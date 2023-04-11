@@ -1,7 +1,10 @@
 import React from "react";
-import Navbar from "../components/navbar/Navbar";
+import Navbar from "./components/navbar/Navbar";
 import "./globals.css";
 import { Nunito } from "next/font/google";
+import ClientOnly from "./components/ClientOnly";
+import Modal from "@/app/components/modal/Modal";
+import { ToasterProvider } from "react-hot-toast";
 
 export const metadata = {
   title: "Konak Sanat Akademisi",
@@ -20,7 +23,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={font.className}>
-        <Navbar />
+        <ClientOnly>
+          <ToasterProvider />
+          <Modal
+            isOpen
+            title="Kapat"
+            actionLabel="Kapattt"
+            secondaryActionLabel="Kapat here"
+          />
+          <Navbar />
+        </ClientOnly>
+
         {children}
       </body>
     </html>

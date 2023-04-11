@@ -9,7 +9,7 @@ const Logo = () => {
   return (
     <Image
       alt="Logo"
-      className="hidden md:block cutsor-pointer"
+      className="cursor-pointer"
       height="40"
       width="40"
       src="/images/logo.png"
