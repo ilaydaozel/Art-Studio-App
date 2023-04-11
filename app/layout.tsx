@@ -1,4 +1,5 @@
-import Navbar from "@/components/navbar/Navbar";
+import React from "react";
+import Navbar from "../components/navbar/Navbar";
 import "./globals.css";
 import { Nunito } from "next/font/google";
 

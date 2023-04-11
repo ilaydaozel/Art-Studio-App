@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import React from "react";
 
 const Logo = () => {
   const router = useRouter();
@@ -9,8 +10,8 @@ const Logo = () => {
     <Image
       alt="Logo"
       className="hidden md:block cutsor-pointer"
-      height="50"
-      width="50"
+      height="40"
+      width="40"
       src="/images/logo.png"
     ></Image>
   );
