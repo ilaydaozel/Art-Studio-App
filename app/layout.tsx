@@ -4,7 +4,7 @@ import "./globals.css";
 import { Nunito } from "next/font/google";
 import ClientOnly from "./components/ClientOnly";
 import Modal from "@/app/components/modal/Modal";
-import { ToasterProvider } from "react-hot-toast";
+import ToasterProvider from "./providers/ToasterProvider";
 
 export const metadata = {
   title: "Konak Sanat Akademisi",
