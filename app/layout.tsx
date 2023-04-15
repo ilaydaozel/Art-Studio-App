@@ -5,6 +5,7 @@ import { Nunito } from "next/font/google";
 import ClientOnly from "./components/ClientOnly";
 import Modal from "@/app/components/modal/Modal";
 import ToasterProvider from "./providers/ToasterProvider";
+import RegisterModal from "./components/modal/RegisterModal";
 
 export const metadata = {
   title: "Konak Sanat Akademisi",
@@ -25,12 +26,7 @@ export default function RootLayout({
       <body className={font.className}>
         <ClientOnly>
           <ToasterProvider />
-          <Modal
-            isOpen
-            title="Kapat"
-            actionLabel="Kapattt"
-            secondaryActionLabel="Kapat here"
-          />
+          <RegisterModal />
           <Navbar />
         </ClientOnly>
 

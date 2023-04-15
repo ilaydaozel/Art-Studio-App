@@ -5,6 +5,8 @@ import Logo from "./Logo";
 import MenuElement from "./MenuElement";
 import MenuContainer from "./MenuContainer";
 import LogoTitle from "./LogoTitle";
+import RegisterModal from "../modal/RegisterModal";
+import UserMenu from "./UserMenu";
 
 const Navbar = () => {
   return (
@@ -37,9 +39,12 @@ const Navbar = () => {
             </div>
             <MenuContainer>
               <MenuElement address="/" displayName="Anasayfa" />
-              <MenuElement address="/artists" displayName="Sanatçılar" />
-              <MenuElement address="/about" displayName="Hakkında" />
+              <MenuElement address="/sanatçılar" displayName="Sanatçılar" />
+              <MenuElement address="/hakkında" displayName="Hakkında" />
+              <MenuElement address="/kaydol" displayName="About" />
+              <MenuElement address="/girişyap" displayName="Giriş Yap" />
             </MenuContainer>
+            <UserMenu />
           </div>
         </Container>
       </div>
