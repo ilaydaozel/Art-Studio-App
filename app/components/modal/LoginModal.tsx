@@ -2,9 +2,6 @@
 
 import axios from "axios";
 import { signIn } from "next-auth/react";
-import { AiFillGithub } from "react-icons/ai";
-//import { signIn } from "next-auth/react";
-import { FcGoogle } from "react-icons/fc";
 import { useCallback, useState } from "react";
 import { toast } from "react-hot-toast";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
@@ -81,17 +78,10 @@ const LoginModal = () => {
     </div>
   );
 
-  //google github için
   const footerContent = (
     <div className="flex flex-col gap-4 mt-3">
       <hr />
 
-      <Button
-        outline
-        label="Continue with Google"
-        icon={FcGoogle}
-        onClick={() => {}}
-      />
       <div
         className="
           text-neutral-500 

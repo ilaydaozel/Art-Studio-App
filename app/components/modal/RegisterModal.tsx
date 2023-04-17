@@ -1,9 +1,7 @@
 "use client";
 
 import axios from "axios";
-import { AiFillGithub } from "react-icons/ai";
 import { signIn } from "next-auth/react";
-import { FcGoogle } from "react-icons/fc";
 import { useState } from "react";
 import { useCallback } from "react";
 import { toast } from "react-hot-toast";
@@ -42,7 +40,6 @@ const RegisterModal = () => {
       .then(() => {
         toast.success("Registered!");
         registerModal.onClose();
-        //loginModal.onOpen();
       })
       .catch((error) => {
         toast.error(error);
@@ -91,17 +88,9 @@ const RegisterModal = () => {
     </div>
   );
 
-  //google github için
   const footerContent = (
     <div className="flex flex-col gap-4 mt-3">
       <hr />
-
-      <Button
-        outline
-        label="Continue with Google"
-        icon={FcGoogle}
-        onClick={() => signIn("google")}
-      />
       <div
         className="
           text-neutral-500 

@@ -13,7 +13,7 @@ const Avatar: React.FC<AvatarProps> = ({ src }) => {
       height="30"
       width="30"
       alt="Avatar"
-      src={src || "/images/placeholder.jpg"}
+      src="https://cdn-icons-png.flaticon.com/512/666/666201.png"
     />
   );
 };
