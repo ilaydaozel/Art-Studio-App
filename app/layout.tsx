@@ -7,6 +7,7 @@ import Modal from "@/app/components/modal/Modal";
 import ToasterProvider from "./providers/ToasterProvider";
 import RegisterModal from "./components/modal/RegisterModal";
 import LoginModal from "./components/modal/LoginModal";
+import getCurrentUser from "./actions/getCurrentUser";
 
 export const metadata = {
   title: "Konak Sanat Akademisi",
@@ -17,11 +18,12 @@ const font = Nunito({
   subsets: ["latin"],
 });
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const currentUser = await getCurrentUser();
   return (
     <html lang="en">
       <body className={font.className}>
@@ -29,7 +31,7 @@ export default function RootLayout({
           <ToasterProvider />
           <RegisterModal />
           <LoginModal />
-          <Navbar />
+          <Navbar currentUser={currentUser} />
         </ClientOnly>
 
         {children}

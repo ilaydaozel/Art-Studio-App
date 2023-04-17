@@ -92,12 +92,6 @@ const LoginModal = () => {
         icon={FcGoogle}
         onClick={() => {}}
       />
-      <Button
-        outline
-        label="Continue with Github"
-        icon={AiFillGithub}
-        onClick={() => {}}
-      />
       <div
         className="
           text-neutral-500 

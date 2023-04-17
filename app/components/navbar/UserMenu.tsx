@@ -10,8 +10,14 @@ import useLoginModal from "@/app/hooks/useLoginModal";
 
 import MenuItem from "./MenuItem";
 import Avatar from "../Avatar";
+import { User } from "@prisma/client";
+import { signOut } from "next-auth/react";
+import { SafeUser } from "@/app/types";
+interface UserMenuProps {
+  currentUser?: SafeUser | null;
+}
 
-const UserMenu = () => {
+const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
   const router = useRouter();
 
   const registerModal = useRegisterModal();
@@ -63,7 +69,7 @@ const UserMenu = () => {
         >
           <AiOutlineMenu />
           <div className="hidden md:block">
-            <Avatar src="" />
+            <Avatar src={currentUser?.profilePic} />
           </div>
         </div>
       </div>
@@ -83,10 +89,18 @@ const UserMenu = () => {
           "
         >
           <div className="flex flex-col cursor-pointer">
-            <>
-              <MenuItem label="Login" onClick={loginModal.onOpen} />
-              <MenuItem label="Sign up" onClick={registerModal.onOpen} />
-            </>
+            {currentUser ? (
+              <>
+                <MenuItem label="Sayfam" onClick={registerModal.onOpen} />
+                <MenuItem label="Resimlerim" onClick={loginModal.onOpen} />
+                <MenuItem label="Çıkış Yap" onClick={() => signOut()} />
+              </>
+            ) : (
+              <>
+                <MenuItem label="Giriş Yap" onClick={loginModal.onOpen} />
+                <MenuItem label="Kaydol" onClick={registerModal.onOpen} />
+              </>
+            )}
           </div>
         </div>
       )}
