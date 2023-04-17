@@ -6,6 +6,7 @@ import ClientOnly from "./components/ClientOnly";
 import Modal from "@/app/components/modal/Modal";
 import ToasterProvider from "./providers/ToasterProvider";
 import RegisterModal from "./components/modal/RegisterModal";
+import LoginModal from "./components/modal/LoginModal";
 
 export const metadata = {
   title: "Konak Sanat Akademisi",
@@ -27,6 +28,7 @@ export default function RootLayout({
         <ClientOnly>
           <ToasterProvider />
           <RegisterModal />
+          <LoginModal />
           <Navbar />
         </ClientOnly>
 
