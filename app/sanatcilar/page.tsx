@@ -1,5 +1,5 @@
-const sanatcilar = () => {
-  return <div className='width: 200'>hellooooooooooo</div>;
+const Artists = () => {
+  return <div className='heigth: 200'>Sanatçılar</div>;
 };
 
-export default sanatcilar;
+export default Artists;
