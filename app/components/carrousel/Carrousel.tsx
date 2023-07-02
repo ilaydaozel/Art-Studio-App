@@ -1,16 +1,17 @@
 'use client';
-
-import Image from 'next/image';
 import styled from 'styled-components';
-
-interface CarrouselProps {}
+import ArtworkContainer from '../artwork/ArtworkContainer';
 
 const Container = styled.div`
-  height: 100px;
+  height: 400px;
   width: full;
   background: black;
 `;
-
-export const Carrousel = ({}: CarrouselProps) => {
-  return <Container></Container>;
+const Carrousel = () => {
+  return (
+    <div>
+      <Container></Container>
+    </div>
+  );
 };
+export default Carrousel;
