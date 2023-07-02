@@ -2,6 +2,7 @@
 import React from 'react';
 import Link from 'next/link';
 import styled from 'styled-components';
+import { COLORS } from '@/constants/colors';
 
 interface MenuElementProps {
   address: string;
@@ -9,18 +10,17 @@ interface MenuElementProps {
 }
 const Content = styled.text`
   text-align: center;
-  color: #bf4f74;
   padding: 2px 4px;
-  color: 'var(--gray-color)';
+  color: ${COLORS.gray};
   cursor: pointer;
   transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: #f7fafc;
+    background-color: ${COLORS.textBgColor};
   }
 `;
 
-const DisplayName = styled.a`
+const DisplayName = styled.text`
   font-size: 12px;
 `;
 
