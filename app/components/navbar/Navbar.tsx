@@ -48,6 +48,7 @@ const Navbar = ({ currentUser }: NavbarProps) => {
               <MenuElement address='/sanatcilar' displayName='Sanatçılar' />
               <MenuElement address='/hakkında' displayName='Hakkında' />
             </MenuContainer>
+
             <UserMenu currentUser={currentUser} />
           </div>
         </Container>

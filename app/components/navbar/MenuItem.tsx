@@ -15,6 +15,7 @@ const MenuItem = ({ onClick, label }: MenuItemProps) => {
         hover:bg-neutral-100 
         transition
         font-semibold
+        whitespace-nowrap
       '
     >
       {label}

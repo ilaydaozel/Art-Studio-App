@@ -3,17 +3,19 @@
 import Image from 'next/image';
 
 interface AvatarProps {
-  src?: string | null | undefined;
+  src: string | null | undefined;
+  height?: number;
+  width?: number;
 }
 
-const Avatar = ({ src }: AvatarProps) => {
+const Avatar = ({ src, height = 20, width = 20 }: AvatarProps) => {
   return (
     <Image
       className='rounded-full'
-      height='30'
-      width='30'
+      height={height}
+      width={width}
       alt='Avatar'
-      src='https://cdn-icons-png.flaticon.com/512/666/666201.png'
+      src={src ? src : 'https://cdn-icons-png.flaticon.com/512/666/666201.png'}
     />
   );
 };
