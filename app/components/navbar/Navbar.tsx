@@ -13,7 +13,7 @@ import ArtworkContainer from '../artwork/ArtworkContainer';
 interface NavbarProps {
   currentUser?: SafeUser | null;
 }
-const Navbar: React.FC<NavbarProps> = ({ currentUser }) => {
+const Navbar = ({ currentUser }: NavbarProps) => {
   console.log({ currentUser });
   return (
     <div className='fixed w-full bg-white z-10 shadow-sm'>

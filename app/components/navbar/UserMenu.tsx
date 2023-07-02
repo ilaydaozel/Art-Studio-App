@@ -1,23 +1,23 @@
-"use client";
+'use client';
 
-import { useCallback, useState } from "react";
-import { AiOutlineMenu } from "react-icons/ai";
+import { useCallback, useState } from 'react';
+import { AiOutlineMenu } from 'react-icons/ai';
 //import { signOut } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { useRouter } from 'next/navigation';
 
-import useRegisterModal from "@/app/hooks/useRegisterModal";
-import useLoginModal from "@/app/hooks/useLoginModal";
+import useRegisterModal from '@/app/hooks/useRegisterModal';
+import useLoginModal from '@/app/hooks/useLoginModal';
 
-import MenuItem from "./MenuItem";
-import Avatar from "../Avatar";
-import { User } from "@prisma/client";
-import { signOut } from "next-auth/react";
-import { SafeUser } from "@/app/types";
+import MenuItem from './MenuItem';
+import Avatar from '../Avatar';
+import { User } from '@prisma/client';
+import { signOut } from 'next-auth/react';
+import { SafeUser } from '@/app/types';
 interface UserMenuProps {
   currentUser?: SafeUser | null;
 }
 
-const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
+const UserMenu = ({ currentUser }: UserMenuProps) => {
   const router = useRouter();
 
   const registerModal = useRegisterModal();
@@ -30,11 +30,11 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
   }, []);
 
   return (
-    <div className="relative">
-      <div className="flex flex-row items-center gap-3">
+    <div className='relative'>
+      <div className='flex flex-row items-center gap-3'>
         <div
           onClick={() => {}}
-          className="
+          className='
             hidden
             md:block
             text-sm 
@@ -45,13 +45,13 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
             hover:bg-neutral-100 
             transition 
             cursor-pointer
-          "
+          '
         >
           Üyelik
         </div>
         <div
           onClick={toggleOpen}
-          className="
+          className='
           p-4
           md:py-1
           md:px-2
@@ -65,17 +65,17 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
           cursor-pointer 
           hover:shadow-md 
           transition
-          "
+          '
         >
           <AiOutlineMenu />
-          <div className="hidden md:block">
+          <div className='hidden md:block'>
             <Avatar />
           </div>
         </div>
       </div>
       {isOpen && (
         <div
-          className="
+          className='
             absolute 
             rounded-xl 
             shadow-md
@@ -86,19 +86,19 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
             right-0 
             top-12 
             text-sm
-          "
+          '
         >
-          <div className="flex flex-col cursor-pointer">
+          <div className='flex flex-col cursor-pointer'>
             {currentUser ? (
               <>
-                <MenuItem label="Sayfam" onClick={registerModal.onOpen} />
-                <MenuItem label="Resimlerim" onClick={loginModal.onOpen} />
-                <MenuItem label="Çıkış Yap" onClick={() => signOut()} />
+                <MenuItem label='Sayfam' onClick={registerModal.onOpen} />
+                <MenuItem label='Resimlerim' onClick={loginModal.onOpen} />
+                <MenuItem label='Çıkış Yap' onClick={() => signOut()} />
               </>
             ) : (
               <>
-                <MenuItem label="Giriş Yap" onClick={loginModal.onOpen} />
-                <MenuItem label="Kaydol" onClick={registerModal.onOpen} />
+                <MenuItem label='Giriş Yap' onClick={loginModal.onOpen} />
+                <MenuItem label='Kaydol' onClick={registerModal.onOpen} />
               </>
             )}
           </div>

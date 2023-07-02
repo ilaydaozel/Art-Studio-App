@@ -1,23 +1,22 @@
-"use client";
-import React from "react";
-import Link from "next/link";
+'use client';
+import React from 'react';
+import Link from 'next/link';
 
 interface MenuElementProps {
   address: string;
   displayName: string;
 }
 
-const MenuElement: React.FC<MenuElementProps> = ({ address, displayName }) => {
+const MenuElement = ({ address, displayName }: MenuElementProps) => {
   return (
     <div
-      className="
+      className='
       text-sm
         py-2
         px-4
-        rounded-full
         hover:bg-neutral-100
         transition
-        cursor-pointer"
+        cursor-pointer'
     >
       <Link href={address}>{displayName}</Link>
     </div>

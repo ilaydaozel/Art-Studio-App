@@ -1,20 +1,20 @@
-"use client";
-import React from "react";
+'use client';
+import React from 'react';
 
 interface MenuContainerProps {
   children: React.ReactNode;
 }
 
-const MenuContainer: React.FC<MenuContainerProps> = ({ children }) => {
+const MenuContainer = ({ children }: MenuContainerProps) => {
   return (
     <div
-      className="
+      className='
       flex
       flex-row
       items-center
       justify-between
       gap-3
-      md:gap-0"
+      md:gap-0'
     >
       {children}
     </div>
