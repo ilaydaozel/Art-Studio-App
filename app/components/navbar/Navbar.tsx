@@ -9,7 +9,7 @@ import UserMenu from './UserMenu';
 import { SafeUser } from '@/app/types';
 import ArtworkContainer from '../artwork/ArtworkContainer';
 interface NavbarProps {
-  currentUser?: SafeUser | null;
+  currentUser: SafeUser | null;
 }
 const Navbar = ({ currentUser }: NavbarProps) => {
   console.log({ currentUser });

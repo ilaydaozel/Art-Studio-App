@@ -6,5 +6,5 @@ export type SafeUser = Omit<
     createdAt: string;
     updatedAt: string;
     emailVerified: string | null;
-    image: string | null;
+    profilePic: string | null;
 };

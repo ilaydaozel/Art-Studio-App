@@ -16,6 +16,7 @@ const UserMenuElement = ({ onClick, label }: MenuItemProps) => {
         transition
         font-semibold
         whitespace-nowrap
+        
       '
     >
       {label}
