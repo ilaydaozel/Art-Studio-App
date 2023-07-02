@@ -8,7 +8,6 @@ import RegisterModal from '../modal/RegisterModal';
 import UserMenu from './UserMenu';
 import { SafeUser } from '@/app/types';
 import ArtworkContainer from '../artwork/ArtworkContainer';
-
 interface NavbarProps {
   currentUser?: SafeUser | null;
 }

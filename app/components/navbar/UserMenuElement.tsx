@@ -5,7 +5,7 @@ interface MenuItemProps {
   label: string;
 }
 
-const MenuItem = ({ onClick, label }: MenuItemProps) => {
+const UserMenuElement = ({ onClick, label }: MenuItemProps) => {
   return (
     <div
       onClick={onClick}
@@ -23,4 +23,4 @@ const MenuItem = ({ onClick, label }: MenuItemProps) => {
   );
 };
 
-export default MenuItem;
+export default UserMenuElement;

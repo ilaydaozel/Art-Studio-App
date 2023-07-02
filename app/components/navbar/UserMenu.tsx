@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation';
 import useRegisterModal from '@/app/hooks/useRegisterModal';
 import useLoginModal from '@/app/hooks/useLoginModal';
 
-import MenuItem from './MenuItem';
+import UserMenuElement from './UserMenuElement';
 import Avatar from '../Avatar';
 import { User } from '@prisma/client';
 import { signOut } from 'next-auth/react';
@@ -72,14 +72,26 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
           <div className='inline-flex flex-col cursor-pointer'>
             {currentUser ? (
               <>
-                <MenuItem label='Sayfam' onClick={registerModal.onOpen} />
-                <MenuItem label='Resimlerim' onClick={loginModal.onOpen} />
-                <MenuItem label='Çıkış Yap' onClick={() => signOut()} />
+                <UserMenuElement
+                  label='Sayfam'
+                  onClick={registerModal.onOpen}
+                />
+                <UserMenuElement
+                  label='Resimlerim'
+                  onClick={loginModal.onOpen}
+                />
+                <UserMenuElement label='Çıkış Yap' onClick={() => signOut()} />
               </>
             ) : (
               <>
-                <MenuItem label='Giriş Yap' onClick={loginModal.onOpen} />
-                <MenuItem label='Kaydol' onClick={registerModal.onOpen} />
+                <UserMenuElement
+                  label='Giriş Yap'
+                  onClick={loginModal.onOpen}
+                />
+                <UserMenuElement
+                  label='Kaydol'
+                  onClick={registerModal.onOpen}
+                />
               </>
             )}
           </div>
