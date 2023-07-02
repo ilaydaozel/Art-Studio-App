@@ -3,7 +3,6 @@ import React from 'react';
 import Container from '../Container';
 import Logo from './Logo';
 import MenuElement from './MenuElement';
-import MenuContainer from './MenuContainer';
 import LogoTitle from './LogoTitle';
 import RegisterModal from '../modal/RegisterModal';
 import UserMenu from './UserMenu';
@@ -43,11 +42,18 @@ const Navbar = ({ currentUser }: NavbarProps) => {
               <Logo height={30} width={30} />
               <LogoTitle>KONAK KÜLTÜR SANAT AKADEMİSİ</LogoTitle>
             </div>
-            <MenuContainer>
-              <MenuElement address='/' displayName='Anasayfa' />
-              <MenuElement address='/sanatcilar' displayName='Sanatçılar' />
-              <MenuElement address='/hakkında' displayName='Hakkında' />
-            </MenuContainer>
+            <div
+              className='
+              flex
+              flex-row
+              justify-between
+              gap-12
+             '
+            >
+              <MenuElement address='/' displayName='ANASAYFA' />
+              <MenuElement address='/sanatcilar' displayName='SANATÇILAR' />
+              <MenuElement address='/hakkında' displayName='HAKKINDA' />
+            </div>
 
             <UserMenu currentUser={currentUser} />
           </div>
