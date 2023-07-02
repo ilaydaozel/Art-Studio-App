@@ -11,7 +11,7 @@ const Content = styled.text`
   text-align: center;
   color: #bf4f74;
   padding: 2px 4px;
-  color: gray;
+  color: 'var(--gray-color)';
   cursor: pointer;
   transition: background-color 0.3s ease;
 
