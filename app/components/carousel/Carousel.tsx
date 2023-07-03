@@ -1,18 +1,30 @@
 'use client';
 import styled from 'styled-components';
 import { useState } from 'react';
-import Image from 'next/image';
 import { Slide } from '@/models/slide';
+import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
+import { COLORS } from '@/constants/colors';
 interface CarouselProps {
   slides: Slide[];
 }
+
 const SlideContainer = styled.div<{ src: string }>`
+  position: relative;
   background-image: url(${(props) => props.src});
   background-size: cover;
   background-position: center;
   width: 100%;
-  height: 400px; /* Set an appropriate height for your carousel slides */
+  height: 80vh;
+`;
+
+const SlideForeground = styled.div`
+  position: relative;
+  background-color: rgba(0, 0, 0, 0.4);
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 80vh;
 `;
 
 const Caption = styled.p`
@@ -25,18 +37,59 @@ const Caption = styled.p`
   font-size: 16px;
 `;
 
+const NavButtonRight = styled.button`
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  color: ${COLORS.lightGray};
+  font-size: 24px;
+  right: 0;
+`;
+const NavButtonLeft = styled.button`
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  color: ${COLORS.lightGray};
+  font-size: 24px;
+  left: 0;
+`;
 const Carousel = ({ slides }: CarouselProps) => {
   console.log(slides);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const goToNextSlide = () => {
+    setActiveIndex((prevIndex) => (prevIndex + 1) % slides.length);
+  };
+
+  const goToPrevSlide = () => {
+    setActiveIndex(
+      (prevIndex) => (prevIndex - 1 + slides.length) % slides.length
+    );
+  };
+
   return (
     <div>
       <div>
-        {slides.map((slide, index) => (
-          <SlideContainer key={index} src={slide.src}>
-            <Caption>{slide.caption}</Caption>
-          </SlideContainer>
-        ))}
+        <SlideContainer src={slides[activeIndex].src}>
+          <SlideForeground>
+            <NavButtonLeft onClick={goToPrevSlide}>
+              <FaChevronLeft />
+            </NavButtonLeft>
+            <Caption>{slides[activeIndex].caption}</Caption>
+            <NavButtonRight onClick={goToNextSlide}>
+              <FaChevronRight />
+            </NavButtonRight>
+          </SlideForeground>
+        </SlideContainer>
       </div>
-      <div className='h-6'></div>
     </div>
   );
 };
