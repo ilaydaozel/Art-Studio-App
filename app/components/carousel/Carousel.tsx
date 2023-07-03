@@ -1,23 +1,42 @@
 'use client';
 import styled from 'styled-components';
 import { useState } from 'react';
+import Image from 'next/image';
+import { Slide } from '@/models/slide';
 
 interface CarouselProps {
-  images: string[];
-  captions: string[];
+  slides: Slide[];
 }
+const SlideContainer = styled.div<{ src: string }>`
+  background-image: url(${(props) => props.src});
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 400px; /* Set an appropriate height for your carousel slides */
+`;
 
-const Carousel = ({ images, captions }: CarouselProps) => {
+const Caption = styled.p`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  font-size: 16px;
+`;
+
+const Carousel = ({ slides }: CarouselProps) => {
+  console.log(slides);
   return (
-    <div className='h-20'>
+    <div>
       <div>
-        {images.map((image, index) => (
-          <div key={index}>
-            <img src={image} alt={`Slide ${index + 1}`} />
-            <p>{captions[index]}</p>
-          </div>
+        {slides.map((slide, index) => (
+          <SlideContainer key={index} src={slide.src}>
+            <Caption>{slide.caption}</Caption>
+          </SlideContainer>
         ))}
       </div>
+      <div className='h-6'></div>
     </div>
   );
 };

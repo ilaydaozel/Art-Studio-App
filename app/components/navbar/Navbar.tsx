@@ -25,7 +25,7 @@ const Navbar = ({ currentUser = undefined }: NavbarProps) => {
   return (
     <div
       className='
-      h-14'
+      h-15'
     >
       <NavbarContainer>
         <div
