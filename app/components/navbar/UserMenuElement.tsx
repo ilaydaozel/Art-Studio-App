@@ -14,7 +14,7 @@ const TextDiv = styled.div`
   transition: background-color 0.3s ease;
   white-space: nowrap;
   &:hover {
-    background-color: ${COLORS.textBgColor};
+    background-color: ${COLORS.lightGray};
   }
 `;
 const UserMenuElement = ({ onClick, label }: MenuItemProps) => {
