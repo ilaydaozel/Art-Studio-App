@@ -1,5 +1,6 @@
 import { Slide } from '@/models/slide';
 import Carousel from '../components/carousel/Carousel';
+import ArtworkList from '../components/artwork/ArtworkList';
 
 const Artists = () => {
   const slide1: Slide = {
@@ -23,6 +24,9 @@ const Artists = () => {
   return (
     <div>
       <Carousel slides={slides} />
+      <div>
+        <ArtworkList title={'Eserler'}></ArtworkList>
+      </div>
     </div>
   );
 };
