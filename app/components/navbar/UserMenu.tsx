@@ -66,7 +66,7 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
             right-0 
             top-12 
             text-sm
-
+            w-[15vw]
           '
         >
           <div className='inline-flex flex-col cursor-pointer'>

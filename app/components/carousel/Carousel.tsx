@@ -1,6 +1,6 @@
 'use client';
 import styled from 'styled-components';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Slide } from '@/models/slide';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
@@ -27,14 +27,31 @@ const SlideForeground = styled.div`
   height: 80vh;
 `;
 
+const CaptionContainer = styled.div`
+  position: relative;
+  background-color: rgba(0, 0, 0, 0.4);
+  background-position: center;
+  width: 50%;
+  height: 40vh;
+  top: 40%;
+  left: 4%;
+`;
+
 const Caption = styled.p`
   position: absolute;
-  bottom: 0;
-  left: 0;
+  top: 20%;
+  left: 5%;
   padding: 10px;
-  background-color: rgba(0, 0, 0, 0.7);
   color: #fff;
-  font-size: 16px;
+  font-size: 28px;
+`;
+const Subcaption = styled.p`
+  position: absolute;
+  top: 50%;
+  left: 5%;
+  padding: 10px;
+  color: #fff;
+  font-size: 18px;
 `;
 
 const NavButtonRight = styled.button`
@@ -74,6 +91,10 @@ const Carousel = ({ slides }: CarouselProps) => {
       (prevIndex) => (prevIndex - 1 + slides.length) % slides.length
     );
   };
+  useEffect(() => {
+    const interval = setInterval(goToNextSlide, 5000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div>
@@ -83,7 +104,11 @@ const Carousel = ({ slides }: CarouselProps) => {
             <NavButtonLeft onClick={goToPrevSlide}>
               <FaChevronLeft />
             </NavButtonLeft>
-            <Caption>{slides[activeIndex].caption}</Caption>
+            <CaptionContainer>
+              <Caption>{slides[activeIndex].caption}</Caption>
+              <Subcaption>{slides[activeIndex].subcaption}</Subcaption>
+            </CaptionContainer>
+
             <NavButtonRight onClick={goToNextSlide}>
               <FaChevronRight />
             </NavButtonRight>

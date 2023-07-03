@@ -7,6 +7,7 @@ interface MenuItemProps {
 }
 
 const TextDiv = styled.div`
+  width: 100%;
   margin: 4px 8px;
   padding: 6px 8px;
   color: ${COLORS.gray};
@@ -14,7 +15,8 @@ const TextDiv = styled.div`
   transition: background-color 0.3s ease;
   white-space: nowrap;
   &:hover {
-    background-color: ${COLORS.lightGray};
+    border-radius: 25px;
+    background-color: ${COLORS.bgGray};
   }
 `;
 const UserMenuElement = ({ onClick, label }: MenuItemProps) => {

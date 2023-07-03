@@ -16,7 +16,7 @@ const Content = styled.text`
   transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: ${COLORS.lightGray};
+    font-weight: bold;
   }
 `;
 
