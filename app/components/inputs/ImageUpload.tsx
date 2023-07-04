@@ -1,9 +1,11 @@
 'use client';
 
+import { COLORS } from '@/constants/colors';
 import { CldUploadWidget } from 'next-cloudinary';
 import Image from 'next/image';
 import { useCallback } from 'react';
 import { TbPhotoPlus } from 'react-icons/tb';
+import styled from 'styled-components';
 
 declare global {
   var cloudinary: any;
@@ -23,10 +25,12 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ onChange, value }) => {
     },
     [onChange]
   );
-
+  const Heading = styled.h1`
+    color: ${COLORS.gray};
+  `;
   return (
     <div>
-      <h1>Fotoğraf Yükle</h1>
+      <Heading>Fotoğraf Yükle</Heading>
       <CldUploadWidget
         onUpload={handleUpload}
         uploadPreset={uploadPreset}

@@ -10,7 +10,7 @@ const TextDiv = styled.div`
   width: 100%;
   margin: 4px 8px;
   padding: 6px 8px;
-  color: ${COLORS.gray};
+  color: ${COLORS.darkGray};
   cursor: pointer;
   transition: background-color 0.3s ease;
   white-space: nowrap;

@@ -41,7 +41,7 @@ const AddArtwork = () => {
     <div>
       <FormContainer>
         <div className='flex flex-col gap-4'>
-          <Heading title='Tekrar Hoş Geldiniz!' subtitle='Giriş yapın!' />
+          <Heading title='Eser Ekle' />
           <Input
             id='email'
             label='Email'

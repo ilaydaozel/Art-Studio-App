@@ -11,7 +11,7 @@ interface MenuElementProps {
 const Content = styled.text`
   text-align: center;
   padding: 2px 4px;
-  color: ${COLORS.gray};
+  color: ${COLORS.darkGray};
   cursor: pointer;
   transition: background-color 0.3s ease;
 
