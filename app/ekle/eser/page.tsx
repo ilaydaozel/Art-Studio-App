@@ -2,8 +2,11 @@
 import Heading from '@/app/components/Heading';
 import ImageUpload from '@/app/components/inputs/ImageUpload';
 import Input from '@/app/components/inputs/Input';
+import axios from 'axios';
+import router from 'next/router';
 import { useState } from 'react';
-import { useForm, FieldValues } from 'react-hook-form';
+import { useForm, FieldValues, SubmitHandler } from 'react-hook-form';
+import toast from 'react-hot-toast';
 import styled from 'styled-components';
 
 const FormContainer = styled.div`
@@ -23,11 +26,23 @@ const AddArtwork = () => {
     reset,
   } = useForm<FieldValues>({
     defaultValues: {
-      email: '',
-      imageSrc: '',
+      title: '',
+      description: '',
+      creationYear: '',
+      medium: '',
+      type: '',
+      width: 0,
+      height: 0,
+      media: '',
     },
   });
-  const imageSrc = watch('imageSrc');
+  const title = watch('title');
+  const description = watch('description');
+  const creationYear = watch('creationYear');
+  const type = watch('type');
+  const width = watch('width');
+  const height = watch('height');
+  const media = watch('media');
 
   const setCustomValue = (id: string, value: any) => {
     setValue(id, value, {
@@ -37,22 +52,89 @@ const AddArtwork = () => {
     });
   };
 
+  const onSubmit: SubmitHandler<FieldValues> = (data) => {
+    setIsLoading(true);
+
+    axios
+      .post('/api/', data)
+      .then(() => {
+        toast.success('Eser eklendi!');
+        window.location.reload();
+        reset();
+      })
+      .catch(() => {
+        toast.error('Bir şeyler yanlış gitti');
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  };
+
   return (
     <div>
       <FormContainer>
-        <div className='flex flex-col gap-4'>
-          <Heading title='Eser Ekle' />
+        <Heading title='Kayıtlı Sanatçı Eseri Ekleme Formu' />
+        <div className='flex flex-row justify-start flex-wrap'>
           <Input
-            id='email'
-            label='Email'
+            id='title'
+            label='Başlık'
             disabled={isLoading}
             register={register}
             errors={errors}
             required
           />
+          <Input
+            id='description'
+            label='Açıklama'
+            width='50%'
+            disabled={isLoading}
+            register={register}
+            errors={errors}
+          />
+          <Input
+            id='creationYear'
+            label='Yapım Yılı'
+            width='50%'
+            disabled={isLoading}
+            register={register}
+            errors={errors}
+          />
+          <Input
+            id='medium'
+            label='Teknik'
+            width='50%'
+            disabled={isLoading}
+            register={register}
+            errors={errors}
+          />
+          <Input
+            id='type'
+            label='Tür'
+            width='50%'
+            disabled={isLoading}
+            register={register}
+            errors={errors}
+          />
+          <Input
+            id='width'
+            label='Yükseklik'
+            width='50%'
+            disabled={isLoading}
+            register={register}
+            errors={errors}
+          />
+          <Input
+            id='height'
+            label='Uzunluk'
+            width='50%'
+            disabled={isLoading}
+            register={register}
+            errors={errors}
+          />
           <ImageUpload
-            onChange={(value) => setCustomValue('imageSrc', value)}
-            value={imageSrc}
+            label='Eser Fotoğrafı'
+            onChange={(value) => setCustomValue('media', value)}
+            value={media}
           />
         </div>
       </FormContainer>
