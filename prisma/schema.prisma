@@ -35,11 +35,11 @@ model UserArtwork{
   artistId String @db.ObjectId
   title String
   description String?
-  creationYear DateTime
+  creationYear String?
   medium String?
   type String?
   width Int?
-  heigth Int?
+  height Int?
   medias ArtworkMedia[]
   exhibitionIds String[] @db.ObjectId
   user User @relation(fields: [artistId], references: [id], onDelete: Cascade)
@@ -52,11 +52,11 @@ model GuestArtwork{
   artistName String
   artistSurname String
   description String?
-  creationYear DateTime
+  creationYear String?
   medium String?
   type String?
   width Int?
-  heigth Int?
+  height Int?
   medias ArtworkMedia[]
   exhibitionIds String[] @db.ObjectId
   exhibitions Exhibition[] @relation(fields: [exhibitionIds], references: [id])
