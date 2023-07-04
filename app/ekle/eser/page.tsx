@@ -1,13 +1,15 @@
 'use client';
 import Heading from '@/app/components/Heading';
-import Input from '@/app/components/inputs/Input';
 import ImageUpload from '@/app/components/inputs/ImageUpload';
+import Input from '@/app/components/inputs/Input';
 import { useState } from 'react';
 import { useForm, FieldValues } from 'react-hook-form';
 import styled from 'styled-components';
 
 const FormContainer = styled.div`
-  margin: 10px;
+  padding: 10vh 0;
+  width: 80vw;
+  margin: auto;
 `;
 
 const AddArtwork = () => {
@@ -15,13 +17,26 @@ const AddArtwork = () => {
   const {
     register,
     handleSubmit,
+    setValue,
+    watch,
     formState: { errors },
+    reset,
   } = useForm<FieldValues>({
     defaultValues: {
       email: '',
-      password: '',
+      imageSrc: '',
     },
   });
+  const imageSrc = watch('imageSrc');
+
+  const setCustomValue = (id: string, value: any) => {
+    setValue(id, value, {
+      shouldDirty: true,
+      shouldTouch: true,
+      shouldValidate: true,
+    });
+  };
+
   return (
     <div>
       <FormContainer>
@@ -34,6 +49,10 @@ const AddArtwork = () => {
             register={register}
             errors={errors}
             required
+          />
+          <ImageUpload
+            onChange={(value) => setCustomValue('imageSrc', value)}
+            value={imageSrc}
           />
         </div>
       </FormContainer>
