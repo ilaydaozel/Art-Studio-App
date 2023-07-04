@@ -74,7 +74,7 @@ const AddArtwork = () => {
     <div>
       <FormContainer>
         <Heading title='Kayıtlı Sanatçı Eseri Ekleme Formu' />
-        <div className='flex flex-row justify-start flex-wrap'>
+        <div className='flex flex-row justify-start flex-wrap py-8'>
           <Input
             id='title'
             label='Başlık'
@@ -131,6 +131,7 @@ const AddArtwork = () => {
             register={register}
             errors={errors}
           />
+          <div className='h-6 w-full'></div>
           <ImageUpload
             label='Eser Fotoğrafı'
             onChange={(value) => setCustomValue('media', value)}
