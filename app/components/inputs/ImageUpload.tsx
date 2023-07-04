@@ -16,21 +16,31 @@ const uploadPreset = 'hkxhm69e';
 interface ImageUploadProps {
   onChange: (value: string) => void;
   value: string;
+  label: string;
 }
 
-const ImageUpload: React.FC<ImageUploadProps> = ({ onChange, value }) => {
+const Heading = styled.h1`
+  color: ${COLORS.gray};
+  padding: 4px 0;
+  font-size: 18px;
+  font-weigth: 600;
+`;
+
+const ImageUpload: React.FC<ImageUploadProps> = ({
+  onChange,
+  value,
+  label,
+}) => {
   const handleUpload = useCallback(
     (result: any) => {
       onChange(result.info.secure_url);
     },
     [onChange]
   );
-  const Heading = styled.h1`
-    color: ${COLORS.gray};
-  `;
+
   return (
-    <div>
-      <Heading>Fotoğraf Yükle</Heading>
+    <div className='w-full'>
+      <Heading>{label}</Heading>
       <CldUploadWidget
         onUpload={handleUpload}
         uploadPreset={uploadPreset}

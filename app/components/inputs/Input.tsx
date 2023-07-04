@@ -6,6 +6,7 @@ interface InputProps {
   id: string;
   label: string;
   type?: string;
+  width?: string;
   disabled?: boolean;
   formatPrice?: boolean;
   required?: boolean;
@@ -17,6 +18,7 @@ const Input = ({
   id,
   label,
   type = 'text',
+  width = '100%',
   disabled,
   formatPrice,
   register,
@@ -24,7 +26,7 @@ const Input = ({
   errors,
 }: InputProps) => {
   return (
-    <div className='w-full relative'>
+    <div style={{ width: width }} className='relative py-2'>
       {formatPrice && (
         <BiDollar
           size={24}
