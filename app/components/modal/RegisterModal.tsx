@@ -11,6 +11,8 @@ import useRegisterModal from '@/app/hooks/useRegisterModal';
 import Modal from './Modal';
 import Input from '../inputs/Input';
 import useLoginModal from '@/app/hooks/useLoginModal';
+import { UserRequest } from '@/models/user';
+import Selectbox from '../inputs/Selectbox';
 
 const RegisterModal = () => {
   const registerModal = useRegisterModal();
@@ -24,26 +26,41 @@ const RegisterModal = () => {
   } = useForm<FieldValues>({
     defaultValues: {
       name: '',
+      surname: '',
       email: '',
+      gender: '',
       password: '',
+      password_again: '',
     },
   });
 
-  const onSubmit: SubmitHandler<FieldValues> = (data) => {
+  const onSubmit: SubmitHandler<FieldValues> = (data: FieldValues) => {
     setIsLoading(true);
-
-    axios
-      .post('/api/register', data)
-      .then(() => {
-        toast.success('Registered!');
-        registerModal.onClose();
-      })
-      .catch((error) => {
-        toast.error(error);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
+    const userData: UserRequest = {
+      name: data.name,
+      surname: data.surname,
+      password: data.password,
+      userType: 'artist', // Add the user type value here
+      email: data.email, // Add the email value here
+      gender: data.gender, // Add the gender value here
+    };
+    if (data.password === data.password_again) {
+      axios
+        .post('/api/register', userData)
+        .then(() => {
+          toast.success('Kayıt olundu!');
+          registerModal.onClose();
+        })
+        .catch((error) => {
+          toast.error(error);
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
+    } else {
+      toast.error('Şifreler aynı değil!');
+      setIsLoading(false);
+    }
   };
 
   const onToggle = useCallback(() => {
@@ -52,26 +69,58 @@ const RegisterModal = () => {
   }, [registerModal, loginModal]);
 
   const bodyContent = (
-    <div className='flex flex-col'>
+    <div className='flex flex-wrap felx-between gap-2 flex-row'>
+      <Input
+        id='name'
+        label='Ad'
+        width='49%'
+        disabled={isLoading}
+        register={register}
+        errors={errors}
+        required
+      />
+      <Input
+        id='surname'
+        label='Soyad'
+        width='49%'
+        disabled={isLoading}
+        register={register}
+        errors={errors}
+        required
+      />
       <Input
         id='email'
         label='Email'
+        width='49%'
         disabled={isLoading}
         register={register}
         errors={errors}
         required
       />
-      <Input
-        id='name'
-        label='Name'
+      <Selectbox
+        id='gender'
+        label='Cinsiyet'
+        width='49%'
+        type='password'
         disabled={isLoading}
         register={register}
         errors={errors}
-        required
+        choices={['Kadın', 'Erkek', 'Bilinmiyor']}
       />
       <Input
         id='password'
-        label='Password'
+        label='Şifre'
+        width='49%'
+        type='password'
+        disabled={isLoading}
+        register={register}
+        errors={errors}
+        required
+      />
+      <Input
+        id='password_again'
+        label='Şifre Tekrar'
+        width='49%'
         type='password'
         disabled={isLoading}
         register={register}
