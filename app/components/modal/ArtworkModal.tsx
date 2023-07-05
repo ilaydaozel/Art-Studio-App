@@ -1,20 +1,19 @@
 'use client';
-import ImageUpload from '@/app/components/inputs/ImageUpload';
-import Input from '@/app/components/inputs/Input';
+
 import axios from 'axios';
 import { useState } from 'react';
-import { useForm, FieldValues, SubmitHandler } from 'react-hook-form';
-import toast from 'react-hot-toast';
-import styled from 'styled-components';
-import Form from './Form';
+import { useCallback } from 'react';
+import { toast } from 'react-hot-toast';
+import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
+import useArtworkModal from '@/app/hooks/useArtworkModal';
 
-const FormContainer = styled.div`
-  padding: 10vh 0;
-  width: 80vw;
-`;
+import Modal from './Modal';
+import Input from '../inputs/Input';
+import ImageUpload from '../inputs/ImageUpload';
 
-const ArtworkForm = () => {
+const ArtworkModal = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const artworkModal = useArtworkModal();
   const {
     register,
     handleSubmit,
@@ -69,7 +68,7 @@ const ArtworkForm = () => {
   };
 
   const bodyContent = (
-    <div className='flex flex-row justify-start flex-wrap'>
+    <div className='flex flex-row justify-between flex-wrap'>
       <Input
         id='title'
         label='Başlık'
@@ -81,7 +80,7 @@ const ArtworkForm = () => {
       <Input
         id='description'
         label='Açıklama'
-        width='50%'
+        width='49%'
         disabled={isLoading}
         register={register}
         errors={errors}
@@ -89,7 +88,7 @@ const ArtworkForm = () => {
       <Input
         id='creationYear'
         label='Yapım Yılı'
-        width='50%'
+        width='49%'
         disabled={isLoading}
         register={register}
         errors={errors}
@@ -97,7 +96,7 @@ const ArtworkForm = () => {
       <Input
         id='medium'
         label='Teknik'
-        width='50%'
+        width='49%'
         disabled={isLoading}
         register={register}
         errors={errors}
@@ -105,7 +104,7 @@ const ArtworkForm = () => {
       <Input
         id='type'
         label='Tür'
-        width='50%'
+        width='49%'
         disabled={isLoading}
         register={register}
         errors={errors}
@@ -113,7 +112,7 @@ const ArtworkForm = () => {
       <Input
         id='width'
         label='Yükseklik'
-        width='50%'
+        width='49%'
         disabled={isLoading}
         register={register}
         errors={errors}
@@ -121,7 +120,7 @@ const ArtworkForm = () => {
       <Input
         id='height'
         label='Uzunluk'
-        width='50%'
+        width='49%'
         disabled={isLoading}
         register={register}
         errors={errors}
@@ -136,13 +135,16 @@ const ArtworkForm = () => {
   );
 
   return (
-    <Form
-      title='Kayıtlı Sanatçı Eseri Ekleme Formu'
-      body={bodyContent}
-      submitActionLabel='Kaydet'
+    <Modal
+      disabled={isLoading}
+      isOpen={artworkModal.isOpen}
+      title='Resim Ekle'
+      actionLabel='Ekle'
+      onClose={artworkModal.onClose}
       onSubmit={handleSubmit(onSubmit)}
-    ></Form>
+      body={bodyContent}
+    />
   );
 };
 
-export default ArtworkForm;
+export default ArtworkModal;
