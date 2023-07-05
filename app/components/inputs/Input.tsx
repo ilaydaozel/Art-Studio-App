@@ -1,4 +1,5 @@
 'use client';
+import { COLORS } from '@/constants/colors';
 import { FieldValues, FieldErrors, UseFormRegister } from 'react-hook-form';
 import { BiDollar } from 'react-icons/bi';
 
@@ -44,12 +45,14 @@ const Input = ({
         {...register(id, { required })}
         placeholder=' '
         type={type}
+        style={{
+          color: COLORS.gray,
+        }}
         className={`
         peer
         w-full
         p-4
         pt-6 
-        font-light 
         bg-white 
         border-2
         rounded-md
@@ -63,6 +66,9 @@ const Input = ({
       `}
       />
       <label
+        style={{
+          color: COLORS.darkGray,
+        }}
         className={`
         absolute 
         text-md

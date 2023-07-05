@@ -1,6 +1,7 @@
 'use client';
 
 import { IconType } from 'react-icons';
+import { COLORS } from '@/constants/colors';
 
 interface ButtonProps {
   label: string;
@@ -9,6 +10,7 @@ interface ButtonProps {
   outline?: boolean;
   small?: boolean;
   icon?: IconType;
+  width?: string;
 }
 
 const Button = ({
@@ -18,11 +20,19 @@ const Button = ({
   outline,
   small,
   icon: Icon,
+  width = '100%',
 }: ButtonProps) => {
   return (
     <button
       disabled={disabled}
       onClick={onClick}
+      style={{
+        width: width,
+        backgroundColor: outline ? 'white' : COLORS.yellow,
+        border: outline ? '2px solid' : '2px solid',
+        borderColor: outline ? 'black' : COLORS.yellow,
+        color: outline ? 'black' : 'black',
+      }}
       className={`
         relative
         disabled:opacity-70
@@ -30,10 +40,6 @@ const Button = ({
         rounded-lg
         hover:opacity-80
         transition
-        w-full
-        ${outline ? 'bg-white' : 'bg-rose-500'}
-        ${outline ? 'border-black' : 'border-rose-500'}
-        ${outline ? 'text-black' : 'text-white'}
         ${small ? 'text-sm' : 'text-md'}
         ${small ? 'py-1' : 'py-3'}
         ${small ? 'font-light' : 'font-semibold'}

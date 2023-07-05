@@ -20,7 +20,7 @@ interface ImageUploadProps {
 }
 
 const Heading = styled.h1`
-  color: ${COLORS.gray};
+  color: ${COLORS.darkGray};
   padding: 4px 0;
   font-size: 16px;
   font-weigth: 800;
