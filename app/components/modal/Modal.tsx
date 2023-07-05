@@ -4,12 +4,15 @@ import { useCallback, useEffect, useState } from 'react';
 import { IoMdClose } from 'react-icons/io';
 
 import Button from '../Button';
+import { subtle } from 'crypto';
+import Heading from '../Heading';
 
 interface ModalProps {
   isOpen?: boolean;
   onClose: () => void;
   onSubmit: () => void;
-  title?: string;
+  title: string;
+  subtitle?: string;
   body?: React.ReactElement;
   footer?: React.ReactElement;
   actionLabel: string;
@@ -23,6 +26,7 @@ const Modal = ({
   onClose,
   onSubmit,
   title,
+  subtitle,
   body,
   actionLabel,
   footer,
@@ -78,7 +82,7 @@ const Modal = ({
           overflow-y-auto 
           fixed 
           inset-0 
-          z-50 
+          z-50
           outline-none 
           focus:outline-none
           bg-neutral-800/70        
@@ -111,7 +115,6 @@ const Modal = ({
             <div
               className='
               translate
-              top-20
               h-full
               w-full
               lg:h-full
@@ -132,7 +135,7 @@ const Modal = ({
                 className='
                 flex 
                 items-center 
-                p-6
+                p-4
                 rounded-t
                 justify-center
                 relative
@@ -146,14 +149,17 @@ const Modal = ({
                     hover:opacity-70
                     transition
                     absolute
-                    left-9
+                    right-4
+                    top-2
                   '
                   onClick={handleClose}
                 >
-                  <IoMdClose size={18} />
+                  <IoMdClose size={16} />
                 </button>
-
-                <div className='text-lg font-semibold'>{title}</div>
+                <div className='flex flex-col'>
+                  <h1 className='text-xl font-semibold'>{title}</h1>
+                  <h1 className='text-md text-center '>{subtitle}</h1>
+                </div>
               </div>
               {/*body*/}
               <div className='relative p-6 flex-auto'>{body}</div>
