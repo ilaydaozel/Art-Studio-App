@@ -3,7 +3,6 @@ import Navbar from './components/navbar/Navbar';
 import './globals.css';
 import { Nunito } from 'next/font/google';
 import ClientOnly from './components/ClientOnly';
-import Modal from '@/app/components/modal/Modal';
 import ToasterProvider from './providers/ToasterProvider';
 import RegisterModal from './components/modal/RegisterModal';
 import LoginModal from './components/modal/LoginModal';

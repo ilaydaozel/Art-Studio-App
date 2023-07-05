@@ -6,11 +6,11 @@ import MenuElement from './MenuElement';
 import LogoTitle from './LogoTitle';
 import RegisterModal from '../modal/RegisterModal';
 import UserMenu from './UserMenu';
-import { SafeUser } from '@/app/types';
 import ArtworkContainer from '../artwork/ArtworkContainer';
 import styled from 'styled-components';
+import { User } from '@prisma/client';
 interface NavbarProps {
-  currentUser?: SafeUser | null;
+  currentUser?: User | null;
 }
 const NavbarContainer = styled.div`
   position: fixed;

@@ -79,7 +79,6 @@ const NavButtonLeft = styled.button`
   left: 0;
 `;
 const Carousel = ({ slides }: CarouselProps) => {
-  console.log(slides);
   const [activeIndex, setActiveIndex] = useState(0);
 
   const goToNextSlide = () => {

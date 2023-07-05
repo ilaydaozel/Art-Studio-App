@@ -2,7 +2,6 @@
 
 import { useCallback, useState } from 'react';
 import { AiOutlineMenu } from 'react-icons/ai';
-//import { signOut } from "next-auth/react";
 import { useRouter } from 'next/navigation';
 
 import useRegisterModal from '@/app/hooks/useRegisterModal';
@@ -12,9 +11,8 @@ import UserMenuElement from './UserMenuElement';
 import Avatar from '../Avatar';
 import { User } from '@prisma/client';
 import { signOut } from 'next-auth/react';
-import { SafeUser } from '@/app/types';
 interface UserMenuProps {
-  currentUser?: SafeUser | null;
+  currentUser?: User | null;
 }
 
 const UserMenu = ({ currentUser }: UserMenuProps) => {
@@ -49,10 +47,10 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
           transition
           '
       >
-        <AiOutlineMenu />
         <div className='hidden md:block'>
-          <Avatar src={currentUser?.profilePic} />
+          <Avatar />
         </div>
+        <AiOutlineMenu />
       </div>
       <div></div>
       {isOpen && (

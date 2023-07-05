@@ -52,7 +52,8 @@ const RegisterModal = () => {
           registerModal.onClose();
         })
         .catch((error) => {
-          toast.error(error);
+          toast.error('Error');
+          console.log('Register error: ', error);
         })
         .finally(() => {
           setIsLoading(false);

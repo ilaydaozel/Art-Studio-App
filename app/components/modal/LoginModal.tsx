@@ -1,6 +1,4 @@
 'use client';
-
-import axios from 'axios';
 import { signIn } from 'next-auth/react';
 import { useCallback, useState } from 'react';
 import { toast } from 'react-hot-toast';
@@ -41,6 +39,7 @@ const LoginModal = () => {
         toast.success('Logged in');
         router.refresh();
         loginModal.onClose();
+        console.log('signed in user:  ', data);
       }
       if (callback?.error) {
         toast.error(callback.error);
@@ -65,7 +64,7 @@ const LoginModal = () => {
       />
       <Input
         id='password'
-        label='Password'
+        label='Şifre'
         type='password'
         disabled={isLoading}
         register={register}
@@ -78,7 +77,6 @@ const LoginModal = () => {
   const footerContent = (
     <div className='flex flex-col gap-4 mt-3'>
       <hr />
-
       <div
         className='
           text-neutral-500 

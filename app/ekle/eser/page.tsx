@@ -1,11 +1,11 @@
 'use client';
 
-import ArtworkForm from '@/app/components/form/ArtworkForm';
+import ArtistForm from '@/app/components/form/ArtistForm';
 
 const AddArtwork = () => {
   return (
     <div>
-      <ArtworkForm></ArtworkForm>
+      <ArtistForm></ArtistForm>
     </div>
   );
 };
