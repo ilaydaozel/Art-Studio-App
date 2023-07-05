@@ -20,14 +20,19 @@ model User{
   emailVerified DateTime?
   dateOfBirth DateTime?
   gender String?
-  instagramUrl String?
-  facebookUrl String?
-  biography String?
-  profilePic String?
   hashedPassword String?
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  artistProfile ArtistProfile?
+}
+
+model ArtistProfile{ 
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  biography String?
+  links String[]
+  profilePic String?
   artworks UserArtwork[]
+  artistId String @unique @db.ObjectId
+  user User @relation(fields: [artistId], references: [id], onDelete: Cascade)
 }
 
 model UserArtwork{
@@ -42,7 +47,7 @@ model UserArtwork{
   height Int?
   medias ArtworkMedia[]
   exhibitionIds String[] @db.ObjectId
-  user User @relation(fields: [artistId], references: [id], onDelete: Cascade)
+  artist ArtistProfile @relation(fields: [artistId], references: [artistId], onDelete: Cascade)
   exhibitions Exhibition[] @relation(fields: [exhibitionIds], references: [id])
 }
 
