@@ -17,11 +17,8 @@ model User{
   surname String
   userType String
   email String @unique
-  emailVerified DateTime?
-  dateOfBirth DateTime?
   gender String?
   hashedPassword String?
-  createdAt DateTime @default(now())
   artistProfile ArtistProfile?
 }
 
@@ -70,10 +67,9 @@ model GuestArtwork{
 model ArtworkMedia{
   id String @id @default(auto()) @map("_id") @db.ObjectId
   mediaUrl String
-  userArtworkId String? @db.ObjectId
-  guestArtworkId String? @db.ObjectId
-  userArtwork UserArtwork? @relation(fields: [userArtworkId], references: [id], onDelete: Cascade)
-  guestArtwork GuestArtwork? @relation(fields: [guestArtworkId], references: [id], onDelete: Cascade)
+  artworkId String @db.ObjectId
+  userArtwork UserArtwork? @relation(fields: [artworkId], references: [id], onDelete: Cascade)
+  guestArtwork GuestArtwork? @relation(fields: [artworkId], references: [id], onDelete: Cascade)
 }
 
 model Exhibition{
