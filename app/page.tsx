@@ -1,18 +1,33 @@
-import Image from 'next/image';
-import { Inter } from 'next/font/google';
 import React from 'react';
-import Carrousel from './components/carousel/ArtworkCarousel';
+import Carousel from './components/carousel/HomeCarousel';
+import { Slide } from '@/models/slide';
+import ArtworkList from './components/artwork/ArtworkList';
 
 export default function Home() {
+  const slide1: Slide = {
+    src: 'https://blogimages.musement.com/2019/11/Rijksmuseum-AdobeStock_233087421.jpg',
+    caption: 'Sergimize hoş geldiniz',
+    subcaption: 'test caption',
+  };
+
+  const slide2: Slide = {
+    src: 'https://img.theculturetrip.com/wp-content/uploads/2016/08/hendrick_avercamp_-_winterlandschap_met_ijsvermaak.jpg',
+    caption: 'En iyi sanal sergi deneyimi',
+    subcaption: 'test caption 2',
+  };
+  const slide3: Slide = {
+    src: 'https://doagahehoc242.cloudfront.net/uploads/posts/792/8563e153_hopper.jpg',
+    caption: 'Modern Zamanlar',
+    subcaption: 'test caption 3',
+  };
+
+  const slides: Slide[] = [slide1, slide2, slide3];
   return (
     <div>
-      <Carrousel
-        images={[
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2_KsyjvB30UC5RVHpFmna6jr3P_-PvIxZ9w&usqp=CAU',
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTisLZpbdmJ4kWDgUvpoWFG33PG2UQ0xgUZzw&usqp=CAU',
-        ]}
-        captions={['Test 1', 'Text 2']}
-      />
+      <Carousel slides={slides} />
+      <div>
+        <ArtworkList title={'Eserler'}></ArtworkList>
+      </div>
     </div>
   );
 }
