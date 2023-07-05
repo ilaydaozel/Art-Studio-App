@@ -17,7 +17,7 @@ const NavbarContainer = styled.div`
   top: 0;
   width: 100%;
   background-color: #ffffff;
-  z-index: 999;
+  z-index: 10;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 `;
 const Navbar = ({ currentUser = undefined }: NavbarProps) => {
