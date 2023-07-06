@@ -6,6 +6,7 @@ import ClientOnly from './components/ClientOnly';
 import ToasterProvider from './providers/ToasterProvider';
 import RegisterModal from './components/modal/RegisterModal';
 import LoginModal from './components/modal/LoginModal';
+import ArtworkModal from './components/modal/ArtworkModal';
 import getCurrentUser from './actions/getCurrentUser';
 
 export const metadata = {
@@ -30,6 +31,7 @@ export default async function RootLayout({
           <ToasterProvider />
           <RegisterModal />
           <LoginModal />
+          <ArtworkModal />
           <Navbar currentUser={currentUser} />
         </ClientOnly>
 
