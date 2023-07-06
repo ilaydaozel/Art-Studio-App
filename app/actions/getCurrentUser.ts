@@ -1,12 +1,13 @@
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import prisma from "@/app/libs/prismadb";
+import { User } from "@prisma/client";
 
 export async function getSession() {
     return await getServerSession(authOptions);
 }
 
-export default async function getCurrentUser() {
+export default async function getCurrentUser(): Promise<{ currentUser: User } | null> {
     try {
         const session = await getSession();
 
@@ -25,7 +26,7 @@ export default async function getCurrentUser() {
         }
         console.log("current User getUser: ", currentUser);
         return {
-            currentUser,
+            currentUser: currentUser as User,
         }
     } catch (error: any) {
         return null;

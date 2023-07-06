@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 
 import prisma from "@/app/libs/prismadb";
 import getCurrentUser from "@/app/actions/getCurrentUser";
+import { User } from "@prisma/client";
 
 export async function POST(
     request: Request,
@@ -11,6 +12,7 @@ export async function POST(
     if (!currentUser) {
         return NextResponse.error();
     }
+    const user: User = currentUser.currentUser;
 
     const body = await request.json();
     const {
@@ -21,8 +23,6 @@ export async function POST(
         type,
         width,
         height,
-        medias,
-        exhibitionIds,
     } = body;
 
     Object.keys(body).forEach((value: any) => {
@@ -33,7 +33,7 @@ export async function POST(
 
     const userArtwork = await prisma.userArtwork.create({
         data: {
-            artistId: currentUser.id,
+            artistId: user.id,
             title,
             description,
             creationYear,
@@ -41,8 +41,6 @@ export async function POST(
             type,
             width,
             height,
-            medias,
-            exhibitionIds,
         }
     });
 
