@@ -1,19 +1,31 @@
 'use client';
 
 import axios from 'axios';
-import { useState } from 'react';
-import { useCallback } from 'react';
 import { toast } from 'react-hot-toast';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
+import dynamic from 'next/dynamic';
+import { useRouter } from 'next/navigation';
+import { useMemo, useState } from 'react';
+
 import useArtworkModal from '@/app/hooks/useArtworkModal';
 
 import Modal from './Modal';
-import Input from '../inputs/Input';
 import ImageUpload from '../inputs/ImageUpload';
+import Input from '../inputs/Input';
+import Heading from '../Heading';
+
+enum STEPS {
+  INFORMATION = 0,
+  PHOTO = 1,
+}
 
 const ArtworkModal = () => {
-  const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
   const artworkModal = useArtworkModal();
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [step, setStep] = useState(STEPS.INFORMATION);
+
   const {
     register,
     handleSubmit,
@@ -49,7 +61,19 @@ const ArtworkModal = () => {
     });
   };
 
+  const onBack = () => {
+    setStep((value) => value - 1);
+  };
+
+  const onNext = () => {
+    setStep((value) => value + 1);
+  };
+
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
+    if (step !== STEPS.PHOTO) {
+      return onNext();
+    }
+
     setIsLoading(true);
 
     axios
@@ -67,7 +91,23 @@ const ArtworkModal = () => {
       });
   };
 
-  const bodyContent = (
+  const actionLabel = useMemo(() => {
+    if (step === STEPS.PHOTO) {
+      return 'Create';
+    }
+
+    return 'Next';
+  }, [step]);
+
+  const secondaryActionLabel = useMemo(() => {
+    if (step === STEPS.INFORMATION) {
+      return undefined;
+    }
+
+    return 'Back';
+  }, [step]);
+
+  let bodyContent = (
     <div className='flex flex-row justify-between flex-wrap'>
       <Input
         id='title'
@@ -125,23 +165,29 @@ const ArtworkModal = () => {
         register={register}
         errors={errors}
       />
-      <div className='h-6 w-full'></div>
+    </div>
+  );
+
+  if (step === STEPS.PHOTO) {
+    bodyContent = (
       <ImageUpload
         label='Eser Fotoğrafı'
         onChange={(value) => setCustomValue('media', value)}
         value={media}
       />
-    </div>
-  );
+    );
+  }
 
   return (
     <Modal
       disabled={isLoading}
       isOpen={artworkModal.isOpen}
-      title='Resim Ekle'
-      actionLabel='Ekle'
-      onClose={artworkModal.onClose}
+      title='Eser Ekle!'
+      actionLabel={actionLabel}
       onSubmit={handleSubmit(onSubmit)}
+      secondaryActionLabel={secondaryActionLabel}
+      secondaryAction={step === STEPS.INFORMATION ? undefined : onBack}
+      onClose={artworkModal.onClose}
       body={bodyContent}
     />
   );
