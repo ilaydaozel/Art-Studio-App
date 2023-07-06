@@ -19,13 +19,6 @@ interface ImageUploadProps {
   label: string;
 }
 
-const Heading = styled.h1`
-  color: ${COLORS.darkGray};
-  padding: 4px 0;
-  font-size: 16px;
-  font-weigth: 800;
-`;
-
 const ImageUpload: React.FC<ImageUploadProps> = ({
   onChange,
   value,
@@ -40,7 +33,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
 
   return (
     <div className='w-full'>
-      <Heading>{label}</Heading>
+      <h1 className='font-semibold text-neutral-600 text-lg m-2'>{label}</h1>
       <CldUploadWidget
         onUpload={handleUpload}
         uploadPreset={uploadPreset}
@@ -58,8 +51,9 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
               hover:opacity-70
               transition
               border-dashed 
-              border-2 
-              p-40
+              border-2
+              p-10
+              m-4
               border-neutral-300
               flex
               flex-col
