@@ -1,13 +1,13 @@
 'use client';
-import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
-import Button from '../components/Button';
-import useBiographyModal from '../hooks/useBiographyModal';
-import useProfilePictureModal from '../hooks/useProfilePictureModal';
-import { useState } from 'react';
-import axios from 'axios';
-import toast from 'react-hot-toast';
-import ImageUpload from '../components/inputs/ImageUpload';
+import Image from 'next/image';
+import useBiographyModal from '@/app/hooks/useBiographyModal';
+import useProfilePictureModal from '@/app/hooks/useProfilePictureModal';
 import { COLORS } from '@/constants/colors';
+import { ArtistProfile } from '@prisma/client';
+import axios from 'axios';
+import { useState } from 'react';
+import { useForm, FieldValues, SubmitHandler } from 'react-hook-form';
+import toast from 'react-hot-toast';
 import styled from 'styled-components';
 
 const PictureContainer = styled.div`
@@ -45,8 +45,12 @@ const TextArea = styled.textarea`
     border-color: ${COLORS.darkGray};
   }
 `;
+interface ArtistPageProps {
+  profileInfo?: any | null;
+}
 
-const ArtistPage = () => {
+const ArtistPage = ({ profileInfo }: ArtistPageProps) => {
+  console.log('ARTIST: ', profileInfo);
   const biographyModal = useBiographyModal();
   const profilePictureModal = useProfilePictureModal();
   const [isLoading, setIsLoading] = useState(false);
@@ -98,31 +102,44 @@ const ArtistPage = () => {
   return (
     <div>
       <div className='p-20'>
-        <div className='flex'>
+        <div className='flex flex-col'>
+          <h1 className='text-xl font-bold'>
+            {profileInfo?.user.name} {profileInfo?.user.surname}
+          </h1>
           <div className='flex flex-grow gap-2'>
             <div className='w-[30vw]'>
-              <ImageUpload
-                label='Profil Fotoğrafı'
-                onChange={(value) => setCustomValue('profilePic', value)}
-                value={profilePic}
+              <Image
+                width={0}
+                height={0}
+                sizes='100vw'
+                style={{ width: '100%', height: 'auto' }}
+                src={profileInfo?.profilePic || ''}
+                alt={'profile Image'}
               />
+              <h4
+                className='underline text-sm'
+                onClick={() => profilePictureModal.onOpen}
+              >
+                Düzenle
+              </h4>
             </div>
 
             <div className='w-full'>
               <label className='font-semibold text-neutral-600 text-lg'>
                 Biografi
               </label>
-              <div>hello</div>
+              <div>{profileInfo?.biography}</div>
+              <h4
+                className='underline text-sm'
+                onClick={() => biographyModal.onOpen}
+              >
+                Düzenle
+              </h4>
             </div>
           </div>
           <div></div>
         </div>
       </div>
-      <Button label={'Düzenle'} onClick={biographyModal.onOpen}></Button>
-      <Button
-        label={'Profil Fotoğrafını Düzenle'}
-        onClick={profilePictureModal.onOpen}
-      ></Button>
     </div>
   );
 };
