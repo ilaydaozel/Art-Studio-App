@@ -12,12 +12,11 @@ import Avatar from '../Avatar';
 import { User } from '@prisma/client';
 import { signOut } from 'next-auth/react';
 interface UserMenuProps {
-  currentUser?: User | null;
+  currentUser: User | null;
 }
 
 const UserMenu = ({ currentUser }: UserMenuProps) => {
   const router = useRouter();
-
   const registerModal = useRegisterModal();
   const loginModal = useLoginModal();
 
@@ -64,20 +63,25 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
             right-0 
             top-12 
             text-sm
+            sm:m-4
             w-[15vw]
+            md:w-[20vw]
+            sm:w-[30vw]
           '
         >
           <div className='inline-flex flex-col cursor-pointer'>
             {currentUser ? (
               <>
+                <div className='flex flex-col items-center justify-center m-2 w-full'>
+                  <div className='text-md font-semibold border-solid border-b-[1px] w-full m-auto'>
+                    SANATÇI MENÜSÜ
+                  </div>
+                </div>
+
                 <UserMenuElement
-                  label='Sayfam'
-                  onClick={registerModal.onOpen}
-                />
-                <UserMenuElement
-                  label='Resimlerim'
-                  onClick={loginModal.onOpen}
-                />
+                  label='Sayfamı Düzenle'
+                  onClick={() => router.push(`/sayfam/${currentUser?.id}`)}
+                ></UserMenuElement>
                 <UserMenuElement label='Çıkış Yap' onClick={() => signOut()} />
               </>
             ) : (
