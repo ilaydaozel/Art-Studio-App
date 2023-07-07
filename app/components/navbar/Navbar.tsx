@@ -61,6 +61,7 @@ const Navbar = ({ currentUser }: NavbarProps) => {
               <MenuElement address='/' displayName='ANASAYFA' />
               <MenuElement address='/sanatcilar' displayName='SANATÇILAR' />
               <MenuElement address='/hakkinda' displayName='HAKKINDA' />
+              <MenuElement address='/sayfam' displayName='SAYFAM' />
               <MenuElement address='/ekle/eser' displayName='ESER EKLE' />
               <MenuElement address='/ekle/sanatci' displayName='SANATÇI EKLE' />
             </div>
