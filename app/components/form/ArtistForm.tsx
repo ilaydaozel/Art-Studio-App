@@ -82,15 +82,16 @@ const ArtistForm = () => {
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     setIsLoading(true);
-
+    console.log('sent data:', data);
     axios
-      .post('/api/', data)
+      .post('/api/artistProfile', data)
       .then(() => {
-        toast.success('Sanatçı eklendi!');
+        toast.success('Sanatçı sayfası güncellendi!');
         window.location.reload();
         reset();
       })
-      .catch(() => {
+      .catch((error) => {
+        console.log('Error: ', error);
         toast.error('Bir şeyler yanlış gitti');
       })
       .finally(() => {
@@ -113,7 +114,11 @@ const ArtistForm = () => {
           <label className='font-semibold text-neutral-600 text-lg'>
             Biografi
           </label>
-          <TextArea value={biography} placeholder='Hakkınızda...' />
+          <TextArea
+            id='biography'
+            {...register('biography', { required: true })}
+            placeholder='Hakkınızda...'
+          />
         </div>
       </div>
 
