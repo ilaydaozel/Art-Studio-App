@@ -10,7 +10,7 @@ import ArtworkContainer from '../artwork/ArtworkContainer';
 import styled from 'styled-components';
 import { User } from '@prisma/client';
 interface NavbarProps {
-  currentUser?: User | null;
+  currentUser: User | null;
 }
 const NavbarContainer = styled.div`
   position: fixed;
@@ -20,64 +20,56 @@ const NavbarContainer = styled.div`
   z-index: 10;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 `;
-const Navbar = ({ currentUser = undefined }: NavbarProps) => {
+const Navbar = ({ currentUser }: NavbarProps) => {
   console.log({ currentUser });
   return (
-    <div
-      className='
-      h-14'
-    >
-      <NavbarContainer>
-        <div
-          className='
+    <NavbarContainer>
+      <div
+        className='
        py-3
        border-b-[1px]'
-        >
-          <Container>
-            <div
-              className='
+      >
+        <Container>
+          <div
+            className='
           flex
           flex-row
           items-center
           justify-between
           gap-3
           md:gap-0'
-            >
-              <div
-                className='
+          >
+            <div
+              className='
           flex
           flex-row
           items-center
           justify-between
           gap-2'
-              >
-                <Logo height={30} width={30} />
-                <LogoTitle>KONAK KÜLTÜR SANAT AKADEMİSİ</LogoTitle>
-              </div>
-              <div
-                className='
+            >
+              <Logo height={30} width={30} />
+              <LogoTitle>KONAK KÜLTÜR SANAT AKADEMİSİ</LogoTitle>
+            </div>
+            <div
+              className='
               flex
               flex-row
               justify-between
               gap-12
              '
-              >
-                <MenuElement address='/' displayName='ANASAYFA' />
-                <MenuElement address='/sanatcilar' displayName='SANATÇILAR' />
-                <MenuElement address='/hakkinda' displayName='HAKKINDA' />
-                <MenuElement address='/ekle/eser' displayName='ESER EKLE' />
-                <MenuElement
-                  address='/ekle/sanatci'
-                  displayName='SANATÇI EKLE'
-                />
-              </div>
-
-              <UserMenu currentUser={currentUser} />
+            >
+              <MenuElement address='/' displayName='ANASAYFA' />
+              <MenuElement address='/sanatcilar' displayName='SANATÇILAR' />
+              <MenuElement address='/hakkinda' displayName='HAKKINDA' />
+              <MenuElement address='/ekle/eser' displayName='ESER EKLE' />
+              <MenuElement address='/ekle/sanatci' displayName='SANATÇI EKLE' />
             </div>
-          </Container>
-        </div>
-      </NavbarContainer>
-    </div>
+
+            <UserMenu currentUser={currentUser} />
+          </div>
+        </Container>
+      </div>
+    </NavbarContainer>
   );
 };
 
