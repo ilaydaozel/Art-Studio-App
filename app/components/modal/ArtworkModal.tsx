@@ -42,7 +42,6 @@ const ArtworkModal = () => {
       type: '',
       width: 0,
       height: 0,
-      media: '',
     },
   });
   const title = watch('title');

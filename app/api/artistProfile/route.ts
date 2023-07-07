@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 
 import prisma from "@/app/libs/prismadb";
 import getCurrentUser from "@/app/actions/getCurrentUser";
+import { User } from "@prisma/client";
 
 export async function POST(
     request: Request,
@@ -19,18 +20,17 @@ export async function POST(
     const body = await request.json();
     const {
         biography,
-        links,
         profilePic,
         artworks,
     } = body;
+    const user: User = currentUser.currentUser;
 
     const artistProfile = await prisma.artistProfile.create({
         data: {
             biography,
-            links,
             profilePic,
             artworks,
-            artistId: currentUser.id,
+            artistId: user.id,
         }
     });
 
