@@ -9,6 +9,8 @@ import LoginModal from './components/modal/LoginModal';
 import ArtworkModal from './components/modal/ArtworkModal';
 import getCurrentUser from './actions/getCurrentUser';
 import { User } from '@prisma/client';
+import BiographyModal from './components/modal/BiographyModal';
+import ProfilePictureModal from './components/modal/ProfilePictureModal';
 
 export const metadata = {
   title: 'Konak Sanat Akademisi',
@@ -33,6 +35,8 @@ export default async function RootLayout({
           <RegisterModal />
           <LoginModal />
           <ArtworkModal />
+          <BiographyModal />
+          <ProfilePictureModal />
           <Navbar
             currentUser={currentUser ? (currentUser as unknown as User) : null}
           />
