@@ -37,12 +37,10 @@ export default async function RootLayout({
           <ArtworkModal />
           <BiographyModal />
           <ProfilePictureModal />
-          <Navbar
-            currentUser={currentUser ? (currentUser as unknown as User) : null}
-          />
+          <Navbar currentUser={currentUser.currentUser} />
         </ClientOnly>
 
-        <div className='pb-10 pt-14'>{children}</div>
+        {children}
       </body>
     </html>
   );
