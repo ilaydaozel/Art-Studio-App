@@ -14,9 +14,9 @@ const TextDiv = styled.div`
   cursor: pointer;
   transition: background-color 0.3s ease;
   white-space: nowrap;
+  font-size: 1em;
   &:hover {
-    border-radius: 25px;
-    background-color: ${COLORS.bgGray};
+    font-weight: 700;
   }
 `;
 const UserMenuElement = ({ onClick, label }: MenuItemProps) => {
