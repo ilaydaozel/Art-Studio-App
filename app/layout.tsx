@@ -4,12 +4,10 @@ import './globals.css';
 import { Nunito } from 'next/font/google';
 import ClientOnly from './components/ClientOnly';
 import ToasterProvider from './providers/ToasterProvider';
-import RegisterModal from './components/modal/RegisterModal';
 import LoginModal from './components/modal/LoginModal';
 import AddArtworkModal from './components/modal/AddArtworkModal';
 import ArtworkModal from './components/modal/ArtworkModal';
 import getCurrentUser from './actions/getCurrentUser';
-import { User } from '@prisma/client';
 import BiographyModal from './components/modal/BiographyModal';
 import ProfilePictureModal from './components/modal/ProfilePictureModal';
 
@@ -33,7 +31,6 @@ export default async function RootLayout({
       <body className={font.className}>
         <ClientOnly>
           <ToasterProvider />
-          <RegisterModal />
           <LoginModal />
           <ArtworkModal />
           <AddArtworkModal />
