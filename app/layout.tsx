@@ -6,6 +6,7 @@ import ClientOnly from './components/ClientOnly';
 import ToasterProvider from './providers/ToasterProvider';
 import RegisterModal from './components/modal/RegisterModal';
 import LoginModal from './components/modal/LoginModal';
+import AddArtworkModal from './components/modal/AddArtworkModal';
 import ArtworkModal from './components/modal/ArtworkModal';
 import getCurrentUser from './actions/getCurrentUser';
 import { User } from '@prisma/client';
@@ -35,9 +36,14 @@ export default async function RootLayout({
           <RegisterModal />
           <LoginModal />
           <ArtworkModal />
+          <AddArtworkModal />
           <BiographyModal />
           <ProfilePictureModal />
-          <Navbar currentUser={currentUser.currentUser} />
+          <Navbar
+            currentUser={
+              currentUser?.currentUser ? currentUser.currentUser : null
+            }
+          />
         </ClientOnly>
 
         {children}
