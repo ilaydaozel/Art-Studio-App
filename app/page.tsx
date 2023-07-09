@@ -23,9 +23,9 @@ export default function Home() {
 
   const slides: Slide[] = [slide1, slide2, slide3];
   return (
-    <div>
+    <div style={{ maxWidth: '100vw', overflowX: 'hidden' }}>
       <Carousel slides={slides} />
-      <div>
+      <div className='w-full'>
         <ArtworkList title={'Eserler'}></ArtworkList>
       </div>
     </div>
