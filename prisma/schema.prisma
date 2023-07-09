@@ -42,7 +42,7 @@ model UserArtwork{
   type String?
   width Int?
   height Int?
-  medias ArtworkMedia[]
+  artworkMedias String[]
   exhibitionIds String[] @db.ObjectId
   artist ArtistProfile @relation(fields: [artistId], references: [artistId], onDelete: Cascade)
   exhibitions Exhibition[] @relation(fields: [exhibitionIds], references: [id])
@@ -59,17 +59,9 @@ model GuestArtwork{
   type String?
   width Int?
   height Int?
-  medias ArtworkMedia[]
+  artworkMedias String[]
   exhibitionIds String[] @db.ObjectId
   exhibitions Exhibition[] @relation(fields: [exhibitionIds], references: [id])
-}
-
-model ArtworkMedia{
-  id String @id @default(auto()) @map("_id") @db.ObjectId
-  mediaUrl String
-  artworkId String @db.ObjectId
-  userArtwork UserArtwork? @relation(fields: [artworkId], references: [id], onDelete: Cascade)
-  guestArtwork GuestArtwork? @relation(fields: [artworkId], references: [id], onDelete: Cascade)
 }
 
 model Exhibition{
