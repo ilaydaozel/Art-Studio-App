@@ -28,9 +28,9 @@ const Button = ({
       onClick={onClick}
       style={{
         width: width,
-        backgroundColor: outline ? 'white' : COLORS.yellow,
+        backgroundColor: outline ? 'white' : 'white',
         border: outline ? '2px solid' : '2px solid',
-        borderColor: outline ? 'black' : COLORS.yellow,
+        borderColor: outline ? 'black' : 'black',
         color: outline ? 'black' : 'black',
       }}
       className={`
