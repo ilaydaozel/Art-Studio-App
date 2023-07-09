@@ -2,8 +2,8 @@
 import { UserArtwork } from '@prisma/client';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useCallback } from 'react';
-import qs from 'query-string';
 import styled from 'styled-components';
+import Image from 'next/image';
 
 interface ArtworkContainerProps {
   artwork?: UserArtwork | null;
@@ -19,7 +19,20 @@ const Container = styled.div`
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
 `;
 const ArtworkContainer = ({ artwork, label }: ArtworkContainerProps) => {
-  return <Container>This is an artwork {label}</Container>;
+  return (
+    <Container>
+      <div className='w-[40vw]'>
+        <Image
+          width={0}
+          height={0}
+          sizes='100vw'
+          style={{ width: '100%', height: 'auto' }}
+          src={artwork?.medias[0] || ''}
+          alt={'profile Image'}
+        />
+      </div>
+    </Container>
+  );
 };
 
 export default ArtworkContainer;
