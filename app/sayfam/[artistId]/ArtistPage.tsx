@@ -45,6 +45,35 @@ const TextArea = styled.textarea`
     border-color: ${COLORS.darkGray};
   }
 `;
+const NameHeading = styled.text`
+  font-size: 3.5vw;
+  font-weight: 600;
+  color: ${COLORS.darkGray};
+`;
+const BiographyHeading = styled.text`
+  font-size: 2.5vw;
+  font-weight: 600;
+  color: ${COLORS.darkGray};
+`;
+const BiographyContent = styled.text`
+  display: flex;
+  flex-direction: column;
+  font-size: 16px;
+  font-weight: 500;
+`;
+const HeadingContainer = styled.div`
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  border-bottom: solid 1px;
+  border-color: ${COLORS.lightGray};
+  padding: 3% 1% 1% 0;
+`;
+const InformaionContainer = styled.div`
+  margin: 6% 2% 3% 2%;
+  display: flex;
+  gap: 4%;
+`;
 interface ArtistPageProps {
   profileInfo?: any | null;
 }
@@ -101,13 +130,16 @@ const ArtistPage = ({ profileInfo }: ArtistPageProps) => {
 
   return (
     <div>
-      <div className='p-20'>
+      <div className='p-[2vw]'>
         <div className='flex flex-col'>
-          <h1 className='text-xl font-bold'>
-            {profileInfo?.user.name} {profileInfo?.user.surname}
-          </h1>
-          <div className='flex flex-grow gap-2'>
-            <div className='w-[30vw]'>
+          <HeadingContainer>
+            <NameHeading>
+              {profileInfo?.user.name} {profileInfo?.user.surname}
+            </NameHeading>
+          </HeadingContainer>
+
+          <InformaionContainer>
+            <div className='w-[40vw]'>
               <Image
                 width={0}
                 height={0}
@@ -125,10 +157,8 @@ const ArtistPage = ({ profileInfo }: ArtistPageProps) => {
             </div>
 
             <div className='w-full'>
-              <label className='font-semibold text-neutral-600 text-lg'>
-                Biografi
-              </label>
-              <div>{profileInfo?.biography}</div>
+              <BiographyHeading>Biografi</BiographyHeading>
+              <BiographyContent>{profileInfo?.biography}</BiographyContent>
               <h4
                 className='underline text-sm'
                 onClick={() => biographyModal.onOpen}
@@ -136,7 +166,7 @@ const ArtistPage = ({ profileInfo }: ArtistPageProps) => {
                 Düzenle
               </h4>
             </div>
-          </div>
+          </InformaionContainer>
           <div></div>
         </div>
       </div>
