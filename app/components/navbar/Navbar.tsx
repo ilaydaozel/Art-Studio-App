@@ -26,7 +26,7 @@ const LogoTitle = styled.text`
 `;
 const Navbar = ({ currentUser }: NavbarProps) => {
   return (
-    <div className='pt-16 mt-1'>
+    <div className='pt-16 m-1'>
       <NavbarContainer>
         <div
           className='
@@ -76,11 +76,6 @@ const Navbar = ({ currentUser }: NavbarProps) => {
                 <MenuElement address='/' displayName='ANASAYFA' />
                 <MenuElement address='/sanatcilar' displayName='SANATÇILAR' />
                 <MenuElement address='/hakkinda' displayName='HAKKINDA' />
-                <MenuElement address='/ekle/eser' displayName='ESER EKLE' />
-                <MenuElement
-                  address='/ekle/sanatci'
-                  displayName='SANATÇI EKLE'
-                />
               </div>
 
               <UserMenu currentUser={currentUser} />
