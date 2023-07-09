@@ -9,6 +9,7 @@ import { useState } from 'react';
 import { useForm, FieldValues, SubmitHandler } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import styled from 'styled-components';
+import useAddArtworkModal from '@/app/hooks/useAddArtworkModal';
 
 const PictureContainer = styled.div`
   width: 100%;
@@ -31,20 +32,6 @@ const PictureContainer = styled.div`
   }
 `;
 
-const TextArea = styled.textarea`
-  width: 100%;
-  height: 100%;
-  min-height: 100px;
-  padding: 8px;
-  border: 2px solid ${COLORS.lightGray};
-  margin: 12px;
-  outline: none;
-  transition: border-color 0.3s;
-  resize: vertical;
-  &:focus {
-    border-color: ${COLORS.darkGray};
-  }
-`;
 const NameHeading = styled.text`
   font-size: 3.5vw;
   font-weight: 600;
@@ -72,6 +59,7 @@ const HeadingContainer = styled.div`
 const InformaionContainer = styled.div`
   margin: 6% 2% 3% 2%;
   display: flex;
+  align-items: center;
   gap: 4%;
 `;
 interface ArtistPageProps {
@@ -82,32 +70,8 @@ const ArtistPage = ({ profileInfo }: ArtistPageProps) => {
   console.log('ARTIST: ', profileInfo);
   const biographyModal = useBiographyModal();
   const profilePictureModal = useProfilePictureModal();
+  const addArtworkModal = useAddArtworkModal();
   const [isLoading, setIsLoading] = useState(false);
-  const {
-    register,
-    handleSubmit,
-    setValue,
-    watch,
-    formState: { errors },
-    reset,
-  } = useForm<FieldValues>({
-    defaultValues: {
-      biography: '',
-      profilePic: '',
-      artworks: [],
-    },
-  });
-  const biography = watch('biography');
-  const profilePic = watch('profilePic');
-  const artworks = watch('artworks');
-
-  const setCustomValue = (id: string, value: any) => {
-    setValue(id, value, {
-      shouldDirty: true,
-      shouldTouch: true,
-      shouldValidate: true,
-    });
-  };
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     setIsLoading(true);
@@ -117,7 +81,6 @@ const ArtistPage = ({ profileInfo }: ArtistPageProps) => {
       .then(() => {
         toast.success('Sanatçı sayfası güncellendi!');
         window.location.reload();
-        reset();
       })
       .catch((error) => {
         console.log('Error: ', error);
@@ -139,15 +102,17 @@ const ArtistPage = ({ profileInfo }: ArtistPageProps) => {
           </HeadingContainer>
 
           <InformaionContainer>
-            <div className='w-[40vw]'>
-              <Image
-                width={0}
-                height={0}
-                sizes='100vw'
-                style={{ width: '100%', height: 'auto' }}
-                src={profileInfo?.profilePic || ''}
-                alt={'profile Image'}
-              />
+            <div className='pt-12'>
+              <div className='w-[30vw] min-h-[40vh] p-2 shadow-lg'>
+                <Image
+                  width={0}
+                  height={0}
+                  sizes='100vw'
+                  style={{ width: '100%', height: 'auto' }}
+                  src={profileInfo?.profilePic || ''}
+                  alt={'profile Image'}
+                />
+              </div>
               <h4
                 className='underline text-sm'
                 onClick={() => profilePictureModal.onOpen}
@@ -155,10 +120,11 @@ const ArtistPage = ({ profileInfo }: ArtistPageProps) => {
                 Düzenle
               </h4>
             </div>
-
-            <div className='w-full'>
-              <BiographyHeading>Biografi</BiographyHeading>
-              <BiographyContent>{profileInfo?.biography}</BiographyContent>
+            <div>
+              <div className='w-full min-h-[50vh]'>
+                <BiographyHeading>Biografi</BiographyHeading>
+                <BiographyContent>{profileInfo?.biography}</BiographyContent>
+              </div>
               <h4
                 className='underline text-sm'
                 onClick={() => biographyModal.onOpen}
@@ -167,7 +133,26 @@ const ArtistPage = ({ profileInfo }: ArtistPageProps) => {
               </h4>
             </div>
           </InformaionContainer>
-          <div></div>
+          <div>
+            <div className='p-2 h-[50vh] shadow-xl rounded-xl m-4'>
+              <div className='flex h-full flex-grow justify-between'>
+                <PictureContainer
+                  onClick={() => {
+                    addArtworkModal.onOpen();
+                  }}
+                >
+                  Eser Bilgilerini Gir
+                </PictureContainer>
+                <PictureContainer
+                  onClick={() => {
+                    addArtworkModal.onOpen();
+                  }}
+                >
+                  Eser Bilgilerini Gir
+                </PictureContainer>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
