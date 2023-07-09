@@ -90,10 +90,6 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
                   label='Giriş Yap'
                   onClick={loginModal.onOpen}
                 />
-                <UserMenuElement
-                  label='Kaydol'
-                  onClick={registerModal.onOpen}
-                />
               </>
             )}
           </div>
