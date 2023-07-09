@@ -27,7 +27,7 @@ const ArtworkContainer = ({ artwork, label }: ArtworkContainerProps) => {
           height={0}
           sizes='100vw'
           style={{ width: '100%', height: 'auto' }}
-          src={artwork?.medias[0] || ''}
+          src={artwork?.artworkMedias[0] || ''}
           alt={'profile Image'}
         />
       </div>
