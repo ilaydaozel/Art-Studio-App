@@ -10,9 +10,9 @@ import Form from './Form';
 import Button from '../Button';
 import { COLORS } from '@/constants/colors';
 import Image from 'next/image';
-import useArtworkModal from '@/app/hooks/useArtworkModal';
 import UserMenuElement from '../navbar/UserMenuElement';
-import ArtworkModal from '../modal/ArtworkModal';
+import AddArtworkModal from '../modal/AddArtworkModal';
+import useAddArtworkModal from '@/app/hooks/useAddArtworkModal';
 
 const PictureContainer = styled.div`
   width: 100%;
@@ -52,7 +52,7 @@ const TextArea = styled.textarea`
 
 const ArtistForm = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const artworkModal = useArtworkModal();
+  const addArtworkModal = useAddArtworkModal();
 
   const {
     register,
@@ -130,21 +130,21 @@ const ArtistForm = () => {
           <div className='flex h-full flex-grow justify-between'>
             <PictureContainer
               onClick={() => {
-                artworkModal.onOpen();
+                addArtworkModal.onOpen();
               }}
             >
               Eser Bilgilerini Gir
             </PictureContainer>
             <PictureContainer
               onClick={() => {
-                artworkModal.onOpen();
+                addArtworkModal.onOpen();
               }}
             >
               Eser Bilgilerini Gir
             </PictureContainer>
             <PictureContainer
               onClick={() => {
-                artworkModal.onOpen();
+                addArtworkModal.onOpen();
               }}
             >
               Eser Bilgilerini Gir
