@@ -23,6 +23,7 @@ export async function POST(
         type,
         width,
         height,
+        mediaLink,
     } = body;
 
     Object.keys(body).forEach((value: any) => {
@@ -41,6 +42,7 @@ export async function POST(
             type,
             width,
             height,
+            artworkMedias: mediaLink[0],
         }
     });
 
