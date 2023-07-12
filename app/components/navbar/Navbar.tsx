@@ -2,7 +2,6 @@
 import React from 'react';
 import Logo from './Logo';
 import MenuElement from './MenuElement';
-import RegisterModal from '../modal/RegisterModal';
 import UserMenu from './UserMenu';
 import ArtworkContainer from '../artwork/ArtworkContainer';
 import styled from 'styled-components';
@@ -26,7 +25,7 @@ const LogoTitle = styled.text`
 `;
 const Navbar = ({ currentUser }: NavbarProps) => {
   return (
-    <div className='pt-16 m-1'>
+    <div className='pt-16 m-1 '>
       <NavbarContainer>
         <div
           className='

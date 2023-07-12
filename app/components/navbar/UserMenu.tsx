@@ -91,7 +91,11 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
                     ></UserMenuElement>
                     <UserMenuElement
                       label='Çıkış Yap'
-                      onClick={() => signOut()}
+                      onClick={() => {
+                        signOut();
+                        router.refresh();
+                        router.push('/');
+                      }}
                     />
                   </div>
                 ) : (
@@ -107,7 +111,11 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
                     ></UserMenuElement>
                     <UserMenuElement
                       label='Çıkış Yap'
-                      onClick={() => signOut()}
+                      onClick={() => {
+                        signOut();
+                        router.refresh();
+                        router.push('/');
+                      }}
                     />
                   </div>
                 )
