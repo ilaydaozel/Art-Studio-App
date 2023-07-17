@@ -3,15 +3,13 @@ import Image from 'next/image';
 import useBiographyModal from '@/app/hooks/useBiographyModal';
 import useProfilePictureModal from '@/app/hooks/useProfilePictureModal';
 import { COLORS } from '@/constants/colors';
-import { ArtistProfile } from '@prisma/client';
-import axios from 'axios';
-import { useEffect, useState } from 'react';
-import { useForm, FieldValues, SubmitHandler } from 'react-hook-form';
-import toast from 'react-hot-toast';
 import styled from 'styled-components';
 import useAddArtworkModal from '@/app/hooks/useAddArtworkModal';
 import BiographyModal from '@/app/components/modal/BiographyModal';
 import { useRouter } from 'next/navigation';
+import ProfilePictureModal from '@/app/components/modal/ProfilePictureModal';
+import { FaRegEdit } from 'react-icons/fa';
+import { useState } from 'react';
 
 const PictureContainer = styled.div`
   width: 100%;
@@ -47,8 +45,9 @@ const BiographyHeading = styled.text`
 const BiographyContent = styled.text`
   display: flex;
   flex-direction: column;
-  font-size: 16px;
+  font-size: 1.25rem;
   font-weight: 500;
+  color: ${COLORS.gray};
 `;
 const HeadingContainer = styled.div`
   display: flex;
@@ -80,24 +79,6 @@ const ArtistPage = ({ profileInfo }: ArtistPageProps) => {
     router.refresh();
   };
 
-  const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    setIsLoading(true);
-    console.log('sent data:', data);
-    axios
-      .post('/api/artistProfile', data)
-      .then(() => {
-        toast.success('Sanatçı sayfası güncellendi!');
-        window.location.reload();
-      })
-      .catch((error) => {
-        console.log('Error: ', error);
-        toast.error('Bir şeyler yanlış gitti');
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  };
-
   return (
     <div>
       <div className='p-[2vw]'>
@@ -109,23 +90,24 @@ const ArtistPage = ({ profileInfo }: ArtistPageProps) => {
           </HeadingContainer>
 
           <InformaionContainer>
-            <div className='pt-12'>
-              <div className='w-[30vw] min-h-[40vh] p-2 shadow-lg'>
+            <div className='flex flex-col items-end pt-12'>
+              <ProfilePictureModal
+                pictureLink={profileInfo?.profilePic}
+                onClose={profilePictureModal.onClose}
+                onUpdate={refreshPage}
+              />
+              <div className='p-1 shadow-lg'>
                 <Image
-                  width={0}
-                  height={0}
-                  sizes='100vw'
-                  style={{ width: '100%', height: 'auto' }}
+                  width={350}
+                  height={300}
                   src={profileInfo?.profilePic || ''}
                   alt={'profile Image'}
                 />
               </div>
-              <h4
-                className='underline text-sm'
-                onClick={() => profilePictureModal.onOpen}
-              >
-                Düzenle
-              </h4>
+              <FaRegEdit
+                className='cursor-pointer'
+                onClick={biographyModal.onOpen}
+              />
             </div>
 
             <div>
@@ -135,15 +117,15 @@ const ArtistPage = ({ profileInfo }: ArtistPageProps) => {
                 onUpdate={refreshPage}
               />
               <div className='w-full min-h-[50vh]'>
-                <BiographyHeading>Biografi</BiographyHeading>
+                <div className='flex flex-row items-baseline gap-4'>
+                  <BiographyHeading>Biografi</BiographyHeading>
+                  <FaRegEdit
+                    className='cursor-pointer'
+                    onClick={biographyModal.onOpen}
+                  />
+                </div>
                 <BiographyContent>{profileInfo?.biography}</BiographyContent>
               </div>
-              <h4
-                className='underline text-sm cursor-pointer'
-                onClick={biographyModal.onOpen}
-              >
-                Düzenle
-              </h4>
             </div>
           </InformaionContainer>
           <div>
