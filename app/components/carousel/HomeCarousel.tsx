@@ -1,12 +1,16 @@
 'use client';
 import styled from 'styled-components';
 import { useState, useEffect } from 'react';
-import { Slide } from '@/models/slide';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
 import { COLORS } from '@/constants/colors';
 interface CarouselProps {
   slides: Slide[];
+}
+interface Slide {
+  src: string;
+  caption: string;
+  subcaption: string;
 }
 
 const SlideContainer = styled.div<{ src: string }>`
@@ -20,7 +24,7 @@ const SlideContainer = styled.div<{ src: string }>`
 
 const SlideForeground = styled.div`
   position: relative;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.6);
   background-size: cover;
   background-position: center;
   width: 100%;
@@ -29,10 +33,9 @@ const SlideForeground = styled.div`
 
 const CaptionContainer = styled.div`
   position: relative;
-  background-color: rgba(0, 0, 0, 0.4);
   background-position: center;
-  width: 50%;
-  height: 40vh;
+  width: 80%;
+  height: 46vh;
   top: 40%;
   left: 4%;
 `;
@@ -43,7 +46,7 @@ const Caption = styled.p`
   left: 5%;
   padding: 10px;
   color: #fff;
-  font-size: 28px;
+  font-size: 3rem;
 `;
 const Subcaption = styled.p`
   position: absolute;
@@ -51,7 +54,7 @@ const Subcaption = styled.p`
   left: 5%;
   padding: 10px;
   color: #fff;
-  font-size: 18px;
+  font-size: 2rem;
 `;
 
 const NavButtonRight = styled.button`
@@ -62,7 +65,7 @@ const NavButtonRight = styled.button`
   border: none;
   cursor: pointer;
   padding: 5px;
-  color: ${COLORS.lightGray};
+  color: ${COLORS.gray};
   font-size: 24px;
   right: 0;
 `;
@@ -74,7 +77,7 @@ const NavButtonLeft = styled.button`
   border: none;
   cursor: pointer;
   padding: 5px;
-  color: ${COLORS.lightGray};
+  color: ${COLORS.gray};
   font-size: 24px;
   left: 0;
 `;
