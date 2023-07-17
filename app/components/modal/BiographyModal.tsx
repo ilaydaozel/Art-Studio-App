@@ -14,54 +14,44 @@ import { UserRequest } from '@/models/user';
 import Selectbox from '../inputs/Selectbox';
 import { COLORS } from '@/constants/colors';
 import styled from 'styled-components';
+import { ArtistProfile } from '@prisma/client';
 
-const BiographyModal = () => {
+interface BiographyModalProps {
+  artistProfile: ArtistProfile | null;
+  onClose: () => void;
+}
+const BiographyModal = ({ artistProfile, onClose }: BiographyModalProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const biographyModal = useBiographyModal();
 
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm<FieldValues>({
     defaultValues: {
-      name: '',
-      surname: '',
-      email: '',
-      gender: '',
-      password: '',
-      password_again: '',
+      biography: '',
     },
   });
 
+  const biography = watch('biography');
+
   const onSubmit: SubmitHandler<FieldValues> = (data: FieldValues) => {
     setIsLoading(true);
-    const userData: UserRequest = {
-      name: data.name,
-      surname: data.surname,
-      password: data.password,
-      userType: 'artist', // Add the user type value here
-      email: data.email, // Add the email value here
-      gender: data.gender, // Add the gender value here
-    };
-    if (data.password === data.password_again) {
-      axios
-        .post('/api/register', userData)
-        .then(() => {
-          toast.success('Kayıt olundu!');
-          biographyModal.onClose();
-        })
-        .catch((error) => {
-          toast.error('Error');
-          console.log('Register error: ', error);
-        })
-        .finally(() => {
-          setIsLoading(false);
-        });
-    } else {
-      toast.error('Şifreler aynı değil!');
-      setIsLoading(false);
-    }
+    axios
+      .post(`/api/artistProfile`, { biography })
+      .then(() => {
+        toast.success('Biografi güncellendi!');
+        biographyModal.onClose();
+      })
+      .catch((error) => {
+        toast.error('Error');
+        console.log('Biografi error: ', error);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   const TextArea = styled.textarea`
@@ -85,7 +75,7 @@ const BiographyModal = () => {
       <TextArea
         id='biography'
         {...register('biography', { required: true })}
-        placeholder='Hakkınızda...'
+        placeholder={artistProfile?.biography || 'Hakkınızda...'}
       />
     </div>
   );
@@ -95,8 +85,8 @@ const BiographyModal = () => {
       disabled={isLoading}
       isOpen={biographyModal.isOpen}
       title='Biografi'
-      actionLabel='Kaydol'
-      onClose={biographyModal.onClose}
+      actionLabel='Güncelle'
+      onClose={onClose}
       onSubmit={handleSubmit(onSubmit)}
       body={bodyContent}
     />
