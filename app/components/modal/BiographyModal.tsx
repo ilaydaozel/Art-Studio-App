@@ -1,17 +1,10 @@
 import axios from 'axios';
-import { signIn } from 'next-auth/react';
 import { useState } from 'react';
-import { useCallback } from 'react';
 import { toast } from 'react-hot-toast';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import useBiographyModal from '@/app/hooks/useBiographyModal';
 
 import Modal from './Modal';
-import Input from '../inputs/Input';
-import { UserRequest } from '@/models/user';
-import Selectbox from '../inputs/Selectbox';
-import { COLORS } from '@/constants/colors';
-import styled from 'styled-components';
 import { ArtistProfile } from '@prisma/client';
 
 interface BiographyModalProps {
@@ -39,8 +32,6 @@ const BiographyModal = ({
       biography: bio,
     },
   });
-
-  const biography = watch('biography');
 
   const onSubmit: SubmitHandler<FieldValues> = async (data: FieldValues) => {
     setIsLoading(true);
