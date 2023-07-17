@@ -18,13 +18,14 @@ const NavbarContainer = styled.div<{ bgColor: string }>`
   z-index: 10;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 `;
-const LogoTitle = styled.text`
+const LogoTitle = styled.a`
   font-weight: 600;
   color: ${COLORS.darkGray};
   font-size: 1.1rem;
+  cursor: pointer;
 `;
 
-const MenuElement = styled.text`
+const MenuElement = styled.a`
   text-align: center;
   padding: 2px 4px;
   color: ${COLORS.darkGray};
@@ -74,7 +75,7 @@ const Navbar = ({ currentUser }: NavbarProps) => {
           gap-2'
               >
                 <div className='flex flex-col'>
-                  <LogoTitle>KONAK KÜLTÜR SANAT AKADEMİSİ</LogoTitle>
+                  <LogoTitle href='/'>KONAK KÜLTÜR SANAT AKADEMİSİ</LogoTitle>
                 </div>
               </div>
               <div className='flex flex-row gap-6 items-center'>
