@@ -13,6 +13,7 @@ import Modal from './Modal';
 import ImageUpload from '../inputs/ImageUpload';
 import Input from '../inputs/Input';
 import { UserArtwork } from '@prisma/client';
+import Selectbox from '../inputs/Selectbox';
 
 enum STEPS {
   INFORMATION = 0,
@@ -146,21 +147,23 @@ const ArtworkModal = () => {
         register={register}
         errors={errors}
       />
-      <Input
+      <Selectbox
         id='medium'
         label='Teknik'
         width='49%'
         disabled={isLoading}
         register={register}
         errors={errors}
+        choices={['Yağlıboya', 'Akrilik', 'Suluboya', 'Karakalem', 'Karışık']}
       />
-      <Input
+      <Selectbox
         id='type'
         label='Tür'
         width='49%'
         disabled={isLoading}
         register={register}
         errors={errors}
+        choices={['Tablo', 'Kağıt']}
       />
       <Input
         id='width'
