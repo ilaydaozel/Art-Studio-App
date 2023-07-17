@@ -5,12 +5,13 @@ import useProfilePictureModal from '@/app/hooks/useProfilePictureModal';
 import { COLORS } from '@/constants/colors';
 import { ArtistProfile } from '@prisma/client';
 import axios from 'axios';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm, FieldValues, SubmitHandler } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import styled from 'styled-components';
 import useAddArtworkModal from '@/app/hooks/useAddArtworkModal';
 import BiographyModal from '@/app/components/modal/BiographyModal';
+import { useRouter } from 'next/navigation';
 
 const PictureContainer = styled.div`
   width: 100%;
@@ -69,10 +70,15 @@ interface ArtistPageProps {
 
 const ArtistPage = ({ profileInfo }: ArtistPageProps) => {
   console.log('ARTIST: ', profileInfo);
+  const router = useRouter();
   const biographyModal = useBiographyModal();
   const profilePictureModal = useProfilePictureModal();
   const addArtworkModal = useAddArtworkModal();
   const [isLoading, setIsLoading] = useState(false);
+
+  const refreshPage = () => {
+    router.refresh();
+  };
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     setIsLoading(true);
@@ -126,6 +132,7 @@ const ArtistPage = ({ profileInfo }: ArtistPageProps) => {
               <BiographyModal
                 artistProfile={profileInfo}
                 onClose={biographyModal.onClose}
+                onUpdate={refreshPage}
               />
               <div className='w-full min-h-[50vh]'>
                 <BiographyHeading>Biografi</BiographyHeading>

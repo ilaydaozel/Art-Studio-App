@@ -1,5 +1,3 @@
-'use client';
-
 import axios from 'axios';
 import { signIn } from 'next-auth/react';
 import { useState } from 'react';
@@ -19,10 +17,16 @@ import { ArtistProfile } from '@prisma/client';
 interface BiographyModalProps {
   artistProfile: ArtistProfile | null;
   onClose: () => void;
+  onUpdate: () => void;
 }
-const BiographyModal = ({ artistProfile, onClose }: BiographyModalProps) => {
+
+const BiographyModal = ({
+  artistProfile,
+  onClose,
+  onUpdate,
+}: BiographyModalProps) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [bio, setBio] = useState(artistProfile?.biography || 'Hakkımda ..');
+  const [bio, setBio] = useState(artistProfile?.biography);
   const biographyModal = useBiographyModal();
 
   const {
@@ -32,37 +36,42 @@ const BiographyModal = ({ artistProfile, onClose }: BiographyModalProps) => {
     formState: { errors },
   } = useForm<FieldValues>({
     defaultValues: {
-      biography: '',
+      biography: bio,
     },
   });
 
   const biography = watch('biography');
 
-  const onSubmit: SubmitHandler<FieldValues> = (data: FieldValues) => {
+  const onSubmit: SubmitHandler<FieldValues> = async (data: FieldValues) => {
     setIsLoading(true);
-    axios
-      .post(`/api/artistProfile`, { biography })
-      .then(() => {
-        toast.success('Biografi güncellendi!');
-        biographyModal.onClose();
-      })
-      .catch((error) => {
-        toast.error('Error');
-        console.log('Biografi error: ', error);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
+    const { biography } = data;
+
+    try {
+      await axios.post(`/api/artistProfile`, { biography });
+      toast.success('Biografi güncellendi!');
+      biographyModal.onClose();
+      onUpdate();
+    } catch (error) {
+      toast.error('Error');
+      console.log('Biografi error: ', error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const bodyContent = (
     <div>
-      <label className='font-semibold text-neutral-600 text-lg'>Biografi</label>
-      <input
+      <label
+        className='font-semibold text-neutral-600 text-lg'
+        htmlFor='biography'
+      >
+        Biografi
+      </label>
+      <textarea
         className='w-full min-h-[100px] border-double border-2 border-neutral-300'
         id='biography'
         {...register('biography', { required: true })}
-        value={bio}
+        placeholder='Hakkımda ..'
         onChange={(e) => {
           setBio(e.target.value);
         }}
