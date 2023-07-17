@@ -34,7 +34,6 @@ export default async function RootLayout({
           <LoginModal />
           <ArtworkModal />
           <AddArtworkModal />
-          <ProfilePictureModal />
           <Navbar
             currentUser={
               currentUser?.currentUser ? currentUser.currentUser : null
