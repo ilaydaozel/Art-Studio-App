@@ -9,86 +9,79 @@ import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 
 import Modal from './Modal';
 import Input from '../inputs/Input';
-import { UserRequest } from '@/models/user';
 import Selectbox from '../inputs/Selectbox';
 import { COLORS } from '@/constants/colors';
 import styled from 'styled-components';
 import ImageUpload from '../inputs/ImageUpload';
 import useProfilePictureModal from '@/app/hooks/useProfilePictureModal';
 
-const ProfilePictureModal = () => {
+interface ProfilePictureModalProps {
+  pictureLink: string | null;
+  onClose: () => void;
+  onUpdate: () => void;
+}
+
+const ProfilePictureModal = ({
+  pictureLink,
+  onClose,
+  onUpdate,
+}: ProfilePictureModalProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const profilePictureModal = useProfilePictureModal();
 
   const {
     register,
     handleSubmit,
+    setValue,
+    watch,
     formState: { errors },
   } = useForm<FieldValues>({
     defaultValues: {
-      name: '',
-      surname: '',
-      email: '',
-      gender: '',
-      password: '',
-      password_again: '',
+      profilePic: pictureLink ? pictureLink : '',
     },
   });
+  const profilePic = watch('profilePic');
 
-  const onSubmit: SubmitHandler<FieldValues> = (data: FieldValues) => {
+  const onSubmit: SubmitHandler<FieldValues> = async (data: FieldValues) => {
     setIsLoading(true);
-    const userData: UserRequest = {
-      name: data.name,
-      surname: data.surname,
-      password: data.password,
-      userType: 'artist', // Add the user type value here
-      email: data.email, // Add the email value here
-      gender: data.gender, // Add the gender value here
-    };
-    if (data.password === data.password_again) {
-      axios
-        .post('/api/register', userData)
-        .then(() => {
-          toast.success('Kayıt olundu!');
-          profilePictureModal.onClose();
-        })
-        .catch((error) => {
-          toast.error('Error');
-          console.log('Register error: ', error);
-        })
-        .finally(() => {
-          setIsLoading(false);
-        });
-    } else {
-      toast.error('Şifreler aynı değil!');
+    const { profilePic } = data;
+
+    try {
+      await axios.post(`/api/artistProfile`, { profilePic });
+      toast.success('Profil fotoğrafı güncellendi!');
+      profilePictureModal.onClose();
+      onUpdate();
+    } catch (error) {
+      toast.error('Error');
+      console.log('Profile pic error: ', error);
+    } finally {
       setIsLoading(false);
     }
   };
-
-  const TextArea = styled.textarea`
-    width: 100%;
-    height: 100%;
-    min-height: 100px;
-    padding: 8px;
-    border: 2px solid ${COLORS.lightGray};
-    margin: 12px;
-    outline: none;
-    transition: border-color 0.3s;
-    resize: vertical;
-    &:focus {
-      border-color: ${COLORS.darkGray};
-    }
-  `;
-
-  const bodyContent = <div>Profil pic</div>;
+  const setCustomValue = (id: string, value: any) => {
+    setValue(id, value, {
+      shouldDirty: true,
+      shouldTouch: true,
+      shouldValidate: true,
+    });
+  };
+  const bodyContent = (
+    <div>
+      <ImageUpload
+        label='Profil Fotoğrafı'
+        onChange={(value) => setCustomValue('profilePic', value)}
+        value={profilePic}
+      />
+    </div>
+  );
 
   return (
     <Modal
       disabled={isLoading}
       isOpen={profilePictureModal.isOpen}
       title='Profil Fotoğrafı'
-      actionLabel='Kaydol'
-      onClose={profilePictureModal.onClose}
+      actionLabel='Güncelle'
+      onClose={onClose}
       onSubmit={handleSubmit(onSubmit)}
       body={bodyContent}
     />
