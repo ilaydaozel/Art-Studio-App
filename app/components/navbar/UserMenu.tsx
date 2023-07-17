@@ -1,13 +1,11 @@
 'use client';
 
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { AiOutlineMenu } from 'react-icons/ai';
 import { useRouter } from 'next/navigation';
 
-import useLoginModal from '@/app/hooks/useLoginModal';
-
 import UserMenuElement from './UserMenuElement';
-import Avatar from '../Avatar';
+
 import { User } from '@prisma/client';
 import { signOut } from 'next-auth/react';
 import styled from 'styled-components';
@@ -28,7 +26,6 @@ const UserTypeText = styled.text`
 `;
 const UserMenu = ({ currentUser }: UserMenuProps) => {
   const router = useRouter();
-  const loginModal = useLoginModal();
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -36,8 +33,31 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
     setIsOpen((value) => !value);
   }, []);
 
+  const menuRef = useRef<HTMLDivElement>(null); // Specify the type of menuRef
+
+  // Use useEffect to add a click event listener when the component mounts
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      // If the click is outside the menu and the menu is open, close it
+      if (
+        menuRef.current &&
+        !menuRef.current.contains(event.target as Node) &&
+        isOpen
+      ) {
+        setIsOpen(false);
+      }
+    };
+
+    // Add the event listener to 'document'
+    document.addEventListener('click', handleClickOutside);
+
+    // Clean up the event listener when the component unmounts
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, [isOpen]);
   return (
-    <div className='relative'>
+    <div className='relative' ref={menuRef}>
       <div
         onClick={toggleOpen}
         className='
@@ -65,7 +85,6 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
         </div>
         <AiOutlineMenu className='h-[16px] text-neutral-400 ' />
       </div>
-      <div></div>
       {isOpen && (
         <div
           className='
@@ -83,7 +102,7 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
             sm:w-[30vw]
           '
         >
-          <div className='inline-flex flex-col cursor-pointer'>
+          <div className='inline-flex flex-col cursor-pointer '>
             <>
               {currentUser?.userType === 'artist' ? (
                 <div>
