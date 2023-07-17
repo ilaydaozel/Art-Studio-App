@@ -22,6 +22,7 @@ interface BiographyModalProps {
 }
 const BiographyModal = ({ artistProfile, onClose }: BiographyModalProps) => {
   const [isLoading, setIsLoading] = useState(false);
+  const [bio, setBio] = useState(artistProfile?.biography || 'Hakkımda ..');
   const biographyModal = useBiographyModal();
 
   const {
@@ -54,28 +55,17 @@ const BiographyModal = ({ artistProfile, onClose }: BiographyModalProps) => {
       });
   };
 
-  const TextArea = styled.textarea`
-    width: 100%;
-    height: 100%;
-    min-height: 100px;
-    padding: 8px;
-    border: 2px solid ${COLORS.lightGray};
-    margin: 12px;
-    outline: none;
-    transition: border-color 0.3s;
-    resize: vertical;
-    &:focus {
-      border-color: ${COLORS.darkGray};
-    }
-  `;
-
   const bodyContent = (
     <div>
       <label className='font-semibold text-neutral-600 text-lg'>Biografi</label>
-      <TextArea
+      <input
+        className='w-full min-h-[100px] border-double border-2 border-neutral-300'
         id='biography'
         {...register('biography', { required: true })}
-        placeholder={artistProfile?.biography || 'Hakkınızda...'}
+        value={bio}
+        onChange={(e) => {
+          setBio(e.target.value);
+        }}
       />
     </div>
   );
