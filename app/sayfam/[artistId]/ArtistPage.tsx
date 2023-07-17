@@ -9,10 +9,13 @@ import BiographyModal from '@/app/components/modal/BiographyModal';
 import { useRouter } from 'next/navigation';
 import ProfilePictureModal from '@/app/components/modal/ProfilePictureModal';
 import { FaRegEdit } from 'react-icons/fa';
+import { FaRegSquarePlus } from 'react-icons/fa6';
 import { useState } from 'react';
+import ArtworkContainer from '@/app/components/artwork/ArtworkContainer';
+import { UserArtwork } from '@prisma/client';
 
 const PictureContainer = styled.div`
-  width: 100%;
+  width: 30%;
   margin: 10px;
   height: full;
   cursor: pointer;
@@ -65,10 +68,12 @@ const InformaionContainer = styled.div`
 `;
 interface ArtistPageProps {
   profileInfo?: any | null;
+  artworks?: UserArtwork[] | null;
 }
 
-const ArtistPage = ({ profileInfo }: ArtistPageProps) => {
+const ArtistPage = ({ profileInfo, artworks }: ArtistPageProps) => {
   console.log('ARTIST: ', profileInfo);
+  console.log('ARTWORKS: ', artworks);
   const router = useRouter();
   const biographyModal = useBiographyModal();
   const profilePictureModal = useProfilePictureModal();
@@ -106,7 +111,7 @@ const ArtistPage = ({ profileInfo }: ArtistPageProps) => {
               </div>
               <FaRegEdit
                 className='cursor-pointer'
-                onClick={biographyModal.onOpen}
+                onClick={profilePictureModal.onOpen}
               />
             </div>
 
@@ -129,22 +134,29 @@ const ArtistPage = ({ profileInfo }: ArtistPageProps) => {
             </div>
           </InformaionContainer>
           <div>
-            <div className='p-2 h-[50vh] shadow-xl rounded-xl m-4'>
-              <div className='flex h-full flex-grow justify-between'>
-                <PictureContainer
-                  onClick={() => {
-                    addArtworkModal.onOpen();
-                  }}
-                >
-                  Eser Bilgilerini Gir
-                </PictureContainer>
-                <PictureContainer
-                  onClick={() => {
-                    addArtworkModal.onOpen();
-                  }}
-                >
-                  Eser Bilgilerini Gir
-                </PictureContainer>
+            <div className='p-2 shadow-xl rounded-xl m-4 flex flex-col items-end'>
+              {artworks ? (
+                artworks.length < 3 ? (
+                  <button
+                    className='flex items-center gap-2 p-2 rounded-xl shadow-md'
+                    onClick={() => {
+                      addArtworkModal.onOpen();
+                    }}
+                  >
+                    Eser Ekle
+                    <FaRegSquarePlus></FaRegSquarePlus>
+                  </button>
+                ) : (
+                  <h1>Maximum eser sayısına ulaştınız.</h1>
+                )
+              ) : (
+                <></>
+              )}
+
+              <div className='flex w-full flex-grow justify-center'>
+                {artworks?.map((currentArtwork: UserArtwork) => (
+                  <ArtworkContainer artwork={currentArtwork}></ArtworkContainer>
+                ))}
               </div>
             </div>
           </div>
