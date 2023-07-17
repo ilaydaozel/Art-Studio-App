@@ -10,12 +10,14 @@ interface IParams {
 
 const ArtistProfilePage = async ({ params }: { params: IParams }) => {
   let artistProfile = null;
+  let allArtworks = null;
   if (params != undefined && params != undefined) {
     artistProfile = await getArtistProfileById(params);
+    allArtworks = await getAllArtworksByArtistId(params);
   }
   console.log('artistProfile: ', artistProfile);
-  const allArtworks = getAllArtworksByArtistId(params);
   console.log('allArtworks ', allArtworks);
+
   if (!artistProfile) {
     return (
       <ClientOnly>
@@ -26,7 +28,10 @@ const ArtistProfilePage = async ({ params }: { params: IParams }) => {
 
   return (
     <ClientOnly>
-      <ArtistPage profileInfo={artistProfile?.artistProfile} />
+      <ArtistPage
+        profileInfo={artistProfile?.artistProfile}
+        artworks={allArtworks?.allUserArtworks}
+      />
     </ClientOnly>
   );
 };
