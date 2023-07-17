@@ -10,10 +10,22 @@ import UserMenuElement from './UserMenuElement';
 import Avatar from '../Avatar';
 import { User } from '@prisma/client';
 import { signOut } from 'next-auth/react';
+import styled from 'styled-components';
+import { COLORS } from '@/constants/colors';
 interface UserMenuProps {
   currentUser: User | null;
 }
 
+const UserTypeText = styled.text`
+  color: ${COLORS.darkGray};
+  cursor: pointer;
+  padding: 2px 4px;
+  font-weight: 600;
+  font-size: 12px;
+  &:hover {
+    font-weight: bold;
+  }
+`;
 const UserMenu = ({ currentUser }: UserMenuProps) => {
   const router = useRouter();
   const loginModal = useLoginModal();
@@ -29,7 +41,7 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
       <div
         onClick={toggleOpen}
         className='
-          p-4
+          p-2
           md:py-1
           md:px-2
           border-[1px] 
@@ -37,7 +49,7 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
           flex 
           flex-row 
           items-center 
-          gap-3 
+          gap-2
           rounded-full 
           cursor-pointer 
           hover:shadow-md 
@@ -45,17 +57,13 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
           '
       >
         <div className='hidden md:block'>
-          {currentUser ? (
-            currentUser.userType === 'admin' ? (
-              <div className='text-sm'>ADMİN</div>
-            ) : (
-              <div className='text-sm'>SANATÇI</div>
-            )
+          {currentUser?.userType === 'admin' ? (
+            <UserTypeText>ADMİN</UserTypeText>
           ) : (
-            <Avatar />
+            <UserTypeText>SANATÇI</UserTypeText>
           )}
         </div>
-        <AiOutlineMenu />
+        <AiOutlineMenu className='h-[16px] text-neutral-400 ' />
       </div>
       <div></div>
       {isOpen && (
@@ -77,55 +85,46 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
         >
           <div className='inline-flex flex-col cursor-pointer'>
             <>
-              {currentUser ? (
-                currentUser.userType === 'artist' ? (
-                  <div>
-                    <div className='flex flex-col items-center justify-center m-2 w-full'>
-                      <div className='text-md font-semibold border-solid border-b-[1px] w-full m-auto'>
-                        SANATÇI MENÜSÜ
-                      </div>
+              {currentUser?.userType === 'artist' ? (
+                <div>
+                  <div className='flex flex-col items-center justify-center m-2 w-full'>
+                    <div className='text-md font-semibold border-solid border-b-[1px] w-full m-auto'>
+                      SANATÇI MENÜSÜ
                     </div>
-                    <UserMenuElement
-                      label='Sayfamı Düzenle'
-                      onClick={() => router.push(`/sayfam/${currentUser?.id}`)}
-                    ></UserMenuElement>
-                    <UserMenuElement
-                      label='Çıkış Yap'
-                      onClick={() => {
-                        signOut();
-                        router.refresh();
-                        router.push('/');
-                      }}
-                    />
                   </div>
-                ) : (
-                  <div>
-                    <div className='flex flex-col items-center justify-center m-2 w-full'>
-                      <div className='text-md font-semibold border-solid border-b-[1px] w-full m-auto'>
-                        ADMİN MENÜSÜ
-                      </div>
-                    </div>
-                    <UserMenuElement
-                      label='Yeni Sanatçı Ekle'
-                      onClick={() => router.push(`/ekle/sanatci`)}
-                    ></UserMenuElement>
-                    <UserMenuElement
-                      label='Çıkış Yap'
-                      onClick={() => {
-                        signOut();
-                        router.refresh();
-                        router.push('/');
-                      }}
-                    />
-                  </div>
-                )
-              ) : (
-                <>
                   <UserMenuElement
-                    label='Giriş Yap'
-                    onClick={loginModal.onOpen}
+                    label='Sayfamı Düzenle'
+                    onClick={() => router.push(`/sayfam/${currentUser?.id}`)}
+                  ></UserMenuElement>
+                  <UserMenuElement
+                    label='Çıkış Yap'
+                    onClick={() => {
+                      signOut();
+                      router.refresh();
+                      router.push('/');
+                    }}
                   />
-                </>
+                </div>
+              ) : (
+                <div>
+                  <div className='flex flex-col items-center justify-center m-2 w-full'>
+                    <div className='text-md font-semibold border-solid border-b-[1px] w-full m-auto'>
+                      ADMİN MENÜSÜ
+                    </div>
+                  </div>
+                  <UserMenuElement
+                    label='Yeni Sanatçı Ekle'
+                    onClick={() => router.push(`/ekle/sanatci`)}
+                  ></UserMenuElement>
+                  <UserMenuElement
+                    label='Çıkış Yap'
+                    onClick={() => {
+                      signOut();
+                      router.refresh();
+                      router.push('/');
+                    }}
+                  />
+                </div>
               )}
             </>
           </div>
