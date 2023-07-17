@@ -10,6 +10,7 @@ import { useForm, FieldValues, SubmitHandler } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import styled from 'styled-components';
 import useAddArtworkModal from '@/app/hooks/useAddArtworkModal';
+import BiographyModal from '@/app/components/modal/BiographyModal';
 
 const PictureContainer = styled.div`
   width: 100%;
@@ -120,14 +121,19 @@ const ArtistPage = ({ profileInfo }: ArtistPageProps) => {
                 Düzenle
               </h4>
             </div>
+
             <div>
+              <BiographyModal
+                artistProfile={profileInfo}
+                onClose={biographyModal.onClose}
+              />
               <div className='w-full min-h-[50vh]'>
                 <BiographyHeading>Biografi</BiographyHeading>
                 <BiographyContent>{profileInfo?.biography}</BiographyContent>
               </div>
               <h4
-                className='underline text-sm'
-                onClick={() => biographyModal.onOpen}
+                className='underline text-sm cursor-pointer'
+                onClick={biographyModal.onOpen}
               >
                 Düzenle
               </h4>
