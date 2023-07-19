@@ -3,22 +3,33 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { AiOutlineMenu } from 'react-icons/ai';
 import { useRouter } from 'next/navigation';
-
-import UserMenuElement from './UserMenuElement';
-
 import { User } from '@prisma/client';
 import { signOut } from 'next-auth/react';
 import styled from 'styled-components';
 import { COLORS } from '@/constants/colors';
+import { ROUTE_PATHS, ROUTE_NAMES } from '@/constants/routes';
 interface UserMenuProps {
   currentUser: User | null;
 }
 
-const UserTypeText = styled.text`
+const UserMenuElement = styled.a`
+  width: 100%;
+  margin: 6px 8px 4px 0;
+  padding: 0 4px;
   color: ${COLORS.darkGray};
   cursor: pointer;
-  padding: 2px 4px;
-  font-weight: 600;
+  transition: background-color 0.3s ease;
+  white-space: nowrap;
+  font-size: 12px;
+  &:hover {
+    font-weight: 700;
+  }
+`;
+
+const UserTypeText = styled.text`
+  color: ${COLORS.gray};
+  cursor: pointer;
+  font-weight: 700;
   font-size: 12px;
   &:hover {
     font-weight: bold;
@@ -61,22 +72,15 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
       <div
         onClick={toggleOpen}
         className='
-          p-2
-          md:py-1
-          md:px-2
-          border-[1px] 
-          border-neutral-200 
           flex 
           flex-row 
           items-center 
-          gap-2
-          rounded-full 
+          justify-center
           cursor-pointer 
-          hover:shadow-md 
-          transition
+          gap-1
           '
       >
-        <div className='hidden md:block'>
+        <div className='hidden md:block pb-1'>
           {currentUser?.userType === 'admin' ? (
             <UserTypeText>ADMİN</UserTypeText>
           ) : (
@@ -94,55 +98,51 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
             bg-white 
             overflow-hidden 
             right-0 
-            top-12 
+            top-16 
             text-sm
-            sm:m-4
-            w-[15vw]
             md:w-[20vw]
             sm:w-[30vw]
           '
         >
-          <div className='inline-flex flex-col cursor-pointer '>
+          <div className='inline-flex flex-col cursor-pointer w-full '>
             <>
               {currentUser?.userType === 'artist' ? (
-                <div>
-                  <div className='flex flex-col items-center justify-center m-2 w-full'>
-                    <div className='text-md font-semibold border-solid border-b-[1px] w-full m-auto'>
-                      SANATÇI MENÜSÜ
-                    </div>
+                <div className='flex flex-col items-center justify-center p-2'>
+                  <div className='text-md font-semibold border-solid border-b-[1px] mt-3 mb-1 w-full m-auto'>
+                    SANATÇI MENÜSÜ
                   </div>
                   <UserMenuElement
-                    label='Sayfamı Düzenle'
-                    onClick={() => router.push(`/sayfam/${currentUser?.id}`)}
-                  ></UserMenuElement>
+                    href={`${ROUTE_PATHS.MY_PROFILE}/${currentUser?.id}`}
+                  >
+                    {ROUTE_NAMES.MY_PROFILE}
+                  </UserMenuElement>
                   <UserMenuElement
-                    label='Çıkış Yap'
+                    href={ROUTE_PATHS.HOME}
                     onClick={() => {
                       signOut();
                       router.refresh();
-                      router.push('/');
                     }}
-                  />
+                  >
+                    ÇIKIŞ YAP
+                  </UserMenuElement>
                 </div>
               ) : (
-                <div>
-                  <div className='flex flex-col items-center justify-center m-2 w-full'>
-                    <div className='text-md font-semibold border-solid border-b-[1px] w-full m-auto'>
-                      ADMİN MENÜSÜ
-                    </div>
+                <div className='flex flex-col items-center justify-center m-2 w-full'>
+                  <div className='text-md font-semibold border-solid border-b-[1px] w-full m-auto'>
+                    ADMİN MENÜSÜ
                   </div>
+                  <UserMenuElement href={ROUTE_PATHS.ADD_ARTIST}>
+                    {ROUTE_NAMES.ADD_ARTIST}
+                  </UserMenuElement>
                   <UserMenuElement
-                    label='Yeni Sanatçı Ekle'
-                    onClick={() => router.push(`/ekle/sanatci`)}
-                  ></UserMenuElement>
-                  <UserMenuElement
-                    label='Çıkış Yap'
+                    href={ROUTE_PATHS.HOME}
                     onClick={() => {
                       signOut();
                       router.refresh();
-                      router.push('/');
                     }}
-                  />
+                  >
+                    ÇIKIŞ YAP
+                  </UserMenuElement>
                 </div>
               )}
             </>
