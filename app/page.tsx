@@ -1,8 +1,12 @@
 import React from 'react';
 import Carousel from './components/carousel/HomeCarousel';
-import { Slide } from '@/models/slide';
 import ArtworkList from './components/artwork/ArtworkList';
 
+interface Slide {
+  src: string;
+  caption: string;
+  subcaption: string;
+}
 export default function Home() {
   const slide1: Slide = {
     src: 'https://blogimages.musement.com/2019/11/Rijksmuseum-AdobeStock_233087421.jpg',
