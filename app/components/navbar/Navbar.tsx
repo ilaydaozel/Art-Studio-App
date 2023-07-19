@@ -46,23 +46,39 @@ const Navbar = ({ currentUser }: NavbarProps) => {
   const loginModal = useLoginModal();
   const path = usePathname();
   const [backgroundColor, setBackgroundColor] = useState('transparent');
-  const [logoColor, setLogoColor] = useState(COLORS.darkGray);
-  const [menuElementColor, setMenuElementColor] = useState(COLORS.darkGray);
+  const [logoColor, setLogoColor] = useState('#FFFFFF');
+  const [menuElementColor, setMenuElementColor] = useState('#FFFFFF');
+  const [atHomePage, setAtHomePage] = useState(true);
 
   useEffect(() => {
-    const handleScroll = () => {
-      // Check if the user has scrolled to the top of the page
-      const isOnTop = window.scrollY === 0;
-      setBackgroundColor(isOnTop ? 'transparent' : '#FFFFFF');
-      setLogoColor(isOnTop ? '#FFFFFF' : COLORS.darkGray);
-      setMenuElementColor(isOnTop ? '#FFFFFF' : COLORS.darkGray);
-    };
+    if (path === ROUTE_PATHS.HOME) {
+      setAtHomePage(true);
+    } else {
+      setAtHomePage(false);
+    }
+  }, [path]);
 
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
+  useEffect(() => {
+    if (atHomePage) {
+      const handleScroll = () => {
+        // Check if the user has scrolled to the top of the page
+        const isOnTop = window.scrollY === 0;
+        setBackgroundColor(isOnTop ? 'transparent' : '#FFFFFF');
+        setLogoColor(isOnTop ? '#FFFFFF' : COLORS.darkGray);
+        setMenuElementColor(isOnTop ? '#FFFFFF' : COLORS.darkGray);
+      };
+
+      window.addEventListener('scroll', handleScroll);
+      return () => {
+        window.removeEventListener('scroll', handleScroll);
+      };
+    } else {
+      setBackgroundColor('#FFFFFF');
+      setLogoColor(COLORS.darkGray);
+      setMenuElementColor(COLORS.darkGray);
+    }
+  }, [atHomePage]);
+
   return (
     <NavbarContainer bgColor={backgroundColor}>
       <div
