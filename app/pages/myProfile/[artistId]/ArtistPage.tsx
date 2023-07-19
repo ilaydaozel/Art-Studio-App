@@ -134,7 +134,7 @@ const ArtistPage = ({ profileInfo, artworks }: ArtistPageProps) => {
             </div>
           </InformaionContainer>
           <div>
-            <div className='p-2 shadow-xl rounded-xl m-4 flex flex-col items-end'>
+            <div className='p-10 rounded-xl flex flex-col items-center justify-center'>
               {artworks ? (
                 artworks.length < 3 ? (
                   <button
@@ -153,7 +153,7 @@ const ArtistPage = ({ profileInfo, artworks }: ArtistPageProps) => {
                 <></>
               )}
 
-              <div className='flex w-full flex-grow justify-center'>
+              <div className='flex w-full flex-wrap justify-between'>
                 {artworks?.map((currentArtwork: UserArtwork) => (
                   <ArtworkContainer artwork={currentArtwork}></ArtworkContainer>
                 ))}
