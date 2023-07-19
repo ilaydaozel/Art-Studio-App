@@ -24,9 +24,8 @@ const NavbarContainer = styled.div<{ bgColor: string }>`
 `;
 
 const LogoTitle = styled.a<{ color: string }>`
-  font-weight: 600;
   color: ${(props) => props.color};
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   cursor: pointer;
 `;
 
