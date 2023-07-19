@@ -19,7 +19,7 @@ const SlideContainer = styled.div<{ src: string }>`
   background-size: cover;
   background-position: center;
   width: 100%;
-  height: 90vh;
+  height: 100vh;
 `;
 
 const SlideForeground = styled.div`
@@ -28,7 +28,7 @@ const SlideForeground = styled.div`
   background-size: cover;
   background-position: center;
   width: 100%;
-  height: 90vh;
+  height: 100vh;
 `;
 
 const CaptionContainer = styled.div`
