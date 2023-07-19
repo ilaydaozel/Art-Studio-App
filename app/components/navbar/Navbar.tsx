@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from 'react';
 import Logo from './Logo';
 import UserMenu from './UserMenu';
-import ArtworkContainer from '../artwork/ArtworkContainer';
 import styled from 'styled-components';
 import { User } from '@prisma/client';
 import { COLORS } from '@/constants/colors';
@@ -21,6 +20,7 @@ const NavbarContainer = styled.div<{ bgColor: string }>`
   padding: 2% 0 2% 0;
   box-shadow: ${(props) =>
     props.bgColor == 'transparent' ? 'none' : '0 2px 4px rgba(0, 0, 0, 0.1)'};
+  transition: background-color 0.6s ease;
 `;
 
 const LogoTitle = styled.a<{ color: string }>`

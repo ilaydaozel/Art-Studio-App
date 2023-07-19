@@ -20,11 +20,12 @@ const SlideContainer = styled.div<{ src: string }>`
   background-position: center;
   width: 100%;
   height: 100vh;
+  transition: background-image 0.8s ease;
 `;
 
 const SlideForeground = styled.div`
   position: relative;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.4);
   background-size: cover;
   background-position: center;
   width: 100%;
