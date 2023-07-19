@@ -49,6 +49,20 @@ const Navbar = ({ currentUser }: NavbarProps) => {
   const [logoColor, setLogoColor] = useState(COLORS.darkGray);
   const [menuElementColor, setMenuElementColor] = useState(COLORS.darkGray);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      // Check if the user has scrolled to the top of the page
+      const isOnTop = window.scrollY === 0;
+      setBackgroundColor(isOnTop ? 'transparent' : '#FFFFFF');
+      setLogoColor(isOnTop ? '#FFFFFF' : COLORS.darkGray);
+      setMenuElementColor(isOnTop ? '#FFFFFF' : COLORS.darkGray);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
   return (
     <NavbarContainer bgColor={backgroundColor}>
       <div
