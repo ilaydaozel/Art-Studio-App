@@ -4,9 +4,11 @@ import styled from 'styled-components';
 import Image from 'next/image';
 import { MdOutlinePhotoSizeSelectActual } from 'react-icons/md';
 import { COLORS } from '@/constants/colors';
+import useArtworkModal from '@/app/hooks/useArtworkModal';
+import ArtworkModal from '../modal/ArtworkModal';
 
 interface ArtworkContainerProps {
-  artwork?: UserArtwork | null;
+  artwork: UserArtwork | null;
 }
 const Container = styled.div`
   display: flex;
@@ -37,34 +39,41 @@ const InfoContainer = styled.div`
 const InfoContent = styled.p``;
 
 const ArtworkContainer = ({ artwork }: ArtworkContainerProps) => {
+  const detailedArtworkModal = useArtworkModal();
   return (
-    <Container>
-      <PhotoContainer>
-        {artwork?.artworkMedias[0] !== undefined ? (
-          <Image
-            src={artwork?.artworkMedias[0] || ''}
-            alt={'artwork image'}
-            width={320}
-            height={320}
-          />
-        ) : (
-          <div>
-            <MdOutlinePhotoSizeSelectActual
-              style={{ color: `${COLORS.gray}`, fontSize: '5em' }}
+    <div>
+      <ArtworkModal
+        artwork={artwork}
+        onClose={detailedArtworkModal.onClose}
+      ></ArtworkModal>
+      <Container onClick={detailedArtworkModal.onOpen}>
+        <PhotoContainer>
+          {artwork?.artworkMedias[0] !== undefined ? (
+            <Image
+              src={artwork?.artworkMedias[0] || ''}
+              alt={'artwork image'}
+              width={320}
+              height={320}
             />
-          </div>
-        )}
-      </PhotoContainer>
-      <InfoContainer>
-        <InfoContent>{artwork?.title || ''}</InfoContent>
-        <InfoContent>{artwork?.creationYear || ''}</InfoContent>
-        <InfoContent>{artwork?.medium || ''}</InfoContent>
-        <InfoContent>{artwork?.type || ''}</InfoContent>
-        <InfoContent>
-          {artwork?.width || ''} x {artwork?.height || ''}
-        </InfoContent>
-      </InfoContainer>
-    </Container>
+          ) : (
+            <div>
+              <MdOutlinePhotoSizeSelectActual
+                style={{ color: `${COLORS.gray}`, fontSize: '5em' }}
+              />
+            </div>
+          )}
+        </PhotoContainer>
+        <InfoContainer>
+          <InfoContent>{artwork?.title || ''}</InfoContent>
+          <InfoContent>{artwork?.creationYear || ''}</InfoContent>
+          <InfoContent>{artwork?.medium || ''}</InfoContent>
+          <InfoContent>{artwork?.type || ''}</InfoContent>
+          <InfoContent>
+            {artwork?.width || ''} x {artwork?.height || ''}
+          </InfoContent>
+        </InfoContainer>
+      </Container>
+    </div>
   );
 };
 
