@@ -107,10 +107,10 @@ const ArtworkModal = () => {
 
   const actionLabel = useMemo(() => {
     if (step === STEPS.PHOTO) {
-      return 'Create';
+      return 'Tamamla';
     }
 
-    return 'Next';
+    return 'İleri';
   }, [step]);
 
   const secondaryActionLabel = useMemo(() => {
@@ -118,7 +118,7 @@ const ArtworkModal = () => {
       return undefined;
     }
 
-    return 'Back';
+    return 'Geri';
   }, [step]);
 
   let bodyContent = (
