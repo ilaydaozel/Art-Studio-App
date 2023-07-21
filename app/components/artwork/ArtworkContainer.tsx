@@ -44,8 +44,6 @@ const ArtworkContainer = ({ artwork }: ArtworkContainerProps) => {
           <Image
             src={artwork?.artworkMedias[0] || ''}
             alt={'artwork image'}
-            objectFit='cover' /* Set object-fit to 'cover' to make the image fit 320x320 size */
-            layout='fixed'
             width={320}
             height={320}
           />
