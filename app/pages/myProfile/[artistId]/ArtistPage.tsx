@@ -10,6 +10,7 @@ import { useRouter } from 'next/navigation';
 import ProfilePictureModal from '@/app/components/modal/ProfilePictureModal';
 import { FaRegEdit } from 'react-icons/fa';
 import { FaRegSquarePlus } from 'react-icons/fa6';
+import { MdDeleteForever } from 'react-icons/md';
 import { useState } from 'react';
 import ArtworkContainer from '@/app/components/artwork/ArtworkContainer';
 import { UserArtwork } from '@prisma/client';
@@ -67,6 +68,35 @@ const InformaionContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 4%;
+`;
+const ButtonWithIcon = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: baseline;
+  gap: 4px;
+  cursor: pointer;
+  color: ${COLORS.gray};
+  transition: color 0.2s transform 0.2s;
+
+  &:hover {
+    color: ${COLORS.darkGray};
+    transform: scale(1.1);
+  }
+`;
+const AddArtworkButton = styled.button`
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+
+  &:hover {
+    transform: scale(1.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
 `;
 interface ArtistPageProps {
   profileInfo?: any | null;
@@ -126,10 +156,10 @@ const ArtistPage = ({ profileInfo, artworks }: ArtistPageProps) => {
                   alt={'profile Image'}
                 />
               </div>
-              <FaRegEdit
-                className='cursor-pointer'
-                onClick={profilePictureModal.onOpen}
-              />
+              <ButtonWithIcon>
+                Düzenle
+                <FaRegEdit onClick={profilePictureModal.onOpen} />
+              </ButtonWithIcon>
             </div>
 
             <div>
@@ -141,28 +171,27 @@ const ArtistPage = ({ profileInfo, artworks }: ArtistPageProps) => {
               <div className='w-full min-h-[50vh]'>
                 <div className='flex flex-row items-baseline gap-4'>
                   <BiographyHeading>Biografi</BiographyHeading>
-                  <FaRegEdit
-                    className='cursor-pointer'
-                    onClick={biographyModal.onOpen}
-                  />
+                  <ButtonWithIcon>
+                    Düzenle
+                    <FaRegEdit onClick={biographyModal.onOpen} />
+                  </ButtonWithIcon>
                 </div>
                 <BiographyContent>{profileInfo?.biography}</BiographyContent>
               </div>
             </div>
           </InformaionContainer>
           <div>
-            <div className='p-10 rounded-xl flex flex-col items-center justify-center'>
+            <div className='p-10 rounded-xl flex flex-col items-end justify-center'>
               {artworks ? (
                 artworks.length < 3 ? (
-                  <button
-                    className='flex items-center gap-2 p-2 rounded-xl shadow-md'
+                  <AddArtworkButton
                     onClick={() => {
                       addArtworkModal.onOpen();
                     }}
                   >
-                    Eser Ekle
+                    Yeni Eser Ekle
                     <FaRegSquarePlus></FaRegSquarePlus>
-                  </button>
+                  </AddArtworkButton>
                 ) : (
                   <h1>Maximum eser sayısına ulaştınız.</h1>
                 )
@@ -170,15 +199,18 @@ const ArtistPage = ({ profileInfo, artworks }: ArtistPageProps) => {
                 <></>
               )}
 
-              <div className='flex w-full flex-wrap justify-between'>
+              <div className='flex w-full flex-wrap justify-around'>
                 {artworks?.map((currentArtwork: UserArtwork) => (
-                  <div>
+                  <div className='flex flex-col items-end'>
                     <ArtworkContainer
                       artwork={currentArtwork}
                     ></ArtworkContainer>
-                    <button onClick={() => handleDelete(currentArtwork.id)}>
-                      delete
-                    </button>
+                    <ButtonWithIcon
+                      onClick={() => handleDelete(currentArtwork.id)}
+                    >
+                      Sil
+                      <MdDeleteForever style={{ width: '50%' }} />
+                    </ButtonWithIcon>
                   </div>
                 ))}
               </div>
