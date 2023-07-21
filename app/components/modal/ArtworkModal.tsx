@@ -10,10 +10,11 @@ import useArtworkModal from '@/app/hooks/useArtworkModal';
 import { UserArtwork } from '@prisma/client';
 import Image from 'next/image';
 interface ArtworkModalProps {
-  artwork?: UserArtwork | null;
+  artwork: UserArtwork | null;
+  onClose: () => void;
 }
 
-const DisplayArtworkModal = ({ artwork }: ArtworkModalProps) => {
+const DisplayArtworkModal = ({ artwork, onClose }: ArtworkModalProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const artworkModal = useArtworkModal();
 
@@ -37,7 +38,7 @@ const DisplayArtworkModal = ({ artwork }: ArtworkModalProps) => {
       isOpen={artworkModal.isOpen}
       title='Eser'
       actionLabel='Kaydol'
-      onClose={artworkModal.onClose}
+      onClose={onClose}
       onSubmit={onSubmit}
       body={bodyContent}
     />
