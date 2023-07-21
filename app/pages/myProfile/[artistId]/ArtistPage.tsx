@@ -13,6 +13,8 @@ import { FaRegSquarePlus } from 'react-icons/fa6';
 import { useState } from 'react';
 import ArtworkContainer from '@/app/components/artwork/ArtworkContainer';
 import { UserArtwork } from '@prisma/client';
+import { toast } from 'react-hot-toast';
+import axios from 'axios';
 
 const PictureContainer = styled.div`
   width: 30%;
@@ -83,7 +85,22 @@ const ArtistPage = ({ profileInfo, artworks }: ArtistPageProps) => {
   const refreshPage = () => {
     router.refresh();
   };
+  const handleDelete = (artworkId: string) => {
+    setIsLoading(true);
 
+    axios
+      .delete(`/api/userArtwork/${artworkId}`)
+      .then(() => {
+        toast.success('Eser silindi!');
+        refreshPage();
+      })
+      .catch(() => {
+        toast.error('Bir şeyler yanlış gitti');
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  };
   return (
     <div>
       <div className='p-[2vw]'>
@@ -155,7 +172,14 @@ const ArtistPage = ({ profileInfo, artworks }: ArtistPageProps) => {
 
               <div className='flex w-full flex-wrap justify-between'>
                 {artworks?.map((currentArtwork: UserArtwork) => (
-                  <ArtworkContainer artwork={currentArtwork}></ArtworkContainer>
+                  <div>
+                    <ArtworkContainer
+                      artwork={currentArtwork}
+                    ></ArtworkContainer>
+                    <button onClick={() => handleDelete(currentArtwork.id)}>
+                      delete
+                    </button>
+                  </div>
                 ))}
               </div>
             </div>
