@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import prisma from "@/app/libs/prismadb";
 import getCurrentUser from "@/app/actions/getCurrentUser";
-import { User } from "@prisma/client";
+import { User, UserArtwork } from "@prisma/client";
 
 export async function POST(request: Request) {
     const currentUser = await getCurrentUser();
@@ -12,7 +12,7 @@ export async function POST(request: Request) {
 
     const body = await request.json();
     const { biography, profilePic, artworks } = body;
-    const user: User = currentUser.currentUser;
+    const user = currentUser.currentUser;
 
     let artistProfile;
 
@@ -49,5 +49,33 @@ export async function POST(request: Request) {
     }
 
     return NextResponse.json(artistProfile);
+}
+
+export async function DELETE(
+    request: Request,
+) {
+
+    const body = await request.json();
+    const { artistId, artworkId } = body;
+
+    const allUserArtworks = await prisma.userArtwork.findMany({
+        where: {
+            artistId: artistId,
+        }
+    });
+
+
+    const artworks: UserArtwork[] = allUserArtworks.filter((id) => id !== artworkId);
+
+    const user = await prisma.artistProfile.update({
+        where: {
+            artistId: artistId
+        },
+        data: {
+
+        }
+    });
+
+    return NextResponse.json(user);
 }
 
