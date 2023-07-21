@@ -3,7 +3,7 @@
 import { COLORS } from '@/constants/colors';
 import { CldUploadWidget } from 'next-cloudinary';
 import Image from 'next/image';
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import { TbPhotoPlus } from 'react-icons/tb';
 import styled from 'styled-components';
 
@@ -16,13 +16,13 @@ const uploadPreset = 'hkxhm69e';
 interface ImageUploadProps {
   onChange: (value: string) => void;
   value: string;
-  label: string;
+  label?: string;
 }
 
 const ImageUpload: React.FC<ImageUploadProps> = ({
   onChange,
   value,
-  label,
+  label = '',
 }) => {
   const handleUpload = useCallback(
     (result: any) => {
@@ -32,7 +32,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
   );
 
   return (
-    <div className='w-full'>
+    <div className='w-full flex flex-col items-center justify-center'>
       <h1 className='font-semibold text-neutral-600 text-lg m-2'>{label}</h1>
       <CldUploadWidget
         onUpload={handleUpload}
@@ -47,20 +47,20 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
               onClick={() => open?.()}
               className='
               relative
-              cursor-pointer
-              hover:opacity-70
-              transition
-              border-dashed 
-              border-2
-              p-10
-              m-4
-              border-neutral-300
               flex
               flex-col
               justify-center
               items-center
               gap-4
+              cursor-pointer
+              hover:opacity-70
+              transition
+              border-dashed 
+              border-2
+              border-neutral-300
               text-neutral-600
+              w-80vw 
+              p-24
             '
             >
               <TbPhotoPlus size={30} />
@@ -70,11 +70,11 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
               {value && (
                 <div
                   className='
-              absolute inset-0 w-full h-full'
+              absolute inset-0 w-full h-full bg-white'
                 >
                   <Image
                     fill
-                    style={{ objectFit: 'cover' }}
+                    style={{ objectFit: 'contain', padding: '1%' }}
                     src={value}
                     alt='Picture'
                   />
