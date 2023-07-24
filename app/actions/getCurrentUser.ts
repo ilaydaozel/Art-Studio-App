@@ -18,13 +18,15 @@ export default async function getCurrentUser(): Promise<{ currentUser: User } | 
         const currentUser = await prisma.user.findUnique({
             where: {
                 email: session.user.email as string,
-            }
+            },
+            include: {
+                artistProfile: true,
+            },
         });
 
         if (!currentUser) {
             return null;
         }
-        console.log("current User getUser: ", currentUser);
         return {
             currentUser: currentUser as User,
         }
