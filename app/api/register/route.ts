@@ -1,12 +1,12 @@
 import bcrypt from "bcrypt";
 import prisma from "@/app/libs/prismadb";
 import { NextResponse } from "next/server";
-import { UserRequest } from "@/models/user";
+import { Prisma } from "@prisma/client";
 
 export async function POST(
     request: Request
 ) {
-    const body: UserRequest = await request.json();
+    const body: any = await request.json();
     const {
         name,
         surname,
@@ -17,9 +17,9 @@ export async function POST(
     } = body;
 
     const hashedPassword = await bcrypt.hash(password, 12);
-
-    const user = await prisma.user.create({
-        data: {
+    let user: Prisma.UserCreateInput;
+    if (userType === 'artist') {
+        user = {
             name,
             surname,
             userType,
@@ -34,7 +34,19 @@ export async function POST(
                 }
             }
         }
+    } else {
+        user = {
+            name,
+            surname,
+            userType,
+            email,
+            gender,
+            hashedPassword,
+        }
+    }
+    const createdUser = await prisma.user.create({
+        data: user
     });
 
-    return NextResponse.json(user);
+    return NextResponse.json(createdUser);
 }
