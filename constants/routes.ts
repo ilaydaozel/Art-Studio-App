@@ -5,6 +5,7 @@ export enum ROUTE_PATHS {
     ARTISTS = '/pages/artists',
     ADD_ARTIST = '/pages/add/artist',
     MY_PROFILE = '/pages/myProfile',
+    ARTIST_PROFILE = '/pages/artistProfile',
     ABOUT = '/pages/about',
     UNAUTHORIZED = '/unauthorized',
 }
@@ -14,6 +15,7 @@ export const ROUTE_NAMES: ChangeTypes<typeof ROUTE_PATHS, string> = {
     ARTISTS: 'SANATÇILAR',
     ADD_ARTIST: 'SANATÇI EKLE',
     MY_PROFILE: 'PROFİLİMİ DÜZENLE',
+    ARTIST_PROFILE: 'SANATÇI',
     ABOUT: 'HAKKIMIZDA',
     UNAUTHORIZED: 'Unauthorized',
 };
