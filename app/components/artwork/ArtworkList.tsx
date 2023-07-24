@@ -17,25 +17,20 @@ const ListTitle = styled.h1`
   padding: 4px;
   text-align: center;
 `;
+
 const ListContainer = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
   padding-top: 10px;
   flex-wrap: wrap;
+  height: 600px;
 `;
 const ArtworkList = ({ artworkArray = [], title }: ArtworkListProps) => {
   return (
     <Container>
       <ListTitle>{title}</ListTitle>
-      <ListContainer>
-        <ArtworkContainer label='ilayda'></ArtworkContainer>
-        <ArtworkContainer label='ilayda'></ArtworkContainer>
-        <ArtworkContainer label='ilayda'></ArtworkContainer>
-        <ArtworkContainer label='ilayda'></ArtworkContainer>
-        <ArtworkContainer label='ilayda'></ArtworkContainer>
-        <ArtworkContainer label='ilayda'></ArtworkContainer>
-      </ListContainer>
+      <ListContainer></ListContainer>
     </Container>
   );
 };
