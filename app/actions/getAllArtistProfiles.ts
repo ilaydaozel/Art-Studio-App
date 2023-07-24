@@ -2,7 +2,7 @@ import prisma from "@/app/libs/prismadb";
 import { ArtistProfile } from "@prisma/client";
 
 
-export default async function getArtistProfileById() {
+export default async function getAllArtistProfiles() {
     try {
         const artistProfile = await prisma.artistProfile.findMany({
             include: {
