@@ -9,6 +9,7 @@ const ArtistsPage = async () => {
   const artistsArray = artists?.artistProfile;
   console.log('artists : ', artists);
   console.log('artistsArray: ', artistsArray);
+
   if (artistsArray?.length === 0) {
     return (
       <ClientOnly>
@@ -22,10 +23,13 @@ const ArtistsPage = async () => {
 
   return (
     <ClientOnly>
-      <div className='pt-20'>
-        {artistsArray?.map((artist) => (
-          <ArtistPreview artist={artist}></ArtistPreview>
-        ))}
+      <div className='pt-20  w-full'>
+        <h1>Sanatçılar</h1>
+        <div className='flex flex-col flex-wrap gap-4'>
+          {artistsArray?.map((artist) => (
+            <ArtistPreview artist={artist}></ArtistPreview>
+          ))}
+        </div>
       </div>
     </ClientOnly>
   );
