@@ -3,10 +3,10 @@
 A full-stack web application that showcases the artists, the artworks, and the exhibitions of an Art Studio.
 
 ## Technologies Used
-NextJS
-JavaScript
-Tailwind
-Prisma db
+- NextJS
+- JavaScript
+- Tailwind
+- Prisma db
 
 ## Launch
 ### Clone the repository
