@@ -95,9 +95,9 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
                     SANATÇI MENÜSÜ
                   </div>
                   <UserMenuElement
-                    href={`${ROUTE_PATHS.MY_PROFILE}/${currentUser?.id}`}
+                    href={`${ROUTE_PATHS.EDIT_PROFILE}/${currentUser?.id}`}
                   >
-                    {ROUTE_NAMES.MY_PROFILE}
+                    {ROUTE_NAMES.EDIT_PROFILE}
                   </UserMenuElement>
                   <UserMenuElement
                     href={ROUTE_PATHS.HOME}
