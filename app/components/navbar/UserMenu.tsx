@@ -80,14 +80,7 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
           gap-1
           '
       >
-        <div className='hidden md:block pb-1'>
-          {currentUser?.userType === 'admin' ? (
-            <UserTypeText>ADMİN</UserTypeText>
-          ) : (
-            <UserTypeText>SANATÇI</UserTypeText>
-          )}
-        </div>
-        <AiOutlineMenu className='h-[16px] text-neutral-400 ' />
+        <AiOutlineMenu className='w-[24px] h-[20px] text-neutral-400 ' />
       </div>
       {isOpen && (
         <div

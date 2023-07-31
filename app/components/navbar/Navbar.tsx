@@ -1,6 +1,5 @@
 'use client';
 import React, { useEffect, useState } from 'react';
-import Logo from './Logo';
 import UserMenu from './UserMenu';
 import styled from 'styled-components';
 import { User } from '@prisma/client';
@@ -8,6 +7,7 @@ import { COLORS } from '@/constants/colors';
 import useLoginModal from '@/app/hooks/useLoginModal';
 import { ROUTE_NAMES, ROUTE_PATHS } from '@/constants/routes';
 import { usePathname, useRouter } from 'next/navigation';
+import { PiUserCircleLight } from 'react-icons/pi';
 interface NavbarProps {
   currentUser: User | null;
 }
@@ -29,6 +29,10 @@ const LogoTitle = styled.a<{ color: string }>`
   font-weight: 600;
   letter-spacing: 3px;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  flex: 2 1 auto;
+  margin: 0 0 0 24px;
 `;
 
 const MenuElement = styled.a<{ color: string; isActive?: boolean }>`
@@ -100,9 +104,19 @@ const Navbar = ({ currentUser }: NavbarProps) => {
           gap-1
           '
         >
-          <LogoTitle color={logoColor} href='/'>
-            KONAK KÜLTÜR SANAT AKADEMİSİ
-          </LogoTitle>
+          <div className='w-full flex items-center'>
+            <LogoTitle color={logoColor} href='/'>
+              KONAK KÜLTÜR SANAT AKADEMİSİ
+            </LogoTitle>
+            {currentUser ? (
+              <UserMenu currentUser={currentUser} />
+            ) : (
+              <MenuElement color={menuElementColor} onClick={loginModal.onOpen}>
+                <PiUserCircleLight className='h-[24px] w-[24px] text-neutral-400 ' />
+              </MenuElement>
+            )}
+          </div>
+
           <div className='flex flex-row gap-2 items-center'>
             <MenuElement
               isActive={path === ROUTE_PATHS.HOME}
@@ -125,13 +139,6 @@ const Navbar = ({ currentUser }: NavbarProps) => {
             >
               {ROUTE_NAMES.ABOUT}
             </MenuElement>
-            {currentUser ? (
-              <UserMenu currentUser={currentUser} />
-            ) : (
-              <MenuElement color={menuElementColor} onClick={loginModal.onOpen}>
-                GİRİŞ
-              </MenuElement>
-            )}
           </div>
         </div>
       </div>
