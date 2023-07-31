@@ -12,6 +12,18 @@ interface UserMenuProps {
   currentUser: User | null;
 }
 
+const MenuContainer = styled.div`
+  position: absolute;
+  right: 0;
+  top: 4rem;
+  width: 20vw;
+  max-width: 20rem;
+  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: 0.75rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  font-size: 0.875rem; /* text-sm is roughly equivalent to 0.875rem */
+`;
 const UserMenuElement = styled.a`
   width: 100%;
   margin: 6px 8px 4px 0;
@@ -26,15 +38,6 @@ const UserMenuElement = styled.a`
   }
 `;
 
-const UserTypeText = styled.text`
-  color: ${COLORS.gray};
-  cursor: pointer;
-  font-weight: 700;
-  font-size: 12px;
-  &:hover {
-    font-weight: bold;
-  }
-`;
 const UserMenu = ({ currentUser }: UserMenuProps) => {
   const router = useRouter();
 
@@ -83,25 +86,12 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
         <AiOutlineMenu className='w-[24px] h-[20px] text-neutral-400 ' />
       </div>
       {isOpen && (
-        <div
-          className='
-            absolute 
-            rounded-xl 
-            shadow-md           
-            bg-white 
-            overflow-hidden 
-            right-0 
-            top-16 
-            text-sm
-            md:w-[20vw]
-            sm:w-[30vw]
-          '
-        >
+        <MenuContainer>
           <div className='inline-flex flex-col cursor-pointer w-full '>
             <>
               {currentUser?.userType === 'artist' ? (
                 <div className='flex flex-col items-center justify-center p-2'>
-                  <div className='text-md font-semibold border-solid border-b-[1px] mt-3 mb-1 w-full m-auto'>
+                  <div className='text-md font-semibold mt-3 mb-1 w-full m-auto'>
                     SANATÇI MENÜSÜ
                   </div>
                   <UserMenuElement
@@ -121,7 +111,7 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
                 </div>
               ) : (
                 <div className='flex flex-col items-center justify-center m-2 w-full'>
-                  <div className='text-md font-semibold border-solid border-b-[1px] w-full m-auto'>
+                  <div className='text-md font-semibold mt-3 mb-1 w-full m-auto'>
                     ADMİN MENÜSÜ
                   </div>
                   <UserMenuElement href={ROUTE_PATHS.ADD_ARTIST}>
@@ -140,7 +130,7 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
               )}
             </>
           </div>
-        </div>
+        </MenuContainer>
       )}
     </div>
   );
