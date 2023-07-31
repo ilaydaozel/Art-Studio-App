@@ -11,16 +11,15 @@ import { ArtistProfile } from '@prisma/client';
 import { toast } from 'react-hot-toast';
 import axios from 'axios';
 import { ROUTE_PATHS } from '@/constants/routes';
-import { BsThreeDotsVertical } from 'react-icons/bs';
-import { MdDeleteForever } from 'react-icons/md';
-import { FaRegEdit } from 'react-icons/fa';
+import EditArtistMenu from './EditArtistMenu';
 
 const ArtistContainer = styled.div`
   display: flex;
   align-items: center;
   margin: 2rem;
-  width: 10%;
+  width: 20%;
   cursor: pointer;
+  gap: 4px;
 `;
 
 const ArtistName = styled.text`
@@ -62,34 +61,11 @@ interface EditArtistsClientProps {
 const EditArtistsClient = ({ artists }: EditArtistsClientProps) => {
   console.log('artists: ', artists);
   const router = useRouter();
-  const biographyModal = useBiographyModal();
-  const profilePictureModal = useProfilePictureModal();
-  const addArtworkModal = useAddArtworkModal();
-  const [isLoading, setIsLoading] = useState(false);
 
   const handleEdit = (artist: ArtistProfile) => {
     router.push(`${ROUTE_PATHS.EDIT_PROFILE}/${artist?.artistId}`);
   };
 
-  const refreshPage = () => {
-    router.refresh();
-  };
-  const handleDelete = (artworkId: string) => {
-    setIsLoading(true);
-
-    axios
-      .delete(`/api/userArtwork/${artworkId}`)
-      .then(() => {
-        toast.success('Sanatçı silindi!');
-        refreshPage();
-      })
-      .catch(() => {
-        toast.error('Bir şeyler yanlış gitti');
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  };
   return (
     <div>
       <div className='p-[2vw] w-full'>
@@ -107,6 +83,7 @@ const EditArtistsClient = ({ artists }: EditArtistsClientProps) => {
                 <ArtistName onClick={() => handleEdit(artist)}>
                   {artist.user.name} {artist.user.surname}
                 </ArtistName>
+                <EditArtistMenu currentArtist={artist.user}></EditArtistMenu>
               </ArtistContainer>
             ))}
           </div>
