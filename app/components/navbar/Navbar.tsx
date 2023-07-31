@@ -25,20 +25,22 @@ const NavbarContainer = styled.div<{ bgColor: string }>`
 
 const LogoTitle = styled.a<{ color: string }>`
   color: ${(props) => props.color};
-  font-size: 1.2rem;
+  font-size: 1.4rem;
+  font-weight: 600;
+  letter-spacing: 3px;
   cursor: pointer;
 `;
 
-const MenuElement = styled.a<{ color: string }>`
+const MenuElement = styled.a<{ color: string; isActive?: boolean }>`
   text-align: center;
   padding: 2px 4px;
   color: ${(props) => props.color};
   cursor: pointer;
-  transition: background-color 0.3s ease;
-  font-weight: 600;
+  transition: text-decoration 0.3s;
+  font-weight: ${(props) => (props.isActive ? 800 : 500)};
   font-size: 12px;
   &:hover {
-    font-weight: bold;
+    text-decoration: underline;
   }
 `;
 const Navbar = ({ currentUser }: NavbarProps) => {
@@ -91,35 +93,36 @@ const Navbar = ({ currentUser }: NavbarProps) => {
         <div
           className='
           flex
-          flex-row
+          flex-col
           flex-grow
           items-center
           justify-between
-          gap-6
-          md:gap-0'
+          gap-1
+          '
         >
-          <div
-            className='
-          flex
-          flex-row
-          items-baseline
-          justify-between
-          gap-2'
-          >
-            <div className='flex flex-col'>
-              <LogoTitle color={logoColor} href='/'>
-                KONAK KÜLTÜR SANAT AKADEMİSİ
-              </LogoTitle>
-            </div>
-          </div>
-          <div className='flex flex-row gap-6 items-center'>
-            <MenuElement color={menuElementColor} href={ROUTE_PATHS.HOME}>
+          <LogoTitle color={logoColor} href='/'>
+            KONAK KÜLTÜR SANAT AKADEMİSİ
+          </LogoTitle>
+          <div className='flex flex-row gap-2 items-center'>
+            <MenuElement
+              isActive={path === ROUTE_PATHS.HOME}
+              color={menuElementColor}
+              href={ROUTE_PATHS.HOME}
+            >
               {ROUTE_NAMES.HOME}
             </MenuElement>
-            <MenuElement color={menuElementColor} href={ROUTE_PATHS.ARTISTS}>
+            <MenuElement
+              isActive={path === ROUTE_PATHS.ARTISTS}
+              color={menuElementColor}
+              href={ROUTE_PATHS.ARTISTS}
+            >
               {ROUTE_NAMES.ARTISTS}
             </MenuElement>
-            <MenuElement color={menuElementColor} href={ROUTE_PATHS.ABOUT}>
+            <MenuElement
+              isActive={path === ROUTE_PATHS.ABOUT}
+              color={menuElementColor}
+              href={ROUTE_PATHS.ABOUT}
+            >
               {ROUTE_NAMES.ABOUT}
             </MenuElement>
             {currentUser ? (
