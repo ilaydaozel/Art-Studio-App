@@ -104,8 +104,6 @@ interface ArtistPageProps {
 }
 
 const ArtistPage = ({ profileInfo, artworks }: ArtistPageProps) => {
-  console.log('ARTIST: ', profileInfo);
-  console.log('ARTWORKS: ', artworks);
   const router = useRouter();
   const biographyModal = useBiographyModal();
   const profilePictureModal = useProfilePictureModal();

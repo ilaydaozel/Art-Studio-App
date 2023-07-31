@@ -15,8 +15,6 @@ const ArtistProfilePage = async ({ params }: { params: IParams }) => {
     artistProfile = await getArtistProfileById(params);
     allArtworks = await getAllArtworksByArtistId(params);
   }
-  console.log('artistProfile: ', artistProfile);
-  console.log('allArtworks ', allArtworks);
 
   if (!artistProfile) {
     return (
