@@ -114,6 +114,9 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
                   <div className='text-md font-semibold mt-3 mb-1 w-full m-auto'>
                     ADMİN MENÜSÜ
                   </div>
+                  <UserMenuElement href={ROUTE_PATHS.EDIT_ARTIST}>
+                    {ROUTE_NAMES.EDIT_ARTIST}
+                  </UserMenuElement>
                   <UserMenuElement href={ROUTE_PATHS.ADD_ARTIST}>
                     {ROUTE_NAMES.ADD_ARTIST}
                   </UserMenuElement>
