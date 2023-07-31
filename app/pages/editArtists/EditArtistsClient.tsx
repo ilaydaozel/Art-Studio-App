@@ -1,27 +1,58 @@
 'use client';
-import Image from 'next/image';
+
 import useBiographyModal from '@/app/hooks/useBiographyModal';
 import useProfilePictureModal from '@/app/hooks/useProfilePictureModal';
 import { COLORS } from '@/constants/colors';
 import styled from 'styled-components';
 import useAddArtworkModal from '@/app/hooks/useAddArtworkModal';
-import BiographyModal from '@/app/components/modal/BiographyModal';
 import { useRouter } from 'next/navigation';
-import ProfilePictureModal from '@/app/components/modal/ProfilePictureModal';
-import { FaRegEdit } from 'react-icons/fa';
-import { FaRegSquarePlus } from 'react-icons/fa6';
-import { MdDeleteForever } from 'react-icons/md';
 import { useState } from 'react';
-import ArtworkContainer from '@/app/components/artwork/ArtworkContainer';
-import { ArtistProfile, User, UserArtwork } from '@prisma/client';
+import { ArtistProfile } from '@prisma/client';
 import { toast } from 'react-hot-toast';
 import axios from 'axios';
-import EditArtistsPage from './page';
+import { ROUTE_PATHS } from '@/constants/routes';
+import { BsThreeDotsVertical } from 'react-icons/bs';
+import { MdDeleteForever } from 'react-icons/md';
+import { FaRegEdit } from 'react-icons/fa';
 
-const NameHeading = styled.text`
-  font-size: 3.5vw;
-  font-weight: 600;
+const ArtistContainer = styled.div`
+  display: flex;
+  align-items: center;
+  margin: 2rem;
+  width: 10%;
+  cursor: pointer;
+`;
+
+const ArtistName = styled.text`
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: ${COLORS.gray};
+  &:hover {
+    color: ${COLORS.darkGray};
+    text-decoration: underline;
+  }
+`;
+
+const ArtistsTitle = styled.text`
+  font-size: 2rem;
+  font-weight: 500;
   color: ${COLORS.darkGray};
+`;
+
+const AddArtistButton = styled.button`
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  transition: transform 0.2s;
+  background-color: ${COLORS.darkGray};
+  color: white;
+  &:hover {
+    transform: scale(1.05);
+  }
 `;
 
 interface EditArtistsClientProps {
@@ -35,6 +66,10 @@ const EditArtistsClient = ({ artists }: EditArtistsClientProps) => {
   const profilePictureModal = useProfilePictureModal();
   const addArtworkModal = useAddArtworkModal();
   const [isLoading, setIsLoading] = useState(false);
+
+  const handleEdit = (artist: ArtistProfile) => {
+    router.push(`${ROUTE_PATHS.EDIT_PROFILE}/${artist?.artistId}`);
+  };
 
   const refreshPage = () => {
     router.refresh();
@@ -57,9 +92,24 @@ const EditArtistsClient = ({ artists }: EditArtistsClientProps) => {
   };
   return (
     <div>
-      <div className='p-[2vw]'>
-        <div className='flex flex-col'>
-          <NameHeading>hello</NameHeading>
+      <div className='p-[2vw] w-full'>
+        <div className='flex w-full justify-end'>
+          <AddArtistButton onClick={() => router.push(ROUTE_PATHS.ADD_ARTIST)}>
+            Yeni Sanatçı Ekle +
+          </AddArtistButton>
+        </div>
+
+        <div className='w-full flex flex-col items-start'>
+          <ArtistsTitle>Sanatçıları Düzenle</ArtistsTitle>
+          <div className='w-full flex flex-row flex-wrap'>
+            {artists?.map((artist) => (
+              <ArtistContainer>
+                <ArtistName onClick={() => handleEdit(artist)}>
+                  {artist.user.name} {artist.user.surname}
+                </ArtistName>
+              </ArtistContainer>
+            ))}
+          </div>
         </div>
       </div>
     </div>
