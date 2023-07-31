@@ -20,11 +20,8 @@ const EditArtistsPage = async () => {
 
   return (
     <ClientOnly>
-      <div className='pt-20  w-full'>
-        <h1 className='text-4xl my-10 mx-6'>Sanatçılar</h1>
-        <div className='flex flex-wrap gap-4 mx-6 my-10'>
-          <EditArtistsClient artists={artistsArray}></EditArtistsClient>
-        </div>
+      <div className='pt-24  w-full'>
+        <EditArtistsClient artists={artistsArray}></EditArtistsClient>
       </div>
     </ClientOnly>
   );
