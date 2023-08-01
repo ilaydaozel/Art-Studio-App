@@ -18,7 +18,7 @@ const MenuContainer = styled.div`
   top: 4rem;
   width: 20vw;
   max-width: 20rem;
-  background-color: rgba(255, 255, 255, 0.6);
+  background-color: rgba(255, 255, 255, 0.8);
   border-radius: 0.75rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   overflow: hidden;
@@ -92,7 +92,7 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
               {currentUser?.userType === 'artist' ? (
                 <div className='flex flex-col items-center justify-center p-2'>
                   <div className='text-md font-semibold mt-3 mb-1 w-full m-auto'>
-                    SANATÇI MENÜSÜ
+                    SANATÇI
                   </div>
                   <UserMenuElement
                     href={`${ROUTE_PATHS.EDIT_PROFILE}/${currentUser?.id}`}
@@ -112,7 +112,7 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
               ) : (
                 <div className='flex flex-col items-center justify-center m-2 w-full'>
                   <div className='text-md font-semibold mt-3 mb-1 w-full m-auto'>
-                    ADMİN MENÜSÜ
+                    ADMİN
                   </div>
                   <UserMenuElement href={ROUTE_PATHS.EDIT_ARTIST}>
                     {ROUTE_NAMES.EDIT_ARTIST}
