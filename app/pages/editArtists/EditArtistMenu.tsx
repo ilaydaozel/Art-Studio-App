@@ -60,8 +60,9 @@ const EditArtistMenu = ({ currentArtist }: EditArtistMenuProps) => {
 
   const handleDeleteArtist = () => {
     setIsLoading(true);
+
     axios
-      .delete(`/api/register/${currentArtist?.id}`)
+      .delete(`/api/user/${currentArtist?.id}`)
       .then(() => {
         toast.success('Sanatçı sistemden silindi!');
         refreshPage();
@@ -119,7 +120,7 @@ const EditArtistMenu = ({ currentArtist }: EditArtistMenuProps) => {
                 router.push(`${ROUTE_PATHS.EDIT_PROFILE}/${currentArtist?.id}`);
               }}
             >
-              Sayfayı Düzenle
+              Sayfasını Düzenle
             </MenuElement>
             <MenuElement
               onClick={() => {
