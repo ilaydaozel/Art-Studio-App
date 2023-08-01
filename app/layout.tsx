@@ -40,9 +40,11 @@ export default async function RootLayout({
         </ClientOnly>
 
         {children}
-        <ClientOnly>
-          <Footer />
-        </ClientOnly>
+        <div className='mb-[140px]'>
+          <ClientOnly>
+            <Footer />
+          </ClientOnly>
+        </div>
       </body>
     </html>
   );
