@@ -18,12 +18,12 @@ import { toast } from 'react-hot-toast';
 import axios from 'axios';
 
 const NameHeading = styled.text`
-  font-size: 3.5vw;
-  font-weight: 600;
+  font-size: 2rem;
+  font-weight: 500;
   color: ${COLORS.darkGray};
 `;
 const BiographyHeading = styled.text`
-  font-size: 2.5vw;
+  font-size: 1.5rem;
   font-weight: 600;
   color: ${COLORS.darkGray};
 `;
@@ -48,68 +48,17 @@ const InformaionContainer = styled.div`
   align-items: center;
   gap: 4%;
 `;
-const ButtonWithIcon = styled.button`
-  display: flex;
-  align-items: center;
-  justify-content: baseline;
-  gap: 4px;
-  cursor: pointer;
-  color: ${COLORS.gray};
-  transition: color 0.2s transform 0.2s;
 
-  &:hover {
-    color: ${COLORS.darkGray};
-    transform: scale(1.1);
-  }
-`;
-const AddArtworkButton = styled.button`
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
-
-  &:hover {
-    transform: scale(1.1);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-  }
-`;
 interface ArtistProfileProps {
   profileInfo?: any | null;
   artworks?: UserArtwork[] | null;
 }
 
 const ArtistProfile = ({ profileInfo, artworks }: ArtistProfileProps) => {
-  console.log('ARTIST: ', profileInfo);
-  console.log('ARTWORKS: ', artworks);
   const router = useRouter();
   const biographyModal = useBiographyModal();
   const profilePictureModal = useProfilePictureModal();
-  const addArtworkModal = useAddArtworkModal();
-  const [isLoading, setIsLoading] = useState(false);
 
-  const refreshPage = () => {
-    router.refresh();
-  };
-  const handleDelete = (artworkId: string) => {
-    setIsLoading(true);
-
-    axios
-      .delete(`/api/userArtwork/${artworkId}`)
-      .then(() => {
-        toast.success('Eser silindi!');
-        refreshPage();
-      })
-      .catch(() => {
-        toast.error('Bir şeyler yanlış gitti');
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  };
   return (
     <div>
       <div className='p-[2vw]'>
@@ -122,11 +71,6 @@ const ArtistProfile = ({ profileInfo, artworks }: ArtistProfileProps) => {
 
           <InformaionContainer>
             <div className='flex flex-col items-end pt-12'>
-              <ProfilePictureModal
-                pictureLink={profileInfo?.profilePic}
-                onClose={profilePictureModal.onClose}
-                onUpdate={refreshPage}
-              />
               <div className='p-1 shadow-lg'>
                 <Image
                   width={350}
@@ -136,17 +80,9 @@ const ArtistProfile = ({ profileInfo, artworks }: ArtistProfileProps) => {
                 />
               </div>
             </div>
-
-            <div>
-              <BiographyModal
-                artistProfile={profileInfo}
-                onClose={biographyModal.onClose}
-                onUpdate={refreshPage}
-              />
-              <div className='w-full min-h-[50vh]'>
-                <BiographyHeading>Biografi</BiographyHeading>
-                <BiographyContent>{profileInfo?.biography}</BiographyContent>
-              </div>
+            <div className='w-full min-h-[50vh]'>
+              <BiographyHeading>Biografi</BiographyHeading>
+              <BiographyContent>{profileInfo?.biography}</BiographyContent>
             </div>
           </InformaionContainer>
           <div>
