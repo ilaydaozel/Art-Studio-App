@@ -7,6 +7,7 @@ import ToasterProvider from './providers/ToasterProvider';
 import LoginModal from './components/modal/LoginModal';
 import AddArtworkModal from './components/modal/AddArtworkModal';
 import getCurrentUser from './actions/getCurrentUser';
+import Footer from './components/footer/Footer';
 
 export const metadata = {
   title: 'Konak Sanat Akademisi',
@@ -39,6 +40,9 @@ export default async function RootLayout({
         </ClientOnly>
 
         {children}
+        <ClientOnly>
+          <Footer />
+        </ClientOnly>
       </body>
     </html>
   );
