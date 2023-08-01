@@ -51,31 +51,5 @@ export async function POST(request: Request) {
     return NextResponse.json(artistProfile);
 }
 
-export async function DELETE(
-    request: Request,
-) {
 
-    const body = await request.json();
-    const { artistId, artworkId } = body;
-
-    const allUserArtworks = await prisma.userArtwork.findMany({
-        where: {
-            artistId: artistId,
-        }
-    });
-
-
-    const artworks: UserArtwork[] = allUserArtworks.filter((id) => id !== artworkId);
-
-    const user = await prisma.artistProfile.update({
-        where: {
-            artistId: artistId
-        },
-        data: {
-
-        }
-    });
-
-    return NextResponse.json(user);
-}
 
