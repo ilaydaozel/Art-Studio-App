@@ -1,15 +1,9 @@
 'use client';
 
-import useBiographyModal from '@/app/hooks/useBiographyModal';
-import useProfilePictureModal from '@/app/hooks/useProfilePictureModal';
 import { COLORS } from '@/constants/colors';
 import styled from 'styled-components';
-import useAddArtworkModal from '@/app/hooks/useAddArtworkModal';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
 import { ArtistProfile } from '@prisma/client';
-import { toast } from 'react-hot-toast';
-import axios from 'axios';
 import { ROUTE_PATHS } from '@/constants/routes';
 import EditArtistMenu from './EditArtistMenu';
 
@@ -23,7 +17,7 @@ const ArtistContainer = styled.div`
 `;
 
 const ArtistName = styled.text`
-  font-size: 1.5rem;
+  font-size: 1rem;
   font-weight: 500;
   color: ${COLORS.gray};
   &:hover {
@@ -33,7 +27,7 @@ const ArtistName = styled.text`
 `;
 
 const ArtistsTitle = styled.text`
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: 500;
   color: ${COLORS.darkGray};
 `;
@@ -75,7 +69,7 @@ const EditArtistsClient = ({ artists }: EditArtistsClientProps) => {
           </AddArtistButton>
         </div>
 
-        <div className='w-full flex flex-col items-start'>
+        <div className='w-full flex flex-col items-start ml-6 mt-10'>
           <ArtistsTitle>Sanatçıları Düzenle</ArtistsTitle>
           <div className='w-full flex flex-row flex-wrap'>
             {artists?.map((artist) => (
