@@ -4,20 +4,18 @@ import styled from 'styled-components';
 import { COLORS } from '@/constants/colors';
 import { ROUTE_PATHS, ROUTE_NAMES } from '@/constants/routes';
 
-const FooterContainer = styled.div<{ isVisible: boolean; translateY: number }>`
-  position: fixed;
-  left: 0;
-  bottom: ${(props) => (props.isVisible ? '0' : `-${props.translateY}px`)};
+const FooterContainer = styled.div<{ isVisible: boolean }>`
   width: 100%;
-  background-color: #ffffff;
+  background-color: ${(props) =>
+    props.isVisible ? COLORS.darkGray : 'transparent'};
   padding: 1% 0 1% 0;
   box-shadow: 0px -6px 6px -6px rgba(0, 0, 0, 0.1);
-  transition: bottom 0.4s ease-in-out;
+  transition: background-color 0.6s ease-in-out;
 `;
 
 const FooterElement = styled.a`
   text-align: center;
-  color: ${COLORS.darkGray};
+  color: ${COLORS.lightGray};
   cursor: pointer;
   font-weight: 500;
   font-size: 10px;
@@ -30,12 +28,12 @@ const FooterElement = styled.a`
 const FooterText = styled.p`
   display: flex;
   justify-content: center;
-  color: ${COLORS.darkGray};
+  color: ${COLORS.gray};
 `;
 
 const LogoTitle = styled.a`
-  color: ${COLORS.darkGray};
-  font-size: 0.8rem;
+  color: #ffffff;
+  font-size: 0.9rem;
   font-weight: 600;
   letter-spacing: 1.5px;
   cursor: pointer;
@@ -53,34 +51,22 @@ const Footer = () => {
   useEffect(() => {
     const handleScroll = () => {
       const isOnBottom =
-        document.documentElement.clientHeight + window.scrollY >=
+        document.documentElement.clientHeight + window.scrollY + 100 >=
         (document.documentElement.scrollHeight ||
           document.documentElement.clientHeight);
       console.log('isOnBottom ', isOnBottom);
       setIsVisible(isOnBottom);
     };
-
-    const handleResize = () => {
-      setFooterHeight(footerRef.current?.scrollHeight || 0);
-    };
-
     window.addEventListener('scroll', handleScroll);
-    window.addEventListener('resize', handleResize);
-    handleResize(); // Initialize footer height on mount
     return () => {
       window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('resize', handleResize);
     };
   }, [footerHeight]);
 
   const footerRef = React.useRef<HTMLDivElement>(null);
 
   return (
-    <FooterContainer
-      isVisible={isVisible}
-      translateY={footerHeight}
-      ref={footerRef}
-    >
+    <FooterContainer isVisible={isVisible} ref={footerRef}>
       <div
         className='    
             max-w-[2520px]
