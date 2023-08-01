@@ -28,19 +28,27 @@ export default async function RootLayout({
   return (
     <html lang='en'>
       <body className={font.className}>
-        <ClientOnly>
-          <ToasterProvider />
-          <LoginModal />
-          <AddArtworkModal />
-          <Navbar
-            currentUser={
-              currentUser?.currentUser ? currentUser.currentUser : null
-            }
-          />
-        </ClientOnly>
+        <div
+          style={{
+            minHeight: '100vh',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+          }}
+        >
+          <ClientOnly>
+            <ToasterProvider />
+            <LoginModal />
+            <AddArtworkModal />
+            <Navbar
+              currentUser={
+                currentUser?.currentUser ? currentUser.currentUser : null
+              }
+            />
+          </ClientOnly>
 
-        {children}
-        <div className='mb-[140px]'>
+          {children}
+
           <ClientOnly>
             <Footer />
           </ClientOnly>
