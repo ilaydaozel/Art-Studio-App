@@ -36,25 +36,21 @@ const SlideContainer = styled.div<{ src: string }>`
 const CaptionContainer = styled.div`
   position: relative;
   background-position: center;
-  width: 80%;
-  height: 46vh;
-  top: 40%;
-  left: 4%;
+  height: 30%;
+  top: 60%;
+  left: 8%;
+  right: 8%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
 `;
 
 const Caption = styled.p`
-  position: absolute;
-  top: 20%;
-  left: 5%;
-  padding: 10px;
   color: #fff;
   font-size: 3rem;
 `;
+
 const Subcaption = styled.p`
-  position: absolute;
-  top: 50%;
-  left: 5%;
-  padding: 10px;
   color: #fff;
   font-size: 2rem;
 `;
