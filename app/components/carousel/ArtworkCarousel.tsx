@@ -6,6 +6,7 @@ import React from 'react';
 
 import { Carousel as ResponsiveCarousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
+import Image from 'next/image';
 
 interface CarouselProps {
   images: string[];
@@ -18,7 +19,12 @@ const ArtworkCarousel = ({ images, captions }: CarouselProps) => {
       <ResponsiveCarousel>
         {images.map((image, index) => (
           <div key={index}>
-            <img src={image} alt={`Slide ${index + 1}`} />
+            <Image
+              width={300}
+              height={300}
+              src={image}
+              alt={`Slide ${index + 1}`}
+            />
             <p>{captions[index]}</p>
           </div>
         ))}
