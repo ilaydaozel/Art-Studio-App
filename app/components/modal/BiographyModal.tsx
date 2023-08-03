@@ -38,7 +38,9 @@ const BiographyModal = ({
     const { biography } = data;
 
     try {
-      await axios.post(`/api/artistProfile`, { biography });
+      await axios.post(`/api/artistProfile/${artistProfile?.artistId}`, {
+        biography,
+      });
       toast.success('Biografi güncellendi!');
       biographyModal.onClose();
       onUpdate();
@@ -59,7 +61,7 @@ const BiographyModal = ({
         Biografi
       </label>
       <textarea
-        className='w-full min-h-[100px] border-double border-2 border-neutral-300'
+        className='w-full min-h-[100px] h-[50vh] border-double border-2 border-neutral-300'
         id='biography'
         {...register('biography', { required: true })}
         placeholder='Hakkımda ..'
