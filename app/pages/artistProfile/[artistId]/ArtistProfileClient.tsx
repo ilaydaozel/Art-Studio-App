@@ -76,7 +76,7 @@ const ArtistProfile = ({ profileInfo, artworks }: ArtistProfileProps) => {
             </NameHeading>
           </div>
           <HeaderImage
-            imageUrl={artworks[0]?.artworkMedias[0] || ''}
+            imageUrl={artworks ? artworks[0]?.artworkMedias[0] : ''}
           ></HeaderImage>
         </HeadingContainer>
 
