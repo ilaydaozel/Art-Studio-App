@@ -40,11 +40,12 @@ const AddArtistButton = styled.button`
   border-radius: 0.5rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   cursor: pointer;
-  transition: transform 0.2s;
+
+  transition: transform 0.5s;
   background-color: ${COLORS.darkGray};
   color: white;
   &:hover {
-    transform: scale(1.05);
+    transform: translateY(0.5rem);
   }
 `;
 
