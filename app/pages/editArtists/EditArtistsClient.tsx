@@ -74,7 +74,7 @@ const EditArtistsClient = ({ artists }: EditArtistsClientProps) => {
           <ArtistsTitle>Sanatçıları Düzenle</ArtistsTitle>
           <div className='w-full flex flex-row flex-wrap'>
             {artists?.map((artist) => (
-              <ArtistContainer>
+              <ArtistContainer key={artist.id}>
                 <ArtistName onClick={() => handleEdit(artist)}>
                   {artist.user.name} {artist.user.surname}
                 </ArtistName>

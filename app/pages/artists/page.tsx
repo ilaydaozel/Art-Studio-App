@@ -25,7 +25,7 @@ const ArtistsPage = async () => {
       <div className='pt-24  w-full'>
         <div className='flex flex-wrap gap-4 px-12 my-8'>
           {artistsArray?.map((artist) => (
-            <ArtistPreview artist={artist}></ArtistPreview>
+            <ArtistPreview key={artist.id} artist={artist}></ArtistPreview>
           ))}
         </div>
       </div>

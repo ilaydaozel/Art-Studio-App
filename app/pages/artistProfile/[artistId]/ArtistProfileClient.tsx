@@ -97,7 +97,10 @@ const ArtistProfile = ({ profileInfo, artworks }: ArtistProfileProps) => {
             <StyledDivider />
             <div className='flex w-full flex-wrap justify-around my-20'>
               {artworks?.map((currentArtwork: UserArtwork) => (
-                <div className='flex flex-col items-end'>
+                <div
+                  key={currentArtwork.id}
+                  className='flex flex-col items-end'
+                >
                   <ArtworkContainer artwork={currentArtwork}></ArtworkContainer>
                 </div>
               ))}
