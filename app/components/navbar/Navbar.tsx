@@ -19,7 +19,7 @@ const NavbarContainer = styled.div<{ bgColor: string }>`
   z-index: 10;
   padding: 2% 0 2% 0;
   box-shadow: ${(props) =>
-    props.bgColor == 'transparent' ? 'none' : '0 2px 4px rgba(0, 0, 0, 0.1)'};
+    props.bgColor != '#FFFFFF' ? 'none' : '0 2px 4px rgba(0, 0, 0, 0.1)'};
   transition: background-color 0.6s ease;
 `;
 
@@ -50,39 +50,36 @@ const MenuElement = styled.a<{ color: string; isActive?: boolean }>`
 const Navbar = ({ currentUser }: NavbarProps) => {
   const loginModal = useLoginModal();
   const path = usePathname();
-  const [backgroundColor, setBackgroundColor] = useState('transparent');
-  const [logoColor, setLogoColor] = useState('#FFFFFF');
-  const [menuElementColor, setMenuElementColor] = useState('#FFFFFF');
-  const [atHomePage, setAtHomePage] = useState(true);
+  const [backgroundColor, setBackgroundColor] = useState(
+    path === ROUTE_PATHS.HOME ? 'transparent' : 'rgba(255, 255, 255, 0.1)'
+  );
+  const [logoColor, setLogoColor] = useState(
+    path === ROUTE_PATHS.HOME ? '#FFFFFF' : COLORS.darkGray
+  );
+  const [menuElementColor, setMenuElementColor] = useState(
+    path === ROUTE_PATHS.HOME ? '#FFFFFF' : COLORS.darkGray
+  );
 
   useEffect(() => {
-    if (path === ROUTE_PATHS.HOME) {
-      setAtHomePage(true);
-    } else {
-      setAtHomePage(false);
-    }
-  }, [path]);
-
-  useEffect(() => {
-    if (atHomePage) {
-      const handleScroll = () => {
-        // Check if the user has scrolled to the top of the page
-        const isOnTop = window.scrollY === 0;
+    const handleScroll = () => {
+      // Check if the user has scrolled to the top of the page
+      const isOnTop = window.scrollY === 0;
+      if (path === ROUTE_PATHS.HOME) {
         setBackgroundColor(isOnTop ? 'transparent' : '#FFFFFF');
         setLogoColor(isOnTop ? '#FFFFFF' : COLORS.darkGray);
         setMenuElementColor(isOnTop ? '#FFFFFF' : COLORS.darkGray);
-      };
+      } else {
+        setBackgroundColor(isOnTop ? 'rgba(255, 255, 255, 0.1)' : '#FFFFFF');
+        setLogoColor(COLORS.darkGray);
+        setMenuElementColor(COLORS.darkGray);
+      }
+    };
 
-      window.addEventListener('scroll', handleScroll);
-      return () => {
-        window.removeEventListener('scroll', handleScroll);
-      };
-    } else {
-      setBackgroundColor('#FFFFFF');
-      setLogoColor(COLORS.darkGray);
-      setMenuElementColor(COLORS.darkGray);
-    }
-  }, [atHomePage]);
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [path]);
 
   return (
     <NavbarContainer bgColor={backgroundColor}>
