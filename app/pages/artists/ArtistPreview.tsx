@@ -22,7 +22,7 @@ const ArtistContainer = styled.div<{ profilePic: string }>`
   justify-content: center;
   width: 200px;
   height: 200px;
-  background-image: ${(props) => `url('${props.profilePic}')`};
+  background-image: url(${(props) => props.profilePic});
   background-size: cover;
   border: 1px solid #ccc;
   border-radius: 5px;

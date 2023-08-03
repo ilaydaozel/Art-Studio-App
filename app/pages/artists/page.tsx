@@ -23,7 +23,6 @@ const ArtistsPage = async () => {
   return (
     <ClientOnly>
       <div className='pt-24  w-full'>
-        <h1 className='text-3xl my-10 mx-10'>Sanatçılar</h1>
         <div className='flex flex-wrap gap-4 px-12 my-8'>
           {artistsArray?.map((artist) => (
             <ArtistPreview artist={artist}></ArtistPreview>

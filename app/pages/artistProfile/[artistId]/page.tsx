@@ -27,12 +27,10 @@ const ArtistProfilePage = async ({ params }: { params: IParams }) => {
 
   return (
     <ClientOnly>
-      <div className='pt-20'>
-        <ArtistProfileClient
-          profileInfo={artistProfile?.artistProfile}
-          artworks={allArtworks?.allUserArtworks}
-        />
-      </div>
+      <ArtistProfileClient
+        profileInfo={artistProfile?.artistProfile}
+        artworks={allArtworks?.allUserArtworks}
+      />
     </ClientOnly>
   );
 };
