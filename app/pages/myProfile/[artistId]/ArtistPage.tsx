@@ -17,27 +17,6 @@ import { UserArtwork } from '@prisma/client';
 import { toast } from 'react-hot-toast';
 import axios from 'axios';
 
-const PictureContainer = styled.div`
-  width: 30%;
-  margin: 10px;
-  height: full;
-  cursor: pointer;
-  transition: all 0.3s;
-  border: solid 2px ${COLORS.lightGray};
-  margin: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 4px;
-  color: ${COLORS.gray};
-  border-radius: 25px;
-  font-size: 16px;
-  &:hover {
-    font-size: 18px;
-  }
-`;
-
 const NameHeading = styled.text`
   font-size: 3.5vw;
   font-weight: 600;
@@ -142,7 +121,7 @@ const ArtistPage = ({ profileInfo, artworks }: ArtistPageProps) => {
           <InformaionContainer>
             <div className='flex flex-col items-end pt-12'>
               <ProfilePictureModal
-                pictureLink={profileInfo?.profilePic}
+                artistProfile={profileInfo}
                 onClose={profilePictureModal.onClose}
                 onUpdate={refreshPage}
               />

@@ -14,21 +14,22 @@ import { COLORS } from '@/constants/colors';
 import styled from 'styled-components';
 import ImageUpload from '../inputs/ImageUpload';
 import useProfilePictureModal from '@/app/hooks/useProfilePictureModal';
+import { ArtistProfile } from '@prisma/client';
 
 interface ProfilePictureModalProps {
-  pictureLink: string | null;
+  artistProfile: ArtistProfile | null;
   onClose: () => void;
   onUpdate: () => void;
 }
 
 const ProfilePictureModal = ({
-  pictureLink,
+  artistProfile,
   onClose,
   onUpdate,
 }: ProfilePictureModalProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const profilePictureModal = useProfilePictureModal();
-
+  const pictureLink = artistProfile?.profilePic;
   const {
     register,
     handleSubmit,
@@ -47,7 +48,9 @@ const ProfilePictureModal = ({
     const { profilePic } = data;
 
     try {
-      await axios.post(`/api/artistProfile`, { profilePic });
+      await axios.post(`/api/artistProfile/${artistProfile?.artistId}`, {
+        profilePic,
+      });
       toast.success('Profil fotoğrafı güncellendi!');
       profilePictureModal.onClose();
       onUpdate();
