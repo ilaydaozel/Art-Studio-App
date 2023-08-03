@@ -21,22 +21,16 @@ const Container = styled.div`
   gap: 10px;
 `;
 
-const PhotoContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  width: 100%;
-  height: 320px;
-`;
-
 const InfoContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   font-size: 14px;
 `;
-const InfoContent = styled.p``;
+const InfoContent = styled.p`
+  font-size: 12px;
+  color: ${COLORS.darkGray};
+`;
 
 const ArtworkContainer = ({ artwork }: ArtworkContainerProps) => {
   const detailedArtworkModal = useArtworkModal();
@@ -47,22 +41,23 @@ const ArtworkContainer = ({ artwork }: ArtworkContainerProps) => {
         onClose={detailedArtworkModal.onClose}
       ></ArtworkModal>
       <Container onClick={detailedArtworkModal.onOpen}>
-        <PhotoContainer>
-          {artwork?.artworkMedias[0] !== undefined ? (
+        {artwork?.artworkMedias[0] !== undefined ? (
+          <div className='relative w-[320px] h-[320px]'>
             <Image
               src={artwork?.artworkMedias[0] || ''}
-              alt={'artwork image'}
-              width={320}
-              height={320}
+              placeholder='empty'
+              alt='artwork'
+              fill
+              className='object-cover'
             />
-          ) : (
-            <div>
-              <MdOutlinePhotoSizeSelectActual
-                style={{ color: `${COLORS.gray}`, fontSize: '5em' }}
-              />
-            </div>
-          )}
-        </PhotoContainer>
+          </div>
+        ) : (
+          <div>
+            <MdOutlinePhotoSizeSelectActual
+              style={{ color: `${COLORS.gray}`, fontSize: '5em' }}
+            />
+          </div>
+        )}
         <InfoContainer>
           <InfoContent>{artwork?.title || ''}</InfoContent>
           <InfoContent>{artwork?.creationYear || ''}</InfoContent>
