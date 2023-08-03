@@ -63,7 +63,7 @@ const Input = ({
         transform 
         -translate-y-3 
         top-5 
-        z-10 
+        z-8
         origin-[0] 
         left-4        
         peer-placeholder-shown:scale-100 
