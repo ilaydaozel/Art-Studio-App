@@ -1,45 +1,65 @@
 'use client';
 import Image from 'next/image';
-import useBiographyModal from '@/app/hooks/useBiographyModal';
-import useProfilePictureModal from '@/app/hooks/useProfilePictureModal';
 import { COLORS } from '@/constants/colors';
 import styled from 'styled-components';
-import { useRouter } from 'next/navigation';
 import ArtworkContainer from '@/app/components/artwork/ArtworkContainer';
 import { UserArtwork } from '@prisma/client';
 
-const NameHeading = styled.text`
-  font-size: 2rem;
-  font-weight: 500;
-  color: ${COLORS.darkGray};
-`;
-const BiographyHeading = styled.text`
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: ${COLORS.darkGray};
-`;
-const BiographyContent = styled.text`
-  display: flex;
-  flex-direction: column;
-  font-size: 1.25rem;
-  font-weight: 500;
-  color: ${COLORS.gray};
-`;
 const HeadingContainer = styled.div`
   display: flex;
-  justify-content: start;
   align-items: center;
-  border-bottom: solid 1px;
-  border-color: ${COLORS.lightGray};
-  padding: 3% 1% 1% 0;
+  min-height: 100vh;
+  width: 100%;
 `;
-const InformaionContainer = styled.div`
-  margin: 6% 2% 3% 2%;
-  display: flex;
-  align-items: center;
-  gap: 4%;
+const HeaderImage = styled.div<{ imageUrl: string }>`
+  width: 50%;
+  height: 100%;
+  position: absolute;
+  transform: translateX(100%);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url(${(props) => props.imageUrl});
+`;
+const ProfileImage = styled.img<{ imageUrl: string }>`
+  width: 40%;
+  height: auto;
+  content: url(${(props) => props.imageUrl});
 `;
 
+const NameHeading = styled.text`
+  font-size: 2.5rem;
+  font-weight: 500;
+  text-align: center;
+  color: ${COLORS.darkGray};
+`;
+
+const SectionTitle = styled.div`
+  width: 80%;
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: ${COLORS.darkGray};
+  text-align: left;
+  margin: 2rem 0 0.25rem 0;
+`;
+const BiographyContent = styled.div`
+  font-size: 1rem;
+  font-weight: 500;
+  color: ${COLORS.darkGray};
+`;
+
+const InformaionContainer = styled.div`
+  width: full;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const StyledDivider = styled.div`
+  width: 84%;
+  border-top: 1px solid #e5e7eb;
+  height: 1px;
+`;
 interface ArtistProfileProps {
   profileInfo?: any | null;
   artworks?: UserArtwork[] | null;
@@ -48,41 +68,39 @@ interface ArtistProfileProps {
 const ArtistProfile = ({ profileInfo, artworks }: ArtistProfileProps) => {
   return (
     <div>
-      <div className='p-[2vw]'>
-        <div className='flex flex-col'>
-          <HeadingContainer>
+      <div className='flex flex-col gap-10'>
+        <HeadingContainer>
+          <div className='flex justify-center items-center w-[50%] h-full'>
             <NameHeading>
               {profileInfo?.user.name} {profileInfo?.user.surname}
             </NameHeading>
-          </HeadingContainer>
+          </div>
+          <HeaderImage
+            imageUrl={artworks[0]?.artworkMedias[0] || ''}
+          ></HeaderImage>
+        </HeadingContainer>
 
-          <InformaionContainer>
-            <div className='flex flex-col items-end pt-12'>
-              <div className='p-1 shadow-lg'>
-                <Image
-                  width={350}
-                  height={300}
-                  src={profileInfo?.profilePic || ''}
-                  alt={'profile Image'}
-                />
-              </div>
-            </div>
-            <div className='w-full min-h-[50vh]'>
-              <BiographyHeading>Biografi</BiographyHeading>
-              <BiographyContent>{profileInfo?.biography}</BiographyContent>
-            </div>
-          </InformaionContainer>
-          <div>
-            <div className='p-10 rounded-xl flex flex-col items-end justify-center'>
-              <div className='flex w-full flex-wrap justify-around'>
-                {artworks?.map((currentArtwork: UserArtwork) => (
-                  <div className='flex flex-col items-end'>
-                    <ArtworkContainer
-                      artwork={currentArtwork}
-                    ></ArtworkContainer>
-                  </div>
-                ))}
-              </div>
+        <InformaionContainer>
+          <SectionTitle>Hakkında</SectionTitle>
+          <StyledDivider />
+          <div className='flex items-center gap-5 mx-40 my-20'>
+            <ProfileImage
+              imageUrl={profileInfo?.profilePic || ''}
+            ></ProfileImage>
+            <BiographyContent>{profileInfo?.biography}</BiographyContent>
+          </div>
+        </InformaionContainer>
+
+        <div>
+          <div className='flex flex-col items-center justify-center'>
+            <SectionTitle>Seçilmiş Eserler</SectionTitle>
+            <StyledDivider />
+            <div className='flex w-full flex-wrap justify-around my-20'>
+              {artworks?.map((currentArtwork: UserArtwork) => (
+                <div className='flex flex-col items-end'>
+                  <ArtworkContainer artwork={currentArtwork}></ArtworkContainer>
+                </div>
+              ))}
             </div>
           </div>
         </div>
