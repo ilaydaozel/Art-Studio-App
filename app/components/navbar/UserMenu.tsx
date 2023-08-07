@@ -95,9 +95,9 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
                     SANATÇI
                   </div>
                   <UserMenuElement
-                    href={`${ROUTE_PATHS.EDIT_PROFILE}/${currentUser?.id}`}
+                    href={`${ROUTE_PATHS.EDIT}${ROUTE_PATHS.EDIT_ARTIST_PROFILE}/${currentUser?.id}`}
                   >
-                    {ROUTE_NAMES.EDIT_PROFILE}
+                    {ROUTE_NAMES.EDIT_ARTIST_PROFILE}
                   </UserMenuElement>
                   <UserMenuElement
                     href={ROUTE_PATHS.HOME}
@@ -114,11 +114,15 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
                   <div className='text-md font-semibold mt-3 mb-1 w-full m-auto'>
                     ADMİN
                   </div>
-                  <UserMenuElement href={ROUTE_PATHS.EDIT_ARTIST}>
-                    {ROUTE_NAMES.EDIT_ARTIST}
+                  <UserMenuElement
+                    href={`${ROUTE_PATHS.EDIT}${ROUTE_PATHS.EDIT_ARTIST_ACCOUNT}`}
+                  >
+                    {ROUTE_NAMES.EDIT_ARTIST_ACCOUNT}
                   </UserMenuElement>
-                  <UserMenuElement href={ROUTE_PATHS.ADD_ARTIST}>
-                    {ROUTE_NAMES.ADD_ARTIST}
+                  <UserMenuElement
+                    href={`${ROUTE_PATHS.ADD}${ROUTE_PATHS.ADD_NEW_ARTIST}`}
+                  >
+                    {ROUTE_NAMES.ADD_NEW_ARTIST}
                   </UserMenuElement>
                   <UserMenuElement
                     href={ROUTE_PATHS.HOME}
