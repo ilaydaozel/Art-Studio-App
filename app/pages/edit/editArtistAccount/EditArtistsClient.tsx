@@ -58,14 +58,20 @@ const EditArtistsClient = ({ artists }: EditArtistsClientProps) => {
   const router = useRouter();
 
   const handleEdit = (artist: ArtistProfile) => {
-    router.push(`${ROUTE_PATHS.EDIT_PROFILE}/${artist?.artistId}`);
+    router.push(
+      `${ROUTE_PATHS.EDIT}${ROUTE_PATHS.EDIT_ARTIST_PROFILE}/${artist?.artistId}`
+    );
   };
 
   return (
     <div>
       <div className='p-[2vw] w-full'>
         <div className='flex w-full justify-end'>
-          <AddArtistButton onClick={() => router.push(ROUTE_PATHS.ADD_ARTIST)}>
+          <AddArtistButton
+            onClick={() =>
+              router.push(`${ROUTE_PATHS.ADD}${ROUTE_PATHS.ADD_NEW_ARTIST}`)
+            }
+          >
             Yeni Sanatçı Ekle +
           </AddArtistButton>
         </div>
@@ -74,7 +80,12 @@ const EditArtistsClient = ({ artists }: EditArtistsClientProps) => {
           <ArtistsTitle>Sanatçıları Düzenle</ArtistsTitle>
           <div className='w-full flex flex-row flex-wrap'>
             {artists?.map((artist) => (
-              <ArtistContainer key={artist.id}></ArtistContainer>
+              <ArtistContainer key={artist.id}>
+                <ArtistName onClick={() => handleEdit(artist)}>
+                  {artist.user.name} {artist.user.surname}
+                </ArtistName>
+                <EditArtistMenu currentArtist={artist.user}></EditArtistMenu>
+              </ArtistContainer>
             ))}
           </div>
         </div>

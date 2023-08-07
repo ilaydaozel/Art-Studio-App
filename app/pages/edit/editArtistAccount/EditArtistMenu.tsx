@@ -117,7 +117,9 @@ const EditArtistMenu = ({ currentArtist }: EditArtistMenuProps) => {
           <div className='inline-flex flex-col cursor-pointer w-full '>
             <MenuElement
               onClick={() => {
-                router.push(`${ROUTE_PATHS.EDIT_PROFILE}/${currentArtist?.id}`);
+                router.push(
+                  `${ROUTE_PATHS.EDIT}${ROUTE_PATHS.EDIT_ARTIST_PROFILE}/${currentArtist?.id}`
+                );
               }}
             >
               Sayfasını Düzenle
