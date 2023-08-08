@@ -1,23 +1,23 @@
 'use client';
-
-import { COLORS } from '@/constants/colors';
 import styled from 'styled-components';
 import { ROUTE_PATHS } from '@/constants/routes';
 import { useRouter } from 'next/navigation';
+import { IArtistProfile } from '@/app/actions/type';
+import { useState } from 'react';
 
 interface ArtistPreviewProps {
-  artist: any;
+  artist: IArtistProfile;
 }
 
-const NameText = styled.button`
-  pointer: cursor;
+const NameText = styled.button<{ isLoading: boolean }>`
+  pointer-events: ${(props) => (props.isLoading ? 'none' : 'auto')};
   color: #fff;
   transition: color 0.2s;
   position: absolute;
   bottom: 2px;
 `;
 
-const ArtistContainer = styled.div<{ profilePic: string }>`
+const ArtistBox = styled.div<{ profilePic: string }>`
   display: flex;
   justify-content: center;
   width: 200px;
@@ -53,20 +53,27 @@ const ArtistContainer = styled.div<{ profilePic: string }>`
 `;
 
 const ArtistPreview = ({ artist }: ArtistPreviewProps) => {
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
-  console.log('pp:', artist.profilePic);
 
-  const handleArtistClick = (artistId: string) => {
-    router.push(`${ROUTE_PATHS.ARTIST_PROFILE}/${artistId}`);
+  const handleArtistClick = async (artistId: string) => {
+    try {
+      setIsLoading(true);
+      await router.push(`${ROUTE_PATHS.ARTIST_PROFILE}/${artistId}`);
+    } catch (error) {
+      setIsLoading(false);
+    }
   };
+
   return (
-    <div onClick={() => handleArtistClick(artist.user.id)}>
-      <ArtistContainer profilePic={artist.profilePic}>
-        <NameText>
-          {artist.user.name} {artist.user.surname}
-        </NameText>
-      </ArtistContainer>
-    </div>
+    <ArtistBox
+      onClick={() => handleArtistClick(artist.user.id)}
+      profilePic={artist.profilePic ? artist.profilePic : ''}
+    >
+      <NameText isLoading={isLoading}>
+        {artist.user.name} {artist.user.surname}
+      </NameText>
+    </ArtistBox>
   );
 };
 
