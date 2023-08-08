@@ -1,5 +1,5 @@
 import prisma from "@/app/libs/prismadb";
-import { ArtistProfile } from "@prisma/client";
+import { IArtistProfile } from "./type";
 
 interface IParams {
     artistId?: string;
@@ -22,9 +22,8 @@ export default async function getArtistProfileById(
         if (!artistProfile) {
             return null;
         }
-        console.log("artistProfile: ", artistProfile);
         return {
-            artistProfile: artistProfile as ArtistProfile,
+            artistProfile: artistProfile as IArtistProfile,
         };
     } catch (error: any) {
         throw new Error(error);
