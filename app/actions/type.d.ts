@@ -13,7 +13,7 @@ export interface IArtistProfile {
     biography?: string;
     links: string[];
     profilePic?: string;
-    artworks: IUserArtwork[];
+    artworks?: IUserArtwork[];
     artistId: string;
     user: IUser;
 }
