@@ -1,5 +1,5 @@
 import prisma from "@/app/libs/prismadb";
-import { ArtistProfile, UserArtwork } from "@prisma/client";
+import { IUserArtwork } from "./type";
 
 interface IParams {
     artistId?: string;
@@ -13,15 +13,18 @@ export default async function getAllArtworksByArtistId(
         const allUserArtworks = await prisma.userArtwork.findMany({
             where: {
                 artistId: artistId,
+            },
+            include: {
+                artist: true,
+                exhibitions: true,
             }
         });
 
         if (!allUserArtworks) {
             return null;
         }
-        console.log("allUserArtworks: ", allUserArtworks);
         return {
-            allUserArtworks: allUserArtworks as UserArtwork[],
+            allUserArtworks: allUserArtworks as IUserArtwork[],
         };
     } catch (error: any) {
         throw new Error(error);
