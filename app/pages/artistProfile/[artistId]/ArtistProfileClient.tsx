@@ -4,6 +4,7 @@ import { COLORS } from '@/constants/colors';
 import styled from 'styled-components';
 import ArtworkContainer from '@/app/components/artwork/ArtworkContainer';
 import { UserArtwork } from '@prisma/client';
+import { IArtistProfile, IUserArtwork } from '@/app/actions/type';
 
 const HeadingContainer = styled.div`
   display: flex;
@@ -61,8 +62,8 @@ const StyledDivider = styled.div`
   height: 1px;
 `;
 interface ArtistProfileProps {
-  profileInfo?: any | null;
-  artworks?: UserArtwork[] | null;
+  profileInfo: IArtistProfile;
+  artworks?: IUserArtwork[];
 }
 
 const ArtistProfile = ({ profileInfo, artworks }: ArtistProfileProps) => {
@@ -96,7 +97,7 @@ const ArtistProfile = ({ profileInfo, artworks }: ArtistProfileProps) => {
             <SectionTitle>Seçilmiş Eserler</SectionTitle>
             <StyledDivider />
             <div className='flex w-full flex-wrap justify-around my-20'>
-              {artworks?.map((currentArtwork: UserArtwork) => (
+              {artworks?.map((currentArtwork: IUserArtwork) => (
                 <div
                   key={currentArtwork.id}
                   className='flex flex-col items-end'

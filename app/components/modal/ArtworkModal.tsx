@@ -1,16 +1,12 @@
 'use client';
-
-import axios from 'axios';
-import { toast } from 'react-hot-toast';
-import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 
 import Modal from './Modal';
 import useArtworkModal from '@/app/hooks/useArtworkModal';
-import { UserArtwork } from '@prisma/client';
 import Image from 'next/image';
+import { IUserArtwork } from '@/app/actions/type';
 interface ArtworkModalProps {
-  artwork: UserArtwork | null;
+  artwork: IUserArtwork | null;
   onClose: () => void;
 }
 
