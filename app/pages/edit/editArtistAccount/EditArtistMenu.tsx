@@ -1,9 +1,7 @@
 'use client';
 
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { AiOutlineMenu } from 'react-icons/ai';
 import { useRouter } from 'next/navigation';
-import { User } from '@prisma/client';
 import styled from 'styled-components';
 import { COLORS } from '@/constants/colors';
 import { MdDelete } from 'react-icons/md';
@@ -11,9 +9,10 @@ import { BsThreeDotsVertical } from 'react-icons/bs';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import { ROUTE_PATHS } from '@/constants/routes';
+import { IUser } from '@/app/actions/type';
 
 interface EditArtistMenuProps {
-  currentArtist: User | null;
+  currentArtist: IUser | null;
 }
 
 const MenuContainer = styled.div`
@@ -76,10 +75,8 @@ const EditArtistMenu = ({ currentArtist }: EditArtistMenuProps) => {
   };
   const menuRef = useRef<HTMLDivElement>(null); // Specify the type of menuRef
 
-  // Use useEffect to add a click event listener when the component mounts
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      // If the click is outside the menu and the menu is open, close it
       if (
         menuRef.current &&
         !menuRef.current.contains(event.target as Node) &&
@@ -89,10 +86,8 @@ const EditArtistMenu = ({ currentArtist }: EditArtistMenuProps) => {
       }
     };
 
-    // Add the event listener to 'document'
     document.addEventListener('click', handleClickOutside);
 
-    // Clean up the event listener when the component unmounts
     return () => {
       document.removeEventListener('click', handleClickOutside);
     };
