@@ -28,7 +28,7 @@ const HeaderImage = styled.div<{ imageUrl: string }>`
 `;
 
 const ProfileImage = styled.img<{ imageUrl: string }>`
-  width: 30%;
+  width: 35%;
   height: auto;
   content: url(${(props) => props.imageUrl});
 `;
