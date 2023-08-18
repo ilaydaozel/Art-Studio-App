@@ -1,16 +1,21 @@
 'use client';
-import Image from 'next/image';
 import { COLORS } from '@/constants/colors';
 import styled from 'styled-components';
 import ArtworkContainer from '@/app/components/artwork/ArtworkContainer';
 import { IArtistProfile, IUserArtwork } from '@/app/actions/type';
 
+const LayoutContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: 2rem;
+`;
 const HeadingContainer = styled.div`
   display: flex;
   align-items: center;
   min-height: 100vh;
   width: 100%;
 `;
+
 const HeaderImage = styled.div<{ imageUrl: string }>`
   width: 50%;
   height: 100%;
@@ -21,8 +26,9 @@ const HeaderImage = styled.div<{ imageUrl: string }>`
   background-repeat: no-repeat;
   background-image: url(${(props) => props.imageUrl});
 `;
+
 const ProfileImage = styled.img<{ imageUrl: string }>`
-  width: 40%;
+  width: 30%;
   height: auto;
   content: url(${(props) => props.imageUrl});
 `;
@@ -42,6 +48,7 @@ const SectionTitle = styled.div`
   text-align: left;
   margin: 2rem 0 0.25rem 0;
 `;
+
 const BiographyContent = styled.div`
   font-size: 1rem;
   font-weight: 500;
@@ -68,22 +75,21 @@ interface ArtistProfileProps {
 const ArtistProfile = ({ profileInfo, artworks }: ArtistProfileProps) => {
   return (
     <div>
-      <div className='flex flex-col gap-10'>
-        <HeadingContainer>
-          <div className='flex justify-center items-center w-[50%] h-full'>
-            <NameHeading>
-              {profileInfo?.user.name} {profileInfo?.user.surname}
-            </NameHeading>
-          </div>
-          <HeaderImage
-            imageUrl={artworks ? artworks[0]?.artworkMedias[0] : ''}
-          ></HeaderImage>
-        </HeadingContainer>
-
+      <HeadingContainer>
+        <div className='flex justify-center items-center w-[50%] h-full'>
+          <NameHeading>
+            {profileInfo.user.name} {profileInfo.user.surname}
+          </NameHeading>
+        </div>
+        <HeaderImage
+          imageUrl={artworks ? artworks[0]?.artworkMedias[0] : ''}
+        ></HeaderImage>
+      </HeadingContainer>
+      <LayoutContainer>
         <InformaionContainer>
           <SectionTitle>Hakkında</SectionTitle>
           <StyledDivider />
-          <div className='flex items-center gap-5 mx-40 my-20'>
+          <div className='flex items-center gap-10 mx-40 my-20'>
             <ProfileImage
               imageUrl={profileInfo?.profilePic || ''}
             ></ProfileImage>
@@ -91,23 +97,18 @@ const ArtistProfile = ({ profileInfo, artworks }: ArtistProfileProps) => {
           </div>
         </InformaionContainer>
 
-        <div>
-          <div className='flex flex-col items-center justify-center'>
-            <SectionTitle>Seçilmiş Eserler</SectionTitle>
-            <StyledDivider />
-            <div className='flex w-full flex-wrap justify-around my-20'>
-              {artworks?.map((currentArtwork: IUserArtwork) => (
-                <div
-                  key={currentArtwork.id}
-                  className='flex flex-col items-end'
-                >
-                  <ArtworkContainer artwork={currentArtwork}></ArtworkContainer>
-                </div>
-              ))}
-            </div>
+        <div className='flex flex-col items-center justify-center'>
+          <SectionTitle>Seçilmiş Eserler</SectionTitle>
+          <StyledDivider />
+          <div className='flex w-full flex-wrap justify-around my-20'>
+            {artworks?.map((currentArtwork: IUserArtwork) => (
+              <div key={currentArtwork.id} className='flex flex-col items-end'>
+                <ArtworkContainer artwork={currentArtwork}></ArtworkContainer>
+              </div>
+            ))}
           </div>
         </div>
-      </div>
+      </LayoutContainer>
     </div>
   );
 };
