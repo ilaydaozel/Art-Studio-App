@@ -2,14 +2,14 @@
 import React, { useEffect, useState } from 'react';
 import UserMenu from './UserMenu';
 import styled from 'styled-components';
-import { User } from '@prisma/client';
 import { COLORS } from '@/constants/colors';
 import useLoginModal from '@/app/hooks/useLoginModal';
 import { ROUTE_NAMES, ROUTE_PATHS } from '@/constants/routes';
 import { usePathname, useRouter } from 'next/navigation';
 import { PiUserCircleLight } from 'react-icons/pi';
+import { IUser } from '@/app/actions/type';
 interface NavbarProps {
-  currentUser: User | null;
+  currentUser: IUser | null;
 }
 const NavbarContainer = styled.div<{ bgColor: string }>`
   position: fixed;

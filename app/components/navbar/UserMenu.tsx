@@ -3,13 +3,13 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { AiOutlineMenu } from 'react-icons/ai';
 import { useRouter } from 'next/navigation';
-import { User } from '@prisma/client';
 import { signOut } from 'next-auth/react';
 import styled from 'styled-components';
 import { COLORS } from '@/constants/colors';
 import { ROUTE_PATHS, ROUTE_NAMES } from '@/constants/routes';
+import { IUser } from '@/app/actions/type';
 interface UserMenuProps {
-  currentUser: User | null;
+  currentUser: IUser | null;
 }
 
 const MenuContainer = styled.div`
