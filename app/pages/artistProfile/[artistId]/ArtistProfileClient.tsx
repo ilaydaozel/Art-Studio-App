@@ -3,7 +3,6 @@ import Image from 'next/image';
 import { COLORS } from '@/constants/colors';
 import styled from 'styled-components';
 import ArtworkContainer from '@/app/components/artwork/ArtworkContainer';
-import { UserArtwork } from '@prisma/client';
 import { IArtistProfile, IUserArtwork } from '@/app/actions/type';
 
 const HeadingContainer = styled.div`

@@ -12,7 +12,6 @@ import useAddArtworkModal from '@/app/hooks/useAddArtworkModal';
 import Modal from './Modal';
 import ImageUpload from '../inputs/ImageUpload';
 import Input from '../inputs/Input';
-import { UserArtwork } from '@prisma/client';
 import Selectbox from '../inputs/Selectbox';
 
 enum STEPS {

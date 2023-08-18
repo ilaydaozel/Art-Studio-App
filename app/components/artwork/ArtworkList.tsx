@@ -1,10 +1,9 @@
 'use client';
-import { UserArtwork } from '@prisma/client';
 import styled from 'styled-components';
 import ArtworkContainer from './ArtworkContainer';
 
 interface ArtworkListProps {
-  artworkArray?: UserArtwork[] | null;
+  artworkArray?: IUserArtwork[] | null;
   title: string;
 }
 

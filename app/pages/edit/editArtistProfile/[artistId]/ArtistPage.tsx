@@ -13,7 +13,6 @@ import { FaRegSquarePlus } from 'react-icons/fa6';
 import { MdDeleteForever } from 'react-icons/md';
 import { useState } from 'react';
 import ArtworkContainer from '@/app/components/artwork/ArtworkContainer';
-import { UserArtwork } from '@prisma/client';
 import { toast } from 'react-hot-toast';
 import axios from 'axios';
 
@@ -79,7 +78,7 @@ const AddArtworkButton = styled.button`
 `;
 interface ArtistPageProps {
   profileInfo?: any | null;
-  artworks?: UserArtwork[] | null;
+  artworks?: IUserArtwork[] | null;
 }
 
 const ArtistPage = ({ profileInfo, artworks }: ArtistPageProps) => {

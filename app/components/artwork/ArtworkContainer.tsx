@@ -1,5 +1,4 @@
 'use client';
-import { UserArtwork } from '@prisma/client';
 import styled from 'styled-components';
 import Image from 'next/image';
 import { MdOutlinePhotoSizeSelectActual } from 'react-icons/md';
