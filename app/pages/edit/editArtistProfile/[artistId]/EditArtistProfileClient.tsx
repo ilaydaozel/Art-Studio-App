@@ -15,6 +15,7 @@ import { useState } from 'react';
 import ArtworkContainer from '@/app/components/artwork/ArtworkContainer';
 import { toast } from 'react-hot-toast';
 import axios from 'axios';
+import { IUserArtwork } from '@/app/actions/type';
 
 const NameHeading = styled.text`
   font-size: 3.5vw;
@@ -176,7 +177,7 @@ const ArtistPage = ({ profileInfo, artworks }: ArtistPageProps) => {
               )}
 
               <div className='flex w-full flex-wrap justify-around'>
-                {artworks?.map((currentArtwork: UserArtwork) => (
+                {artworks?.map((currentArtwork: IUserArtwork) => (
                   <div
                     key={currentArtwork.id}
                     className='flex flex-col items-end'

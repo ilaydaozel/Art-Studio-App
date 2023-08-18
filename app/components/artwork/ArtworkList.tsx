@@ -1,6 +1,6 @@
 'use client';
 import styled from 'styled-components';
-import ArtworkContainer from './ArtworkContainer';
+import { IUserArtwork } from '@/app/actions/type';
 
 interface ArtworkListProps {
   artworkArray?: IUserArtwork[] | null;
