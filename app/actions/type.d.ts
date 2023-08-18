@@ -5,7 +5,6 @@ export interface IUser {
     userType: string;
     email: string;
     gender?: string;
-    artistProfile?: IArtistProfile;
 }
 
 export interface IArtistProfile {
