@@ -3,24 +3,23 @@
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
-import dynamic from 'next/dynamic';
-import { useRouter } from 'next/navigation';
 import { useMemo, useState } from 'react';
-
 import useAddArtworkModal from '@/app/hooks/useAddArtworkModal';
-
 import Modal from './Modal';
 import ImageUpload from '../inputs/ImageUpload';
 import Input from '../inputs/Input';
 import Selectbox from '../inputs/Selectbox';
+import { IArtistProfile } from '@/app/actions/type';
 
 enum STEPS {
   INFORMATION = 0,
   PHOTO = 1,
 }
+interface AddArtworkModalProps {
+  artistProfile: IArtistProfile;
+}
 
-const ArtworkModal = () => {
-  const router = useRouter();
+const AddArtworkModal = ({ artistProfile }: AddArtworkModalProps) => {
   const addArtworkModal = useAddArtworkModal();
 
   const [isLoading, setIsLoading] = useState(false);
@@ -71,6 +70,7 @@ const ArtworkModal = () => {
   };
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
+    const artistId = artistProfile?.artistId;
     if (step !== STEPS.PHOTO) {
       return onNext();
     }
@@ -90,14 +90,15 @@ const ArtworkModal = () => {
     };
 
     axios
-      .post('/api/userArtwork', artwork)
+      .post(`/api/userArtwork/addUserArtwork/${artistId}`, artwork)
       .then(() => {
         toast.success('Eser eklendi!');
         window.location.reload();
         reset();
       })
-      .catch(() => {
+      .catch((e) => {
         toast.error('Bir şeyler yanlış gitti');
+        console.log(' error ', e);
       })
       .finally(() => {
         setIsLoading(false);
@@ -210,4 +211,4 @@ const ArtworkModal = () => {
   );
 };
 
-export default ArtworkModal;
+export default AddArtworkModal;

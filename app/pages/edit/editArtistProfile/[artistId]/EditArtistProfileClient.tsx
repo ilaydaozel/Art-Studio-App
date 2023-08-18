@@ -16,6 +16,7 @@ import ArtworkContainer from '@/app/components/artwork/ArtworkContainer';
 import { toast } from 'react-hot-toast';
 import axios from 'axios';
 import { IArtistProfile, IUserArtwork } from '@/app/actions/type';
+import AddArtworkModal from '@/app/components/modal/AddArtworkModal';
 
 const NameHeading = styled.text`
   font-size: 3.5vw;
@@ -97,13 +98,14 @@ const ArtistPage = ({ profileInfo, artworks }: ArtistPageProps) => {
     setIsLoading(true);
 
     axios
-      .delete(`/api/userArtwork/${artworkId}`)
+      .delete(`/api/userArtwork/deleteUserArtwork/${artworkId}`)
       .then(() => {
         toast.success('Eser silindi!');
         refreshPage();
       })
       .catch(() => {
         toast.error('Bir şeyler yanlış gitti');
+        refreshPage();
       })
       .finally(() => {
         setIsLoading(false);
@@ -159,6 +161,7 @@ const ArtistPage = ({ profileInfo, artworks }: ArtistPageProps) => {
             </div>
           </InformaionContainer>
           <div>
+            <AddArtworkModal artistProfile={profileInfo} />
             <div className='p-10 rounded-xl flex flex-col items-end justify-center'>
               {artworks ? (
                 artworks.length < 3 ? (

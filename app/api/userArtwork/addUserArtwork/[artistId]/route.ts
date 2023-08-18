@@ -1,18 +1,25 @@
 import { NextResponse } from "next/server";
-
 import prisma from "@/app/libs/prismadb";
-import getCurrentUser from "@/app/actions/getCurrentUser";
-import { User } from "@prisma/client";
+import getArtistProfileById from "@/app/actions/getArtistProfileById";
+import { IUser } from "@/app/actions/type";
 
-export async function POST(
-    request: Request,
-) {
-    const currentUser = await getCurrentUser();
 
-    if (!currentUser) {
+interface IParams {
+    artistId?: string;
+}
+
+export async function POST(request: Request, { params }: { params: IParams }) {
+    const currentProfile = await getArtistProfileById(params);
+
+    if (!currentProfile) {
         return NextResponse.error();
     }
-    const user: User = currentUser.currentUser;
+
+    const user: IUser = currentProfile.artistProfile.user;
+
+    if (user.userType != "artist") {
+        return NextResponse.error();
+    }
 
     const body = await request.json();
     const {
