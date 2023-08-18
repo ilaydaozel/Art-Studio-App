@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { ArtistProfile } from '@prisma/client';
 import { ROUTE_PATHS } from '@/constants/routes';
 import EditArtistMenu from './EditArtistMenu';
+import { IArtistProfile } from '@/app/actions/type';
 
 const ArtistContainer = styled.div`
   display: flex;
@@ -50,14 +51,13 @@ const AddArtistButton = styled.button`
 `;
 
 interface EditArtistsClientProps {
-  artists?: ArtistProfile[] | null;
+  artists: IArtistProfile[];
 }
 
 const EditArtistsClient = ({ artists }: EditArtistsClientProps) => {
-  console.log('artists: ', artists);
   const router = useRouter();
 
-  const handleEdit = (artist: ArtistProfile) => {
+  const handleEdit = (artist: IArtistProfile) => {
     router.push(
       `${ROUTE_PATHS.EDIT}${ROUTE_PATHS.EDIT_ARTIST_PROFILE}/${artist?.artistId}`
     );

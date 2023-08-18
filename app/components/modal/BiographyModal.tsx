@@ -3,12 +3,11 @@ import { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import useBiographyModal from '@/app/hooks/useBiographyModal';
-
 import Modal from './Modal';
-import { ArtistProfile } from '@prisma/client';
+import { IArtistProfile } from '@/app/actions/type';
 
 interface BiographyModalProps {
-  artistProfile: ArtistProfile | null;
+  artistProfile: IArtistProfile | null;
   onClose: () => void;
   onUpdate: () => void;
 }

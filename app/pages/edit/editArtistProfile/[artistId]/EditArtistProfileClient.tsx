@@ -15,7 +15,7 @@ import { useState } from 'react';
 import ArtworkContainer from '@/app/components/artwork/ArtworkContainer';
 import { toast } from 'react-hot-toast';
 import axios from 'axios';
-import { IUserArtwork } from '@/app/actions/type';
+import { IArtistProfile, IUserArtwork } from '@/app/actions/type';
 
 const NameHeading = styled.text`
   font-size: 3.5vw;
@@ -77,8 +77,9 @@ const AddArtworkButton = styled.button`
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   }
 `;
+
 interface ArtistPageProps {
-  profileInfo?: any | null;
+  profileInfo: IArtistProfile;
   artworks?: IUserArtwork[] | null;
 }
 

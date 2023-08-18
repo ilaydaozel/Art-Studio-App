@@ -14,10 +14,10 @@ import { COLORS } from '@/constants/colors';
 import styled from 'styled-components';
 import ImageUpload from '../inputs/ImageUpload';
 import useProfilePictureModal from '@/app/hooks/useProfilePictureModal';
-import { ArtistProfile } from '@prisma/client';
+import { IArtistProfile } from '@/app/actions/type';
 
 interface ProfilePictureModalProps {
-  artistProfile: ArtistProfile | null;
+  artistProfile: IArtistProfile | null;
   onClose: () => void;
   onUpdate: () => void;
 }
