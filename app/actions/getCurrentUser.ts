@@ -1,13 +1,13 @@
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import prisma from "@/app/libs/prismadb";
-import { User } from "@prisma/client";
+import { IUser } from "./type";
 
 export async function getSession() {
     return await getServerSession(authOptions);
 }
 
-export default async function getCurrentUser(): Promise<{ currentUser: User } | null> {
+export default async function getCurrentUser(): Promise<{ currentUser: IUser } | null> {
     try {
         const session = await getSession();
 
@@ -19,16 +19,13 @@ export default async function getCurrentUser(): Promise<{ currentUser: User } | 
             where: {
                 email: session.user.email as string,
             },
-            include: {
-                artistProfile: true,
-            },
         });
 
         if (!currentUser) {
             return null;
         }
         return {
-            currentUser: currentUser as User,
+            currentUser: currentUser as IUser,
         }
     } catch (error: any) {
         return null;

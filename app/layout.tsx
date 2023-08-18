@@ -8,6 +8,7 @@ import LoginModal from './components/modal/LoginModal';
 import AddArtworkModal from './components/modal/AddArtworkModal';
 import getCurrentUser from './actions/getCurrentUser';
 import Footer from './components/footer/Footer';
+import { IUser } from './actions/type';
 
 export const metadata = {
   title: 'Konak Sanat Akademisi',
@@ -41,9 +42,7 @@ export default async function RootLayout({
             <LoginModal />
             <AddArtworkModal />
             <Navbar
-              currentUser={
-                currentUser?.currentUser ? currentUser.currentUser : null
-              }
+              currentUser={currentUser ? currentUser.currentUser : null}
             />
           </ClientOnly>
 
