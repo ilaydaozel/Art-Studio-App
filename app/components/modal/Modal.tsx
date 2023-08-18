@@ -2,10 +2,7 @@
 
 import { useCallback, useEffect, useState } from 'react';
 import { IoMdClose } from 'react-icons/io';
-
 import Button from '../buttons/Button';
-import { subtle } from 'crypto';
-import Heading from '../Heading';
 
 interface ModalProps {
   isOpen?: boolean;

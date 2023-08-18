@@ -3,8 +3,6 @@ import ClientOnly from '@/app/components/ClientOnly';
 import getAllArtistProfiles from '@/app/actions/getAllArtistProfiles';
 import ArtistPreview from './ArtistPreview';
 import { IArtistProfile } from '@/app/actions/type';
-import { useRouter } from 'next/navigation';
-import { ROUTE_PATHS } from '@/constants/routes';
 
 const ArtistsPage = async () => {
   let artistProfiles: IArtistProfile[] = [];
@@ -13,7 +11,6 @@ const ArtistsPage = async () => {
     const result = await getAllArtistProfiles();
     if (result && result.artistProfiles) {
       artistProfiles = result.artistProfiles;
-      console.log('artistProfiles: ', artistProfiles);
       if (artistProfiles.length > 0) {
         return (
           <ClientOnly>

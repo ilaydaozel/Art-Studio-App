@@ -40,7 +40,6 @@ export default async function RootLayout({
           <ClientOnly>
             <ToasterProvider />
             <LoginModal />
-            <AddArtworkModal />
             <Navbar
               currentUser={currentUser ? currentUser.currentUser : null}
             />
