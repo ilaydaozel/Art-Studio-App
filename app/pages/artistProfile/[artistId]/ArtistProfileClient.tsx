@@ -62,6 +62,13 @@ const InformaionContainer = styled.div`
   align-items: center;
 `;
 
+const ArtworksContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+
 const StyledDivider = styled.div`
   width: 84%;
   border-top: 1px solid #e5e7eb;
@@ -97,7 +104,7 @@ const ArtistProfile = ({ profileInfo, artworks }: ArtistProfileProps) => {
           </div>
         </InformaionContainer>
 
-        <div className='flex flex-col items-center justify-center'>
+        <ArtworksContainer>
           <SectionTitle>Seçilmiş Eserler</SectionTitle>
           <StyledDivider />
           <div className='flex w-full flex-wrap justify-around my-20'>
@@ -107,7 +114,7 @@ const ArtistProfile = ({ profileInfo, artworks }: ArtistProfileProps) => {
               </div>
             ))}
           </div>
-        </div>
+        </ArtworksContainer>
       </LayoutContainer>
     </div>
   );
