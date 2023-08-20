@@ -14,11 +14,13 @@ interface SlidingButtonProps {
   width?: string;
 }
 
-const ButtonStyle = styled.button`
+const ButtonStyle = styled.button<{ width: string }>`
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
   padding: 0.5rem 1rem;
+  width: ${(props) => props.width};
   border-radius: 0.5rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   cursor: pointer;
@@ -35,10 +37,10 @@ const SlidingButton = ({
   onClick,
   disabled,
   icon: Icon,
-  width = '100%',
+  width = 'auto',
 }: SlidingButtonProps) => {
   return (
-    <ButtonStyle disabled={disabled} onClick={onClick}>
+    <ButtonStyle disabled={disabled} width={width} onClick={onClick}>
       {label}
       {Icon && (
         <Icon
