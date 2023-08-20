@@ -17,12 +17,11 @@ interface SlidingButtonProps {
 const ButtonStyle = styled.button`
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.5rem;
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   cursor: pointer;
-
   transition: transform 0.5s;
   background-color: ${COLORS.darkGray};
   color: white;
@@ -35,24 +34,20 @@ const SlidingButton = ({
   label,
   onClick,
   disabled,
-  outline,
-  small,
   icon: Icon,
   width = '100%',
 }: SlidingButtonProps) => {
   return (
     <ButtonStyle disabled={disabled} onClick={onClick}>
+      {label}
       {Icon && (
         <Icon
-          size={24}
+          size={18}
           className='
-            absolute
-            left-4
-            top-3
+            text-neutral-100
           '
         />
       )}
-      {label}
     </ButtonStyle>
   );
 };
