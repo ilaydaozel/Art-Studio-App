@@ -9,11 +9,13 @@ import { useRouter } from 'next/navigation';
 import ProfilePictureModal from '@/app/components/modal/ProfilePictureModal';
 import { FaRegEdit } from 'react-icons/fa';
 import { FaRegSquarePlus } from 'react-icons/fa6';
-import { useState } from 'react';
+import { MouseEvent, useState } from 'react';
 import { IArtistProfile, IUserArtwork } from '@/app/actions/type';
 import AddArtworkModal from '@/app/components/modal/AddArtworkModal';
 import SlidingButton from '@/app/components/buttons/SlidingButton';
 import ArtworkList from '@/app/components/artwork/ArtworkList';
+import axios from 'axios';
+import toast from 'react-hot-toast';
 
 const LayoutContainer = styled.div`
   display: flex;
@@ -102,7 +104,37 @@ const ButtonWithIcon = styled.button`
     color: ${COLORS.darkGray};
   }
 `;
+const ArtworkSelectionPopup = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+`;
 
+const CloseButton = styled.button`
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+`;
+
+const ArtworkThumbnail = styled.img`
+  width: 30%;
+  height: auto;
+  object-fit: cover;
+  cursor: pointer;
+`;
 interface ArtistPageProps {
   profileInfo: IArtistProfile;
   artworks?: IUserArtwork[] | null;
@@ -110,13 +142,39 @@ interface ArtistPageProps {
 
 const ArtistPage = ({ profileInfo, artworks }: ArtistPageProps) => {
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
   const biographyModal = useBiographyModal();
   const profilePictureModal = useProfilePictureModal();
   const addArtworkModal = useAddArtworkModal();
-  const [isLoading, setIsLoading] = useState(false);
+  const [headerArtwork, setHeaderArtwork] = useState(
+    profileInfo?.coverImage || ''
+  );
+  const [showArtworkSelection, setShowArtworkSelection] = useState(false);
   const refreshPage = () => {
     router.refresh();
   };
+
+  const handleHeaderArtworkSelection = (artwork: IUserArtwork) => {
+    setHeaderArtwork(artwork.artworkMedias[0] || '');
+  };
+
+  const handleCoverImageChange = async (coverImage: String) => {
+    setIsLoading(true);
+    try {
+      await axios.post(`/api/artistProfile/${profileInfo.artistId}`, {
+        coverImage,
+      });
+      toast.success('Kapak fotoğrafı güncellendi!');
+      setShowArtworkSelection(false);
+      refreshPage();
+    } catch (error) {
+      toast.error('Error');
+      console.log('Kapak fotoğrafı error: ', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <div>
       <ProfilePictureModal
@@ -129,17 +187,43 @@ const ArtistPage = ({ profileInfo, artworks }: ArtistPageProps) => {
         onClose={biographyModal.onClose}
         onUpdate={refreshPage}
       />
+
       <HeadingContainer>
-        <div className='flex justify-center items-center w-[50%] h-full'>
+        <div className='flex flex-col justify-center items-center w-[50%] h-full'>
           <NameHeading>
             {profileInfo.user.name} {profileInfo.user.surname}
           </NameHeading>
+          <ButtonWithIcon onClick={() => setShowArtworkSelection(true)}>
+            Kapak resmini değiştir
+            <FaRegEdit onClick={biographyModal.onOpen} />
+          </ButtonWithIcon>
         </div>
-        <HeaderImage
-          imageUrl={artworks ? artworks[0]?.artworkMedias[0] : ''}
-        ></HeaderImage>
+        <HeaderImage imageUrl={headerArtwork}></HeaderImage>
       </HeadingContainer>
 
+      {showArtworkSelection && (
+        <ArtworkSelectionPopup>
+          <div>
+            <CloseButton onClick={() => setShowArtworkSelection(false)}>
+              X
+            </CloseButton>
+            <h2>Kapak Resmi Seç</h2>
+          </div>
+          <div className='flex justify-between'>
+            {artworks?.map((artwork) => (
+              <ArtworkThumbnail
+                key={artwork.id}
+                src={artwork.artworkMedias[0] || ''}
+                onClick={() => handleHeaderArtworkSelection(artwork)}
+              />
+            ))}
+          </div>
+          <SlidingButton
+            label='Tamamla'
+            onClick={() => handleCoverImageChange(headerArtwork)}
+          />
+        </ArtworkSelectionPopup>
+      )}
       <LayoutContainer>
         <InformaionContainer>
           <SectionTitle>Hakkında</SectionTitle>
