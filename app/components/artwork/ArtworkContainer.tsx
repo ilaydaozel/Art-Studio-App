@@ -42,7 +42,7 @@ const ArtworkContainer = ({ artwork }: ArtworkContainerProps) => {
       ></ArtworkModal>
       <Container onClick={detailedArtworkModal.onOpen}>
         {artwork?.artworkMedias[0] !== undefined ? (
-          <div className='relative w-[320px] h-[320px]'>
+          <div className='relative w-[280px] h-[280px]'>
             <Image
               src={artwork?.artworkMedias[0] || ''}
               placeholder='empty'
