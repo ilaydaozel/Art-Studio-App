@@ -3,6 +3,7 @@ import { COLORS } from '@/constants/colors';
 import styled from 'styled-components';
 import ArtworkContainer from '@/app/components/artwork/ArtworkContainer';
 import { IArtistProfile, IUserArtwork } from '@/app/actions/type';
+import ArtworkList from '@/app/components/artwork/ArtworkList';
 
 const LayoutContainer = styled.div`
   display: flex;
@@ -107,13 +108,10 @@ const ArtistProfile = ({ profileInfo, artworks }: ArtistProfileProps) => {
         <ArtworksContainer>
           <SectionTitle>Seçilmiş Eserler</SectionTitle>
           <StyledDivider />
-          <div className='flex w-full flex-wrap justify-around my-20'>
-            {artworks?.map((currentArtwork: IUserArtwork) => (
-              <div key={currentArtwork.id} className='flex flex-col items-end'>
-                <ArtworkContainer artwork={currentArtwork}></ArtworkContainer>
-              </div>
-            ))}
-          </div>
+          <ArtworkList
+            artworks={artworks ? artworks : null}
+            width='90%'
+          ></ArtworkList>
         </ArtworksContainer>
       </LayoutContainer>
     </div>

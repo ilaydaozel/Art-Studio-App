@@ -1,5 +1,4 @@
 'use client';
-import Image from 'next/image';
 import useBiographyModal from '@/app/hooks/useBiographyModal';
 import useProfilePictureModal from '@/app/hooks/useProfilePictureModal';
 import { COLORS } from '@/constants/colors';
@@ -10,14 +9,11 @@ import { useRouter } from 'next/navigation';
 import ProfilePictureModal from '@/app/components/modal/ProfilePictureModal';
 import { FaRegEdit } from 'react-icons/fa';
 import { FaRegSquarePlus } from 'react-icons/fa6';
-import { MdDeleteForever } from 'react-icons/md';
 import { useState } from 'react';
-import ArtworkContainer from '@/app/components/artwork/ArtworkContainer';
-import { toast } from 'react-hot-toast';
-import axios from 'axios';
 import { IArtistProfile, IUserArtwork } from '@/app/actions/type';
 import AddArtworkModal from '@/app/components/modal/AddArtworkModal';
 import SlidingButton from '@/app/components/buttons/SlidingButton';
+import ArtworkList from '@/app/components/artwork/ArtworkList';
 
 const LayoutContainer = styled.div`
   display: flex;
@@ -118,26 +114,8 @@ const ArtistPage = ({ profileInfo, artworks }: ArtistPageProps) => {
   const profilePictureModal = useProfilePictureModal();
   const addArtworkModal = useAddArtworkModal();
   const [isLoading, setIsLoading] = useState(false);
-
   const refreshPage = () => {
     router.refresh();
-  };
-  const handleDelete = (artworkId: string) => {
-    setIsLoading(true);
-
-    axios
-      .delete(`/api/userArtwork/deleteUserArtwork/${artworkId}`)
-      .then(() => {
-        toast.success('Eser silindi!');
-        refreshPage();
-      })
-      .catch(() => {
-        toast.error('Bir şeyler yanlış gitti');
-        refreshPage();
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
   };
   return (
     <div>
@@ -161,6 +139,7 @@ const ArtistPage = ({ profileInfo, artworks }: ArtistPageProps) => {
           imageUrl={artworks ? artworks[0]?.artworkMedias[0] : ''}
         ></HeaderImage>
       </HeadingContainer>
+
       <LayoutContainer>
         <InformaionContainer>
           <SectionTitle>Hakkında</SectionTitle>
@@ -207,22 +186,11 @@ const ArtistPage = ({ profileInfo, artworks }: ArtistPageProps) => {
                 <></>
               )}
             </div>
-            <div className='flex w-full flex-wrap justify-around mt-20'>
-              {artworks?.map((currentArtwork: IUserArtwork) => (
-                <div
-                  key={currentArtwork.id}
-                  className='flex flex-col items-end'
-                >
-                  <ArtworkContainer artwork={currentArtwork}></ArtworkContainer>
-                  <ButtonWithIcon
-                    onClick={() => handleDelete(currentArtwork.id)}
-                  >
-                    Sil
-                    <MdDeleteForever style={{ width: '50%' }} />
-                  </ButtonWithIcon>
-                </div>
-              ))}
-            </div>
+            <ArtworkList
+              artworks={artworks ? artworks : null}
+              width='90%'
+              deletable={true}
+            ></ArtworkList>
           </div>
         </ArtworksContainer>
       </LayoutContainer>
