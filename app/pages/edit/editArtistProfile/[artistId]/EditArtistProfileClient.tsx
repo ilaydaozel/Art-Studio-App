@@ -18,37 +18,80 @@ import axios from 'axios';
 import { IArtistProfile, IUserArtwork } from '@/app/actions/type';
 import AddArtworkModal from '@/app/components/modal/AddArtworkModal';
 
-const NameHeading = styled.text`
-  font-size: 3.5vw;
-  font-weight: 600;
-  color: ${COLORS.darkGray};
-`;
-const BiographyHeading = styled.text`
-  font-size: 2.5vw;
-  font-weight: 600;
-  color: ${COLORS.darkGray};
-`;
-const BiographyContent = styled.text`
+const LayoutContainer = styled.div`
   display: flex;
   flex-direction: column;
-  font-size: 1.25rem;
-  font-weight: 500;
-  color: ${COLORS.gray};
+  padding: 2rem;
+  width: 100%;
 `;
 const HeadingContainer = styled.div`
   display: flex;
-  justify-content: start;
   align-items: center;
-  border-bottom: solid 1px;
-  border-color: ${COLORS.lightGray};
-  padding: 3% 1% 1% 0;
+  min-height: 100vh;
+  width: 100%;
 `;
+
+const HeaderImage = styled.div<{ imageUrl: string }>`
+  width: 50%;
+  height: 100%;
+  position: absolute;
+  transform: translateX(100%);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url(${(props) => props.imageUrl});
+`;
+
+const ProfileImage = styled.img<{ imageUrl: string }>`
+  width: 100%;
+  height: auto;
+  content: url(${(props) => props.imageUrl});
+`;
+
+const NameHeading = styled.text`
+  font-size: 2.5rem;
+  font-weight: 500;
+  text-align: center;
+  color: ${COLORS.darkGray};
+`;
+
+const SectionTitle = styled.div`
+  width: 80%;
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: ${COLORS.darkGray};
+  text-align: left;
+  margin: 2rem 0 0.25rem 0;
+`;
+
+const BiographyContent = styled.div`
+  width: 100%;
+  font-size: 1rem;
+  font-weight: 500;
+  color: ${COLORS.darkGray};
+  word-break: break-all;
+`;
+
 const InformaionContainer = styled.div`
-  margin: 6% 2% 3% 2%;
+  width: 100%;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 4%;
 `;
+
+const ArtworksContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+
+const StyledDivider = styled.div`
+  width: 84%;
+  border-top: 1px solid #e5e7eb;
+  height: 1px;
+`;
+
 const ButtonWithIcon = styled.button`
   display: flex;
   align-items: center;
@@ -60,7 +103,6 @@ const ButtonWithIcon = styled.button`
 
   &:hover {
     color: ${COLORS.darkGray};
-    transform: scale(1.1);
   }
 `;
 const AddArtworkButton = styled.button`
@@ -68,14 +110,12 @@ const AddArtworkButton = styled.button`
   align-items: center;
   gap: 1rem;
   padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
+  color: ${COLORS.gray};
+  transition: color 0.2s transform 0.2s;
 
   &:hover {
-    transform: scale(1.1);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    color: ${COLORS.darkGray};
   }
 `;
 
@@ -113,56 +153,73 @@ const ArtistPage = ({ profileInfo, artworks }: ArtistPageProps) => {
   };
   return (
     <div>
-      <div className='p-[2vw]'>
-        <div className='flex flex-col'>
-          <HeadingContainer>
-            <NameHeading>
-              {profileInfo?.user.name} {profileInfo?.user.surname}
-            </NameHeading>
-          </HeadingContainer>
-
-          <InformaionContainer>
-            <div className='flex flex-col items-end pt-12'>
-              <ProfilePictureModal
-                artistProfile={profileInfo}
-                onClose={profilePictureModal.onClose}
-                onUpdate={refreshPage}
-              />
-              <div className='p-1 shadow-lg'>
-                <Image
-                  width={350}
-                  height={300}
-                  src={profileInfo?.profilePic || ''}
-                  alt={'profile Image'}
-                />
-              </div>
+      <ProfilePictureModal
+        artistProfile={profileInfo}
+        onClose={profilePictureModal.onClose}
+        onUpdate={refreshPage}
+      />
+      <BiographyModal
+        artistProfile={profileInfo}
+        onClose={biographyModal.onClose}
+        onUpdate={refreshPage}
+      />
+      <HeadingContainer>
+        <div className='flex justify-center items-center w-[50%] h-full'>
+          <NameHeading>
+            {profileInfo.user.name} {profileInfo.user.surname}
+          </NameHeading>
+        </div>
+        <HeaderImage
+          imageUrl={artworks ? artworks[0]?.artworkMedias[0] : ''}
+        ></HeaderImage>
+      </HeadingContainer>
+      <LayoutContainer>
+        <InformaionContainer>
+          <SectionTitle>Hakkında</SectionTitle>
+          <StyledDivider />
+          <div className='flex items-center gap-10 mx-40 my-20'>
+            <div className='flex flex-col w-[35%]'>
+              <ProfileImage
+                imageUrl={profileInfo?.profilePic || ''}
+              ></ProfileImage>
               <ButtonWithIcon>
                 Düzenle
                 <FaRegEdit onClick={profilePictureModal.onOpen} />
               </ButtonWithIcon>
             </div>
+            <div className='flex flex-col w-[65%]'>
+              <BiographyContent>{profileInfo?.biography}</BiographyContent>
+              <ButtonWithIcon>
+                Düzenle
+                <FaRegEdit onClick={biographyModal.onOpen} />
+              </ButtonWithIcon>
+            </div>
+          </div>
+        </InformaionContainer>
 
-            <div>
-              <BiographyModal
-                artistProfile={profileInfo}
-                onClose={biographyModal.onClose}
-                onUpdate={refreshPage}
-              />
-              <div className='w-full min-h-[50vh]'>
-                <div className='flex flex-row items-baseline gap-4'>
-                  <BiographyHeading>Biografi</BiographyHeading>
-                  <ButtonWithIcon>
-                    Düzenle
-                    <FaRegEdit onClick={biographyModal.onOpen} />
+        <ArtworksContainer>
+          <SectionTitle>Seçilmiş Eserler</SectionTitle>
+          <StyledDivider />
+
+          <AddArtworkModal artistProfile={profileInfo} />
+          <div className='w-full flex flex-col items-end justify-center'>
+            <div className='flex w-full flex-wrap justify-around mt-20'>
+              {artworks?.map((currentArtwork: IUserArtwork) => (
+                <div
+                  key={currentArtwork.id}
+                  className='flex flex-col items-end'
+                >
+                  <ArtworkContainer artwork={currentArtwork}></ArtworkContainer>
+                  <ButtonWithIcon
+                    onClick={() => handleDelete(currentArtwork.id)}
+                  >
+                    Sil
+                    <MdDeleteForever style={{ width: '50%' }} />
                   </ButtonWithIcon>
                 </div>
-                <BiographyContent>{profileInfo?.biography}</BiographyContent>
-              </div>
+              ))}
             </div>
-          </InformaionContainer>
-          <div>
-            <AddArtworkModal artistProfile={profileInfo} />
-            <div className='p-10 rounded-xl flex flex-col items-end justify-center'>
+            <div className='mr-20'>
               {artworks ? (
                 artworks.length < 3 ? (
                   <AddArtworkButton
@@ -179,29 +236,10 @@ const ArtistPage = ({ profileInfo, artworks }: ArtistPageProps) => {
               ) : (
                 <></>
               )}
-
-              <div className='flex w-full flex-wrap justify-around'>
-                {artworks?.map((currentArtwork: IUserArtwork) => (
-                  <div
-                    key={currentArtwork.id}
-                    className='flex flex-col items-end'
-                  >
-                    <ArtworkContainer
-                      artwork={currentArtwork}
-                    ></ArtworkContainer>
-                    <ButtonWithIcon
-                      onClick={() => handleDelete(currentArtwork.id)}
-                    >
-                      Sil
-                      <MdDeleteForever style={{ width: '50%' }} />
-                    </ButtonWithIcon>
-                  </div>
-                ))}
-              </div>
             </div>
           </div>
-        </div>
-      </div>
+        </ArtworksContainer>
+      </LayoutContainer>
     </div>
   );
 };
