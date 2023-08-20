@@ -3,20 +3,19 @@ import { NextResponse } from "next/server";
 import prisma from "@/app/libs/prismadb";
 
 interface IParams {
-    userId?: string;
+    artistId?: string;
 }
 
 export async function POST(request: Request, { params }: { params: IParams }) {
 
-    const { userId } = params;
+    const { artistId } = params;
     const body = await request.json();
-    const { biography, profilePic } = body;
+    const { biography, profilePic, coverImage } = body;
     let artistProfile;
-
 
     artistProfile = await prisma.artistProfile.findFirst({
         where: {
-            artistId: userId,
+            artistId: artistId,
         },
     });
 
@@ -28,6 +27,7 @@ export async function POST(request: Request, { params }: { params: IParams }) {
             data: {
                 biography,
                 profilePic,
+                coverImage,
             },
         });
     } else {
