@@ -28,6 +28,7 @@ model ArtistProfile{
   links String[]
   profilePic String?
   artworks UserArtwork[]
+  coverImage String?
   artistId String @unique @db.ObjectId
   user User @relation(fields: [artistId], references: [id], onDelete: Cascade)
 }

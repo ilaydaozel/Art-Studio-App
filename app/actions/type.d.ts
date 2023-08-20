@@ -13,6 +13,7 @@ export interface IArtistProfile {
     links: string[];
     profilePic?: string;
     artworks?: IUserArtwork[];
+    coverImage?: string;
     artistId: string;
     user: IUser;
 }
