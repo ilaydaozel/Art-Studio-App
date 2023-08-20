@@ -17,6 +17,7 @@ import { toast } from 'react-hot-toast';
 import axios from 'axios';
 import { IArtistProfile, IUserArtwork } from '@/app/actions/type';
 import AddArtworkModal from '@/app/components/modal/AddArtworkModal';
+import SlidingButton from '@/app/components/buttons/SlidingButton';
 
 const LayoutContainer = styled.div`
   display: flex;
@@ -97,19 +98,6 @@ const ButtonWithIcon = styled.button`
   align-items: center;
   justify-content: baseline;
   gap: 4px;
-  cursor: pointer;
-  color: ${COLORS.gray};
-  transition: color 0.2s transform 0.2s;
-
-  &:hover {
-    color: ${COLORS.darkGray};
-  }
-`;
-const AddArtworkButton = styled.button`
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 0.5rem 1rem;
   cursor: pointer;
   color: ${COLORS.gray};
   transition: color 0.2s transform 0.2s;
@@ -200,9 +188,25 @@ const ArtistPage = ({ profileInfo, artworks }: ArtistPageProps) => {
         <ArtworksContainer>
           <SectionTitle>Seçilmiş Eserler</SectionTitle>
           <StyledDivider />
-
           <AddArtworkModal artistProfile={profileInfo} />
-          <div className='w-full flex flex-col items-end justify-center'>
+          <div className='w-full flex flex-col items-center justify-center'>
+            <div className='w-[84%] flex justify-end mt-2'>
+              {artworks ? (
+                artworks.length < 3 ? (
+                  <SlidingButton
+                    label='Yeni Eser Ekle'
+                    onClick={() => {
+                      addArtworkModal.onOpen();
+                    }}
+                    icon={FaRegSquarePlus}
+                  />
+                ) : (
+                  <h1>Maximum eser sayısına ulaştınız.</h1>
+                )
+              ) : (
+                <></>
+              )}
+            </div>
             <div className='flex w-full flex-wrap justify-around mt-20'>
               {artworks?.map((currentArtwork: IUserArtwork) => (
                 <div
@@ -218,24 +222,6 @@ const ArtistPage = ({ profileInfo, artworks }: ArtistPageProps) => {
                   </ButtonWithIcon>
                 </div>
               ))}
-            </div>
-            <div className='mr-20'>
-              {artworks ? (
-                artworks.length < 3 ? (
-                  <AddArtworkButton
-                    onClick={() => {
-                      addArtworkModal.onOpen();
-                    }}
-                  >
-                    Yeni Eser Ekle
-                    <FaRegSquarePlus></FaRegSquarePlus>
-                  </AddArtworkButton>
-                ) : (
-                  <h1>Maximum eser sayısına ulaştınız.</h1>
-                )
-              ) : (
-                <></>
-              )}
             </div>
           </div>
         </ArtworksContainer>
