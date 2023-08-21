@@ -26,21 +26,21 @@ const MenuContainer = styled.div`
   padding: 0.5rem;
 `;
 
-const MenuElement = styled.a`
+const MenuElement = styled.a<{ warning?: boolean }>`
   display: flex;
   align-items: center;
   gap: 4px;
   width: 100%;
   margin: 6px 8px 4px 0;
   padding: 0 4px;
-  color: ${COLORS.gray};
+  color: ${(props) => (props.warning ? COLORS.red : COLORS.gray)};
   cursor: pointer;
   transition: background-color 0.3s ease;
   white-space: nowrap;
   font-size: 0.9rem;
   &:hover {
     font-weight: 700;
-    color: ${COLORS.darkGray};
+    color: ${(props) => (props.warning ? COLORS.red : COLORS.darkGray)};
   }
 `;
 
@@ -120,6 +120,7 @@ const EditArtistMenu = ({ currentArtist }: EditArtistMenuProps) => {
               Sayfasını Düzenle
             </MenuElement>
             <MenuElement
+              warning={true}
               onClick={() => {
                 handleDeleteArtist();
               }}
