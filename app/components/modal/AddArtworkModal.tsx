@@ -189,7 +189,6 @@ const AddArtworkModal = ({ artistProfile }: AddArtworkModalProps) => {
   if (step === STEPS.PHOTO) {
     bodyContent = (
       <ImageUpload
-        label='Eser Fotoğrafı'
         onChange={(value) => setCustomValue('media', value)}
         value={media}
       />
@@ -200,7 +199,7 @@ const AddArtworkModal = ({ artistProfile }: AddArtworkModalProps) => {
     <Modal
       disabled={isLoading}
       isOpen={addArtworkModal.isOpen}
-      title='Eser Ekle!'
+      title='Eser Ekle'
       actionLabel={actionLabel}
       onSubmit={handleSubmit(onSubmit)}
       secondaryActionLabel={secondaryActionLabel}
