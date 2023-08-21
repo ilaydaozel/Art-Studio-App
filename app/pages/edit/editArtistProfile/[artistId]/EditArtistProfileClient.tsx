@@ -81,7 +81,7 @@ const ArtworksContainer = styled.div`
 const ArtworkSelectionPopup = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 1rem;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -108,6 +108,9 @@ const ArtworkThumbnail = styled.img`
   height: auto;
   object-fit: cover;
   cursor: pointer;
+  &:hover {
+    transform: scale(1.02);
+  }
 `;
 interface ArtistPageProps {
   profileInfo: IArtistProfile;
