@@ -33,7 +33,11 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
 
   return (
     <div className='w-full flex flex-col items-center justify-center'>
-      <h1 className='font-semibold text-neutral-600 text-lg m-2'>{label}</h1>
+      {label != '' ? (
+        <h1 className='font-semibold text-neutral-600 text-lg m-2'>{label}</h1>
+      ) : (
+        <></>
+      )}
       <CldUploadWidget
         onUpload={handleUpload}
         uploadPreset={uploadPreset}
@@ -47,6 +51,10 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
               onClick={() => open?.()}
               className='
               relative
+              w-[80%]
+              min-h-[30vh]
+              m-4
+              p-4
               flex
               flex-col
               justify-center
@@ -59,8 +67,6 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
               border-2
               border-neutral-300
               text-neutral-600
-              w-80vw 
-              p-24
             '
             >
               <TbPhotoPlus size={30} />
