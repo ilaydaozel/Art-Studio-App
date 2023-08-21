@@ -18,6 +18,7 @@ const ButtonStyle = styled.button<{ width: string }>`
   justify-content: center;
   gap: 0.5rem;
   padding: 0.5rem 1rem;
+  font-size: 14px;
   width: ${(props) => props.width};
   border-radius: 0.5rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
