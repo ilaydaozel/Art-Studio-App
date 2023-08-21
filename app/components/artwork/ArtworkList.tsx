@@ -8,6 +8,7 @@ import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { MdDeleteForever } from 'react-icons/md';
 import ArtworkContainer from './ArtworkContainer';
+import TextButton from '../buttons/TextButton';
 
 interface ArtworkListProps {
   artworks: IUserArtwork[] | null;
@@ -22,20 +23,6 @@ const ListContainer = styled.div<{ width: string }>`
   flex-wrap: wrap;
   margin: 5rem 0;
   width: ${(props) => props.width};
-`;
-
-const ButtonWithIcon = styled.button`
-  display: flex;
-  align-items: center;
-  justify-content: baseline;
-  gap: 4px;
-  cursor: pointer;
-  color: ${COLORS.gray};
-  transition: color 0.2s transform 0.2s;
-
-  &:hover {
-    color: ${COLORS.darkGray};
-  }
 `;
 
 const ArtworkList = ({
@@ -74,10 +61,11 @@ const ArtworkList = ({
         <div key={currentArtwork.id} className='flex flex-col items-end'>
           <ArtworkContainer artwork={currentArtwork}></ArtworkContainer>
           {deletable ? (
-            <ButtonWithIcon onClick={() => handleDelete(currentArtwork.id)}>
-              Sil
-              <MdDeleteForever style={{ width: '50%' }} />
-            </ButtonWithIcon>
+            <TextButton
+              label='Sil'
+              icon={MdDeleteForever}
+              onClick={() => handleDelete(currentArtwork.id)}
+            ></TextButton>
           ) : (
             <></>
           )}

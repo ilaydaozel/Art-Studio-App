@@ -9,7 +9,7 @@ import { useRouter } from 'next/navigation';
 import ProfilePictureModal from '@/app/components/modal/ProfilePictureModal';
 import { FaRegEdit } from 'react-icons/fa';
 import { FaRegSquarePlus } from 'react-icons/fa6';
-import { MouseEvent, useState } from 'react';
+import { useState } from 'react';
 import { IArtistProfile, IUserArtwork } from '@/app/actions/type';
 import AddArtworkModal from '@/app/components/modal/AddArtworkModal';
 import SlidingButton from '@/app/components/buttons/SlidingButton';
@@ -17,6 +17,7 @@ import ArtworkList from '@/app/components/artwork/ArtworkList';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import HeadingWithUnderline from '@/app/components/HeadingWithUnderline';
+import TextButton from '@/app/components/buttons/TextButton';
 
 const LayoutContainer = styled.div`
   display: flex;
@@ -77,19 +78,6 @@ const ArtworksContainer = styled.div`
   justify-content: center;
 `;
 
-const ButtonWithIcon = styled.button`
-  display: flex;
-  align-items: center;
-  justify-content: baseline;
-  gap: 4px;
-  cursor: pointer;
-  color: ${COLORS.gray};
-  transition: color 0.2s transform 0.2s;
-
-  &:hover {
-    color: ${COLORS.darkGray};
-  }
-`;
 const ArtworkSelectionPopup = styled.div`
   display: flex;
   flex-direction: column;
@@ -179,10 +167,11 @@ const ArtistPage = ({ profileInfo, artworks }: ArtistPageProps) => {
           <NameHeading>
             {profileInfo.user.name} {profileInfo.user.surname}
           </NameHeading>
-          <ButtonWithIcon onClick={() => setShowArtworkSelection(true)}>
-            Kapak resmini değiştir
-            <FaRegEdit onClick={biographyModal.onOpen} />
-          </ButtonWithIcon>
+          <TextButton
+            label='Kapak Resmini Değiştir'
+            icon={FaRegEdit}
+            onClick={() => setShowArtworkSelection(true)}
+          ></TextButton>
         </div>
         <HeaderImage imageUrl={headerArtwork}></HeaderImage>
       </HeadingContainer>
@@ -218,17 +207,19 @@ const ArtistPage = ({ profileInfo, artworks }: ArtistPageProps) => {
               <ProfileImage
                 imageUrl={profileInfo?.profilePic || ''}
               ></ProfileImage>
-              <ButtonWithIcon>
-                Düzenle
-                <FaRegEdit onClick={profilePictureModal.onOpen} />
-              </ButtonWithIcon>
+              <TextButton
+                label='Düzenle'
+                icon={FaRegEdit}
+                onClick={profilePictureModal.onOpen}
+              ></TextButton>
             </div>
             <div className='flex flex-col w-[65%]'>
               <BiographyContent>{profileInfo?.biography}</BiographyContent>
-              <ButtonWithIcon>
-                Düzenle
-                <FaRegEdit onClick={biographyModal.onOpen} />
-              </ButtonWithIcon>
+              <TextButton
+                label='Düzenle'
+                icon={FaRegEdit}
+                onClick={biographyModal.onOpen}
+              ></TextButton>
             </div>
           </div>
         </InformaionContainer>
@@ -241,7 +232,7 @@ const ArtistPage = ({ profileInfo, artworks }: ArtistPageProps) => {
               {artworks ? (
                 artworks.length < 3 ? (
                   <SlidingButton
-                    label='Yeni Eser Ekle'
+                    label='Yeni Eser Ekle +'
                     onClick={() => {
                       addArtworkModal.onOpen();
                     }}

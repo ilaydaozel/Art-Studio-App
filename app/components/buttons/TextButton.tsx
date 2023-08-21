@@ -35,7 +35,7 @@ const TextButton = ({
   return (
     <ButtonStyle disabled={disabled} width={width} onClick={onClick}>
       {label}
-      {Icon && <Icon size={18} />}
+      {Icon && <Icon size={14} />}
     </ButtonStyle>
   );
 };
