@@ -3,7 +3,7 @@
 import { COLORS } from '@/constants/colors';
 import styled from 'styled-components';
 
-interface HeadingProps {
+interface HeadingWithUnderlineProps {
   title: string;
 }
 
@@ -29,7 +29,7 @@ const StyledDivider = styled.div`
   height: 1px;
 `;
 
-const Heading = ({ title }: HeadingProps) => {
+const HeadingWithUnderline = ({ title }: HeadingWithUnderlineProps) => {
   return (
     <Container>
       <SectionTitle>{title}</SectionTitle>
@@ -38,4 +38,4 @@ const Heading = ({ title }: HeadingProps) => {
   );
 };
 
-export default Heading;
+export default HeadingWithUnderline;
