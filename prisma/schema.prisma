@@ -78,3 +78,11 @@ model Exhibition{
   guestArtworks GuestArtwork[] @relation(fields: [guestArtworkIds], references: [id])
 }
 
+model Announcement{
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  caption String
+  subcaption String?
+  coverImage String?
+  link String?
+  isActive Boolean
+}
