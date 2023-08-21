@@ -69,9 +69,8 @@ const ProfilePictureModal = ({
     });
   };
   const bodyContent = (
-    <div>
+    <div className='h-[80%]'>
       <ImageUpload
-        label='Profil Fotoğrafı'
         onChange={(value) => setCustomValue('profilePic', value)}
         value={profilePic}
       />
@@ -82,7 +81,7 @@ const ProfilePictureModal = ({
     <Modal
       disabled={isLoading}
       isOpen={profilePictureModal.isOpen}
-      title='Profil Fotoğrafı'
+      title='Profil Fotoğrafı Ekle'
       actionLabel='Güncelle'
       onClose={onClose}
       onSubmit={handleSubmit(onSubmit)}
