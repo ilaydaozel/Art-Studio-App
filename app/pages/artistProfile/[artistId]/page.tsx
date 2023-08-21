@@ -22,7 +22,10 @@ const ArtistProfilePage = async ({ params }: { params: IParams }) => {
   if (!artistProfile) {
     return (
       <ClientOnly>
-        <EmptyState />
+        <EmptyState
+          title='An error occured.'
+          subtitle='Looks like this artist does not exist anymore.'
+        />
       </ClientOnly>
     );
   }
