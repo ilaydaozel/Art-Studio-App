@@ -53,12 +53,6 @@ const BiographyModal = ({
 
   const bodyContent = (
     <div>
-      <label
-        className='font-semibold text-neutral-600 text-lg'
-        htmlFor='biography'
-      >
-        Biografi
-      </label>
       <textarea
         className='w-full min-h-[100px] h-[50vh] border-double border-2 border-neutral-300'
         id='biography'
