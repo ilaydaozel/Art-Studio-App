@@ -11,7 +11,6 @@ interface ModalProps {
   title: string;
   subtitle?: string;
   body?: React.ReactElement;
-  footer?: React.ReactElement;
   actionLabel: string;
   disabled?: boolean;
   secondaryAction?: () => void;
@@ -26,7 +25,6 @@ const Modal = ({
   subtitle,
   body,
   actionLabel,
-  footer,
   disabled,
   secondaryAction,
   secondaryActionLabel,
@@ -122,6 +120,8 @@ const Modal = ({
               relative 
               flex 
               flex-col 
+              gap-2
+              pb-4
               bg-white 
               outline-none 
               focus:outline-none
@@ -158,35 +158,35 @@ const Modal = ({
                   <h1 className='text-md text-center '>{subtitle}</h1>
                 </div>
               </div>
+
               {/*body*/}
-              <div className='relative p-6 flex-auto'>{body}</div>
+              <div className='relative flex-auto px-6'>{body}</div>
               {/*footer*/}
-              <div className='flex flex-col gap-2 p-6'>
-                <div
-                  className='
+              <div
+                className='
                     flex 
                     flex-row 
                     items-center 
+                    justify-center
                     gap-4 
                     w-full
                     bg-white
+                    px-6
                   '
-                >
-                  {secondaryAction && secondaryActionLabel && (
-                    <Button
-                      disabled={disabled}
-                      label={secondaryActionLabel}
-                      onClick={handleSecondaryAction}
-                      outline
-                    />
-                  )}
+              >
+                {secondaryAction && secondaryActionLabel && (
                   <Button
                     disabled={disabled}
-                    label={actionLabel}
-                    onClick={handleSubmit}
+                    label={secondaryActionLabel}
+                    onClick={handleSecondaryAction}
+                    outline
                   />
-                </div>
-                {footer}
+                )}
+                <Button
+                  disabled={disabled}
+                  label={actionLabel}
+                  onClick={handleSubmit}
+                />
               </div>
             </div>
           </div>
