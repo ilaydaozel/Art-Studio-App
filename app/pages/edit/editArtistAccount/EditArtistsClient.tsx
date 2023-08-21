@@ -7,6 +7,8 @@ import { ROUTE_PATHS } from '@/constants/routes';
 import EditArtistMenu from './EditArtistMenu';
 import { IArtistProfile } from '@/app/actions/type';
 import SlidingButton from '@/app/components/buttons/SlidingButton';
+import useAddAnnouncementModal from '@/app/hooks/useAddAnnouncementModal';
+import AddAnnouncementModal from '@/app/components/modal/AddAnnouncementModal';
 
 const ArtistContainer = styled.div`
   display: flex;
@@ -38,7 +40,7 @@ interface EditArtistsClientProps {
 
 const EditArtistsClient = ({ artists }: EditArtistsClientProps) => {
   const router = useRouter();
-
+  const addAnnouncementModal = useAddAnnouncementModal();
   const handleEdit = (artist: IArtistProfile) => {
     router.push(
       `${ROUTE_PATHS.EDIT}${ROUTE_PATHS.EDIT_ARTIST_PROFILE}/${artist?.artistId}`
@@ -49,11 +51,16 @@ const EditArtistsClient = ({ artists }: EditArtistsClientProps) => {
     <div>
       <div className='p-[2vw] w-full'>
         <div className='flex w-full justify-end'>
+          <AddAnnouncementModal />
           <SlidingButton
             label='Yeni Sanatçı Ekle +'
             onClick={() =>
               router.push(`${ROUTE_PATHS.ADD}${ROUTE_PATHS.ADD_NEW_ARTIST}`)
             }
+          ></SlidingButton>
+          <SlidingButton
+            label='Yeni Duyuru Ekle +'
+            onClick={() => addAnnouncementModal.onOpen()}
           ></SlidingButton>
         </div>
 
