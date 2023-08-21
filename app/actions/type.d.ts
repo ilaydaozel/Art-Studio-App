@@ -62,3 +62,12 @@ export interface IExhibition {
     userArtworks: IUserArtwork[];
     guestArtworks: IGuestArtwork[];
 }
+
+export interface IAnnouncement {
+    id: string;
+    caption: string;
+    subcaption?: string;
+    coverImage?: string;
+    link?: string;
+    isActive: boolean;
+}
