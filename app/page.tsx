@@ -29,9 +29,6 @@ export default function Home() {
   return (
     <div style={{ maxWidth: '100vw', overflowX: 'hidden' }}>
       <Carousel slides={slides} />
-      <div className='w-full'>
-        <ArtworkList title={'Eserler'}></ArtworkList>
-      </div>
     </div>
   );
 }
