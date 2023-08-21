@@ -3,10 +3,10 @@
 import { COLORS } from '@/constants/colors';
 import styled from 'styled-components';
 import { useRouter } from 'next/navigation';
-import { ArtistProfile } from '@prisma/client';
 import { ROUTE_PATHS } from '@/constants/routes';
 import EditArtistMenu from './EditArtistMenu';
 import { IArtistProfile } from '@/app/actions/type';
+import SlidingButton from '@/app/components/buttons/SlidingButton';
 
 const ArtistContainer = styled.div`
   display: flex;
@@ -32,24 +32,6 @@ const ArtistsTitle = styled.text`
   font-weight: 500;
   color: ${COLORS.darkGray};
 `;
-
-const AddArtistButton = styled.button`
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-  cursor: pointer;
-
-  transition: transform 0.5s;
-  background-color: ${COLORS.darkGray};
-  color: white;
-  &:hover {
-    transform: translateY(0.5rem);
-  }
-`;
-
 interface EditArtistsClientProps {
   artists: IArtistProfile[];
 }
@@ -67,13 +49,12 @@ const EditArtistsClient = ({ artists }: EditArtistsClientProps) => {
     <div>
       <div className='p-[2vw] w-full'>
         <div className='flex w-full justify-end'>
-          <AddArtistButton
+          <SlidingButton
+            label='Yeni Sanatçı Ekle +'
             onClick={() =>
               router.push(`${ROUTE_PATHS.ADD}${ROUTE_PATHS.ADD_NEW_ARTIST}`)
             }
-          >
-            Yeni Sanatçı Ekle +
-          </AddArtistButton>
+          ></SlidingButton>
         </div>
 
         <div className='w-full flex flex-col items-start ml-6 mt-10'>
