@@ -16,6 +16,7 @@ import SlidingButton from '@/app/components/buttons/SlidingButton';
 import ArtworkList from '@/app/components/artwork/ArtworkList';
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import HeadingWithUnderline from '@/app/components/HeadingWithUnderline';
 
 const LayoutContainer = styled.div`
   display: flex;
@@ -54,15 +55,6 @@ const NameHeading = styled.text`
   color: ${COLORS.darkGray};
 `;
 
-const SectionTitle = styled.div`
-  width: 80%;
-  font-size: 1.5rem;
-  font-weight: 500;
-  color: ${COLORS.darkGray};
-  text-align: left;
-  margin: 2rem 0 0.25rem 0;
-`;
-
 const BiographyContent = styled.div`
   width: 100%;
   font-size: 1rem;
@@ -83,12 +75,6 @@ const ArtworksContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-`;
-
-const StyledDivider = styled.div`
-  width: 84%;
-  border-top: 1px solid #e5e7eb;
-  height: 1px;
 `;
 
 const ButtonWithIcon = styled.button`
@@ -226,8 +212,7 @@ const ArtistPage = ({ profileInfo, artworks }: ArtistPageProps) => {
       )}
       <LayoutContainer>
         <InformaionContainer>
-          <SectionTitle>Hakkında</SectionTitle>
-          <StyledDivider />
+          <HeadingWithUnderline title='Hakkında'></HeadingWithUnderline>
           <div className='flex items-center gap-10 mx-40 my-20'>
             <div className='flex flex-col w-[35%]'>
               <ProfileImage
@@ -249,8 +234,7 @@ const ArtistPage = ({ profileInfo, artworks }: ArtistPageProps) => {
         </InformaionContainer>
 
         <ArtworksContainer>
-          <SectionTitle>Seçilmiş Eserler</SectionTitle>
-          <StyledDivider />
+          <HeadingWithUnderline title='Seçilmiş Eserler'></HeadingWithUnderline>
           <AddArtworkModal artistProfile={profileInfo} />
           <div className='w-full flex flex-col items-center justify-center'>
             <div className='w-[84%] flex justify-end mt-2'>

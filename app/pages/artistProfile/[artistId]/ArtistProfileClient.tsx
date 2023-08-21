@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import ArtworkContainer from '@/app/components/artwork/ArtworkContainer';
 import { IArtistProfile, IUserArtwork } from '@/app/actions/type';
 import ArtworkList from '@/app/components/artwork/ArtworkList';
+import HeadingWithUnderline from '@/app/components/HeadingWithUnderline';
 
 const LayoutContainer = styled.div`
   display: flex;
@@ -95,8 +96,7 @@ const ArtistProfile = ({ profileInfo, artworks }: ArtistProfileProps) => {
       </HeadingContainer>
       <LayoutContainer>
         <InformaionContainer>
-          <SectionTitle>Hakkında</SectionTitle>
-          <StyledDivider />
+          <HeadingWithUnderline title='Hakkında'></HeadingWithUnderline>
           <div className='flex items-center gap-10 mx-40 my-20'>
             <ProfileImage
               imageUrl={profileInfo?.profilePic || ''}
@@ -106,8 +106,7 @@ const ArtistProfile = ({ profileInfo, artworks }: ArtistProfileProps) => {
         </InformaionContainer>
 
         <ArtworksContainer>
-          <SectionTitle>Seçilmiş Eserler</SectionTitle>
-          <StyledDivider />
+          <HeadingWithUnderline title='Seçilmiş Eserler'></HeadingWithUnderline>
           <ArtworkList
             artworks={artworks ? artworks : null}
             width='90%'
