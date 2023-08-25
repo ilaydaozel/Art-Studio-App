@@ -17,7 +17,7 @@ const EditAnnouncementsPage = async () => {
       if (announcements.length > 0) {
         return (
           <ClientOnly>
-            <div className='pt-24 w-full'>
+            <div className='pt-28 w-full'>
               <AnnouncementsList
                 announcements={announcements}
               ></AnnouncementsList>
