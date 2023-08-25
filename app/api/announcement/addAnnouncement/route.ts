@@ -8,6 +8,7 @@ export async function POST(request: Request) {
     const {
         caption,
         subcaption,
+        smallCaption,
         link,
         coverImage,
         isActive,
@@ -23,6 +24,7 @@ export async function POST(request: Request) {
         data: {
             caption,
             subcaption,
+            smallCaption,
             link,
             coverImage,
             isActive,
