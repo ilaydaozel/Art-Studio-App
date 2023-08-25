@@ -86,15 +86,10 @@ const Modal = ({
         <div
           className='
           relative 
-          w-full
+          xs:w-5/6
           md:w-4/6
           lg:w-3/6
-          xl:w-2/5
-          my-6
-          mx-auto 
-          h-full
-          lg:h-auto
-          md:h-auto
+          h-auto
           '
         >
           {/*content*/}
@@ -131,6 +126,7 @@ const Modal = ({
               <div
                 className='
                 flex 
+                flex-col
                 items-center 
                 p-4
                 rounded-t
@@ -153,9 +149,12 @@ const Modal = ({
                 >
                   <IoMdClose size={16} />
                 </button>
-                <div className='flex flex-col'>
-                  <h1 className='text-xl font-semibold'>{title}</h1>
-                  <h1 className='text-md text-center '>{subtitle}</h1>
+
+                <div className='flex flex-col p-2'>
+                  <h1 className='md:text-xl font-semibold text-sm'>{title}</h1>
+                  <h1 className='md:text-base text-center text-xs '>
+                    {subtitle}
+                  </h1>
                 </div>
               </div>
 
