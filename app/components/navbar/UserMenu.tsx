@@ -83,7 +83,7 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
           gap-1
           '
       >
-        <AiOutlineMenu className='w-[24px] h-[20px] text-neutral-400 ' />
+        <AiOutlineMenu className='md:w-[24px] md:h-[20px] w-[20px] h-[18px] text-white ' />
       </div>
       {isOpen && (
         <MenuContainer>
