@@ -60,6 +60,7 @@ const BiographyContent = styled.div`
   font-weight: 500;
   color: ${COLORS.darkGray};
   word-break: break-all;
+  padding: 10px 0;
 `;
 
 const InformaionContainer = styled.div`

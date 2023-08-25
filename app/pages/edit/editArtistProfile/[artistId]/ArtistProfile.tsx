@@ -75,6 +75,7 @@ const BiographyContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+  padding: 10px 0;
 `;
 const InformaionContainer = styled.div`
   width: 100%;

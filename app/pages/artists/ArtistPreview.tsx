@@ -55,12 +55,18 @@ const ArtistBox = styled.div<{ profilePic: string }>`
     width: 160px;
     height: 160px;
     font-size: 1.2 rem;
+    &:hover {
+      font-size: 1.4rem;
+    }
   }
 
   @media (max-width: 480px) {
     width: 120px;
     height: 120px;
     font-size: 1rem;
+    &:hover {
+      font-size: 1.2rem;
+    }
   }
 `;
 

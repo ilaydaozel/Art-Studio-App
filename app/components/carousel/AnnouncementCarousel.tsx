@@ -59,10 +59,7 @@ const Caption = styled.p`
   font-weight: 800;
   letter-spacing: 3px;
   @media (max-width: 768px) {
-    font-size: 2.4rem;
-  }
-  @media (max-width: 480px) {
-    font-size: 1.5rem;
+    font-size: 2.8rem;
   }
 `;
 
