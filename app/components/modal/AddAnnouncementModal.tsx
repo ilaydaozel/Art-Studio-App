@@ -25,12 +25,14 @@ const AddAnnouncementModal = () => {
     defaultValues: {
       caption: '',
       subcaption: '',
+      smallCaption: '',
       link: '',
       coverImage: '',
     },
   });
   const caption = watch('caption');
   const subcaption = watch('subcaption');
+  const smallCaption = watch('smallCaption');
   const link = watch('link');
   const coverImage = watch('coverImage');
 
@@ -48,6 +50,7 @@ const AddAnnouncementModal = () => {
     const announcement = {
       caption: caption,
       subcaption: subcaption,
+      smallCaption: smallCaption,
       link: link,
       coverImage: coverImage,
       isActive: true,
@@ -88,9 +91,16 @@ const AddAnnouncementModal = () => {
         errors={errors}
       />
       <Input
+        id='smallCaption'
+        label='Kısa Açıklama'
+        width='49%'
+        disabled={isLoading}
+        register={register}
+        errors={errors}
+      />
+      <Input
         id='link'
         label='Link'
-        width='49%'
         disabled={isLoading}
         register={register}
         errors={errors}
