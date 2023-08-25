@@ -13,7 +13,7 @@ const EditArtistsPage = async () => {
       if (artistProfiles.length > 0) {
         return (
           <ClientOnly>
-            <div className='pt-24  w-full'>
+            <div className='pt-24 w-full'>
               <EditArtistsClient artists={artistProfiles}></EditArtistsClient>
             </div>
           </ClientOnly>

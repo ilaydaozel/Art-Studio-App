@@ -13,10 +13,12 @@ import AddAnnouncementModal from '@/app/components/modal/AddAnnouncementModal';
 const ArtistContainer = styled.div`
   display: flex;
   align-items: center;
-  margin: 2rem;
-  width: 20%;
+  margin: 10px;
+  padding: 10px 20px;
   cursor: pointer;
   gap: 4px;
+  border: 1px solid ${COLORS.gray};
+  border-radius: 50px;
 `;
 
 const ArtistName = styled.text`
@@ -64,9 +66,9 @@ const EditArtistsClient = ({ artists }: EditArtistsClientProps) => {
           ></SlidingButton>
         </div>
 
-        <div className='w-full flex flex-col items-start ml-6 mt-10'>
+        <div className='w-full flex flex-col gap-4 items-start ml-6 mt-10'>
           <ArtistsTitle>Sanatçıları Düzenle</ArtistsTitle>
-          <div className='w-full flex flex-row flex-wrap'>
+          <div className='w-full flex flex-row flex-wrap gap-4'>
             {artists?.map((artist) => (
               <ArtistContainer key={artist.id}>
                 <ArtistName onClick={() => handleEdit(artist)}>

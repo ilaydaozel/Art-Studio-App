@@ -105,7 +105,7 @@ const EditArtistMenu = ({ currentArtist }: EditArtistMenuProps) => {
           gap-1
           '
       >
-        <BsThreeDotsVertical />
+        <BsThreeDotsVertical style={{ color: `${COLORS.darkGray}` }} />
       </div>
       {isOpen && (
         <MenuContainer>
