@@ -1,7 +1,7 @@
 import EmptyState from '@/app/components/EmptyState';
 import ClientOnly from '@/app/components/ClientOnly';
 import getAllArtistProfiles from '@/app/actions/getAllArtistProfiles';
-import ArtistPreview from './ArtistPreview';
+import ArtistPreviewClient from './ArtistPreviewClient';
 import { IArtistProfile } from '@/app/actions/type';
 
 const ArtistsPage = async () => {
@@ -15,12 +15,12 @@ const ArtistsPage = async () => {
         return (
           <ClientOnly>
             <div className='md:pt-24 pt-16 w-full'>
-              <div className='flex flex-wrap gap-4 md:px-12 md:my-8 px-6 my-4'>
+              <div className='flex flex-wrap justify-start gap-4 md:px-12 md:my-8 px-6 my-4'>
                 {artistProfiles?.map((artist) => (
-                  <ArtistPreview
+                  <ArtistPreviewClient
                     key={artist.id}
                     artist={artist}
-                  ></ArtistPreview>
+                  ></ArtistPreviewClient>
                 ))}
               </div>
             </div>
