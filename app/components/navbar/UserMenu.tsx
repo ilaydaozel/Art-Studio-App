@@ -8,6 +8,7 @@ import styled from 'styled-components';
 import { COLORS } from '@/constants/colors';
 import { ROUTE_PATHS, ROUTE_NAMES } from '@/constants/routes';
 import { IUser } from '@/app/actions/type';
+import HeadingWithUnderline from '../HeadingWithUnderline';
 interface UserMenuProps {
   currentUser: IUser | null;
 }
@@ -16,25 +17,55 @@ const MenuContainer = styled.div`
   position: absolute;
   right: 0;
   top: 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 10px;
   width: 20vw;
-  max-width: 20rem;
+  padding: 16px 8px;
   background-color: rgba(255, 255, 255, 0.8);
   border-radius: 0.75rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   overflow: hidden;
-  font-size: 0.875rem; /* text-sm is roughly equivalent to 0.875rem */
+  font-size: 0.8rem;
+
+  @media (max-width: 768px) {
+    width: 30vw;
+  }
+  @media (max-width: 480px) {
+    width: 40vw;
+  }
 `;
 const UserMenuElement = styled.a`
-  width: 100%;
-  margin: 6px 8px 4px 0;
-  padding: 0 4px;
   color: ${COLORS.darkGray};
   cursor: pointer;
   transition: background-color 0.3s ease;
   white-space: nowrap;
-  font-size: 12px;
+  font-size: 0.7rem;
   &:hover {
     font-weight: 700;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 0.6rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.5rem;
+  }
+`;
+
+const UserTitle = styled.div`
+  color: ${COLORS.darkGray};
+  font-weight: 600;
+  padding: 2px 10px 2px 10px;
+  border-bottom: 1px solid ${COLORS.lightGray};
+  @media (max-width: 768px) {
+    font-size: 0.7rem;
+  }
+  @media (max-width: 480px) {
+    font-size: 0.6rem;
   }
 `;
 
@@ -83,67 +114,59 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
           gap-1
           '
       >
-        <AiOutlineMenu className='md:w-[24px] md:h-[20px] w-[20px] h-[18px] text-white ' />
+        <AiOutlineMenu className='md:w-[24px] md:h-[20px] w-[20px] h-[18px] text-neutral-400' />
       </div>
       {isOpen && (
-        <MenuContainer>
-          <div className='inline-flex flex-col cursor-pointer w-full '>
-            <>
-              {currentUser?.userType === 'artist' ? (
-                <div className='flex flex-col items-center justify-center p-2'>
-                  <div className='text-md font-semibold mt-3 mb-1 w-full m-auto'>
-                    SANATÇI
-                  </div>
-                  <UserMenuElement
-                    href={`${ROUTE_PATHS.EDIT}${ROUTE_PATHS.EDIT_ARTIST_PROFILE}/${currentUser?.id}`}
-                  >
-                    {ROUTE_NAMES.EDIT_ARTIST_PROFILE}
-                  </UserMenuElement>
-                  <UserMenuElement
-                    href={ROUTE_PATHS.HOME}
-                    onClick={() => {
-                      signOut();
-                      router.refresh();
-                    }}
-                  >
-                    ÇIKIŞ YAP
-                  </UserMenuElement>
-                </div>
-              ) : (
-                <div className='flex flex-col items-center justify-center m-2 w-full'>
-                  <div className='text-md font-semibold mt-3 mb-1 w-full m-auto'>
-                    ADMİN
-                  </div>
-                  <UserMenuElement
-                    href={`${ROUTE_PATHS.EDIT}${ROUTE_PATHS.EDIT_ARTIST_ACCOUNT}`}
-                  >
-                    {ROUTE_NAMES.EDIT_ARTIST_ACCOUNT}
-                  </UserMenuElement>
-                  <UserMenuElement
-                    href={`${ROUTE_PATHS.EDIT}${ROUTE_PATHS.EDIT_ANNOUNCEMENTS}`}
-                  >
-                    {ROUTE_NAMES.EDIT_ANNOUNCEMENTS}
-                  </UserMenuElement>
-                  <UserMenuElement
-                    href={`${ROUTE_PATHS.ADD}${ROUTE_PATHS.ADD_NEW_ARTIST}`}
-                  >
-                    {ROUTE_NAMES.ADD_NEW_ARTIST}
-                  </UserMenuElement>
+        <>
+          {currentUser?.userType === 'artist' ? (
+            <MenuContainer>
+              <UserTitle>SANATÇI</UserTitle>
+              <UserMenuElement
+                href={`${ROUTE_PATHS.EDIT}${ROUTE_PATHS.EDIT_ARTIST_PROFILE}/${currentUser?.id}`}
+              >
+                {ROUTE_NAMES.EDIT_ARTIST_PROFILE}
+              </UserMenuElement>
+              <UserMenuElement
+                href={ROUTE_PATHS.HOME}
+                onClick={() => {
+                  signOut();
+                  router.refresh();
+                }}
+              >
+                ÇIKIŞ YAP
+              </UserMenuElement>
+            </MenuContainer>
+          ) : (
+            <MenuContainer>
+              <UserTitle>ADMİN</UserTitle>
+              <UserMenuElement
+                href={`${ROUTE_PATHS.EDIT}${ROUTE_PATHS.EDIT_ARTIST_ACCOUNT}`}
+              >
+                {ROUTE_NAMES.EDIT_ARTIST_ACCOUNT}
+              </UserMenuElement>
+              <UserMenuElement
+                href={`${ROUTE_PATHS.EDIT}${ROUTE_PATHS.EDIT_ANNOUNCEMENTS}`}
+              >
+                {ROUTE_NAMES.EDIT_ANNOUNCEMENTS}
+              </UserMenuElement>
+              <UserMenuElement
+                href={`${ROUTE_PATHS.ADD}${ROUTE_PATHS.ADD_NEW_ARTIST}`}
+              >
+                {ROUTE_NAMES.ADD_NEW_ARTIST}
+              </UserMenuElement>
 
-                  <UserMenuElement
-                    href={ROUTE_PATHS.HOME}
-                    onClick={() => {
-                      signOut();
-                      router.refresh();
-                    }}
-                  >
-                    ÇIKIŞ YAP
-                  </UserMenuElement>
-                </div>
-              )}
-            </>
-          </div>
-        </MenuContainer>
+              <UserMenuElement
+                href={ROUTE_PATHS.HOME}
+                onClick={() => {
+                  signOut();
+                  router.refresh();
+                }}
+              >
+                ÇIKIŞ YAP
+              </UserMenuElement>
+            </MenuContainer>
+          )}
+        </>
       )}
     </div>
   );
