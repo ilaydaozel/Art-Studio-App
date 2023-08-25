@@ -30,6 +30,7 @@ const AnnouncementsList = ({ announcements }: AnnouncementsListProps) => {
       <div className='w-[90%] pt-4 pb-4 flex flex-row flex-wrap items-center justify-around'>
         {announcements.map((announcement: IAnnouncement) => (
           <AnnouncementPreview
+            key={announcement.id}
             announcement={announcement}
           ></AnnouncementPreview>
         ))}

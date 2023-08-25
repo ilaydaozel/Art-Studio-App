@@ -30,7 +30,10 @@ const ArtistAccountsList = ({ accounts }: ArtistAccountsListProps) => {
 
       <div className='w-[90%] pt-4 pb-4 flex flex-row flex-wrap items-center justify-around'>
         {accounts.map((account: IUser) => (
-          <ArtistAccountPreview artist={account}></ArtistAccountPreview>
+          <ArtistAccountPreview
+            key={account.id}
+            artist={account}
+          ></ArtistAccountPreview>
         ))}
       </div>
     </div>
