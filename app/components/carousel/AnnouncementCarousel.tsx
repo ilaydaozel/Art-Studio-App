@@ -39,6 +39,9 @@ const ContentContainer = styled.div`
   position: relative;
   background-position: center;
   top: 34%;
+  @media (max-width: 768px) {
+    gap: 2.4rem;
+  }
 `;
 
 const CaptionContainer = styled.div`
@@ -47,6 +50,7 @@ const CaptionContainer = styled.div`
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
+  word-break: break-all;
 `;
 
 const Caption = styled.p`
@@ -54,13 +58,23 @@ const Caption = styled.p`
   font-size: 3.5rem;
   font-weight: 800;
   letter-spacing: 3px;
+  @media (max-width: 768px) {
+    font-size: 2.4rem;
+  }
+  @media (max-width: 480px) {
+    font-size: 1.5rem;
+  }
 `;
 
 const Subcaption = styled.p`
   color: #fff;
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   font-weight: 400;
-  line-height: 1.6rem;
+  line-height: 1.8rem;
+  @media (max-width: 768px) {
+    font-size: 1.4rem;
+    line-height: 1.4rem;
+  }
 `;
 
 const SmallCaption = styled.p`
@@ -70,6 +84,11 @@ const SmallCaption = styled.p`
   padding: 0 1rem;
   letter-spacing: 2px;
   border-bottom: 1px solid ${COLORS.lightGray};
+  @media (max-width: 768px) {
+    font-size: 0.8rem;
+    line-height: 0.8rem;
+    padding: 0 0.4rem;
+  }
 `;
 
 const LinkButton = styled.button`
@@ -84,6 +103,14 @@ const LinkButton = styled.button`
   width: fit-content;
   &:hover {
     transform: translateY(0.5rem);
+  }
+  @media (max-width: 768px) {
+    font-size: 1rem;
+    padding: 2px 20px;
+  }
+  @media (max-width: 480px) {
+    font-size: 0.6rem;
+    padding: 2px 10px;
   }
 `;
 
