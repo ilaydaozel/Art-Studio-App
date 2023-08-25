@@ -5,6 +5,7 @@ import styled from 'styled-components';
 
 interface HeadingWithUnderlineProps {
   title: string;
+  size?: string;
 }
 
 const Container = styled.div`
@@ -14,9 +15,9 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
 `;
-const SectionTitle = styled.div`
+const SectionTitle = styled.div<{ size: string }>`
   width: 80%;
-  font-size: 1.5rem;
+  font-size: ${(props) => props.size};
   font-weight: 500;
   color: ${COLORS.darkGray};
   text-align: left;
@@ -29,10 +30,13 @@ const StyledDivider = styled.div`
   height: 1px;
 `;
 
-const HeadingWithUnderline = ({ title }: HeadingWithUnderlineProps) => {
+const HeadingWithUnderline = ({
+  title,
+  size = '1.5rem',
+}: HeadingWithUnderlineProps) => {
   return (
     <Container>
-      <SectionTitle>{title}</SectionTitle>
+      <SectionTitle size={size}>{title}</SectionTitle>
       <StyledDivider />
     </Container>
   );
