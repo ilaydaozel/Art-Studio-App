@@ -128,7 +128,7 @@ const Modal = ({
                 flex 
                 flex-col
                 items-center 
-                p-4
+                p-2
                 rounded-t
                 justify-center
                 relative
@@ -152,9 +152,11 @@ const Modal = ({
 
                 <div className='flex flex-col p-2'>
                   <h1 className='md:text-xl font-semibold text-sm'>{title}</h1>
-                  <h1 className='md:text-base text-center text-xs '>
-                    {subtitle}
-                  </h1>
+                  {subtitle && (
+                    <h1 className='md:text-base text-center text-xs '>
+                      {subtitle}
+                    </h1>
+                  )}
                 </div>
               </div>
 

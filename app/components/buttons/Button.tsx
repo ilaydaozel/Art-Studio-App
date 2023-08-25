@@ -38,10 +38,10 @@ const Button = ({
         disabled:opacity-70
         disabled:cursor-not-allowed
         rounded-lg
-        hover:opacity-80
-        transition
+        hover:scale-105
+        transition-transform
         ${small ? 'text-sm' : 'text-md'}
-        ${small ? 'py-1' : 'py-3'}
+        ${small ? 'py-1' : 'py-2'}
         ${small ? 'font-light' : 'font-semibold'}
         ${small ? 'border-[1px]' : 'border-2'}
       `}
