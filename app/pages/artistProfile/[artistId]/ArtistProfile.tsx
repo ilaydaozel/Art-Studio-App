@@ -32,19 +32,34 @@ const ProfileImage = styled.img<{ imageUrl: string }>`
   width: 35%;
   height: auto;
   content: url(${(props) => props.imageUrl});
+
+  @media (max-width: 768px) {
+    width: 40%;
+  }
+  @media (max-width: 480px) {
+    width: 50%;
+  }
 `;
 
 const NameHeading = styled.text`
   font-size: 2.5rem;
   font-weight: 500;
   text-align: center;
+  margin: 10px;
   color: ${COLORS.darkGray};
+  @media (max-width: 768px) {
+    font-size: 2rem;
+  }
+  @media (max-width: 480px) {
+    font-size: 1.5rem;
+  }
 `;
 
 const BiographyContent = styled.div`
   font-size: 1rem;
   font-weight: 500;
   color: ${COLORS.darkGray};
+  word-break: break-all;
 `;
 
 const InformaionContainer = styled.div`
@@ -82,7 +97,7 @@ const ArtistProfile = ({ profileInfo, artworks }: ArtistProfileProps) => {
       <LayoutContainer>
         <InformaionContainer>
           <HeadingWithUnderline title='Hakkında'></HeadingWithUnderline>
-          <div className='flex items-center gap-10 mx-40 my-20'>
+          <div className='flex items-center justify-center w-[80%] my-10 gap-10'>
             <ProfileImage
               imageUrl={profileInfo?.profilePic || ''}
             ></ProfileImage>

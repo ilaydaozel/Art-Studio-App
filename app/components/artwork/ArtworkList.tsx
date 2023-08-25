@@ -19,7 +19,7 @@ interface ArtworkListProps {
 const ListContainer = styled.div<{ width: string }>`
   display: flex;
   justify-content: space-around;
-  align-items: center;
+  align-items: flex-start;
   flex-wrap: wrap;
   margin: 5rem 0;
   width: ${(props) => props.width};

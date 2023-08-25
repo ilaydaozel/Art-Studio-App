@@ -48,22 +48,34 @@ const ProfileImage = styled.img<{ imageUrl: string }>`
   height: auto;
   content: url(${(props) => props.imageUrl});
 `;
-
+const ProfileImageContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 const NameHeading = styled.text`
   font-size: 2.5rem;
   font-weight: 500;
   text-align: center;
+  margin: 10px;
   color: ${COLORS.darkGray};
+  @media (max-width: 768px) {
+    font-size: 2rem;
+  }
+  @media (max-width: 480px) {
+    font-size: 1.5rem;
+  }
 `;
-
 const BiographyContent = styled.div`
-  width: 100%;
   font-size: 1rem;
   font-weight: 500;
   color: ${COLORS.darkGray};
   word-break: break-all;
 `;
-
+const BiographyContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+`;
 const InformaionContainer = styled.div`
   width: 100%;
   display: flex;
@@ -205,8 +217,8 @@ const ArtistPage = ({ profileInfo, artworks }: ArtistPageProps) => {
       <LayoutContainer>
         <InformaionContainer>
           <HeadingWithUnderline title='Hakkında'></HeadingWithUnderline>
-          <div className='flex items-center gap-10 mx-40 my-20'>
-            <div className='flex flex-col w-[35%]'>
+          <div className='flex items-center justify-center w-[80%] my-10 gap-10'>
+            <ProfileImageContainer className='xl:w-[35%] md:w-[40%] sm:w-[50%]'>
               <ProfileImage
                 imageUrl={profileInfo?.profilePic || ''}
               ></ProfileImage>
@@ -215,15 +227,15 @@ const ArtistPage = ({ profileInfo, artworks }: ArtistPageProps) => {
                 icon={FaRegEdit}
                 onClick={profilePictureModal.onOpen}
               ></TextButton>
-            </div>
-            <div className='flex flex-col w-[65%]'>
+            </ProfileImageContainer>
+            <BiographyContainer>
               <BiographyContent>{profileInfo?.biography}</BiographyContent>
               <TextButton
                 label='Düzenle'
                 icon={FaRegEdit}
                 onClick={biographyModal.onOpen}
               ></TextButton>
-            </div>
+            </BiographyContainer>
           </div>
         </InformaionContainer>
 
