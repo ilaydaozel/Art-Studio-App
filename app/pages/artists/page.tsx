@@ -14,8 +14,8 @@ const ArtistsPage = async () => {
       if (artistProfiles.length > 0) {
         return (
           <ClientOnly>
-            <div className='pt-24  w-full'>
-              <div className='flex flex-wrap gap-4 px-12 my-8'>
+            <div className='md:pt-24 pt-16 w-full'>
+              <div className='flex flex-wrap gap-4 md:px-12 md:my-8 px-6 my-4'>
                 {artistProfiles?.map((artist) => (
                   <ArtistPreview
                     key={artist.id}
