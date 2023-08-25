@@ -16,8 +16,8 @@ const NameText = styled.div`
 const AnnouncementBox = styled.div<{ picture: string }>`
   display: flex;
   justify-content: center;
-  width: 200px;
-  height: 200px;
+  width: 24vw;
+  height: 24vh;
   background-image: url(${(props) => props.picture});
   background-size: cover;
   border: 1px solid #ccc;
@@ -25,7 +25,7 @@ const AnnouncementBox = styled.div<{ picture: string }>`
   overflow: hidden;
   margin: 10px;
   position: relative;
-  font-size: 1.5rem;
+  font-size: 1rem;
   transition: font-size 0.2s background-color:0.2s;
 
   &::before {
@@ -40,11 +40,7 @@ const AnnouncementBox = styled.div<{ picture: string }>`
   }
 
   &:hover::before {
-    background-color: rgba(0, 0, 0, 0.4);
-  }
-
-  &:hover {
-    font-size: 1.7rem;
+    background-color: rgba(0, 0, 0, 0.5);
   }
 
   @media (max-width: 768px) {
@@ -60,7 +56,9 @@ const AnnouncementBox = styled.div<{ picture: string }>`
   }
 `;
 
-const AnnouncementPreview = ({ announcement }: AnnouncementPreviewProps) => {
+const AnnouncementPreviewClient = ({
+  announcement,
+}: AnnouncementPreviewProps) => {
   return (
     <AnnouncementBox
       picture={announcement.coverImage ? announcement.coverImage : ''}
@@ -70,4 +68,4 @@ const AnnouncementPreview = ({ announcement }: AnnouncementPreviewProps) => {
   );
 };
 
-export default AnnouncementPreview;
+export default AnnouncementPreviewClient;
