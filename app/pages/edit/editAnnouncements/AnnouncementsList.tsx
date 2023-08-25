@@ -1,6 +1,6 @@
 'use client';
 import { IAnnouncement } from '@/app/actions/type';
-import AnnouncementPreviewClient from './AnnouncementPreviewClient';
+import AnnouncementPreview from './AnnouncementPreview';
 import HeadingWithUnderline from '@/app/components/HeadingWithUnderline';
 import SlidingButton from '@/app/components/buttons/SlidingButton';
 import AddAnnouncementModal from '@/app/components/modal/AddAnnouncementModal';
@@ -29,9 +29,9 @@ const AnnouncementsList = ({ announcements }: AnnouncementsListProps) => {
 
       <div className='w-[90%] pt-4 pb-4 flex flex-row flex-wrap items-center justify-around'>
         {announcements.map((announcement: IAnnouncement) => (
-          <AnnouncementPreviewClient
+          <AnnouncementPreview
             announcement={announcement}
-          ></AnnouncementPreviewClient>
+          ></AnnouncementPreview>
         ))}
       </div>
     </div>

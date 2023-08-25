@@ -3,8 +3,8 @@ import EmptyState from '@/app/components/EmptyState';
 import ClientOnly from '@/app/components/ClientOnly';
 import getAllAnnouncements from '@/app/actions/getAllAnnouncements';
 import { IAnnouncement } from '@/app/actions/type';
-import AnnouncementPreview from './AnnouncementPreviewClient';
-import AnnouncementPreviewClient from './AnnouncementPreviewClient';
+import AnnouncementPreview from './AnnouncementPreview';
+import AnnouncementPreviewClient from './AnnouncementPreview';
 import AnnouncementsList from './AnnouncementsList';
 
 const EditAnnouncementsPage = async () => {
