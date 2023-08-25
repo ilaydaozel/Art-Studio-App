@@ -11,7 +11,7 @@ import toast from 'react-hot-toast';
 import { ROUTE_PATHS } from '@/constants/routes';
 import { IUser } from '@/app/actions/type';
 
-interface EditArtistMenuProps {
+interface ArtistAcccountMenuProps {
   currentArtist: IUser | null;
 }
 
@@ -44,7 +44,7 @@ const MenuElement = styled.a<{ warning?: boolean }>`
   }
 `;
 
-const EditArtistMenu = ({ currentArtist }: EditArtistMenuProps) => {
+const ArtistAcccountMenu = ({ currentArtist }: ArtistAcccountMenuProps) => {
   const router = useRouter();
 
   const [isOpen, setIsOpen] = useState(false);
@@ -135,4 +135,4 @@ const EditArtistMenu = ({ currentArtist }: EditArtistMenuProps) => {
   );
 };
 
-export default EditArtistMenu;
+export default ArtistAcccountMenu;
