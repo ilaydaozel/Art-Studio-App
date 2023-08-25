@@ -3,6 +3,9 @@ import EmptyState from '@/app/components/EmptyState';
 import ClientOnly from '@/app/components/ClientOnly';
 import getAllAnnouncements from '@/app/actions/getAllAnnouncements';
 import { IAnnouncement } from '@/app/actions/type';
+import AnnouncementPreview from './AnnouncementPreviewClient';
+import AnnouncementPreviewClient from './AnnouncementPreviewClient';
+import AnnouncementsList from './AnnouncementsList';
 
 const EditAnnouncementsPage = async () => {
   let announcements: IAnnouncement[] = [];
@@ -14,7 +17,11 @@ const EditAnnouncementsPage = async () => {
       if (announcements.length > 0) {
         return (
           <ClientOnly>
-            <div className='pt-24 w-full'></div>
+            <div className='pt-24 w-full'>
+              <AnnouncementsList
+                announcements={announcements}
+              ></AnnouncementsList>
+            </div>
           </ClientOnly>
         );
       } else {
