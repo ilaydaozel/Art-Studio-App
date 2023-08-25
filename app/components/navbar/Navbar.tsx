@@ -33,6 +33,12 @@ const LogoTitle = styled.a<{ color: string }>`
   justify-content: center;
   flex: 2 1 auto;
   margin: 0 0 0 24px;
+  @media (max-width: 768px) {
+    font-size: 1.2rem;
+  }
+  @media (max-width: 480px) {
+    font-size: 0.8rem;
+  }
 `;
 
 const MenuElement = styled.a<{ color: string; isActive?: boolean }>`
@@ -42,9 +48,12 @@ const MenuElement = styled.a<{ color: string; isActive?: boolean }>`
   cursor: pointer;
   transition: text-decoration 0.3s;
   font-weight: ${(props) => (props.isActive ? 800 : 500)};
-  font-size: 12px;
+  font-size: 0.8rem;
   &:hover {
     text-decoration: underline;
+  }
+  @media (max-width: 480px) {
+    font-size: 0.6rem;
   }
 `;
 const Navbar = ({ currentUser }: NavbarProps) => {
@@ -89,7 +98,7 @@ const Navbar = ({ currentUser }: NavbarProps) => {
             mx-auto 
             xl:px-10
             md:px-10
-            sm: px-2'
+            sm:px-2'
       >
         <div
           className='
@@ -109,7 +118,7 @@ const Navbar = ({ currentUser }: NavbarProps) => {
               <UserMenu currentUser={currentUser} />
             ) : (
               <MenuElement color={menuElementColor} onClick={loginModal.onOpen}>
-                <PiUserCircleLight className='h-[24px] w-[24px] text-neutral-400 ' />
+                <PiUserCircleLight className='sm:h-[24px] sm:w-[24px] text-neutral-400 w-[20px] h-[20px]' />
               </MenuElement>
             )}
           </div>
