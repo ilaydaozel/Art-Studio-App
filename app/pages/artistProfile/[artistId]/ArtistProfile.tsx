@@ -90,9 +90,7 @@ const ArtistProfile = ({ profileInfo, artworks }: ArtistProfileProps) => {
             {profileInfo.user.name} {profileInfo.user.surname}
           </NameHeading>
         </div>
-        <HeaderImage
-          imageUrl={artworks ? artworks[0]?.artworkMedias[0] : ''}
-        ></HeaderImage>
+        <HeaderImage imageUrl={profileInfo?.coverImage || ''}></HeaderImage>
       </HeadingContainer>
       <LayoutContainer>
         <InformaionContainer>
