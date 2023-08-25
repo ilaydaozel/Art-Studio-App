@@ -17,7 +17,7 @@ const SlideContainer = styled.div<{ src: string }>`
   background-position: center;
   width: 100%;
   height: 100vh;
-  transition: background-image 0.8s ease;
+  transition: background-image 0.4s ease-in-out;
 
   &::before {
     content: '';
@@ -35,9 +35,10 @@ const ContentContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 2rem;
   position: relative;
   background-position: center;
-  top: 50%;
+  top: 34%;
 `;
 
 const CaptionContainer = styled.div`
@@ -50,21 +51,31 @@ const CaptionContainer = styled.div`
 
 const Caption = styled.p`
   color: #fff;
-  font-size: 3rem;
+  font-size: 3.5rem;
+  font-weight: 800;
+  letter-spacing: 3px;
 `;
 
 const Subcaption = styled.p`
   color: #fff;
-  font-size: 1.8rem;
+  font-size: 1.6rem;
+  font-weight: 400;
+  line-height: 1.6rem;
+`;
+
+const SmallCaption = styled.p`
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 400;
+  padding: 0 1rem;
+  letter-spacing: 2px;
+  border-bottom: 1px solid ${COLORS.lightGray};
 `;
 
 const LinkButton = styled.button`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 0.2rem 1rem;
-  font-size: 1.5rem;
+  padding: 4px 40px;
+  margin: 10px;
+  font-size: 1.4rem;
   border-radius: 0.5rem;
   cursor: pointer;
   transition: transform 0.5s;
@@ -88,6 +99,7 @@ const NavButtonRight = styled.button`
   font-size: 24px;
   right: 0;
 `;
+
 const NavButtonLeft = styled.button`
   position: absolute;
   top: 50%;
@@ -120,20 +132,19 @@ const AnnouncementCarousel = ({ slides }: AnnouncementCarouselProps) => {
   }, [goToNextSlide]);
 
   return (
-    <SlideContainer
-      onClick={() => {
-        if (activeSlideLink) {
-          router.push(activeSlideLink);
-        }
-      }}
-      src={slides[activeIndex].coverImage || ''}
-    >
+    <SlideContainer src={slides[activeIndex].coverImage || ''}>
       <NavButtonLeft onClick={goToPrevSlide}>
         <FaChevronLeft />
       </NavButtonLeft>
       <ContentContainer>
+        {slides[activeIndex].smallCaption && (
+          <SmallCaption>{slides[activeIndex].smallCaption}</SmallCaption>
+        )}
+
         <CaptionContainer>
-          <Caption>{slides[activeIndex].caption || ''}</Caption>
+          <Caption>
+            {slides[activeIndex].caption.toLocaleUpperCase('TR') || ''}
+          </Caption>
           <Subcaption>{slides[activeIndex].subcaption || ''}</Subcaption>
         </CaptionContainer>
         {activeSlideLink && (
