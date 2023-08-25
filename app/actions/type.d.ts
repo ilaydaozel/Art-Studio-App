@@ -67,6 +67,7 @@ export interface IAnnouncement {
     id: string;
     caption: string;
     subcaption?: string;
+    smallCaption?: string;
     coverImage?: string;
     link?: string;
     isActive: boolean;

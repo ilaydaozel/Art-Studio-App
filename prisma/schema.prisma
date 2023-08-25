@@ -82,6 +82,7 @@ model Announcement{
   id String @id @default(auto()) @map("_id") @db.ObjectId
   caption String
   subcaption String?
+  smallCaption String?
   coverImage String?
   link String?
   isActive Boolean
