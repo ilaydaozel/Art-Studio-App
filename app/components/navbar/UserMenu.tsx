@@ -120,10 +120,16 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
                     {ROUTE_NAMES.EDIT_ARTIST_ACCOUNT}
                   </UserMenuElement>
                   <UserMenuElement
+                    href={`${ROUTE_PATHS.EDIT}${ROUTE_PATHS.EDIT_ANNOUNCEMENTS}`}
+                  >
+                    {ROUTE_NAMES.EDIT_ANNOUNCEMENTS}
+                  </UserMenuElement>
+                  <UserMenuElement
                     href={`${ROUTE_PATHS.ADD}${ROUTE_PATHS.ADD_NEW_ARTIST}`}
                   >
                     {ROUTE_NAMES.ADD_NEW_ARTIST}
                   </UserMenuElement>
+
                   <UserMenuElement
                     href={ROUTE_PATHS.HOME}
                     onClick={() => {
