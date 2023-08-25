@@ -9,7 +9,7 @@ interface ArtistPreviewProps {
   artist: IArtistProfile;
 }
 
-const NameText = styled.button<{ isLoading: boolean }>`
+const NameText = styled.div<{ isLoading: boolean }>`
   pointer-events: ${(props) => (props.isLoading ? 'none' : 'auto')};
   color: #fff;
   transition: color 0.2s;
@@ -29,8 +29,8 @@ const ArtistBox = styled.div<{ profilePic: string }>`
   overflow: hidden;
   margin: 10px;
   position: relative;
-  font-size: 150%;
-  transition: font-size 0.2s;
+  font-size: 1.5rem;
+  transition: font-size 0.2s background-color:0.2s;
 
   &::before {
     content: '';
@@ -48,7 +48,19 @@ const ArtistBox = styled.div<{ profilePic: string }>`
   }
 
   &:hover {
-    font-size: 175%;
+    font-size: 1.7rem;
+  }
+
+  @media (max-width: 768px) {
+    width: 160px;
+    height: 160px;
+    font-size: 1.2 rem;
+  }
+
+  @media (max-width: 480px) {
+    width: 120px;
+    height: 120px;
+    font-size: 1rem;
   }
 `;
 
