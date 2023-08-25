@@ -1,20 +1,20 @@
 import EmptyState from '@/app/components/EmptyState';
 import ClientOnly from '@/app/components/ClientOnly';
-import getAllArtistProfiles from '@/app/actions/getAllArtistProfiles';
-import EditArtistsClient from './EditArtistsClient';
-import { IArtistProfile } from '@/app/actions/type';
+import { IUser } from '@/app/actions/type';
+import ArtistAccountsList from './ArtistAccountsList';
+import getAllArtists from '@/app/actions/getAllArtists';
 
 const EditArtistsPage = async () => {
-  let artistProfiles: IArtistProfile[] | null = null;
+  let artists: IUser[] | null = null;
   try {
-    const result = await getAllArtistProfiles();
-    if (result && result.artistProfiles) {
-      artistProfiles = result.artistProfiles;
-      if (artistProfiles.length > 0) {
+    const result = await getAllArtists();
+    if (result && result.artists) {
+      artists = result.artists;
+      if (artists.length > 0) {
         return (
           <ClientOnly>
-            <div className='pt-24 w-full'>
-              <EditArtistsClient artists={artistProfiles}></EditArtistsClient>
+            <div className='pt-28 w-full'>
+              <ArtistAccountsList accounts={artists}></ArtistAccountsList>
             </div>
           </ClientOnly>
         );
