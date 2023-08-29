@@ -2,7 +2,8 @@ import React from 'react';
 import Carousel from './components/carousel/AnnouncementCarousel';
 import { IAnnouncement } from './actions/type';
 import getAllAnnouncements from './actions/getAllAnnouncements';
-import ThreeScene from './components/ThreeScene';
+import ThreeScene from './components/virtualExhibition/ThreeScene';
+import HeadingWithUnderline from './components/HeadingWithUnderline';
 
 export default async function Home() {
   let announcements: IAnnouncement[] = [];
@@ -13,9 +14,14 @@ export default async function Home() {
       if (announcements.length > 0) {
         return (
           <>
-            <div style={{ maxWidth: '100vw', overflowX: 'hidden' }}>
+            <div className='max-w-[100vw] overflow-x-hidden'>
               <Carousel slides={announcements} />
-              <ThreeScene></ThreeScene>
+            </div>
+            <div className='flex flex-col items-center justify-center w-full'>
+              <HeadingWithUnderline title='Sanal Sergi'></HeadingWithUnderline>
+              <div className='max-w-[80vw] overflow-x-hidden m-8'>
+                <ThreeScene></ThreeScene>
+              </div>
             </div>
           </>
         );
