@@ -2,6 +2,7 @@ import React from 'react';
 import Carousel from './components/carousel/AnnouncementCarousel';
 import { IAnnouncement } from './actions/type';
 import getAllAnnouncements from './actions/getAllAnnouncements';
+import ThreeScene from './components/ThreeScene';
 
 export default async function Home() {
   let announcements: IAnnouncement[] = [];
@@ -11,9 +12,12 @@ export default async function Home() {
       announcements = result.announcements;
       if (announcements.length > 0) {
         return (
-          <div style={{ maxWidth: '100vw', overflowX: 'hidden' }}>
-            <Carousel slides={announcements} />
-          </div>
+          <>
+            <div style={{ maxWidth: '100vw', overflowX: 'hidden' }}>
+              <Carousel slides={announcements} />
+              <ThreeScene></ThreeScene>
+            </div>
+          </>
         );
       } else {
         return <></>;
