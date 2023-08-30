@@ -11,6 +11,7 @@ export enum ROUTE_PATHS {
     EDIT_ANNOUNCEMENTS = 'editAnnouncements',
     ARTIST_PROFILE = '/pages/artistProfile',
     ABOUT = '/pages/about',
+    VIRTUAL_EXHIBITION = '/pages/virtualExhibition',
     UNAUTHORIZED = '/unauthorized',
 }
 
@@ -25,6 +26,7 @@ export const ROUTE_NAMES: ChangeTypes<typeof ROUTE_PATHS, string> = {
     EDIT_ANNOUNCEMENTS: 'DUYURULARI DÜZENLE',
     ARTIST_PROFILE: 'SANATÇI',
     ABOUT: 'HAKKIMIZDA',
+    VIRTUAL_EXHIBITION: 'SANAL SERGI',
     UNAUTHORIZED: 'Unauthorized',
 };
 

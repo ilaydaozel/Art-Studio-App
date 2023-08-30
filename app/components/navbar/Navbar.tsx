@@ -145,6 +145,13 @@ const Navbar = ({ currentUser }: NavbarProps) => {
             >
               {ROUTE_NAMES.ABOUT}
             </MenuElement>
+            <MenuElement
+              isActive={path === ROUTE_PATHS.VIRTUAL_EXHIBITION}
+              color={menuElementColor}
+              href={ROUTE_PATHS.VIRTUAL_EXHIBITION}
+            >
+              {ROUTE_NAMES.VIRTUAL_EXHIBITION}
+            </MenuElement>
           </div>
         </div>
       </div>
