@@ -29,7 +29,7 @@ const Gallery = ({ artworks = [] }: GalleryProps) => {
       containerRef.current?.appendChild(renderer.domElement);
       //document.body.appendChild(renderer.domElement);
       //ambient light
-      const ambientLight = new THREE.AmbientLight(0x101010, 1.0); //color and intensity
+      const ambientLight = new THREE.AmbientLight(0xffffff, 1.0); //color and intensity
       scene.add(ambientLight);
       //directional light
       const sunLight = new THREE.DirectionalLight(0xdddddd, 1.0);
@@ -87,7 +87,7 @@ const Gallery = ({ artworks = [] }: GalleryProps) => {
         new THREE.MeshBasicMaterial({ color: '#F8F8F8' })
       );
 
-      leftWall.position.x = -20;
+      leftWall.position.x = -25;
       leftWall.position.y = 10;
       leftWall.rotation.y = Math.PI / 2;
 
@@ -97,11 +97,19 @@ const Gallery = ({ artworks = [] }: GalleryProps) => {
         new THREE.MeshBasicMaterial({ color: '#F8F8F8' })
       );
 
-      rightWall.position.x = 20;
+      rightWall.position.x = 25;
       rightWall.rotation.y = Math.PI / 2;
       rightWall.position.y = 10;
+      //Back wall
+      const backWall = new THREE.Mesh(
+        new THREE.BoxGeometry(50, 20, 0.001),
+        new THREE.MeshBasicMaterial({ color: '#F8F8F8' })
+      );
 
-      wallGroup.add(leftWall, frontWall, rightWall);
+      backWall.position.z = 25;
+      backWall.position.y = 10;
+
+      wallGroup.add(leftWall, frontWall, rightWall, backWall);
 
       //Ceiling
       const ceilingTexture = new THREE.TextureLoader().load(
@@ -124,16 +132,16 @@ const Gallery = ({ artworks = [] }: GalleryProps) => {
       const onKeyDown = (e: any) => {
         const keyCode = e.which;
         if (keyCode == 39) {
-          camera.translateX(0.05);
+          camera.translateX(0.1);
         }
         if (keyCode == 37) {
-          camera.translateX(-0.05);
+          camera.translateX(-0.1);
         }
         if (keyCode == 38) {
-          camera.translateY(0.05);
+          camera.translateY(0.1);
         }
         if (keyCode == 40) {
-          camera.translateY(-0.05);
+          camera.translateY(-0.1);
         }
         if (keyCode == 68) {
           camera.translateZ(0.1);
