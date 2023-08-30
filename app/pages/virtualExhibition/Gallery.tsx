@@ -1,5 +1,6 @@
 'use client';
 import { IUserArtwork } from '@/app/actions/type';
+import SlidingButton from '@/app/components/buttons/SlidingButton';
 import React, { useRef, useEffect } from 'react';
 import * as THREE from 'three';
 
@@ -10,25 +11,63 @@ const Gallery = ({ artworks = [] }: GalleryProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (typeof window !== 'undefined') {
+      //scene
       const scene = new THREE.Scene();
+      //camera
       const camera = new THREE.PerspectiveCamera(
         75,
         window.innerWidth / window.innerHeight,
         0.1,
         1000
       );
-      const renderer = new THREE.WebGLRenderer();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      containerRef.current?.appendChild(renderer.domElement);
       camera.position.z = 5;
+      scene.add(camera);
+      //renderer
+      const renderer = new THREE.WebGLRenderer();
+      renderer.setSize(window.innerWidth / 2, window.innerHeight / 2);
+      renderer.setClearColor(0xffffff, 1); //backgroundColor
+      containerRef.current?.appendChild(renderer.domElement);
+      //ambient light
+      let ambientLight = new THREE.AmbientLight(0x101010, 1.0); //color and intensity
+      scene.add(ambientLight);
+      //directional light
+      let sunLight = new THREE.DirectionalLight(0xdddddd, 1.0);
+      sunLight.position.y = 15;
+      scene.add(sunLight);
 
-      const geometry = new THREE.BoxGeometry();
-      const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-      const cube = new THREE.Mesh(geometry, material);
+      //cube
+      const geometry = new THREE.BoxGeometry(1, 1, 1);
+      const material = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+      const cube = new THREE.Mesh(geometry, material); //combine geometry and material
       scene.add(cube);
 
-      // Render the scene and camera
-      renderer.render(scene, camera);
+      //controls
+      const onKeyDown = (e: any) => {
+        let keyCode = e.which;
+        if (keyCode == 39) {
+          camera.translateX(-0.05);
+        }
+        if (keyCode == 37) {
+          camera.translateX(0.05);
+        }
+        if (keyCode == 38) {
+          camera.translateY(-0.05);
+        }
+        if (keyCode == 40) {
+          camera.translateY(0.05);
+        }
+      };
+      document.addEventListener('keydown', onKeyDown, false);
+
+      //render with animation
+      let renderLoop = () => {
+        // Render the scene and camera
+        cube.rotation.x += 0.001;
+        requestAnimationFrame(renderLoop);
+        renderer.render(scene, camera);
+      };
+      renderLoop();
+
       /** 
       const scene = new THREE.Scene();
       const camera = new THREE.PerspectiveCamera(
