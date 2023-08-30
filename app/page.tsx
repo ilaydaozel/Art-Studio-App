@@ -1,35 +1,51 @@
 import React from 'react';
 import Carousel from './components/carousel/AnnouncementCarousel';
-import { IAnnouncement } from './actions/type';
+import { IAnnouncement, IUserArtwork } from './actions/type';
 import getAllAnnouncements from './actions/getAllAnnouncements';
 import ThreeScene from './components/virtualExhibition/ThreeScene';
 import HeadingWithUnderline from './components/HeadingWithUnderline';
+import getAllArtworks from './actions/getAllArtworks';
+import ClientOnly from './components/ClientOnly';
+import EmptyState from './components/EmptyState';
 
 export default async function Home() {
   let announcements: IAnnouncement[] = [];
+  let artworks: IUserArtwork[] = [];
   try {
-    const result = await getAllAnnouncements();
-    if (result && result.announcements) {
-      announcements = result.announcements;
+    const allAnnouncements = await getAllAnnouncements();
+    const allArtworks = await getAllArtworks();
+    if (allArtworks) {
+      artworks = allArtworks.artworks;
+    }
+    if (allAnnouncements && allAnnouncements.announcements) {
+      announcements = allAnnouncements.announcements;
       if (announcements.length > 0) {
         return (
           <>
             <div className='max-w-[100vw] overflow-x-hidden'>
               <Carousel slides={announcements} />
             </div>
-            <div className='flex flex-col items-center justify-center w-full'>
-              <HeadingWithUnderline title='Sanal Sergi'></HeadingWithUnderline>
-              <div className='max-w-[80vw] overflow-x-hidden m-8'>
-                <ThreeScene></ThreeScene>
-              </div>
-            </div>
           </>
         );
       } else {
-        return <></>;
+        return (
+          <ClientOnly>
+            <EmptyState
+              title='Can not load homepage'
+              subtitle='Looks like there is a problem.'
+            />
+          </ClientOnly>
+        );
       }
     } else {
-      return <></>;
+      return (
+        <ClientOnly>
+          <EmptyState
+            title='No homepage found'
+            subtitle='Looks like there is a problem.'
+          />
+        </ClientOnly>
+      );
     }
   } catch (error) {
     console.log(error);
