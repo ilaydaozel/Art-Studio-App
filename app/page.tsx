@@ -2,8 +2,6 @@ import React from 'react';
 import Carousel from './components/carousel/AnnouncementCarousel';
 import { IAnnouncement, IUserArtwork } from './actions/type';
 import getAllAnnouncements from './actions/getAllAnnouncements';
-import ThreeScene from './components/virtualExhibition/ThreeScene';
-import HeadingWithUnderline from './components/HeadingWithUnderline';
 import getAllArtworks from './actions/getAllArtworks';
 import ClientOnly from './components/ClientOnly';
 import EmptyState from './components/EmptyState';

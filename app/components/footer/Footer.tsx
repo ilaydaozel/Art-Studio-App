@@ -54,7 +54,6 @@ const Footer = () => {
         document.documentElement.clientHeight + window.scrollY + 100 >=
         (document.documentElement.scrollHeight ||
           document.documentElement.clientHeight);
-      console.log('isOnBottom ', isOnBottom);
       setIsVisible(isOnBottom);
     };
     window.addEventListener('scroll', handleScroll);

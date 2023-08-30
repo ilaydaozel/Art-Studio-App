@@ -1,5 +1,4 @@
 import ExhibitionMenu from './ExhibitionMenu';
-import Gallery from './Gallery';
 
 const VirtualExhibition = async () => {
   return (
