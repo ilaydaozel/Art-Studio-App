@@ -1,6 +1,5 @@
 'use client';
 import { IUserArtwork } from '@/app/actions/type';
-import SlidingButton from '@/app/components/buttons/SlidingButton';
 import React, { useRef, useEffect } from 'react';
 import * as THREE from 'three';
 
@@ -20,18 +19,20 @@ const Gallery = ({ artworks = [] }: GalleryProps) => {
         0.1,
         1000
       );
-      camera.position.z = 5;
+      camera.position.z = 15;
+      camera.position.y = 5;
       scene.add(camera);
       //renderer
       const renderer = new THREE.WebGLRenderer();
       renderer.setSize(window.innerWidth / 2, window.innerHeight / 2);
       renderer.setClearColor(0xffffff, 1); //backgroundColor
       containerRef.current?.appendChild(renderer.domElement);
+      //document.body.appendChild(renderer.domElement);
       //ambient light
-      let ambientLight = new THREE.AmbientLight(0x101010, 1.0); //color and intensity
+      const ambientLight = new THREE.AmbientLight(0x101010, 1.0); //color and intensity
       scene.add(ambientLight);
       //directional light
-      let sunLight = new THREE.DirectionalLight(0xdddddd, 1.0);
+      const sunLight = new THREE.DirectionalLight(0xdddddd, 1.0);
       sunLight.position.y = 15;
       scene.add(sunLight);
 
@@ -39,118 +40,43 @@ const Gallery = ({ artworks = [] }: GalleryProps) => {
       const geometry = new THREE.BoxGeometry(1, 1, 1);
       const material = new THREE.MeshBasicMaterial({ color: 0xff0000 });
       const cube = new THREE.Mesh(geometry, material); //combine geometry and material
+      cube.position.y = 2;
       scene.add(cube);
-
-      //controls
-      const onKeyDown = (e: any) => {
-        let keyCode = e.which;
-        if (keyCode == 39) {
-          camera.translateX(-0.05);
-        }
-        if (keyCode == 37) {
-          camera.translateX(0.05);
-        }
-        if (keyCode == 38) {
-          camera.translateY(-0.05);
-        }
-        if (keyCode == 40) {
-          camera.translateY(0.05);
-        }
-      };
-      document.addEventListener('keydown', onKeyDown, false);
-
-      //render with animation
-      let renderLoop = () => {
-        // Render the scene and camera
-        cube.rotation.x += 0.001;
-        requestAnimationFrame(renderLoop);
-        renderer.render(scene, camera);
-      };
-      renderLoop();
-
-      /** 
-      const scene = new THREE.Scene();
-      const camera = new THREE.PerspectiveCamera(
-        75,
-        window.innerWidth / window.innerHeight,
-        0.1,
-        1000
-      );
-
-      const renderer = new THREE.WebGLRenderer();
-      renderer.setSize(window.innerWidth, window.innerHeight / 2);
-      containerRef.current?.appendChild(renderer.domElement);
-      //camera position
-      camera.position.z = 0;
-      camera.position.y = 5;
-
-      //Ambient Light
-      let ambientLight = new THREE.AmbientLight(0xffffff, 0.8); //color, intensity, distance, decay
-      ambientLight.position.x = camera.position.x; //light follows camera
-      ambientLight.position.y = camera.position.y;
-      ambientLight.position.z = camera.position.z;
-      scene.add(ambientLight);
-
-      
+      //plane
       //Floor
-      const planeGeometry = new THREE.PlaneGeometry(40, 50);
-      const floorTexture = new THREE.TextureLoader().load('/images/marmer.jpg');
+      const planeGeometry = new THREE.PlaneGeometry(50, 50);
+      const floorTexture = new THREE.TextureLoader().load(
+        '/images/woodFloor.jpeg'
+      );
       floorTexture.wrapS = THREE.RepeatWrapping;
       floorTexture.wrapT = THREE.RepeatWrapping;
-      floorTexture.repeat.set(10, 20); // how many times to repeat the texture
+      floorTexture.repeat.set(12, 30); // how many times to repeat the texture
 
-      const materialFloor = new THREE.MeshPhongMaterial();
-      materialFloor.map = floorTexture;
-      materialFloor.side = THREE.DoubleSide;
-      const floor = new THREE.Mesh(planeGeometry, materialFloor);
+      const materialFloor = new THREE.MeshBasicMaterial({
+        map: floorTexture,
+        side: THREE.DoubleSide,
+      });
+      const floorPlane = new THREE.Mesh(planeGeometry, materialFloor);
 
-      floor.rotation.x = Math.PI / 2; //90 degrees
-      scene.add(floor);
-
-      const artworkPlanes = [];
-      let ZCount = -10;
-
-      const light = new THREE.SpotLight(0xff000f, 1, 1, 1, 0.8, 1);
-      scene.add(light);
-      //renderer.shadowMap.enabled = true
-      //renderer.shadowMap.type = THREE.PCFSoftShadowMap
-      light.position.x = -15;
-      light.position.z = 0;
-      light.position.y = 20;
-
-      const data = {
-        color: light.color.getHex(),
-        mapsEnabled: true,
-        //shadowMapSizeWidth: 512,
-        //shadowMapSizeHeight: 512,
-      };
-
-      for (let i = 0; i < artworks.length; i++) {
-        const planeGeometry = new THREE.BoxGeometry(7, 7, 0.3);
-        const artTexture = new THREE.TextureLoader().load(
-          artworks[i].artworkMedias[0]
-        );
-        console.log(artworks[i].artworkMedias[0]);
-        const artworkMaterial = new THREE.MeshPhongMaterial();
-        artworkMaterial.map = artTexture;
-        const artworkCanvas = new THREE.Mesh(planeGeometry, artworkMaterial);
-        artworkCanvas.position.x = -19;
-        artworkCanvas.rotation.y = Math.PI / 2;
-        artworkCanvas.position.z = ZCount;
-        artworkCanvas.position.y = 7;
-        scene.add(artworkCanvas);
-        ZCount += 12;
-        artworkPlanes.push(artworkCanvas);
-      }
+      floorPlane.rotation.x = Math.PI / 2; //90 degrees
+      floorPlane.rotation.y = -Math.PI; //180 degrees
+      scene.add(floorPlane);
+      //wall group
 
       //Create the walls
       const wallGroup = new THREE.Group(); //create a group to hold the walls
       scene.add(wallGroup);
 
       //Front wall
+      const frontTexture = new THREE.TextureLoader().load(
+        '/images/grayStone.jpeg'
+      );
+      frontTexture.wrapS = THREE.RepeatWrapping;
+      frontTexture.wrapT = THREE.RepeatWrapping;
+      frontTexture.repeat.set(2, 1);
       const frontWall = new THREE.Mesh(
-        new THREE.BoxGeometry(40, 20, 0.001),
-        new THREE.MeshLambertMaterial({ color: '#f2f2f2' })
+        new THREE.BoxGeometry(50, 20, 0.001),
+        new THREE.MeshBasicMaterial({ map: frontTexture })
       );
       frontWall.position.z = -25;
       frontWall.position.y = 10;
@@ -158,7 +84,7 @@ const Gallery = ({ artworks = [] }: GalleryProps) => {
       //Left wall
       const leftWall = new THREE.Mesh(
         new THREE.BoxGeometry(50, 20, 0.001),
-        new THREE.MeshLambertMaterial({ color: '#f9f9f9' })
+        new THREE.MeshBasicMaterial({ color: '#F8F8F8' })
       );
 
       leftWall.position.x = -20;
@@ -168,13 +94,14 @@ const Gallery = ({ artworks = [] }: GalleryProps) => {
       //Right wall
       const rightWall = new THREE.Mesh(
         new THREE.BoxGeometry(50, 20, 0.001),
-        new THREE.MeshLambertMaterial({ color: '#f9f9f9' })
+        new THREE.MeshBasicMaterial({ color: '#F8F8F8' })
       );
 
       rightWall.position.x = 20;
       rightWall.rotation.y = Math.PI / 2;
       rightWall.position.y = 10;
-      wallGroup.add(frontWall, leftWall, rightWall);
+
+      wallGroup.add(leftWall, frontWall, rightWall);
 
       //Ceiling
       const ceilingTexture = new THREE.TextureLoader().load(
@@ -185,36 +112,47 @@ const Gallery = ({ artworks = [] }: GalleryProps) => {
       ceilingTexture.repeat.set(20, 25); // how many times to repeat the texture
 
       const ceiling = new THREE.Mesh(
-        new THREE.PlaneGeometry(40, 50),
-        new THREE.MeshPhongMaterial({ map: ceilingTexture })
+        new THREE.PlaneGeometry(50, 50),
+        new THREE.MeshBasicMaterial({ map: ceilingTexture })
       );
 
       ceiling.rotation.x = Math.PI / 2;
       ceiling.position.y = 20;
 
       scene.add(ceiling);
-        
-      const onWindowResize = () => {
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        render();
+      //controls
+      const onKeyDown = (e: any) => {
+        const keyCode = e.which;
+        if (keyCode == 39) {
+          camera.translateX(0.05);
+        }
+        if (keyCode == 37) {
+          camera.translateX(-0.05);
+        }
+        if (keyCode == 38) {
+          camera.translateY(0.05);
+        }
+        if (keyCode == 40) {
+          camera.translateY(-0.05);
+        }
+        if (keyCode == 68) {
+          camera.translateZ(0.1);
+        }
+        if (keyCode == 69) {
+          camera.translateZ(-0.1);
+        }
       };
-      window.addEventListener('resize', onWindowResize, false);
-      const animate = () => {
-        requestAnimationFrame(animate);
-        render();
-      };
+      document.addEventListener('keydown', onKeyDown, false);
 
-      const render = () => {
+      //render with animation
+      let renderLoop = () => {
+        // Render the scene and camera
+        cube.rotation.x += 0.01;
+        cube.rotation.y += 0.01;
+        requestAnimationFrame(renderLoop);
         renderer.render(scene, camera);
       };
-
-      animate();
-
-      // Render the scene and camera
-      renderer.render(scene, camera);
-      **/
+      renderLoop();
     }
   }, []);
   return <div ref={containerRef} />;
