@@ -5,6 +5,7 @@ import Image from 'next/image';
 import SlidingButton from '@/app/components/buttons/SlidingButton';
 import { useState } from 'react';
 import Gallery from './Gallery';
+import Popup from '@/app/components/popup/Popup';
 
 const MenuContainer = styled.div`
   width: 60%;
@@ -26,35 +27,34 @@ const ExhibitionMenu = () => {
   return (
     <>
       <MenuContainer>
-        {showExhibition ? (
-          <>
-            <button onClick={() => setShowExhibition(false)}>X</button>
-            <Gallery></Gallery>
-          </>
-        ) : (
-          <>
-            <div className='relative w-full h-[50%]'>
-              <Image
-                src={
-                  'https://res.cloudinary.com/dnlz4muyb/image/upload/v1691094915/j0dfdld8wjk1cdgb8afs.jpg'
-                }
-                placeholder='empty'
-                alt='artwork'
-                fill
-                className='object-cover'
-              />
-            </div>
-            <InformationContainer>
-              <text className='text-3xl m-2'>SANAL SERGİ</text>
-              <button
-                id='start_button'
-                className='text-xl bg-yellow-300 p-2 rounded-lg m-4'
-                onClick={() => setShowExhibition(true)}
-              >
-                Sergiyi Gör
-              </button>
-            </InformationContainer>
-          </>
+        <div className='relative w-full h-[50%]'>
+          <Image
+            src={
+              'https://res.cloudinary.com/dnlz4muyb/image/upload/v1691094915/j0dfdld8wjk1cdgb8afs.jpg'
+            }
+            placeholder='empty'
+            alt='artwork'
+            fill
+            className='object-cover'
+          />
+        </div>
+        <InformationContainer>
+          <text className='text-3xl m-2'>SANAL SERGİ</text>
+          <button
+            id='start_button'
+            className='text-xl bg-yellow-300 p-2 rounded-lg m-4'
+            onClick={() => setShowExhibition(true)}
+          >
+            Sergiyi Gör
+          </button>
+        </InformationContainer>
+        {showExhibition && (
+          <Popup
+            onClose={() => setShowExhibition(false)}
+            width='100%'
+            isFullScreen
+            body={<Gallery></Gallery>}
+          ></Popup>
         )}
       </MenuContainer>
     </>
