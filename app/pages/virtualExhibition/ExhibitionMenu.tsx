@@ -6,6 +6,12 @@ import SlidingButton from '@/app/components/buttons/SlidingButton';
 import { useState } from 'react';
 import Gallery from './Gallery';
 import Popup from '@/app/components/popup/Popup';
+import { IUserArtwork } from '@/app/actions/type';
+import StartMenu from '@/app/components/virtualExhibition/StartMenu';
+
+interface GalleryProps {
+  artworks?: IUserArtwork[];
+}
 
 const MenuContainer = styled.div`
   width: 60%;
@@ -22,7 +28,7 @@ const InformationContainer = styled.div`
   margin: 10px;
 `;
 
-const ExhibitionMenu = () => {
+const ExhibitionMenu = ({ artworks = [] }: GalleryProps) => {
   const [showExhibition, setShowExhibition] = useState(false);
   return (
     <>
@@ -53,7 +59,7 @@ const ExhibitionMenu = () => {
             onClose={() => setShowExhibition(false)}
             width='100%'
             isFullScreen
-            body={<Gallery></Gallery>}
+            body={<StartMenu artworks={artworks}></StartMenu>}
           ></Popup>
         )}
       </MenuContainer>
