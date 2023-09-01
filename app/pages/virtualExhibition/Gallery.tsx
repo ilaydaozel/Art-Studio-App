@@ -121,6 +121,33 @@ const Gallery = ({ artworks = [] }: GalleryProps) => {
       ceiling.position.y = 20;
       scene.add(ceiling);
 
+      const createPainting = (
+        url: string,
+        width: number,
+        height: number,
+        position: THREE.Vector3
+      ) => {
+        const paintingTexture = new THREE.TextureLoader().load(url);
+        const painting = new THREE.Mesh(
+          new THREE.BoxGeometry(width, height, 0.01),
+          new THREE.MeshBasicMaterial({ map: paintingTexture })
+        );
+        painting.position.set(position.x, position.y, position.z);
+        return painting;
+      };
+      const painting1 = createPainting(
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Vincent_van_Gogh_-_Self-Portrait_-_Google_Art_Project_%28454045%29.jpg/711px-Vincent_van_Gogh_-_Self-Portrait_-_Google_Art_Project_%28454045%29.jpg',
+        5,
+        8,
+        new THREE.Vector3(-10, 10, -24.9)
+      );
+      const painting2 = createPainting(
+        'https://m.media-amazon.com/images/I/71Fjd73fu9L._AC_UF1000,1000_QL80_.jpg',
+        10,
+        5,
+        new THREE.Vector3(10, 10, -24.9)
+      );
+      scene.add(painting1, painting2);
       const wallBoundingBoxes: THREE.Box3[] = [];
       for (let i = 0; i < wallGroup.children.length; i++) {
         const wallSideBoundingBox = new THREE.Box3().setFromObject(
