@@ -1,15 +1,12 @@
 'use client';
-import { COLORS } from '@/constants/colors';
 import styled from 'styled-components';
 import Image from 'next/image';
-import SlidingButton from '@/app/components/buttons/SlidingButton';
 import { useState } from 'react';
-import Gallery from './Gallery';
 import Popup from '@/app/components/popup/Popup';
 import { IUserArtwork } from '@/app/actions/type';
 import StartMenu from '@/app/components/virtualExhibition/StartMenu';
 
-interface GalleryProps {
+interface ExhibitionPreviewProps {
   artworks?: IUserArtwork[];
 }
 
@@ -28,7 +25,7 @@ const InformationContainer = styled.div`
   margin: 10px;
 `;
 
-const ExhibitionMenu = ({ artworks = [] }: GalleryProps) => {
+const ExhibitionPreview = ({ artworks = [] }: ExhibitionPreviewProps) => {
   const [showExhibition, setShowExhibition] = useState(false);
   return (
     <>
@@ -45,10 +42,9 @@ const ExhibitionMenu = ({ artworks = [] }: GalleryProps) => {
           />
         </div>
         <InformationContainer>
-          <text className='text-3xl m-2'>SANAL SERGİ</text>
           <button
             id='start_button'
-            className='text-xl bg-yellow-300 p-2 rounded-lg m-4'
+            className='text-xlp-2 rounded-lg m-4'
             onClick={() => setShowExhibition(true)}
           >
             Sergiyi Gör
@@ -66,4 +62,4 @@ const ExhibitionMenu = ({ artworks = [] }: GalleryProps) => {
     </>
   );
 };
-export default ExhibitionMenu;
+export default ExhibitionPreview;
