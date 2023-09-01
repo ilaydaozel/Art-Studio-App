@@ -45,11 +45,14 @@ const ExhibitionMenu = () => {
               />
             </div>
             <InformationContainer>
-              <text className='text-xl'>SANAL SERGİ</text>
-              <SlidingButton
-                label='Sergiyi Gör'
+              <text className='text-3xl m-2'>SANAL SERGİ</text>
+              <button
+                id='start_button'
+                className='text-xl bg-yellow-300 p-2 rounded-lg m-4'
                 onClick={() => setShowExhibition(true)}
-              ></SlidingButton>
+              >
+                Sergiyi Gör
+              </button>
             </InformationContainer>
           </>
         )}
