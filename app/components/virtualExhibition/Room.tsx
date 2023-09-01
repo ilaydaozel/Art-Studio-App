@@ -3,14 +3,15 @@ export const createFloor = () => {
   //Floor
   const planeGeometry = new THREE.PlaneGeometry(50, 50);
   const floorTexture = new THREE.TextureLoader().load(
-    '/images/woodMarble.jpeg'
+    '/images/darkGrayMarble.jpeg'
   );
   floorTexture.wrapS = THREE.RepeatWrapping;
   floorTexture.wrapT = THREE.RepeatWrapping;
-  floorTexture.repeat.set(5, 5); // how many times to repeat the texture
-  const materialFloor = new THREE.MeshBasicMaterial({
+  floorTexture.repeat.set(8, 4); // how many times to repeat the texture
+  const materialFloor = new THREE.MeshPhongMaterial({
     map: floorTexture,
     side: THREE.DoubleSide,
+    shininess: 100,
   });
   const floor = new THREE.Mesh(planeGeometry, materialFloor);
   floor.rotation.x = Math.PI / 2; //90 degrees
@@ -21,11 +22,11 @@ export const createFloor = () => {
 export const createCeiling = () => {
   //Ceiling
   const ceilingTexture = new THREE.TextureLoader().load(
-    '/images/textureWall.jpg'
+    '/images/wallTexture.jpeg'
   );
   ceilingTexture.wrapS = THREE.RepeatWrapping;
   ceilingTexture.wrapT = THREE.RepeatWrapping;
-  ceilingTexture.repeat.set(20, 25); // how many times to repeat the texture
+  ceilingTexture.repeat.set(1, 1); // how many times to repeat the texture
   const ceiling = new THREE.Mesh(
     new THREE.PlaneGeometry(50, 50),
     new THREE.MeshBasicMaterial({ map: ceilingTexture })
