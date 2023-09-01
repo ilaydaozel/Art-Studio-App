@@ -1,8 +1,10 @@
 'use client';
 import { IUserArtwork } from '@/app/actions/type';
 import React, { useRef, useEffect } from 'react';
+import { FaBullseye } from 'react-icons/fa';
 import * as THREE from 'three';
-
+import { FlyControls, PointerLockControls } from 'three-stdlib';
+import { OrbitControls } from 'three-stdlib';
 interface GalleryProps {
   artworks?: IUserArtwork[];
 }
@@ -19,8 +21,8 @@ const Gallery = ({ artworks = [] }: GalleryProps) => {
         0.1,
         1000
       );
-      camera.position.z = 15;
-      camera.position.y = 5;
+      camera.position.z = 5;
+      camera.position.y = 20;
       scene.add(camera);
       //renderer
       const renderer = new THREE.WebGLRenderer();
@@ -33,7 +35,7 @@ const Gallery = ({ artworks = [] }: GalleryProps) => {
       scene.add(ambientLight);
       //directional light
       const sunLight = new THREE.DirectionalLight(0xdddddd, 1.0);
-      sunLight.position.y = 15;
+      sunLight.position.y = 5;
       scene.add(sunLight);
 
       //cube
@@ -42,7 +44,7 @@ const Gallery = ({ artworks = [] }: GalleryProps) => {
       const cube = new THREE.Mesh(geometry, material); //combine geometry and material
       cube.position.y = 2;
       scene.add(cube);
-      //plane
+
       //Floor
       const planeGeometry = new THREE.PlaneGeometry(50, 50);
       const floorTexture = new THREE.TextureLoader().load(
@@ -51,22 +53,18 @@ const Gallery = ({ artworks = [] }: GalleryProps) => {
       floorTexture.wrapS = THREE.RepeatWrapping;
       floorTexture.wrapT = THREE.RepeatWrapping;
       floorTexture.repeat.set(12, 30); // how many times to repeat the texture
-
       const materialFloor = new THREE.MeshBasicMaterial({
         map: floorTexture,
         side: THREE.DoubleSide,
       });
       const floorPlane = new THREE.Mesh(planeGeometry, materialFloor);
-
       floorPlane.rotation.x = Math.PI / 2; //90 degrees
       floorPlane.rotation.y = -Math.PI; //180 degrees
       scene.add(floorPlane);
-      //wall group
 
-      //Create the walls
+      //wall group
       const wallGroup = new THREE.Group(); //create a group to hold the walls
       scene.add(wallGroup);
-
       //Front wall
       const frontTexture = new THREE.TextureLoader().load(
         '/images/grayStone.jpeg'
@@ -86,7 +84,6 @@ const Gallery = ({ artworks = [] }: GalleryProps) => {
         new THREE.BoxGeometry(50, 20, 0.001),
         new THREE.MeshBasicMaterial({ color: '#F8F8F8' })
       );
-
       leftWall.position.x = -25;
       leftWall.position.y = 10;
       leftWall.rotation.y = Math.PI / 2;
@@ -96,7 +93,6 @@ const Gallery = ({ artworks = [] }: GalleryProps) => {
         new THREE.BoxGeometry(50, 20, 0.001),
         new THREE.MeshBasicMaterial({ color: '#F8F8F8' })
       );
-
       rightWall.position.x = 25;
       rightWall.rotation.y = Math.PI / 2;
       rightWall.position.y = 10;
@@ -105,7 +101,6 @@ const Gallery = ({ artworks = [] }: GalleryProps) => {
         new THREE.BoxGeometry(50, 20, 0.001),
         new THREE.MeshBasicMaterial({ color: '#F8F8F8' })
       );
-
       backWall.position.z = 25;
       backWall.position.y = 10;
 
@@ -118,46 +113,125 @@ const Gallery = ({ artworks = [] }: GalleryProps) => {
       ceilingTexture.wrapS = THREE.RepeatWrapping;
       ceilingTexture.wrapT = THREE.RepeatWrapping;
       ceilingTexture.repeat.set(20, 25); // how many times to repeat the texture
-
       const ceiling = new THREE.Mesh(
         new THREE.PlaneGeometry(50, 50),
         new THREE.MeshBasicMaterial({ map: ceilingTexture })
       );
-
       ceiling.rotation.x = Math.PI / 2;
       ceiling.position.y = 20;
-
       scene.add(ceiling);
-      //controls
-      const onKeyDown = (e: any) => {
-        const keyCode = e.which;
-        if (keyCode == 39) {
-          camera.translateX(0.1);
-        }
-        if (keyCode == 37) {
-          camera.translateX(-0.1);
-        }
-        if (keyCode == 38) {
-          camera.translateY(0.1);
-        }
-        if (keyCode == 40) {
-          camera.translateY(-0.1);
-        }
-        if (keyCode == 68) {
-          camera.translateZ(0.1);
-        }
-        if (keyCode == 69) {
-          camera.translateZ(-0.1);
+
+      const wallBoundingBoxes: THREE.Box3[] = [];
+      for (let i = 0; i < wallGroup.children.length; i++) {
+        const wallSideBoundingBox = new THREE.Box3().setFromObject(
+          wallGroup.children[i]
+        );
+        wallBoundingBoxes.push(wallSideBoundingBox);
+      }
+      const checkCollision = () => {
+        const playerBoundingBox = new THREE.Box3();
+        const cameraWorldPosition = new THREE.Vector3();
+        camera.getWorldPosition(cameraWorldPosition);
+        playerBoundingBox.setFromCenterAndSize(
+          cameraWorldPosition,
+          new THREE.Vector3(1, 1, 1)
+        );
+        for (let i = 0; i < wallBoundingBoxes.length; i++) {
+          if (playerBoundingBox.intersectsBox(wallBoundingBoxes[i])) {
+            console.log('Collision detected!');
+            return true;
+          }
         }
       };
+      //controls
+      const pointerLockControls = new PointerLockControls(
+        camera,
+        document.body
+      );
+      /**
+      const orbitControls = new OrbitControls(camera, renderer.domElement);
+      orbitControls.enableDamping = true; // Add damping for smooth movement
+      orbitControls.dampingFactor = 0.05; // Adjust damping factor
+      orbitControls.minDistance = 5; // Set minimum distance from the camera
+      orbitControls.maxDistance = 50; // Set maximum distance from the camera
+        */
+
+      const startExperience = () => {
+        pointerLockControls.lock();
+        hideMenu();
+      };
+      const playButton = document.getElementById('start_button');
+      const menu = document.getElementById('menu');
+      playButton?.addEventListener('click', startExperience);
+
+      const hideMenu = () => {
+        if (menu) {
+          menu.style.display = 'none';
+        }
+      };
+      const showMenu = () => {
+        if (menu) {
+          menu.style.display = 'block';
+        }
+      };
+
+      const keysPressed: { [key: string]: boolean } = {
+        ArrowUp: false,
+        ArrowDown: false,
+        ArrowLeft: false,
+        ArrowRight: false,
+        w: false,
+        a: false,
+        s: false,
+        d: false,
+      };
+
+      const onKeyDown = (e: KeyboardEvent) => {
+        const key: string = e.key;
+        if (key in keysPressed) {
+          keysPressed[key] = true;
+        }
+      };
+      const onKeyUp = (e: KeyboardEvent) => {
+        const key: string = e.key;
+        if (key in keysPressed) {
+          keysPressed[key] = false;
+        }
+      };
+
       document.addEventListener('keydown', onKeyDown, false);
+      document.addEventListener('keyup', onKeyUp, false);
+
+      const clock = new THREE.Clock();
+
+      const updateMovement = (delta: number) => {
+        const moveSpeed = 5 * delta;
+        const previousPosition = camera.position.clone();
+        if (keysPressed.ArrowRight || keysPressed.d) {
+          pointerLockControls.moveRight(moveSpeed);
+        }
+        if (keysPressed.ArrowLeft || keysPressed.a) {
+          pointerLockControls.moveRight(-moveSpeed);
+        }
+        if (keysPressed.ArrowUp || keysPressed.w) {
+          pointerLockControls.moveForward(moveSpeed);
+        }
+        if (keysPressed.ArrowDown || keysPressed.s) {
+          pointerLockControls.moveForward(-moveSpeed);
+        }
+
+        if (checkCollision()) {
+          camera.position.copy(previousPosition);
+        }
+      };
 
       //render with animation
       let renderLoop = () => {
-        // Render the scene and camera
         cube.rotation.x += 0.01;
         cube.rotation.y += 0.01;
         requestAnimationFrame(renderLoop);
+        const delta = clock.getDelta();
+        updateMovement(delta);
         renderer.render(scene, camera);
       };
       renderLoop();
