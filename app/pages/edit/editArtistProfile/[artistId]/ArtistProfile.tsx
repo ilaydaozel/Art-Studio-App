@@ -18,6 +18,7 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 import HeadingWithUnderline from '@/app/components/HeadingWithUnderline';
 import TextButton from '@/app/components/buttons/TextButton';
+import Popup from '@/app/components/popup/Popup';
 
 const LayoutContainer = styled.div`
   display: flex;
@@ -91,34 +92,9 @@ const ArtworksContainer = styled.div`
   justify-content: center;
 `;
 
-const ArtworkSelectionPopup = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: white;
-  padding: 2rem;
-  border-radius: 0.5rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
-`;
-
-const CloseButton = styled.button`
-  position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 1rem;
-`;
-
 const ArtworkThumbnail = styled.img`
-  width: 30%;
-  height: auto;
+  width: 20vw;
+  height: 40vh;
   object-fit: cover;
   cursor: pointer;
   &:hover {
@@ -193,27 +169,27 @@ const ArtistPage = ({ profileInfo, artworks }: ArtistPageProps) => {
       </HeadingContainer>
 
       {showArtworkSelection && (
-        <ArtworkSelectionPopup>
-          <div>
-            <CloseButton onClick={() => setShowArtworkSelection(false)}>
-              X
-            </CloseButton>
-            <h2>Kapak Resmi Seç</h2>
-          </div>
-          <div className='flex justify-between'>
-            {artworks?.map((artwork) => (
-              <ArtworkThumbnail
-                key={artwork.id}
-                src={artwork.artworkMedias[0] || ''}
-                onClick={() => handleHeaderArtworkSelection(artwork)}
-              />
-            ))}
-          </div>
-          <SlidingButton
-            label='Tamamla'
-            onClick={() => handleCoverImageChange(headerArtwork)}
-          />
-        </ArtworkSelectionPopup>
+        <Popup
+          onClose={() => {
+            setShowArtworkSelection(false);
+            setHeaderArtwork(profileInfo?.coverImage || '');
+          }}
+          width='60%'
+          body={
+            <div className='flex justify-between gap-2'>
+              {artworks?.map((artwork) => (
+                <ArtworkThumbnail
+                  key={artwork.id}
+                  src={artwork.artworkMedias[0] || ''}
+                  onClick={() => handleHeaderArtworkSelection(artwork)}
+                />
+              ))}
+            </div>
+          }
+          title='Kapak Resmi Seç'
+          actionLabel='Tamamla'
+          onSubmit={() => handleCoverImageChange(headerArtwork)}
+        ></Popup>
       )}
       <LayoutContainer>
         <InformaionContainer>
