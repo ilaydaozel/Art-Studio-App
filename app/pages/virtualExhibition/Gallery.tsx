@@ -21,12 +21,12 @@ const Gallery = ({ artworks = [] }: GalleryProps) => {
         0.1,
         1000
       );
-      camera.position.z = 5;
-      camera.position.y = 20;
+      camera.position.z = 15;
+      camera.position.y = 10;
       scene.add(camera);
       //renderer
       const renderer = new THREE.WebGLRenderer();
-      renderer.setSize(window.innerWidth / 2, window.innerHeight / 2);
+      renderer.setSize(window.innerWidth, window.innerHeight);
       renderer.setClearColor(0xffffff, 1); //backgroundColor
       containerRef.current?.appendChild(renderer.domElement);
       //document.body.appendChild(renderer.domElement);
@@ -52,7 +52,7 @@ const Gallery = ({ artworks = [] }: GalleryProps) => {
       );
       floorTexture.wrapS = THREE.RepeatWrapping;
       floorTexture.wrapT = THREE.RepeatWrapping;
-      floorTexture.repeat.set(12, 30); // how many times to repeat the texture
+      floorTexture.repeat.set(5, 5); // how many times to repeat the texture
       const materialFloor = new THREE.MeshBasicMaterial({
         map: floorTexture,
         side: THREE.DoubleSide,
@@ -129,7 +129,7 @@ const Gallery = ({ artworks = [] }: GalleryProps) => {
       ) => {
         const paintingTexture = new THREE.TextureLoader().load(url);
         const painting = new THREE.Mesh(
-          new THREE.BoxGeometry(width, height, 0.01),
+          new THREE.BoxGeometry(width, height, 0.1),
           new THREE.MeshBasicMaterial({ map: paintingTexture })
         );
         painting.position.set(position.x, position.y, position.z);
@@ -165,7 +165,6 @@ const Gallery = ({ artworks = [] }: GalleryProps) => {
         );
         for (let i = 0; i < wallBoundingBoxes.length; i++) {
           if (playerBoundingBox.intersectsBox(wallBoundingBoxes[i])) {
-            console.log('Collision detected!');
             return true;
           }
         }
