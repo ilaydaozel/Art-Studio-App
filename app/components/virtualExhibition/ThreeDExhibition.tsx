@@ -70,6 +70,9 @@ const ThreeDExhibition = ({ artworks = [] }: ThreeDExhibitionProps) => {
         let distanceBetween = 20;
         let hangingHeight = 20;
         let wallIndex = 0;
+        let currentWallLength = 0; // Keeps track of the current wall's length
+        let positionX = 0;
+        let positionZ = 0;
 
         for (let i = 0; i < artworks.length; i++) {
           const artwork: IUserArtwork = artworks[i];
@@ -81,30 +84,35 @@ const ThreeDExhibition = ({ artworks = [] }: ThreeDExhibitionProps) => {
             height
           );
 
-          let positionX = 0;
-          let positionZ = 0;
+          // Check if there's enough space on the current wall, otherwise, switch walls
+          if (currentWallLength + width + distanceBetween > floorWidth) {
+            wallIndex = (wallIndex + 1) % 4; // Switch to the next wall
+            currentWallLength = 0; // Reset the current wall's length
+          }
 
           switch (wallIndex) {
             case 0:
               // Front wall
-              positionX = -floorWidth / 2 + distanceBetween;
+              positionX = -floorWidth / 2 + currentWallLength + distanceBetween;
               positionZ = -(floorHeight / 2 - 0.2);
               break;
             case 1:
               // left wall
-              positionZ = -floorHeight / 2 + distanceBetween;
+              positionZ =
+                -floorHeight / 2 + currentWallLength + distanceBetween;
               positionX = -floorWidth / 2 + 0.2;
               painting.rotation.y = Math.PI / 2;
               break;
             case 2:
               // Back wall
-              positionX = floorWidth / 2 - distanceBetween;
-              positionZ = -floorHeight / 2 + 0.2;
+              positionX = floorWidth / 2 - currentWallLength - distanceBetween;
+              positionZ = -(floorHeight / 2 - 0.2);
               break;
             case 3:
               // right wall
-              positionX = floorWidth / 2 - distanceBetween;
-              positionZ = -(floorHeight / 2 - 0.2);
+              positionX = floorWidth / 2 - 0.2;
+              positionZ =
+                -floorHeight / 2 + currentWallLength + distanceBetween;
               painting.rotation.y = Math.PI / 2;
               break;
           }
@@ -112,9 +120,7 @@ const ThreeDExhibition = ({ artworks = [] }: ThreeDExhibitionProps) => {
           painting.position.set(positionX, hangingHeight, positionZ);
           scene.add(painting);
 
-          console.log(wallIndex);
-          // Update the wall index in a clockwise manner
-          wallIndex = (wallIndex + 1) % 4;
+          currentWallLength += width + distanceBetween; // Update the current wall's length
         }
       };
 
