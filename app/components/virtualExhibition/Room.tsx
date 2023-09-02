@@ -1,13 +1,14 @@
 import * as THREE from 'three';
-export const createFloor = () => {
+const roomHeight = 40;
+export const createFloor = (width: number, height: number) => {
   //Floor
-  const planeGeometry = new THREE.PlaneGeometry(50, 50);
+  const planeGeometry = new THREE.PlaneGeometry(width, height);
   const floorTexture = new THREE.TextureLoader().load(
     '/images/darkGrayMarble.jpeg'
   );
   floorTexture.wrapS = THREE.RepeatWrapping;
   floorTexture.wrapT = THREE.RepeatWrapping;
-  floorTexture.repeat.set(8, 4); // how many times to repeat the texture
+  floorTexture.repeat.set(width / 10, height / 20); // how many times to repeat the texture
   const materialFloor = new THREE.MeshPhongMaterial({
     map: floorTexture,
     side: THREE.DoubleSide,
@@ -16,10 +17,11 @@ export const createFloor = () => {
   const floor = new THREE.Mesh(planeGeometry, materialFloor);
   floor.rotation.x = Math.PI / 2; //90 degrees
   floor.rotation.y = -Math.PI; //180 degrees
+  floor.position.y = 0;
   return floor;
 };
 
-export const createCeiling = () => {
+export const createCeiling = (width: number, height: number) => {
   //Ceiling
   const ceilingTexture = new THREE.TextureLoader().load(
     '/images/wallTexture.jpeg'
@@ -28,53 +30,42 @@ export const createCeiling = () => {
   ceilingTexture.wrapT = THREE.RepeatWrapping;
   ceilingTexture.repeat.set(1, 1); // how many times to repeat the texture
   const ceiling = new THREE.Mesh(
-    new THREE.PlaneGeometry(50, 50),
+    new THREE.PlaneGeometry(width, height),
     new THREE.MeshBasicMaterial({ map: ceilingTexture })
   );
   ceiling.rotation.x = Math.PI / 2;
-  ceiling.position.y = 20;
+  ceiling.position.y = roomHeight;
   return ceiling;
 };
 
-export const createWalls = () => {
+const createWall = (wallColor: string, width: number) => {
+  const wall = new THREE.Mesh(
+    new THREE.BoxGeometry(width, roomHeight, 0.001),
+    new THREE.MeshBasicMaterial({ color: wallColor })
+  );
+  wall.position.y = roomHeight / 2;
+  return wall;
+};
+
+export const createWalls = (width: number, height: number) => {
   //wall group
   const wallGroup = new THREE.Group(); //create a group to hold the walls
   //Front wall
-  const frontTexture = new THREE.TextureLoader().load('/images/grayStone.jpeg');
-  frontTexture.wrapS = THREE.RepeatWrapping;
-  frontTexture.wrapT = THREE.RepeatWrapping;
-  frontTexture.repeat.set(2, 1);
-  const frontWall = new THREE.Mesh(
-    new THREE.BoxGeometry(50, 20, 0.001),
-    new THREE.MeshBasicMaterial({ color: 'F9F9F9' })
-  );
-  frontWall.position.z = -25;
-  frontWall.position.y = 10;
-
+  const frontWall = createWall('#e9e8e6', width);
+  frontWall.position.z = -height / 2;
   //Left wall
-  const leftWall = new THREE.Mesh(
-    new THREE.BoxGeometry(50, 20, 0.001),
-    new THREE.MeshBasicMaterial({ color: '#F8F8F8' })
-  );
-  leftWall.position.x = -25;
-  leftWall.position.y = 10;
+  const leftWall = createWall('#fcf8f4', height);
+  leftWall.position.x = -width / 2;
   leftWall.rotation.y = Math.PI / 2;
 
   //Right wall
-  const rightWall = new THREE.Mesh(
-    new THREE.BoxGeometry(50, 20, 0.001),
-    new THREE.MeshBasicMaterial({ color: '#F8F8F8' })
-  );
-  rightWall.position.x = 25;
+  const rightWall = createWall('#fcf8f4', height);
+  rightWall.position.x = width / 2;
   rightWall.rotation.y = Math.PI / 2;
-  rightWall.position.y = 10;
+
   //Back wall
-  const backWall = new THREE.Mesh(
-    new THREE.BoxGeometry(50, 20, 0.001),
-    new THREE.MeshBasicMaterial({ color: '#F8F8F8' })
-  );
-  backWall.position.z = 25;
-  backWall.position.y = 10;
+  const backWall = createWall('#e9e8e6', width);
+  backWall.position.z = height / 2;
 
   wallGroup.add(leftWall, frontWall, rightWall, backWall);
   return wallGroup;
