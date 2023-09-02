@@ -65,8 +65,6 @@ const StartMenu = ({ artworks = [] }: GalleryProps) => {
   };
 
   const handleKeyPress = (event: KeyboardEvent) => {
-    console.log('showMenu ', showMenu);
-    console.log('event.key ', event.key);
     if (event.key === 'Escape') {
       setShowMenu(true);
     }
@@ -77,9 +75,6 @@ const StartMenu = ({ artworks = [] }: GalleryProps) => {
       setShowMenu(true);
     }
   };
-  useEffect(() => {
-    console.log('changed to: ', showMenu);
-  }, [showMenu]);
 
   useEffect(() => {
     document.addEventListener('keydown', handleKeyPress);
