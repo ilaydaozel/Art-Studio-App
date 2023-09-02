@@ -26,8 +26,8 @@ const ThreeDExhibition = ({ artworks = [] }: ThreeDExhibitionProps) => {
         0.1,
         1000
       );
-      camera.position.z = 5;
-      camera.position.y = 10;
+      camera.position.z = 0;
+      camera.position.y = 18;
       scene.add(camera);
       //renderer
       const renderer = new THREE.WebGLRenderer();
@@ -36,16 +36,19 @@ const ThreeDExhibition = ({ artworks = [] }: ThreeDExhibitionProps) => {
       containerRef.current?.appendChild(renderer.domElement);
 
       //ambient light
-      const ambientLight = new THREE.AmbientLight(0xffffff, 1.0); //color and intensity
+      const ambientLight = new THREE.AmbientLight(0xffffff, 0.6); //color and intensity
       scene.add(ambientLight);
       //directional light
-      const sunLight = new THREE.DirectionalLight(0xdddddd, 1.0);
+      const sunLight = new THREE.DirectionalLight(0xdddddd, 0.5);
       sunLight.position.y = 5;
       scene.add(sunLight);
 
-      const ceiling = createCeiling();
-      const floor = createFloor();
-      const walls = createWalls();
+      const floorWidth = 100;
+      const floorHeight = 200;
+
+      const ceiling = createCeiling(floorWidth, floorHeight);
+      const floor = createFloor(floorWidth, floorHeight);
+      const walls = createWalls(floorWidth, floorHeight);
       const wallsBoundingBox = createBoundingBox(walls);
       scene.add(ceiling, floor, walls);
 
@@ -63,22 +66,91 @@ const ThreeDExhibition = ({ artworks = [] }: ThreeDExhibitionProps) => {
           }
         }
       };
+      const hangPaintings = () => {
+        let distanceBetween = 20;
+        let hangingHeight = 20;
+        let wallIndex = 0;
 
-      let xlocation = -15;
-      artworks.map((artwork) => {
-        const width: number = artwork.width ? artwork.width / 10 : 5;
-        const height: number = artwork.height ? artwork.height / 10 : 8;
-        const painting = createPainting(
-          artwork.artworkMedias[0],
-          width,
-          height,
-          new THREE.Vector3(xlocation, 10, -24.9)
-        );
-        scene.add(painting);
-        xlocation += width + 10;
-      });
+        for (let i = 0; i < artworks.length; i++) {
+          const artwork: IUserArtwork = artworks[i];
+          const width: number = artwork.width ? artwork.width / 5 : 10;
+          const height: number = artwork.height ? artwork.height / 5 : 10;
+          const painting = createPainting(
+            artwork.artworkMedias[0],
+            width,
+            height
+          );
+
+          let positionX = 0;
+          let positionZ = 0;
+
+          switch (wallIndex) {
+            case 0:
+              // Front wall
+              positionX = -floorWidth / 2 + distanceBetween;
+              positionZ = -(floorHeight / 2 - 0.2);
+              break;
+            case 1:
+              // left wall
+              positionZ = -floorHeight / 2 + distanceBetween;
+              positionX = -floorWidth / 2 + 0.2;
+              painting.rotation.y = Math.PI / 2;
+              break;
+            case 2:
+              // Back wall
+              positionX = floorWidth / 2 - distanceBetween;
+              positionZ = -floorHeight / 2 + 0.2;
+              break;
+            case 3:
+              // right wall
+              positionX = floorWidth / 2 - distanceBetween;
+              positionZ = -(floorHeight / 2 - 0.2);
+              painting.rotation.y = Math.PI / 2;
+              break;
+          }
+
+          painting.position.set(positionX, hangingHeight, positionZ);
+          scene.add(painting);
+
+          console.log(wallIndex);
+          // Update the wall index in a clockwise manner
+          wallIndex = (wallIndex + 1) % 4;
+        }
+      };
+
+      hangPaintings();
+
       //controls
       const controls = new PointerLockControls(camera, document.body);
+
+      const hideMenu = () => {
+        const menu = document.getElementById('menu');
+        if (menu) {
+          menu.style.display = 'none'; // Hide the menu
+        }
+      };
+
+      const showMenu = () => {
+        const menu = document.getElementById('menu');
+        if (menu) {
+          menu.style.display = 'block'; // Show the menu
+        }
+      };
+
+      // Lock the pointer (controls are activated) and hide the menu when the experience starts
+      const startExperience = () => {
+        controls.lock(); // Lock the pointer (controls are activated)
+        hideMenu();
+      };
+
+      const setupPlayButton = () => {
+        const playButton = document.getElementById('play_button'); // Get the reference
+        if (playButton) {
+          console.log('start');
+          playButton.addEventListener('click', () => startExperience()); // Add the click event listener to the play button to start the experience
+        }
+      };
+      setupPlayButton();
 
       const keysPressed: { [key: string]: boolean } = {
         ArrowUp: false,
@@ -96,6 +168,14 @@ const ThreeDExhibition = ({ artworks = [] }: ThreeDExhibitionProps) => {
         if (key in keysPressed) {
           keysPressed[key] = true;
         }
+        /*if (key === 'Escape') {
+          showMenu();
+          controls.unlock();
+        }
+        if (key === 'Enter' || key === 'Return') {
+          hideMenu();
+          controls.lock();
+        }*/
       };
       const onKeyUp = (e: KeyboardEvent) => {
         const key: string = e.key;
