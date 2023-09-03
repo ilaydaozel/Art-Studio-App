@@ -39,8 +39,7 @@ const ThreeDExhibition = ({ artworks = [] }: ThreeDExhibitionProps) => {
       renderer.shadowMap.enabled = true;
       renderer.shadowMap.type = THREE.PCFSoftShadowMap;
       containerRef.current?.appendChild(renderer.domElement);
-      //const orbitControls = new OrbitControls(camera, renderer.domElement);
-      const orbitControls = setUpOrbitControls(camera, renderer.domElement);
+      //const orbitControls = setUpOrbitControls(camera, renderer.domElement);
       //createRoom
       createInitialRoomLight(scene);
       const floorDimensions = { width: 100, height: 200 };
@@ -56,35 +55,25 @@ const ThreeDExhibition = ({ artworks = [] }: ThreeDExhibitionProps) => {
       //controls
       const controls = new PointerLockControls(camera, document.body);
 
-      const hideMenu = () => {
-        const menu = document.getElementById('menu');
-        if (menu) {
-          menu.style.display = 'none'; // Hide the menu
-        }
-      };
+      const menuPanel = document.getElementById('menu') as HTMLDivElement;
+      const startButton = document.getElementById(
+        'start_button'
+      ) as HTMLButtonElement;
+      startButton.addEventListener(
+        'click',
+        () => {
+          controls.lock();
+        },
+        false
+      );
+      controls.addEventListener('lock', () => {
+        menuPanel.style.display = 'none';
+      });
+      controls.addEventListener('unlock', () => {
+        menuPanel.style.display = 'block';
+      });
 
-      const showMenu = () => {
-        const menu = document.getElementById('menu');
-        if (menu) {
-          menu.style.display = 'block'; // Show the menu
-        }
-      };
-
-      const startExperience = () => {
-        controls.lock(); // Lock the pointer (controls are activated)
-        hideMenu();
-      };
-
-      const setupPlayButton = () => {
-        const playButton = document.getElementById('play_button'); // Get the reference
-        if (playButton) {
-          console.log('start');
-          playButton.addEventListener('click', () => startExperience()); // Add the click event listener to the play button to start the experience
-        }
-      };
-      setupPlayButton();
-
-      /*const keysPressed: { [key: string]: boolean } = {
+      const keysPressed: { [key: string]: boolean } = {
         ArrowUp: false,
         ArrowDown: false,
         ArrowLeft: false,
@@ -101,14 +90,13 @@ const ThreeDExhibition = ({ artworks = [] }: ThreeDExhibitionProps) => {
           keysPressed[key] = true;
         }
         if (key === 'Escape') {
-          showMenu();
           controls.unlock();
         }
         if (key === 'Enter' || key === 'Return') {
-          hideMenu();
           controls.lock();
         }
-            };
+      };
+
       const onKeyUp = (e: KeyboardEvent) => {
         const key: string = e.key;
         if (key in keysPressed) {
@@ -141,7 +129,7 @@ const ThreeDExhibition = ({ artworks = [] }: ThreeDExhibitionProps) => {
           camera.position.copy(previousPosition);
         }
       };
-*/
+
       const onWindowResize = () => {
         camera.aspect = window.innerWidth / window.innerHeight;
         camera.updateProjectionMatrix();
@@ -153,8 +141,8 @@ const ThreeDExhibition = ({ artworks = [] }: ThreeDExhibitionProps) => {
       // Render with animation
       const renderLoop = () => {
         requestAnimationFrame(renderLoop);
-        // const delta = clock.getDelta();
-        //updateMovement(delta);
+        const delta = clock.getDelta();
+        updateMovement(delta);
         renderer.render(scene, camera);
       };
       renderLoop();
