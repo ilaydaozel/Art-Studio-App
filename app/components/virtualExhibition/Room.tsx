@@ -68,16 +68,13 @@ const createAllWalls = (width: number, height: number) => {
   return wallGroup;
 };
 
-export const createRoom = (
-  floorDimensions: { width: number; height: number },
-  scene: THREE.Scene
-) => {
-  const roomGroup = new THREE.Group();
+export const createRoom = (floorDimensions: {
+  width: number;
+  height: number;
+}) => {
   const { width, height } = floorDimensions;
   const ceiling = createCeiling(width, height);
   const floor = createFloor(width, height);
   const walls = createAllWalls(width, height);
-  roomGroup.add(ceiling, floor, walls);
-  scene.add(ceiling, floor, walls);
-  return roomGroup;
+  return { ceiling, floor, walls };
 };
