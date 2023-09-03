@@ -20,8 +20,8 @@ const NameText = styled.div<{ isLoading: boolean }>`
 const ArtistBox = styled.div<{ profilePic: string }>`
   display: flex;
   justify-content: center;
-  width: 200px;
-  height: 200px;
+  width: 15vw;
+  height: 15vw;
   background-image: url(${(props) => props.profilePic});
   background-size: cover;
   border: 1px solid #ccc;
@@ -52,8 +52,8 @@ const ArtistBox = styled.div<{ profilePic: string }>`
   }
 
   @media (max-width: 768px) {
-    width: 160px;
-    height: 160px;
+    width: 30vw;
+    height: 30vw;
     font-size: 1.2 rem;
     &:hover {
       font-size: 1.4rem;
@@ -61,8 +61,8 @@ const ArtistBox = styled.div<{ profilePic: string }>`
   }
 
   @media (max-width: 480px) {
-    width: 120px;
-    height: 120px;
+    width: 40vw;
+    height: 40vw;
     font-size: 1rem;
     &:hover {
       font-size: 1.2rem;
