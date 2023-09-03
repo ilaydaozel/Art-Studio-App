@@ -31,19 +31,21 @@ const ThreeDExhibition = ({ artworks = [] }: ThreeDExhibitionProps) => {
       camera.position.y = 18;
       scene.add(camera);
       //renderer
+
       const renderer = new THREE.WebGLRenderer();
       renderer.setSize(window.innerWidth, window.innerHeight);
       renderer.setClearColor(0xffffff, 1); //backgroundColor
       renderer.shadowMap.enabled = true;
       renderer.shadowMap.type = THREE.PCFSoftShadowMap;
       containerRef.current?.appendChild(renderer.domElement);
+      //new OrbitControls(camera, renderer.domElement);
 
-      new OrbitControls(camera, renderer.domElement);
-      createInitialRoomLight(scene);
       //createRoom
+      createInitialRoomLight(scene);
       const floorDimensions = { width: 100, height: 200 };
-      const roomGroup = createRoom(floorDimensions, scene);
-      const roomBoundingBox = createBoundingBoxOfGroup(roomGroup);
+      const { ceiling, floor, walls } = createRoom(floorDimensions);
+      scene.add(ceiling, floor, walls);
+      const roomBoundingBox: THREE.Box3[] = createBoundingBoxOfGroup(walls);
       const paintings = createAndHangPaintings(artworks, floorDimensions);
       for (let i = 0; i < paintings.length; i++) {
         scene.add(paintings[i]);
@@ -67,7 +69,6 @@ const ThreeDExhibition = ({ artworks = [] }: ThreeDExhibitionProps) => {
         }
       };
 
-      // Lock the pointer (controls are activated) and hide the menu when the experience starts
       const startExperience = () => {
         controls.lock(); // Lock the pointer (controls are activated)
         hideMenu();
