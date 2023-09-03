@@ -82,6 +82,7 @@ const ThreeDExhibition = ({ artworks = [] }: ThreeDExhibitionProps) => {
         a: false,
         s: false,
         d: false,
+        Touch: false,
       };
 
       const onKeyDown = (e: KeyboardEvent) => {
@@ -107,6 +108,13 @@ const ThreeDExhibition = ({ artworks = [] }: ThreeDExhibitionProps) => {
       document.addEventListener('keydown', onKeyDown, false);
       document.addEventListener('keyup', onKeyUp, false);
 
+      document.addEventListener('touchstart', () => {
+        keysPressed['Touch'] = true;
+      });
+      document.addEventListener('touchend', () => {
+        keysPressed['Touch'] = false;
+      });
+
       const clock = new THREE.Clock();
 
       const updateMovement = (delta: number) => {
@@ -122,6 +130,9 @@ const ThreeDExhibition = ({ artworks = [] }: ThreeDExhibitionProps) => {
           controls.moveForward(moveSpeed);
         }
         if (keysPressed.ArrowDown || keysPressed.s) {
+          controls.moveForward(-moveSpeed);
+        }
+        if (keysPressed.Touch) {
           controls.moveForward(-moveSpeed);
         }
 
