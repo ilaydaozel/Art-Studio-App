@@ -9,7 +9,8 @@ import {
   checkCollisionWithTheBoundingBox,
   createBoundingBoxOfGroup,
 } from './BoundingBox';
-import { createInitialRoomLight } from './Light';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import { createInitialRoomLight, createSpotlightForTarget } from './Light';
 interface ThreeDExhibitionProps {
   artworks?: IUserArtwork[];
 }
@@ -33,15 +34,22 @@ const ThreeDExhibition = ({ artworks = [] }: ThreeDExhibitionProps) => {
       const renderer = new THREE.WebGLRenderer();
       renderer.setSize(window.innerWidth, window.innerHeight);
       renderer.setClearColor(0xffffff, 1); //backgroundColor
+      renderer.shadowMap.enabled = true;
+      renderer.shadowMap.type = THREE.PCFSoftShadowMap;
       containerRef.current?.appendChild(renderer.domElement);
 
+      new OrbitControls(camera, renderer.domElement);
       createInitialRoomLight(scene);
-
+      //createRoom
       const floorDimensions = { width: 100, height: 200 };
       const roomGroup = createRoom(floorDimensions, scene);
       const roomBoundingBox = createBoundingBoxOfGroup(roomGroup);
-      createAndHangPaintings(artworks, floorDimensions, scene);
-
+      const paintings = createAndHangPaintings(artworks, floorDimensions);
+      for (let i = 0; i < paintings.length; i++) {
+        scene.add(paintings[i]);
+        const spotlightOfPainting = createSpotlightForTarget(paintings[i]);
+        scene.add(spotlightOfPainting);
+      }
       //controls
       const controls = new PointerLockControls(camera, document.body);
 
@@ -112,7 +120,7 @@ const ThreeDExhibition = ({ artworks = [] }: ThreeDExhibitionProps) => {
       const clock = new THREE.Clock();
 
       const updateMovement = (delta: number) => {
-        const moveSpeed = 7 * delta;
+        const moveSpeed = 15 * delta;
         const previousPosition = camera.position.clone();
         if (keysPressed.ArrowRight || keysPressed.d) {
           controls.moveRight(moveSpeed);
@@ -132,8 +140,16 @@ const ThreeDExhibition = ({ artworks = [] }: ThreeDExhibitionProps) => {
         }
       };
 
-      //render with animation
-      let renderLoop = () => {
+      const onWindowResize = () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      };
+
+      window.addEventListener('resize', onWindowResize, false);
+
+      // Render with animation
+      const renderLoop = () => {
         requestAnimationFrame(renderLoop);
         const delta = clock.getDelta();
         updateMovement(delta);
