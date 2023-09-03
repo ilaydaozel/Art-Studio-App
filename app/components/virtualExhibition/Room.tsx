@@ -50,18 +50,18 @@ const createWall = (wallColor: string, width: number) => {
 const createAllWalls = (width: number, height: number) => {
   const wallGroup = new THREE.Group();
 
-  const frontWall = createWall('#e9e8e6', width);
+  const frontWall = createWall('#ffffff', width);
   frontWall.position.z = -height / 2;
 
-  const leftWall = createWall('#fcf8f4', height);
+  const leftWall = createWall('#ffffff', height);
   leftWall.position.x = -width / 2;
   leftWall.rotation.y = Math.PI / 2;
 
-  const rightWall = createWall('#fcf8f4', height);
+  const rightWall = createWall('#ffffff', height);
   rightWall.position.x = width / 2;
   rightWall.rotation.y = Math.PI / 2;
 
-  const backWall = createWall('#e9e8e6', width);
+  const backWall = createWall('#ffffff', width);
   backWall.position.z = height / 2;
 
   wallGroup.add(leftWall, frontWall, rightWall, backWall);
