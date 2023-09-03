@@ -39,7 +39,7 @@ const ThreeDExhibition = ({ artworks = [] }: ThreeDExhibitionProps) => {
       renderer.shadowMap.enabled = true;
       renderer.shadowMap.type = THREE.PCFSoftShadowMap;
       containerRef.current?.appendChild(renderer.domElement);
-      //const orbitControls = setUpOrbitControls(camera, renderer.domElement);
+
       //createRoom
       createInitialRoomLight(scene);
       const floorDimensions = { width: 100, height: 200 };
@@ -66,6 +66,7 @@ const ThreeDExhibition = ({ artworks = [] }: ThreeDExhibitionProps) => {
         },
         false
       );
+
       controls.addEventListener('lock', () => {
         menuPanel.style.display = 'none';
       });
@@ -108,12 +109,39 @@ const ThreeDExhibition = ({ artworks = [] }: ThreeDExhibitionProps) => {
       document.addEventListener('keydown', onKeyDown, false);
       document.addEventListener('keyup', onKeyUp, false);
 
-      document.addEventListener('touchstart', () => {
-        keysPressed['Touch'] = true;
-      });
-      document.addEventListener('touchend', () => {
-        keysPressed['Touch'] = false;
-      });
+      // Touch event handlers
+      let touchMoveX = 0;
+      let touchMoveY = 0;
+      let touching = false;
+
+      const onTouchStart = (e: TouchEvent) => {
+        e.preventDefault();
+        const touch = e.touches[0];
+        touchMoveX = touch.clientX;
+        touchMoveY = touch.clientY;
+        touching = true;
+      };
+
+      const onTouchMove = (e: TouchEvent) => {
+        e.preventDefault();
+        if (!touching) return;
+        const touch = e.touches[0];
+        const deltaX = touch.clientX - touchMoveX;
+        const deltaY = touch.clientY - touchMoveY;
+        touchMoveX = touch.clientX;
+        touchMoveY = touch.clientY;
+        camera.rotation.x -= deltaY * 0.002;
+        camera.rotation.y -= deltaX * 0.002;
+      };
+
+      const onTouchEnd = (e: TouchEvent) => {
+        e.preventDefault();
+        touching = false;
+      };
+
+      document.addEventListener('touchstart', onTouchStart, false);
+      document.addEventListener('touchmove', onTouchMove, false);
+      document.addEventListener('touchend', onTouchEnd, false);
 
       const clock = new THREE.Clock();
 
