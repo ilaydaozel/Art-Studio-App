@@ -1,14 +1,15 @@
 import * as THREE from 'three';
+
 const roomHeight = 40;
-export const createFloor = (width: number, height: number) => {
-  //Floor
+
+const createFloor = (width: number, height: number) => {
   const planeGeometry = new THREE.PlaneGeometry(width, height);
   const floorTexture = new THREE.TextureLoader().load(
     '/images/darkGrayMarble.jpeg'
   );
   floorTexture.wrapS = THREE.RepeatWrapping;
   floorTexture.wrapT = THREE.RepeatWrapping;
-  floorTexture.repeat.set(width / 10, height / 20); // how many times to repeat the texture
+  floorTexture.repeat.set(width / 10, height / 20);
   const materialFloor = new THREE.MeshPhongMaterial({
     map: floorTexture,
     side: THREE.DoubleSide,
@@ -21,17 +22,16 @@ export const createFloor = (width: number, height: number) => {
   return floor;
 };
 
-export const createCeiling = (width: number, height: number) => {
-  //Ceiling
+const createCeiling = (width: number, height: number) => {
   const ceilingTexture = new THREE.TextureLoader().load(
     '/images/wallTexture.jpeg'
   );
   ceilingTexture.wrapS = THREE.RepeatWrapping;
   ceilingTexture.wrapT = THREE.RepeatWrapping;
-  ceilingTexture.repeat.set(1, 1); // how many times to repeat the texture
+  ceilingTexture.repeat.set(1, 1);
   const ceiling = new THREE.Mesh(
     new THREE.PlaneGeometry(width, height),
-    new THREE.MeshBasicMaterial({ map: ceilingTexture })
+    new THREE.MeshPhongMaterial({ map: ceilingTexture })
   );
   ceiling.rotation.x = Math.PI / 2;
   ceiling.position.y = roomHeight;
@@ -41,29 +41,26 @@ export const createCeiling = (width: number, height: number) => {
 const createWall = (wallColor: string, width: number) => {
   const wall = new THREE.Mesh(
     new THREE.BoxGeometry(width, roomHeight, 0.001),
-    new THREE.MeshBasicMaterial({ color: wallColor })
+    new THREE.MeshPhongMaterial({ color: wallColor })
   );
   wall.position.y = roomHeight / 2;
   return wall;
 };
 
-export const createWalls = (width: number, height: number) => {
-  //wall group
-  const wallGroup = new THREE.Group(); //create a group to hold the walls
-  //Front wall
+const createAllWalls = (width: number, height: number) => {
+  const wallGroup = new THREE.Group();
+
   const frontWall = createWall('#e9e8e6', width);
   frontWall.position.z = -height / 2;
-  //Left wall
+
   const leftWall = createWall('#fcf8f4', height);
   leftWall.position.x = -width / 2;
   leftWall.rotation.y = Math.PI / 2;
 
-  //Right wall
   const rightWall = createWall('#fcf8f4', height);
   rightWall.position.x = width / 2;
   rightWall.rotation.y = Math.PI / 2;
 
-  //Back wall
   const backWall = createWall('#e9e8e6', width);
   backWall.position.z = height / 2;
 
@@ -71,13 +68,16 @@ export const createWalls = (width: number, height: number) => {
   return wallGroup;
 };
 
-export const createBoundingBox = (wallGroup: THREE.Group) => {
-  const wallBoundingBoxes: THREE.Box3[] = [];
-  for (let i = 0; i < wallGroup.children.length; i++) {
-    const wallSideBoundingBox = new THREE.Box3().setFromObject(
-      wallGroup.children[i]
-    );
-    wallBoundingBoxes.push(wallSideBoundingBox);
-  }
-  return wallBoundingBoxes;
+export const createRoom = (
+  floorDimensions: { width: number; height: number },
+  scene: THREE.Scene
+) => {
+  const roomGroup = new THREE.Group();
+  const { width, height } = floorDimensions;
+  const ceiling = createCeiling(width, height);
+  const floor = createFloor(width, height);
+  const walls = createAllWalls(width, height);
+  roomGroup.add(ceiling, floor, walls);
+  scene.add(ceiling, floor, walls);
+  return roomGroup;
 };
