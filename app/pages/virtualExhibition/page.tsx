@@ -1,5 +1,7 @@
 import getAllArtworksByArtistId from '@/app/actions/getAllArtworksByArtistId';
 import ExhibitionPreview from './ExhibitionPreview';
+import HeadingWithUnderline from '@/app/components/HeadingWithUnderline';
+import { all } from 'axios';
 
 const VirtualExhibition = async () => {
   const allArtworks = await getAllArtworksByArtistId({
@@ -7,10 +9,12 @@ const VirtualExhibition = async () => {
   });
   return (
     <>
-      <div className='flex items-center justify-center mt-28'>
-        <ExhibitionPreview
-          artworks={allArtworks?.allUserArtworks}
-        ></ExhibitionPreview>
+      <div className='flex flex-col mt-28'>
+        <div className='flex flex-wrap justify-around gap-4 md:px-12 md:my-8 px-6 my-4'>
+          <ExhibitionPreview
+            artworks={allArtworks?.allUserArtworks}
+          ></ExhibitionPreview>
+        </div>
       </div>
     </>
   );

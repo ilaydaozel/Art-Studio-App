@@ -10,13 +10,59 @@ interface ExhibitionPreviewProps {
   artworks?: IUserArtwork[];
 }
 
-const MenuContainer = styled.div`
-  width: 60%;
-  margin: 20px;
-  height: 300px;
-  border-radius: 0.5rem;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+const ExhibitonBox = styled.div<{ backgroundImgUrl: string }>`
+  display: flex;
+  justify-content: center;
+  width: 20vw;
+  height: 20vw;
+  background-image: url(${(props) => props.backgroundImgUrl});
+  background-size: cover;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  overflow: hidden;
+  margin: 10px;
+  position: relative;
+  font-size: 1.5rem;
+  transition: font-size 0.2s background-color:0.2s;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    transition: background-color 0.2s;
+  }
+
+  &:hover::before {
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+
+  &:hover {
+    font-size: 1.7rem;
+  }
+
+  @media (max-width: 768px) {
+    width: 30vw;
+    height: 30vw;
+    font-size: 1.2 rem;
+    &:hover {
+      font-size: 1.4rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    width: 40vw;
+    height: 40vw;
+    font-size: 1rem;
+    &:hover {
+      font-size: 1.2rem;
+    }
+  }
 `;
+
 const InformationContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -29,35 +75,21 @@ const ExhibitionPreview = ({ artworks = [] }: ExhibitionPreviewProps) => {
   const [showExhibition, setShowExhibition] = useState(false);
   return (
     <>
-      <MenuContainer>
-        <div className='relative w-full h-[50%]'>
-          <Image
-            src={
-              'https://res.cloudinary.com/dnlz4muyb/image/upload/v1691094915/j0dfdld8wjk1cdgb8afs.jpg'
-            }
-            placeholder='empty'
-            alt='artwork'
-            fill
-            className='object-cover'
-          />
-        </div>
-        <InformationContainer>
-          <button
-            className='text-xlp-2 rounded-lg m-4'
-            onClick={() => setShowExhibition(true)}
-          >
-            Sergiyi Gör
-          </button>
-        </InformationContainer>
-        {showExhibition && (
-          <Popup
-            onClose={() => setShowExhibition(false)}
-            width='100%'
-            isFullScreen
-            body={<StartMenu artworks={artworks}></StartMenu>}
-          ></Popup>
-        )}
-      </MenuContainer>
+      {' '}
+      <ExhibitonBox
+        onClick={() => setShowExhibition(true)}
+        backgroundImgUrl='https://res.cloudinary.com/dnlz4muyb/image/upload/v1691094915/j0dfdld8wjk1cdgb8afs.jpg'
+      >
+        <InformationContainer></InformationContainer>
+      </ExhibitonBox>
+      {showExhibition && (
+        <Popup
+          onClose={() => setShowExhibition(false)}
+          width='100%'
+          isFullScreen
+          body={<StartMenu artworks={artworks}></StartMenu>}
+        ></Popup>
+      )}
     </>
   );
 };
