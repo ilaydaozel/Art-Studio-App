@@ -43,7 +43,6 @@ const ExhibitionPreview = ({ artworks = [] }: ExhibitionPreviewProps) => {
         </div>
         <InformationContainer>
           <button
-            id='start_button'
             className='text-xlp-2 rounded-lg m-4'
             onClick={() => setShowExhibition(true)}
           >

@@ -22,7 +22,7 @@ const MenuContainer = styled.div`
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 `;
 
-const StartButton = styled.div`
+const StartButton = styled.button`
   display: flex;
   justify-content: center;
   padding: 0.25rem 1rem;
@@ -58,64 +58,37 @@ const InfoText = styled.text`
 `;
 
 const StartMenu = ({ artworks = [] }: GalleryProps) => {
-  const [showMenu, setShowMenu] = useState(true);
-
-  const handleStartClick = () => {
-    setShowMenu(false);
-  };
-
-  const handleKeyPress = (event: KeyboardEvent) => {
-    if (event.key === 'Escape') {
-      setShowMenu(true);
-    }
-    if (event.key === 'Enter' || event.key === 'Return') {
-      setShowMenu(false);
-    }
-    if (event.key === ' ') {
-      setShowMenu(true);
-    }
-  };
-
-  useEffect(() => {
-    document.addEventListener('keydown', handleKeyPress);
-    return () => {
-      document.removeEventListener('keydown', handleKeyPress);
-    };
-  }, []);
-
   return (
     <>
-      {showMenu && (
-        <MenuContainer>
-          <div className='relative w-full h-[40%]'>
-            <Image
-              style={{
-                borderTopRightRadius: '0.5rem',
-                borderTopLeftRadius: '0.5rem',
-              }}
-              src={
-                'https://res.cloudinary.com/dnlz4muyb/image/upload/v1691094915/j0dfdld8wjk1cdgb8afs.jpg'
-              }
-              placeholder='empty'
-              alt='artwork'
-              fill
-              className='object-cover'
-            />
+      <MenuContainer id='menu'>
+        <div className='relative w-full h-[40%]'>
+          <Image
+            style={{
+              borderTopRightRadius: '0.5rem',
+              borderTopLeftRadius: '0.5rem',
+            }}
+            src={
+              'https://res.cloudinary.com/dnlz4muyb/image/upload/v1691094915/j0dfdld8wjk1cdgb8afs.jpg'
+            }
+            placeholder='empty'
+            alt='artwork'
+            fill
+            className='object-cover'
+          />
+        </div>
+        <InformationContainer>
+          <ExhibitionTitle>Sanal Sergi Deneyimi</ExhibitionTitle>
+          <div className='flex flex-col justify-center items-center'>
+            <InfoText>Başlamak için ENTER a basın.</InfoText>
+            <InfoText>
+              Gezinmek için ok tuşlarını veya W A S D tuşlarını kullanın.
+            </InfoText>
+            <InfoText>Etrafa bakmak için fareyi hareket ettirin.</InfoText>
+            <InfoText>Çıkmak için sağ üstteki çarpıya basın.</InfoText>
           </div>
-          <InformationContainer>
-            <ExhibitionTitle>Sanal Sergi Deneyimi</ExhibitionTitle>
-            <div className='flex flex-col justify-center items-center'>
-              <InfoText>Başlamak için ENTER a basın.</InfoText>
-              <InfoText>
-                Gezinmek için ok tuşlarını veya W A S D tuşlarını kullanın.
-              </InfoText>
-              <InfoText>Etrafa bakmak için fareyi hareket ettirin.</InfoText>
-              <InfoText>Çıkmak için sağ üstteki çarpıya basın.</InfoText>
-            </div>
-            <StartButton onClick={handleStartClick}>Sergiyi Gör</StartButton>
-          </InformationContainer>
-        </MenuContainer>
-      )}
+          <StartButton id='start_button'>Sergiyi Gör</StartButton>
+        </InformationContainer>
+      </MenuContainer>
       <ThreeDExhibition artworks={artworks}></ThreeDExhibition>
     </>
   );
