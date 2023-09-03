@@ -29,7 +29,7 @@ const ThreeDExhibition = ({ artworks = [] }: ThreeDExhibitionProps) => {
         1000
       );
       camera.position.z = 0;
-      camera.position.y = 18;
+      camera.position.y = 20;
       scene.add(camera);
       //renderer
 
@@ -54,32 +54,7 @@ const ThreeDExhibition = ({ artworks = [] }: ThreeDExhibitionProps) => {
       }
       //controls
       const controls = new PointerLockControls(camera, document.body);
-
-      const menuPanel = document.getElementById('menu') as HTMLDivElement;
-      const startButton = document.getElementById(
-        'start_button'
-      ) as HTMLButtonElement;
-      startButton.addEventListener(
-        'touchstart',
-        () => {
-          controls.lock();
-        },
-        false
-      );
-      startButton.addEventListener(
-        'click',
-        () => {
-          controls.lock();
-        },
-        false
-      );
-
-      controls.addEventListener('lock', () => {
-        menuPanel.style.display = 'none';
-      });
-      controls.addEventListener('unlock', () => {
-        menuPanel.style.display = 'block';
-      });
+      controls.lock();
 
       const keysPressed: { [key: string]: boolean } = {
         ArrowUp: false,
@@ -90,7 +65,6 @@ const ThreeDExhibition = ({ artworks = [] }: ThreeDExhibitionProps) => {
         a: false,
         s: false,
         d: false,
-        Touch: false,
       };
 
       const onKeyDown = (e: KeyboardEvent) => {
@@ -101,7 +75,7 @@ const ThreeDExhibition = ({ artworks = [] }: ThreeDExhibitionProps) => {
         if (key === 'Escape') {
           controls.unlock();
         }
-        if (key === 'Enter' || key === 'Return') {
+        if (key === 'Enter' || key === 'Return' || key === ' ') {
           controls.lock();
         }
       };
@@ -115,40 +89,6 @@ const ThreeDExhibition = ({ artworks = [] }: ThreeDExhibitionProps) => {
 
       document.addEventListener('keydown', onKeyDown, false);
       document.addEventListener('keyup', onKeyUp, false);
-
-      // Touch event handlers
-      let touchMoveX = 0;
-      let touchMoveY = 0;
-      let touching = false;
-
-      const onTouchStart = (e: TouchEvent) => {
-        e.preventDefault();
-        const touch = e.touches[0];
-        touchMoveX = touch.clientX;
-        touchMoveY = touch.clientY;
-        touching = true;
-      };
-
-      const onTouchMove = (e: TouchEvent) => {
-        e.preventDefault();
-        if (!touching) return;
-        const touch = e.touches[0];
-        const deltaX = touch.clientX - touchMoveX;
-        const deltaY = touch.clientY - touchMoveY;
-        touchMoveX = touch.clientX;
-        touchMoveY = touch.clientY;
-        camera.rotation.x -= deltaY * 0.002;
-        camera.rotation.y -= deltaX * 0.002;
-      };
-
-      const onTouchEnd = (e: TouchEvent) => {
-        e.preventDefault();
-        touching = false;
-      };
-
-      document.addEventListener('touchstart', onTouchStart, false);
-      document.addEventListener('touchmove', onTouchMove, false);
-      document.addEventListener('touchend', onTouchEnd, false);
 
       const clock = new THREE.Clock();
 
