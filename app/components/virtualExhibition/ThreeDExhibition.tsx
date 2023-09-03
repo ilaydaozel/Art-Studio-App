@@ -11,6 +11,7 @@ import {
 } from './BoundingBox';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { createInitialRoomLight, createSpotlightForTarget } from './Light';
+import { setUpOrbitControls } from './Controls';
 interface ThreeDExhibitionProps {
   artworks?: IUserArtwork[];
 }
@@ -38,8 +39,8 @@ const ThreeDExhibition = ({ artworks = [] }: ThreeDExhibitionProps) => {
       renderer.shadowMap.enabled = true;
       renderer.shadowMap.type = THREE.PCFSoftShadowMap;
       containerRef.current?.appendChild(renderer.domElement);
-      //new OrbitControls(camera, renderer.domElement);
-
+      //const orbitControls = new OrbitControls(camera, renderer.domElement);
+      const orbitControls = setUpOrbitControls(camera, renderer.domElement);
       //createRoom
       createInitialRoomLight(scene);
       const floorDimensions = { width: 100, height: 200 };
@@ -83,7 +84,7 @@ const ThreeDExhibition = ({ artworks = [] }: ThreeDExhibitionProps) => {
       };
       setupPlayButton();
 
-      const keysPressed: { [key: string]: boolean } = {
+      /*const keysPressed: { [key: string]: boolean } = {
         ArrowUp: false,
         ArrowDown: false,
         ArrowLeft: false,
@@ -99,15 +100,15 @@ const ThreeDExhibition = ({ artworks = [] }: ThreeDExhibitionProps) => {
         if (key in keysPressed) {
           keysPressed[key] = true;
         }
-        /*if (key === 'Escape') {
+        if (key === 'Escape') {
           showMenu();
           controls.unlock();
         }
         if (key === 'Enter' || key === 'Return') {
           hideMenu();
           controls.lock();
-        }*/
-      };
+        }
+            };
       const onKeyUp = (e: KeyboardEvent) => {
         const key: string = e.key;
         if (key in keysPressed) {
@@ -140,7 +141,7 @@ const ThreeDExhibition = ({ artworks = [] }: ThreeDExhibitionProps) => {
           camera.position.copy(previousPosition);
         }
       };
-
+*/
       const onWindowResize = () => {
         camera.aspect = window.innerWidth / window.innerHeight;
         camera.updateProjectionMatrix();
@@ -152,8 +153,8 @@ const ThreeDExhibition = ({ artworks = [] }: ThreeDExhibitionProps) => {
       // Render with animation
       const renderLoop = () => {
         requestAnimationFrame(renderLoop);
-        const delta = clock.getDelta();
-        updateMovement(delta);
+        // const delta = clock.getDelta();
+        //updateMovement(delta);
         renderer.render(scene, camera);
       };
       renderLoop();

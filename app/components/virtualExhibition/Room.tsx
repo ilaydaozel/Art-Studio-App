@@ -5,7 +5,7 @@ const roomHeight = 40;
 const createFloor = (width: number, height: number) => {
   const planeGeometry = new THREE.PlaneGeometry(width, height);
   const floorTexture = new THREE.TextureLoader().load(
-    '/images/darkGrayMarble.jpeg'
+    '/images/woodMarble.jpeg'
   );
   floorTexture.wrapS = THREE.RepeatWrapping;
   floorTexture.wrapT = THREE.RepeatWrapping;
@@ -49,19 +49,19 @@ const createWall = (wallColor: string, width: number) => {
 
 const createAllWalls = (width: number, height: number) => {
   const wallGroup = new THREE.Group();
-
-  const frontWall = createWall('#ffffff', width);
+  const wallColor: string = '#FFFFFF';
+  const frontWall = createWall(wallColor, width);
   frontWall.position.z = -height / 2;
 
-  const leftWall = createWall('#ffffff', height);
+  const leftWall = createWall(wallColor, height);
   leftWall.position.x = -width / 2;
   leftWall.rotation.y = Math.PI / 2;
 
-  const rightWall = createWall('#ffffff', height);
+  const rightWall = createWall(wallColor, height);
   rightWall.position.x = width / 2;
   rightWall.rotation.y = Math.PI / 2;
 
-  const backWall = createWall('#ffffff', width);
+  const backWall = createWall(wallColor, width);
   backWall.position.z = height / 2;
 
   wallGroup.add(leftWall, frontWall, rightWall, backWall);

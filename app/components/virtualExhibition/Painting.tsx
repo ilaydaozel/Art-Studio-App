@@ -1,13 +1,15 @@
 import { IUserArtwork } from '@/app/actions/type';
 import * as THREE from 'three';
 
+const paintingDepth: number = 0.5;
+
 export const createPainting = (
   url: string,
   dimensions: { width: number; height: number }
 ) => {
   const paintingTexture = new THREE.TextureLoader().load(url);
   const painting = new THREE.Mesh(
-    new THREE.BoxGeometry(dimensions.width, dimensions.height, 0.2),
+    new THREE.BoxGeometry(dimensions.width, dimensions.height, paintingDepth),
     new THREE.MeshLambertMaterial({ map: paintingTexture })
   );
   painting.castShadow = true;
@@ -19,7 +21,7 @@ export const createAndHangPaintings = (
   artworks: IUserArtwork[],
   floorDimensions: { width: number; height: number }
 ) => {
-  let distanceBetween = 20;
+  let distanceBetween = 30;
   let hangingHeight = 20;
   let wallIndex = 0;
   let currentWallLength = 0;
@@ -53,22 +55,22 @@ export const createAndHangPaintings = (
       case 0:
         // Front wall
         positionX = -floorWidth / 2 + currentWallLength + distanceBetween;
-        positionZ = -(floorHeight / 2 - 0.2);
+        positionZ = -(floorHeight / 2 - paintingDepth);
         break;
       case 1:
         // left wall
         positionZ = -floorHeight / 2 + currentWallLength + distanceBetween;
-        positionX = -floorWidth / 2 + 0.2;
+        positionX = -floorWidth / 2 + paintingDepth;
         painting.rotation.y = Math.PI / 2;
         break;
       case 2:
         // Back wall
         positionX = floorWidth / 2 - currentWallLength - distanceBetween;
-        positionZ = -(floorHeight / 2 - 0.2);
+        positionZ = -(floorHeight / 2 - paintingDepth);
         break;
       case 3:
         // right wall
-        positionX = floorWidth / 2 - 0.2;
+        positionX = floorWidth / 2 - paintingDepth;
         positionZ = -floorHeight / 2 + currentWallLength + distanceBetween;
         painting.rotation.y = Math.PI / 2;
         break;
