@@ -105,7 +105,7 @@ const StartMenu = ({ artworks = [] }: GalleryProps) => {
           <InformationContainer>
             <ExhibitionTitle>Sanal Sergi Deneyimi</ExhibitionTitle>
             <div className='flex flex-col justify-center items-center'>
-              <InfoText>Başlamak için enter'a basın.</InfoText>
+              <InfoText>Başlamak için ENTER a basın.</InfoText>
               <InfoText>
                 Gezinmek için ok tuşlarını veya W A S D tuşlarını kullanın.
               </InfoText>
