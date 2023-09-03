@@ -3,13 +3,13 @@ import { IUserArtwork } from '@/app/actions/type';
 import React, { useRef, useEffect } from 'react';
 import * as THREE from 'three';
 import { PointerLockControls } from 'three-stdlib';
+import { createRoom } from './Room';
+import { createAndHangPaintings } from './Painting';
 import {
-  createBoundingBox,
-  createCeiling,
-  createFloor,
-  createWalls,
-} from './Room';
-import { createPainting } from './Painting';
+  checkCollisionWithTheBoundingBox,
+  createBoundingBoxOfGroup,
+} from './BoundingBox';
+import { createInitialRoomLight } from './Light';
 interface ThreeDExhibitionProps {
   artworks?: IUserArtwork[];
 }
@@ -35,96 +35,12 @@ const ThreeDExhibition = ({ artworks = [] }: ThreeDExhibitionProps) => {
       renderer.setClearColor(0xffffff, 1); //backgroundColor
       containerRef.current?.appendChild(renderer.domElement);
 
-      //ambient light
-      const ambientLight = new THREE.AmbientLight(0xffffff, 0.6); //color and intensity
-      scene.add(ambientLight);
-      //directional light
-      const sunLight = new THREE.DirectionalLight(0xdddddd, 0.5);
-      sunLight.position.y = 5;
-      scene.add(sunLight);
+      createInitialRoomLight(scene);
 
-      const floorWidth = 100;
-      const floorHeight = 200;
-
-      const ceiling = createCeiling(floorWidth, floorHeight);
-      const floor = createFloor(floorWidth, floorHeight);
-      const walls = createWalls(floorWidth, floorHeight);
-      const wallsBoundingBox = createBoundingBox(walls);
-      scene.add(ceiling, floor, walls);
-
-      const checkCollision = () => {
-        const playerBoundingBox = new THREE.Box3();
-        const cameraWorldPosition = new THREE.Vector3();
-        camera.getWorldPosition(cameraWorldPosition);
-        playerBoundingBox.setFromCenterAndSize(
-          cameraWorldPosition,
-          new THREE.Vector3(1, 1, 1)
-        );
-        for (let i = 0; i < wallsBoundingBox.length; i++) {
-          if (playerBoundingBox.intersectsBox(wallsBoundingBox[i])) {
-            return true;
-          }
-        }
-      };
-      const hangPaintings = () => {
-        let distanceBetween = 20;
-        let hangingHeight = 20;
-        let wallIndex = 0;
-        let currentWallLength = 0; // Keeps track of the current wall's length
-        let positionX = 0;
-        let positionZ = 0;
-
-        for (let i = 0; i < artworks.length; i++) {
-          const artwork: IUserArtwork = artworks[i];
-          const width: number = artwork.width ? artwork.width / 5 : 10;
-          const height: number = artwork.height ? artwork.height / 5 : 10;
-          const painting = createPainting(
-            artwork.artworkMedias[0],
-            width,
-            height
-          );
-
-          // Check if there's enough space on the current wall, otherwise, switch walls
-          if (currentWallLength + width + distanceBetween > floorWidth) {
-            wallIndex = (wallIndex + 1) % 4; // Switch to the next wall
-            currentWallLength = 0; // Reset the current wall's length
-          }
-
-          switch (wallIndex) {
-            case 0:
-              // Front wall
-              positionX = -floorWidth / 2 + currentWallLength + distanceBetween;
-              positionZ = -(floorHeight / 2 - 0.2);
-              break;
-            case 1:
-              // left wall
-              positionZ =
-                -floorHeight / 2 + currentWallLength + distanceBetween;
-              positionX = -floorWidth / 2 + 0.2;
-              painting.rotation.y = Math.PI / 2;
-              break;
-            case 2:
-              // Back wall
-              positionX = floorWidth / 2 - currentWallLength - distanceBetween;
-              positionZ = -(floorHeight / 2 - 0.2);
-              break;
-            case 3:
-              // right wall
-              positionX = floorWidth / 2 - 0.2;
-              positionZ =
-                -floorHeight / 2 + currentWallLength + distanceBetween;
-              painting.rotation.y = Math.PI / 2;
-              break;
-          }
-
-          painting.position.set(positionX, hangingHeight, positionZ);
-          scene.add(painting);
-
-          currentWallLength += width + distanceBetween; // Update the current wall's length
-        }
-      };
-
-      hangPaintings();
+      const floorDimensions = { width: 100, height: 200 };
+      const roomGroup = createRoom(floorDimensions, scene);
+      const roomBoundingBox = createBoundingBoxOfGroup(roomGroup);
+      createAndHangPaintings(artworks, floorDimensions, scene);
 
       //controls
       const controls = new PointerLockControls(camera, document.body);
@@ -211,7 +127,7 @@ const ThreeDExhibition = ({ artworks = [] }: ThreeDExhibitionProps) => {
           controls.moveForward(-moveSpeed);
         }
 
-        if (checkCollision()) {
+        if (checkCollisionWithTheBoundingBox(camera, roomBoundingBox)) {
           camera.position.copy(previousPosition);
         }
       };
