@@ -60,6 +60,13 @@ const ThreeDExhibition = ({ artworks = [] }: ThreeDExhibitionProps) => {
         'start_button'
       ) as HTMLButtonElement;
       startButton.addEventListener(
+        'touchstart',
+        () => {
+          controls.lock();
+        },
+        false
+      );
+      startButton.addEventListener(
         'click',
         () => {
           controls.lock();
