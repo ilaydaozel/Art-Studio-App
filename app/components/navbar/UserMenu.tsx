@@ -8,7 +8,6 @@ import styled from 'styled-components';
 import { COLORS } from '@/constants/colors';
 import { ROUTE_PATHS, ROUTE_NAMES } from '@/constants/routes';
 import { IUser } from '@/app/actions/type';
-import HeadingWithUnderline from '../HeadingWithUnderline';
 interface UserMenuProps {
   currentUser: IUser | null;
 }
@@ -162,7 +161,7 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
                   router.refresh();
                 }}
               >
-                ÇIKIŞ YAP
+                Çıkış Yap
               </UserMenuElement>
             </MenuContainer>
           )}

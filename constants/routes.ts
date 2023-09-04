@@ -16,17 +16,17 @@ export enum ROUTE_PATHS {
 }
 
 export const ROUTE_NAMES: ChangeTypes<typeof ROUTE_PATHS, string> = {
-    HOME: 'ANASAYFA',
-    ARTISTS: 'SANATÇILAR',
-    ADD: 'EKLE',
-    ADD_NEW_ARTIST: 'YENİ SANATÇI EKLE',
-    EDIT: 'DÜZENLE',
-    EDIT_ARTIST_ACCOUNT: 'SANATÇILARI DÜZENLE',
-    EDIT_ARTIST_PROFILE: 'PROFİLİMİ DÜZENLE',
-    EDIT_ANNOUNCEMENTS: 'DUYURULARI DÜZENLE',
-    ARTIST_PROFILE: 'SANATÇI',
-    ABOUT: 'HAKKIMIZDA',
-    VIRTUAL_EXHIBITION: 'SANAL SERGI',
+    HOME: 'Anasayfa',
+    ARTISTS: 'Sanatçılar',
+    ADD: 'Ekle',
+    ADD_NEW_ARTIST: 'Yeni Sanatçı Ekle',
+    EDIT: 'Düzenle',
+    EDIT_ARTIST_ACCOUNT: 'Sanatçıları Düzenle',
+    EDIT_ARTIST_PROFILE: 'Profilimi Düzenle',
+    EDIT_ANNOUNCEMENTS: 'Duyuruları Düzenle',
+    ARTIST_PROFILE: 'Sanatçı',
+    ABOUT: 'Hakkımızda',
+    VIRTUAL_EXHIBITION: 'Sanal Sergiler',
     UNAUTHORIZED: 'Unauthorized',
 };
 
