@@ -1,6 +1,5 @@
 'use client';
 import styled from 'styled-components';
-import Image from 'next/image';
 import { useState } from 'react';
 import Popup from '@/app/[lang]/components/popup/Popup';
 import { IUserArtwork } from '@/app/[lang]/actions/type';
