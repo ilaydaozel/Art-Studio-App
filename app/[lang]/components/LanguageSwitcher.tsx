@@ -6,14 +6,31 @@ import { i18n } from '@/i18n.config';
 import styled from 'styled-components';
 import { COLORS } from '@/constants/colors';
 
-const LanguageContainer = styled.ul`
+const LanguageContainer = styled.div`
   display: flex;
-  gap: 0.4rem;
+  gap: 0 0.4rem;
+  padding: 0 0.5rem;
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 0.5rem;
+  @media (max-width: 768px) {
+    gap: 0.2rem;
+    padding: 0 0.4rem;
+  }
+  @media (max-width: 576px) {
+    gap: 0.1rem;
+    padding: 0 0.3rem;
+  }
 `;
 const LanguageText = styled.text<{ isActive: boolean }>`
-  font-size: 1.1rem;
+  font-size: 1rem;
   color: ${(props) => (props.isActive ? COLORS.darkGray : COLORS.gray)};
   text-decoration: ${(props) => (props.isActive ? 'underline' : 'none')};
+  @media (max-width: 768px) {
+    font-size: 0.8rem;
+  }
+  @media (max-width: 576px) {
+    font-size: 0.6rem;
+  }
 `;
 export default function LanguageSwitcher() {
   const pathName = usePathname();
@@ -24,6 +41,9 @@ export default function LanguageSwitcher() {
     segments[1] = locale;
     return segments.join('/');
   };
+  const isHomePage =
+    i18n.locales.find((locale) => pathName === `/${locale}`) !== undefined;
+
   const currentLocale =
     pathName &&
     ((i18n.locales.includes(
@@ -36,13 +56,16 @@ export default function LanguageSwitcher() {
     <LanguageContainer>
       {i18n.locales.map((locale) => {
         return (
-          <li key={locale}>
+          <div key={locale}>
             <Link href={redirectedPathName(locale)}>
-              <LanguageText isActive={currentLocale === locale}>
+              <LanguageText
+                isHomePage={isHomePage}
+                isActive={currentLocale === locale}
+              >
                 {locale}
               </LanguageText>
             </Link>
-          </li>
+          </div>
         );
       })}
     </LanguageContainer>

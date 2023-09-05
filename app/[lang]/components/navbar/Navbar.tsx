@@ -10,7 +10,7 @@ import { usePathname } from 'next/navigation';
 import { PiUserCircleLight } from 'react-icons/pi';
 import { IUser } from '@/app/[lang]/actions/type';
 import LanguageSwitcher from '../LanguageSwitcher';
-
+import { i18n } from '@/i18n.config';
 interface NavbarProps {
   currentUser: IUser | null;
 }
@@ -38,17 +38,20 @@ const LogoTitle = styled.a<{ color: string }>`
   display: flex;
   justify-content: center;
   flex: 2 1 auto;
-  @media (max-width: 768px) {
-    font-size: 1.2rem;
+  @media (max-width: 992px) {
+    font-size: 1rem;
   }
-  @media (max-width: 480px) {
+  @media (max-width: 768px) {
     font-size: 0.8rem;
+  }
+  @media (max-width: 576px) {
+    font-size: 0.6rem;
   }
 `;
 const SideIcons = styled.div`
   display: flex;
   gap: 0.5rem;
-  align-items: end;
+  align-items: center;
 `;
 const MenuElement = styled.a<{ color: string; isActive?: boolean }>`
   text-align: center;
@@ -61,28 +64,37 @@ const MenuElement = styled.a<{ color: string; isActive?: boolean }>`
   &:hover {
     text-decoration: underline;
   }
-  @media (max-width: 480px) {
+  @media (max-width: 992px) {
+    font-size: 0.8rem;
+  }
+  @media (max-width: 768px) {
     font-size: 0.6rem;
+  }
+  @media (max-width: 576px) {
+    font-size: 0.4rem;
   }
 `;
 const Navbar = ({ currentUser }: NavbarProps) => {
   const loginModal = useLoginModal();
   const path = usePathname();
+  const isHomePage =
+    i18n.locales.find((locale) => path === `/${locale}`) !== undefined;
+
   const [backgroundColor, setBackgroundColor] = useState(
-    path === ROUTE_PATHS.HOME ? 'transparent' : 'rgba(255, 255, 255, 0.1)'
+    isHomePage ? 'transparent' : 'rgba(255, 255, 255, 0.1)'
   );
   const [logoColor, setLogoColor] = useState(
-    path === ROUTE_PATHS.HOME ? '#FFFFFF' : COLORS.darkGray
+    isHomePage ? '#FFFFFF' : COLORS.darkGray
   );
   const [menuElementColor, setMenuElementColor] = useState(
-    path === ROUTE_PATHS.HOME ? '#FFFFFF' : COLORS.darkGray
+    isHomePage ? '#FFFFFF' : COLORS.darkGray
   );
 
   useEffect(() => {
     const handleScroll = () => {
       // Check if the user has scrolled to the top of the page
       const isOnTop = window.scrollY === 0;
-      if (path === ROUTE_PATHS.HOME) {
+      if (isHomePage) {
         setBackgroundColor(isOnTop ? 'transparent' : '#FFFFFF');
         setLogoColor(isOnTop ? '#FFFFFF' : COLORS.darkGray);
         setMenuElementColor(isOnTop ? '#FFFFFF' : COLORS.darkGray);
@@ -132,7 +144,7 @@ const Navbar = ({ currentUser }: NavbarProps) => {
                   color={menuElementColor}
                   onClick={loginModal.onOpen}
                 >
-                  <PiUserCircleLight className='sm:h-[24px] sm:w-[24px] text-neutral-400 w-[20px] h-[20px]' />
+                  <PiUserCircleLight className='sm:h-[28px] sm:w-[28px] text-neutral-400 w-[20px] h-[20px]' />
                 </MenuElement>
               )}
             </SideIcons>
