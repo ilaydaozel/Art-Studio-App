@@ -140,9 +140,9 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
             <MenuContainer>
               <UserTitle>ADMİN</UserTitle>
               <UserMenuElement
-                href={`${ROUTE_PATHS.EDIT}${ROUTE_PATHS.EDIT_ARTIST_ACCOUNT}`}
+                href={`${ROUTE_PATHS.EDIT}${ROUTE_PATHS.EDIT_ARTIST_ACCOUNTS}`}
               >
-                {ROUTE_NAMES.EDIT_ARTIST_ACCOUNT}
+                {ROUTE_NAMES.EDIT_ARTIST_ACCOUNTS}
               </UserMenuElement>
               <UserMenuElement
                 href={`${ROUTE_PATHS.EDIT}${ROUTE_PATHS.EDIT_ANNOUNCEMENTS}`}

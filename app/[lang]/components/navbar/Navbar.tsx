@@ -11,8 +11,11 @@ import { PiUserCircleLight } from 'react-icons/pi';
 import { IUser } from '@/app/[lang]/actions/type';
 import LanguageSwitcher from '../LanguageSwitcher';
 import { i18n } from '@/i18n.config';
+
 interface NavbarProps {
   currentUser: IUser | null;
+  routeNames: any;
+  academy: any;
 }
 const NavbarContainer = styled.div<{ bgColor: string }>`
   position: fixed;
@@ -31,8 +34,8 @@ const LogoTitle = styled.a<{ color: string }>`
   left: 50%;
   transform: translateX(-50%);
   color: ${(props) => props.color};
-  font-size: 1.4rem;
-  font-weight: 600;
+  font-size: 1.5rem;
+  font-weight: bold;
   letter-spacing: 3px;
   cursor: pointer;
   display: flex;
@@ -74,9 +77,10 @@ const MenuElement = styled.a<{ color: string; isActive?: boolean }>`
     font-size: 0.4rem;
   }
 `;
-const Navbar = ({ currentUser }: NavbarProps) => {
+const Navbar = ({ currentUser, routeNames, academy }: NavbarProps) => {
   const loginModal = useLoginModal();
   const path = usePathname();
+
   const isHomePage =
     i18n.locales.find((locale) => path === `/${locale}`) !== undefined;
 
@@ -133,7 +137,7 @@ const Navbar = ({ currentUser }: NavbarProps) => {
         >
           <div className='w-full relative flex items-center justify-end'>
             <LogoTitle color={logoColor} href='/'>
-              KONAK KÜLTÜR SANAT AKADEMİSİ
+              {academy.name}
             </LogoTitle>
             <SideIcons>
               <LanguageSwitcher />
@@ -156,28 +160,28 @@ const Navbar = ({ currentUser }: NavbarProps) => {
               color={menuElementColor}
               href={ROUTE_PATHS.HOME}
             >
-              {ROUTE_NAMES.HOME}
+              {routeNames.home}
             </MenuElement>
             <MenuElement
               isActive={path === ROUTE_PATHS.ARTISTS}
               color={menuElementColor}
               href={ROUTE_PATHS.ARTISTS}
             >
-              {ROUTE_NAMES.ARTISTS}
+              {routeNames.artists}
             </MenuElement>
             <MenuElement
               isActive={path === ROUTE_PATHS.ABOUT}
               color={menuElementColor}
               href={ROUTE_PATHS.ABOUT}
             >
-              {ROUTE_NAMES.ABOUT}
+              {routeNames.about}
             </MenuElement>
             <MenuElement
-              isActive={path === ROUTE_PATHS.VIRTUAL_EXHIBITION}
+              isActive={path === ROUTE_PATHS.VIRTUAL_EXHIBITIONS}
               color={menuElementColor}
-              href={ROUTE_PATHS.VIRTUAL_EXHIBITION}
+              href={ROUTE_PATHS.VIRTUAL_EXHIBITIONS}
             >
-              {ROUTE_NAMES.VIRTUAL_EXHIBITION}
+              {routeNames.virtual_exhibitions}
             </MenuElement>
           </div>
         </div>

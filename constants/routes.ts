@@ -1,3 +1,4 @@
+import { getDictionary } from '@/lib/dictionary';
 import { ChangeTypes } from './type';
 
 export enum ROUTE_PATHS {
@@ -6,13 +7,12 @@ export enum ROUTE_PATHS {
     ADD = '/pages/add/',
     ADD_NEW_ARTIST = 'addNewArtist',
     EDIT = '/pages/edit/',
-    EDIT_ARTIST_ACCOUNT = 'editArtistAccount',
+    EDIT_ARTIST_ACCOUNTS = 'editArtistAccount',
     EDIT_ARTIST_PROFILE = 'editArtistProfile',
     EDIT_ANNOUNCEMENTS = 'editAnnouncements',
     ARTIST_PROFILE = '/pages/artistProfile',
     ABOUT = '/pages/about',
-    VIRTUAL_EXHIBITION = '/pages/virtualExhibition',
-    UNAUTHORIZED = '/unauthorized',
+    VIRTUAL_EXHIBITIONS = '/pages/virtualExhibition',
 }
 
 export const ROUTE_NAMES: ChangeTypes<typeof ROUTE_PATHS, string> = {
@@ -21,13 +21,12 @@ export const ROUTE_NAMES: ChangeTypes<typeof ROUTE_PATHS, string> = {
     ADD: 'Ekle',
     ADD_NEW_ARTIST: 'Yeni Sanatçı Ekle',
     EDIT: 'Düzenle',
-    EDIT_ARTIST_ACCOUNT: 'Sanatçıları Düzenle',
+    EDIT_ARTIST_ACCOUNTS: 'Sanatçıları Düzenle',
     EDIT_ARTIST_PROFILE: 'Profilimi Düzenle',
     EDIT_ANNOUNCEMENTS: 'Duyuruları Düzenle',
     ARTIST_PROFILE: 'Sanatçı',
     ABOUT: 'Hakkımızda',
-    VIRTUAL_EXHIBITION: 'Sanal Sergiler',
-    UNAUTHORIZED: 'Unauthorized',
+    VIRTUAL_EXHIBITIONS: 'Sanal Sergiler',
 };
 
 export const NAVBAR_LINKS: Pick<typeof ROUTE_PATHS, 'HOME' | 'ARTISTS' | 'ABOUT'> = {

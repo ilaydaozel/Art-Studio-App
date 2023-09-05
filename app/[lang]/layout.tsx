@@ -10,6 +10,7 @@ import Navbar from './components/navbar/Navbar';
 import StyledComponentsRegistry from './libs/registry';
 import ToasterProvider from './providers/ToasterProvider';
 import { Locale, i18n } from '@/i18n.config';
+import { getDictionary } from '@/lib/dictionary';
 
 export const metadata = {
   title: 'Konak Sanat Akademisi',
@@ -34,7 +35,7 @@ export default async function RootLayout({
 }) {
   let { lang } = params;
   const currentUser = await getCurrentUser();
-
+  const { route_names, academy } = await getDictionary(lang);
   // Validate that the incoming `locale` parameter is a valid locale
   if (params.lang !== lang) {
     notFound();
@@ -56,6 +57,8 @@ export default async function RootLayout({
               <ToasterProvider />
               <LoginModal />
               <Navbar
+                academy={academy}
+                routeNames={route_names}
                 currentUser={currentUser ? currentUser.currentUser : null}
               />
             </ClientOnly>
