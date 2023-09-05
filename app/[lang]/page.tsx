@@ -21,7 +21,6 @@ export default async function ({
       if (announcements.length > 0) {
         return (
           <>
-            {' '}
             <div className='max-w-[100vw] overflow-x-hidden'>
               <AnnouncementCarousel slides={announcements} />
             </div>

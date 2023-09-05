@@ -10,7 +10,6 @@ import Navbar from './components/navbar/Navbar';
 import StyledComponentsRegistry from './libs/registry';
 import ToasterProvider from './providers/ToasterProvider';
 import { Locale, i18n } from '@/i18n.config';
-import Header from './components/header';
 
 export const metadata = {
   title: 'Konak Sanat Akademisi',

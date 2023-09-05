@@ -7,7 +7,7 @@ import { useState } from 'react';
 import Modal from './Modal';
 import ImageUpload from '../inputs/ImageUpload';
 import Input from '../inputs/Input';
-import useAddAnnouncementModal from '@/app/hooks/useAddAnnouncementModal';
+import useAddAnnouncementModal from '@/app/[lang]/hooks/useAddAnnouncementModal';
 
 const AddAnnouncementModal = () => {
   const addAnnouncementModal = useAddAnnouncementModal();

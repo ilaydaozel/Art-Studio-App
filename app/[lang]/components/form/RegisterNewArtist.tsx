@@ -1,5 +1,5 @@
 'use client';
-import Input from '@/app/components/inputs/Input';
+import Input from '@/app/[lang]/components/inputs/Input';
 import axios from 'axios';
 import { useState } from 'react';
 import { useForm, FieldValues, SubmitHandler } from 'react-hook-form';
