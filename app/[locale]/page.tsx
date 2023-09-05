@@ -1,28 +1,24 @@
 import React from 'react';
-import Carousel from './components/carousel/AnnouncementCarousel';
-import { IAnnouncement, IUserArtwork } from './actions/type';
-import getAllAnnouncements from './actions/getAllAnnouncements';
-import getAllArtworks from './actions/getAllArtworks';
-import ClientOnly from './components/ClientOnly';
-import EmptyState from './components/EmptyState';
+import { IAnnouncement, IUserArtwork } from '../actions/type';
+import getAllAnnouncements from '../actions/getAllAnnouncements';
+import AnnouncementCarousel from '../components/carousel/AnnouncementCarousel';
+import ClientOnly from '../components/ClientOnly';
+import EmptyState from '../components/EmptyState';
+import { useTranslations } from 'next-intl';
+import Link from 'next-intl/link';
+import AlertMessage from './AlertMessage';
 
 export default async function Home() {
   let announcements: IAnnouncement[] = [];
-  let artworks: IUserArtwork[] = [];
+
   try {
     const allAnnouncements = await getAllAnnouncements();
-    const allArtworks = await getAllArtworks();
-    if (allArtworks) {
-      artworks = allArtworks.artworks;
-    }
     if (allAnnouncements && allAnnouncements.announcements) {
       announcements = allAnnouncements.announcements;
       if (announcements.length > 0) {
         return (
           <>
-            <div className='max-w-[100vw] overflow-x-hidden'>
-              <Carousel slides={announcements} />
-            </div>
+            <ProfileContent announcements={announcements} />
           </>
         );
       } else {
@@ -48,4 +44,17 @@ export default async function Home() {
   } catch (error) {
     console.log(error);
   }
+}
+
+function ProfileContent({ announcements }: { announcements: IAnnouncement[] }) {
+  const t = useTranslations('Index');
+  return (
+    <>
+      <div className='max-w-[100vw] overflow-x-hidden'>
+        <AnnouncementCarousel slides={announcements} />
+      </div>
+      <h1 className='m-4'>{t('title')}</h1>
+      <AlertMessage message={t('alertMessage')}></AlertMessage>
+    </>
+  );
 }

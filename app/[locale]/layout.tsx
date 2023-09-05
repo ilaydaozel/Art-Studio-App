@@ -1,13 +1,15 @@
 import React from 'react';
-import Navbar from './components/navbar/Navbar';
 import './globals.css';
 import { DM_Sans } from 'next/font/google';
-import ClientOnly from './components/ClientOnly';
-import ToasterProvider from './providers/ToasterProvider';
-import LoginModal from './components/modal/LoginModal';
-import getCurrentUser from './actions/getCurrentUser';
-import Footer from './components/footer/Footer';
-import StyledComponentsRegistry from './libs/registry';
+import getCurrentUser from '../actions/getCurrentUser';
+import ClientOnly from '../components/ClientOnly';
+import Footer from '../components/footer/Footer';
+import LoginModal from '../components/modal/LoginModal';
+import Navbar from '../components/navbar/Navbar';
+import StyledComponentsRegistry from '../libs/registry';
+import ToasterProvider from '../providers/ToasterProvider';
+import { useLocale } from 'next-intl';
+import { notFound } from 'next/navigation';
 
 export const metadata = {
   title: 'Konak Sanat Akademisi',
@@ -21,12 +23,19 @@ const font = DM_Sans({
 
 export default async function RootLayout({
   children,
+  params,
 }: {
   children: React.ReactNode;
+  params: { locale: string };
 }) {
+  const locale = useLocale();
   const currentUser = await getCurrentUser();
+  // Validate that the incoming `locale` parameter is a valid locale
+  if (params.locale !== locale) {
+    notFound();
+  }
   return (
-    <html lang='en'>
+    <html lang={locale}>
       <body className={font.className}>
         <StyledComponentsRegistry>
           <div
