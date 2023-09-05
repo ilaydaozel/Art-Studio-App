@@ -47,7 +47,7 @@ const LogoTitle = styled.a<{ color: string }>`
 `;
 const SideIcons = styled.div`
   display: flex;
-  gap: 0.25rem;
+  gap: 0.5rem;
   align-items: end;
 `;
 const MenuElement = styled.a<{ color: string; isActive?: boolean }>`
