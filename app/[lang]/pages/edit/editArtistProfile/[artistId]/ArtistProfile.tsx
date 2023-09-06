@@ -16,7 +16,7 @@ import SlidingButton from '@/app/[lang]/components/buttons/SlidingButton';
 import ArtworkList from '@/app/[lang]/components/artwork/ArtworkList';
 import axios from 'axios';
 import toast from 'react-hot-toast';
-import HeadingWithUnderline from '@/app/[lang]/components/HeadingWithUnderline';
+import HeadingWithUnderline from '@/app/[lang]/components/heading/HeadingWithUnderline';
 import TextButton from '@/app/[lang]/components/buttons/TextButton';
 import Popup from '@/app/[lang]/components/popup/Popup';
 
@@ -157,7 +157,7 @@ const ArtistPage = ({ profileInfo, artworks }: ArtistPageProps) => {
       <HeadingContainer>
         <div className='flex flex-col justify-center items-center w-[50%] h-full'>
           <NameHeading>
-            {profileInfo.user.name} {profileInfo.user.surname}
+            {profileInfo.user?.name} {profileInfo.user?.surname}
           </NameHeading>
           <TextButton
             label='Kapak Resmini Değiştir'

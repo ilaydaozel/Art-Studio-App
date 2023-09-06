@@ -3,7 +3,7 @@ import { COLORS } from '@/constants/colors';
 import styled from 'styled-components';
 import { IArtistProfile, IUserArtwork } from '@/app/[lang]/actions/type';
 import ArtworkList from '@/app/[lang]/components/artwork/ArtworkList';
-import HeadingWithUnderline from '@/app/[lang]/components/HeadingWithUnderline';
+import HeadingWithUnderline from '@/app/[lang]/components/heading/HeadingWithUnderline';
 
 const LayoutContainer = styled.div`
   display: flex;

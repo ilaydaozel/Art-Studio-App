@@ -1,6 +1,6 @@
 'use client';
 import { IUser } from '@/app/[lang]/actions/type';
-import HeadingWithUnderline from '@/app/[lang]/components/HeadingWithUnderline';
+import HeadingWithUnderline from '@/app/[lang]/components/heading/HeadingWithUnderline';
 import SlidingButton from '@/app/[lang]/components/buttons/SlidingButton';
 import { ROUTE_PATHS } from '@/constants/routes';
 import { useRouter } from 'next/navigation';
@@ -23,12 +23,9 @@ const ArtistAccountsList = ({ accounts }: ArtistAccountsListProps) => {
           }
         ></SlidingButton>
       </div>
-      <HeadingWithUnderline
-        size={'1.2rem'}
-        title={'Sanatçı Hesaplarını Düzenle'}
-      ></HeadingWithUnderline>
+      <HeadingWithUnderline title='Sanatçı Hesaplarını Düzenle'></HeadingWithUnderline>
 
-      <div className='w-[90%] pt-4 pb-4 flex flex-row flex-wrap items-center justify-around'>
+      <div className='w-[90%] py-8 flex flex-row flex-wrap items-center justify-around'>
         {accounts.map((account: IUser) => (
           <ArtistAccountPreview
             key={account.id}

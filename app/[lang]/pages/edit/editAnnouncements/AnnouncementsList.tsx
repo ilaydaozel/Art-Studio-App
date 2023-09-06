@@ -1,7 +1,7 @@
 'use client';
 import { IAnnouncement } from '@/app/[lang]/actions/type';
 import AnnouncementPreview from './AnnouncementPreview';
-import HeadingWithUnderline from '@/app/[lang]/components/HeadingWithUnderline';
+import HeadingWithUnderline from '@/app/[lang]/components/heading/HeadingWithUnderline';
 import SlidingButton from '@/app/[lang]/components/buttons/SlidingButton';
 import AddAnnouncementModal from '@/app/[lang]/components/modal/AddAnnouncementModal';
 import useAddAnnouncementModal from '@/app/[lang]/hooks/useAddAnnouncementModal';
@@ -22,12 +22,9 @@ const AnnouncementsList = ({ announcements }: AnnouncementsListProps) => {
           onClick={() => addAnnouncementModal.onOpen()}
         ></SlidingButton>
       </div>
-      <HeadingWithUnderline
-        size={'1.2rem'}
-        title={'Duyuruları Düzenle'}
-      ></HeadingWithUnderline>
+      <HeadingWithUnderline title='Duyuruları Düzenle'></HeadingWithUnderline>
 
-      <div className='w-[90%] pt-4 pb-4 flex flex-row flex-wrap items-center justify-around'>
+      <div className='w-[90%] py-8 flex flex-row flex-wrap items-center justify-around'>
         {announcements.map((announcement: IAnnouncement) => (
           <AnnouncementPreview
             key={announcement.id}
