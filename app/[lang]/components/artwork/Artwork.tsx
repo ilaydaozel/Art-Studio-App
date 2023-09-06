@@ -7,7 +7,7 @@ import useArtworkModal from '@/app/[lang]/hooks/useArtworkModal';
 import ArtworkModal from '../modal/ArtworkModal';
 import { IUserArtwork } from '@/app/[lang]/actions/type';
 
-interface ArtworkContainerProps {
+interface ArtworkProps {
   artwork: IUserArtwork | null;
 }
 const Container = styled.div`
@@ -32,7 +32,7 @@ const InfoContent = styled.p`
   color: ${COLORS.darkGray};
 `;
 
-const ArtworkContainer = ({ artwork }: ArtworkContainerProps) => {
+const Artwork = ({ artwork }: ArtworkProps) => {
   const detailedArtworkModal = useArtworkModal();
   return (
     <div>
@@ -73,4 +73,4 @@ const ArtworkContainer = ({ artwork }: ArtworkContainerProps) => {
   );
 };
 
-export default ArtworkContainer;
+export default Artwork;
