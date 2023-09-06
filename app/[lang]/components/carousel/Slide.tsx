@@ -4,7 +4,7 @@ import { IAnnouncement } from '@/app/[lang]/actions/type';
 
 interface SlideProps {
   slide: IAnnouncement;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 const SlideContainer = styled.div<{ src: string }>`
@@ -12,10 +12,9 @@ const SlideContainer = styled.div<{ src: string }>`
   background-image: url(${(props) => props.src});
   background-size: cover;
   background-position: center;
-  width: 100vw;
-  height: 100vh;
   transition: background-image 0.4s ease-in-out;
-
+  width: 100%;
+  height: 100%;
   &::before {
     content: '';
     position: absolute;
@@ -27,25 +26,21 @@ const SlideContainer = styled.div<{ src: string }>`
   }
 `;
 
-const ContentContainer = styled.div`
+const ContentContainer = styled.div<{ scale: number }>`
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%) scale(${(props) => props.scale});
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 1rem;
-  @media (max-width: 768px) {
-    gap: 2.4rem;
-  }
 `;
 
 const CaptionContainer = styled.div`
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
 `;
@@ -55,9 +50,9 @@ const Caption = styled.p`
   font-size: 2.6rem;
   font-weight: bold;
   letter-spacing: 3px;
-  @media (max-width: 768px) {
-    font-size: 2rem;
-  }
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 const Subcaption = styled.p`
@@ -81,10 +76,19 @@ const SmallCaption = styled.p`
 `;
 
 const Slide = ({ slide, children }: SlideProps) => {
+  const componentWidth =
+    typeof window !== 'undefined'
+      ? document.getElementById('resizable-component')?.clientWidth || 1
+      : 1;
+  const scale = componentWidth / 1029;
+
   return (
-    <SlideContainer src={slide.coverImage || ''}>
+    <SlideContainer id='resizable-component' src={slide.coverImage || ''}>
       {children}
-      <ContentContainer onClick={() => window.open(slide.link, '_blank')}>
+      <ContentContainer
+        scale={scale}
+        onClick={() => window.open(slide.link, '_blank')}
+      >
         {slide.smallCaption && (
           <SmallCaption>{slide.smallCaption}</SmallCaption>
         )}
