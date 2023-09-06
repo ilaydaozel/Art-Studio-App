@@ -15,7 +15,11 @@ export async function POST(request: Request, { params }: { params: IParams }) {
         return NextResponse.error();
     }
 
-    const user: IUser = currentProfile.artistProfile.user;
+    const user: IUser | undefined = currentProfile.artistProfile.user;
+
+    if (user === undefined) {
+        return NextResponse.error();
+    }
 
     if (user.userType != "artist") {
         return NextResponse.error();
