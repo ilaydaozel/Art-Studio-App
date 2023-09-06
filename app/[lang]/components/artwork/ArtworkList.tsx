@@ -1,20 +1,25 @@
 'use client';
 import styled from 'styled-components';
 import { IUserArtwork } from '@/app/[lang]/actions/type';
-import { COLORS } from '@/constants/colors';
-import axios from 'axios';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import Artwork from './Artwork';
+import EditMenu from '../menu/EditMenu';
+import axios from 'axios';
 import toast from 'react-hot-toast';
-import { MdDeleteForever } from 'react-icons/md';
-import ArtworkContainer from './ArtworkContainer';
-import TextButton from '../buttons/TextButton';
+import { useState } from 'react';
 
 interface ArtworkListProps {
   artworks: IUserArtwork[] | null;
   width?: string;
   deletable?: boolean;
 }
+
+const ArtworkContainer = styled.div`
+  display: flex;
+  align-items: baseline;
+  gap: 2px;
+  margin: 16px 4px;
+`;
 
 const ListContainer = styled.div<{ width: string }>`
   display: flex;
@@ -37,9 +42,8 @@ const ArtworkList = ({
     router.refresh();
   };
 
-  const handleDelete = (artworkId: string) => {
+  const handleDeleteArtwork = (artworkId: string) => {
     setIsLoading(true);
-
     axios
       .delete(`/api/userArtwork/deleteUserArtwork/${artworkId}`)
       .then(() => {
@@ -59,16 +63,16 @@ const ArtworkList = ({
     <ListContainer width={width}>
       {artworks?.map((currentArtwork: IUserArtwork) => (
         <div key={currentArtwork.id} className='flex flex-col items-end'>
-          <ArtworkContainer artwork={currentArtwork}></ArtworkContainer>
-          {deletable ? (
-            <TextButton
-              label='Sil'
-              icon={MdDeleteForever}
-              onClick={() => handleDelete(currentArtwork.id)}
-            ></TextButton>
-          ) : (
-            <></>
-          )}
+          <ArtworkContainer>
+            <Artwork artwork={currentArtwork}></Artwork>
+            {deletable ? (
+              <EditMenu
+                onDeleteClick={() => handleDeleteArtwork(currentArtwork.id)}
+              ></EditMenu>
+            ) : (
+              <></>
+            )}
+          </ArtworkContainer>
         </div>
       ))}
     </ListContainer>
