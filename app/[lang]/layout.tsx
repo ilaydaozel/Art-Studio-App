@@ -34,8 +34,9 @@ export default async function RootLayout({
 }) {
   let { lang } = params;
   const currentUser = await getCurrentUser();
+  console.log(currentUser);
   const { navbar } = await getDictionary(lang);
-  // Validate that the incoming `locale` parameter is a valid locale
+
   if (params.lang !== lang) {
     notFound();
   }

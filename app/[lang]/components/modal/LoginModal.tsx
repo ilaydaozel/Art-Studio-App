@@ -38,7 +38,6 @@ const LoginModal = ({ messages }: LoginModalProps) => {
       if (callback?.ok) {
         toast.success(messages.login_successful_message);
         router.refresh();
-        router.push('/');
         loginModal.onClose();
       }
       if (callback?.error) {

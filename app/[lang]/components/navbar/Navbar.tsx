@@ -41,6 +41,9 @@ const LogoTitle = styled.a<{ color: string }>`
   display: flex;
   justify-content: center;
   flex: 2 1 auto;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   @media (max-width: 992px) {
     font-size: 1rem;
   }
@@ -80,10 +83,10 @@ const MenuElement = styled.a<{ color: string; isActive?: boolean }>`
 const Navbar = ({ currentUser, messages }: NavbarProps) => {
   const { academy, route_names, login_modal } = messages;
   const loginModal = useLoginModal();
-  const path = usePathname();
-  console.log('navbar: ', messages);
+  const pathname = usePathname();
+
   const isHomePage =
-    i18n.locales.find((locale) => path === `/${locale}`) !== undefined;
+    i18n.locales.find((locale) => pathname === `/${locale}`) !== undefined;
 
   const [backgroundColor, setBackgroundColor] = useState(
     isHomePage ? 'transparent' : 'rgba(255, 255, 255, 0.1)'
@@ -114,7 +117,7 @@ const Navbar = ({ currentUser, messages }: NavbarProps) => {
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [path]);
+  }, [pathname]);
 
   return (
     <NavbarContainer bgColor={backgroundColor}>
@@ -158,28 +161,28 @@ const Navbar = ({ currentUser, messages }: NavbarProps) => {
 
           <div className='flex flex-row gap-2 items-center'>
             <MenuElement
-              isActive={path === ROUTE_PATHS.HOME}
+              isActive={pathname === ROUTE_PATHS.HOME}
               color={menuElementColor}
               href={ROUTE_PATHS.HOME}
             >
               {route_names.home}
             </MenuElement>
             <MenuElement
-              isActive={path === ROUTE_PATHS.ARTISTS}
+              isActive={pathname === ROUTE_PATHS.ARTISTS}
               color={menuElementColor}
               href={ROUTE_PATHS.ARTISTS}
             >
               {route_names.artists}
             </MenuElement>
             <MenuElement
-              isActive={path === ROUTE_PATHS.ABOUT}
+              isActive={pathname === ROUTE_PATHS.ABOUT}
               color={menuElementColor}
               href={ROUTE_PATHS.ABOUT}
             >
               {route_names.about}
             </MenuElement>
             <MenuElement
-              isActive={path === ROUTE_PATHS.VIRTUAL_EXHIBITIONS}
+              isActive={pathname === ROUTE_PATHS.VIRTUAL_EXHIBITIONS}
               color={menuElementColor}
               href={ROUTE_PATHS.VIRTUAL_EXHIBITIONS}
             >
