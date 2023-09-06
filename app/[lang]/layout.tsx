@@ -5,7 +5,6 @@ import { notFound } from 'next/navigation';
 import getCurrentUser from './actions/getCurrentUser';
 import ClientOnly from './components/ClientOnly';
 import Footer from './components/footer/Footer';
-import LoginModal from './components/modal/LoginModal';
 import Navbar from './components/navbar/Navbar';
 import StyledComponentsRegistry from './libs/registry';
 import ToasterProvider from './providers/ToasterProvider';
@@ -55,9 +54,8 @@ export default async function RootLayout({
           >
             <ClientOnly>
               <ToasterProvider />
-              <LoginModal />
               <Navbar
-                navbarMessages={navbar}
+                messages={navbar}
                 currentUser={currentUser ? currentUser.currentUser : null}
               />
             </ClientOnly>

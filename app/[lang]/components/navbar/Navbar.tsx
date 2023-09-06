@@ -11,10 +11,11 @@ import { PiUserCircleLight } from 'react-icons/pi';
 import { IUser } from '@/app/[lang]/actions/type';
 import LanguageSwitcher from '../LanguageSwitcher';
 import { i18n } from '@/i18n.config';
+import LoginModal from '../modal/LoginModal';
 
 interface NavbarProps {
   currentUser: IUser | null;
-  navbarMessages: any;
+  messages: any;
 }
 const NavbarContainer = styled.div<{ bgColor: string }>`
   position: fixed;
@@ -76,11 +77,11 @@ const MenuElement = styled.a<{ color: string; isActive?: boolean }>`
     font-size: 0.4rem;
   }
 `;
-const Navbar = ({ currentUser, navbarMessages }: NavbarProps) => {
-  const { academy, route_names, login_modal } = navbarMessages;
+const Navbar = ({ currentUser, messages }: NavbarProps) => {
+  const { academy, route_names, login_modal } = messages;
   const loginModal = useLoginModal();
   const path = usePathname();
-  console.log('navbar: ', navbarMessages);
+  console.log('navbar: ', messages);
   const isHomePage =
     i18n.locales.find((locale) => path === `/${locale}`) !== undefined;
 
@@ -140,6 +141,7 @@ const Navbar = ({ currentUser, navbarMessages }: NavbarProps) => {
               {academy.name}
             </LogoTitle>
             <SideIcons>
+              <LoginModal messages={login_modal} />
               <LanguageSwitcher />
               {currentUser ? (
                 <UserMenu currentUser={currentUser} routeNames={route_names} />
