@@ -5,11 +5,11 @@ import UserMenu from './UserMenu';
 import styled from 'styled-components';
 import { COLORS } from '@/constants/colors';
 import useLoginModal from '@/app/[lang]/hooks/useLoginModal';
-import { ROUTE_NAMES, ROUTE_PATHS } from '@/constants/routes';
+import { ROUTE_PATHS } from '@/constants/routes';
 import { usePathname } from 'next/navigation';
 import { PiUserCircleLight } from 'react-icons/pi';
 import { IUser } from '@/app/[lang]/actions/type';
-import LanguageSwitcher from '../LanguageSwitcher';
+import LanguageSwitcher from './LanguageSwitcher';
 import { i18n } from '@/i18n.config';
 import LoginModal from '../modal/LoginModal';
 
