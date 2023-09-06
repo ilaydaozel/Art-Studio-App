@@ -3,7 +3,7 @@
 import { useCallback } from 'react';
 import Button from '../buttons/Button';
 import styled from 'styled-components';
-import Heading from '../Heading';
+import Heading from '../heading/Heading';
 
 interface FormProps {
   onSubmit: () => void;
