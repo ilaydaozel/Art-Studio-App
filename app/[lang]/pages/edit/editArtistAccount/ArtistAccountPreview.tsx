@@ -6,25 +6,13 @@ import { useRouter } from 'next/navigation';
 import { ROUTE_PATHS } from '@/constants/routes';
 import ArtistAcccountMenu from './ArtistAcccountMenu';
 import { IUser } from '@/app/[lang]/actions/type';
+import ArtistPreview from '../../artists/ArtistPreview';
 
 const ArtistContainer = styled.div`
   display: flex;
-  align-items: center;
-  padding: 10px 20px;
-  cursor: pointer;
-  gap: 4px;
-  border: 1px solid ${COLORS.gray};
-  border-radius: 50px;
-`;
-
-const ArtistName = styled.text`
-  font-size: 1rem;
-  font-weight: 500;
-  color: ${COLORS.gray};
-  &:hover {
-    color: ${COLORS.darkGray};
-    text-decoration: underline;
-  }
+  align-items: baseline;
+  gap: 2px;
+  margin: 16px 4px;
 `;
 
 interface ArtistAccountPreviewProps {
@@ -40,10 +28,8 @@ const ArtistAccountPreview = ({ artist }: ArtistAccountPreviewProps) => {
   };
 
   return (
-    <ArtistContainer key={artist.id}>
-      <ArtistName onClick={() => handleEdit(artist)}>
-        {artist.name} {artist.surname}
-      </ArtistName>
+    <ArtistContainer key={artist.id} onClick={() => handleEdit(artist)}>
+      <ArtistPreview artist={artist}></ArtistPreview>
       <ArtistAcccountMenu currentArtist={artist}></ArtistAcccountMenu>
     </ArtistContainer>
   );
