@@ -60,6 +60,7 @@ const ArtworkContainer = ({ artwork }: ArtworkContainerProps) => {
         )}
         <InfoContainer>
           <InfoContent>{artwork?.title || ''}</InfoContent>
+          <InfoContent>{artwork?.description || ''}</InfoContent>
           <InfoContent>{artwork?.creationYear || ''}</InfoContent>
           <InfoContent>{artwork?.medium || ''}</InfoContent>
           <InfoContent>{artwork?.type || ''}</InfoContent>
