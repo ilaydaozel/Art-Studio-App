@@ -2,16 +2,16 @@
 import styled from 'styled-components';
 import { IUserArtwork } from '@/app/[lang]/actions/type';
 import { useRouter } from 'next/navigation';
-import Artwork from './Artwork';
+import Artwork from '../artwork/Artwork';
 import EditMenu from '../menu/EditMenu';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import { useState } from 'react';
 
 interface ArtworkListProps {
-  artworks: IUserArtwork[] | null;
+  artworks: IUserArtwork[];
   width?: string;
-  deletable?: boolean;
+  isEditable?: boolean;
 }
 
 const ArtworkContainer = styled.div`
@@ -33,7 +33,7 @@ const ListContainer = styled.div<{ width: string }>`
 const ArtworkList = ({
   artworks,
   width = '100%',
-  deletable = false,
+  isEditable = false,
 }: ArtworkListProps) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
@@ -61,11 +61,11 @@ const ArtworkList = ({
 
   return (
     <ListContainer width={width}>
-      {artworks?.map((currentArtwork: IUserArtwork) => (
+      {artworks.map((currentArtwork: IUserArtwork) => (
         <div key={currentArtwork.id} className='flex flex-col items-end'>
           <ArtworkContainer>
             <Artwork artwork={currentArtwork}></Artwork>
-            {deletable ? (
+            {isEditable ? (
               <EditMenu
                 onDeleteClick={() => handleDeleteArtwork(currentArtwork.id)}
               ></EditMenu>
