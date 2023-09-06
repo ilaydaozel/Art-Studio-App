@@ -13,7 +13,7 @@ import { useState } from 'react';
 import { IArtistProfile, IUserArtwork } from '@/app/[lang]/actions/type';
 import AddArtworkModal from '@/app/[lang]/components/modal/AddArtworkModal';
 import SlidingButton from '@/app/[lang]/components/buttons/SlidingButton';
-import ArtworkList from '@/app/[lang]/components/artwork/ArtworkList';
+import ArtworkList from '@/app/[lang]/components/lists/ArtworkList';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import HeadingWithUnderline from '@/app/[lang]/components/heading/HeadingWithUnderline';
@@ -103,7 +103,7 @@ const ArtworkThumbnail = styled.img`
 `;
 interface ArtistPageProps {
   profileInfo: IArtistProfile;
-  artworks?: IUserArtwork[] | null;
+  artworks?: IUserArtwork[];
 }
 
 const ArtistPage = ({ profileInfo, artworks }: ArtistPageProps) => {
@@ -228,7 +228,6 @@ const ArtistPage = ({ profileInfo, artworks }: ArtistPageProps) => {
                     onClick={() => {
                       addArtworkModal.onOpen();
                     }}
-                    icon={FaRegSquarePlus}
                   />
                 ) : (
                   <h1>Maximum eser sayısına ulaştınız.</h1>
@@ -237,11 +236,15 @@ const ArtistPage = ({ profileInfo, artworks }: ArtistPageProps) => {
                 <></>
               )}
             </div>
-            <ArtworkList
-              artworks={artworks ? artworks : null}
-              width='90%'
-              deletable={true}
-            ></ArtworkList>
+            {artworks ? (
+              <ArtworkList
+                artworks={artworks}
+                width='90%'
+                isEditable
+              ></ArtworkList>
+            ) : (
+              <></>
+            )}
           </div>
         </ArtworksContainer>
       </LayoutContainer>

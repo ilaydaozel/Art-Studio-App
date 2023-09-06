@@ -2,7 +2,7 @@
 import { COLORS } from '@/constants/colors';
 import styled from 'styled-components';
 import { IArtistProfile, IUserArtwork } from '@/app/[lang]/actions/type';
-import ArtworkList from '@/app/[lang]/components/artwork/ArtworkList';
+import ArtworkList from '@/app/[lang]/components/lists/ArtworkList';
 import HeadingWithUnderline from '@/app/[lang]/components/heading/HeadingWithUnderline';
 
 const LayoutContainer = styled.div`
@@ -106,10 +106,11 @@ const ArtistProfile = ({ profileInfo, artworks }: ArtistProfileProps) => {
 
         <ArtworksContainer>
           <HeadingWithUnderline title='Seçilmiş Eserler'></HeadingWithUnderline>
-          <ArtworkList
-            artworks={artworks ? artworks : null}
-            width='90%'
-          ></ArtworkList>
+          {artworks ? (
+            <ArtworkList artworks={artworks} width='90%'></ArtworkList>
+          ) : (
+            <></>
+          )}
         </ArtworksContainer>
       </LayoutContainer>
     </div>
