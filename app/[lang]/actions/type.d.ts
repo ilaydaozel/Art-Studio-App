@@ -5,7 +5,7 @@ export interface IUser {
     userType: string;
     email: string;
     gender?: string;
-    artistProfile: IArtistProfile;
+    artistProfile?: IArtistProfile;
 }
 
 export interface IArtistProfile {
@@ -16,7 +16,7 @@ export interface IArtistProfile {
     artworks?: IUserArtwork[];
     coverImage?: string;
     artistId: string;
-    user: IUser;
+    user?: IUser;
 }
 
 export interface IUserArtwork {

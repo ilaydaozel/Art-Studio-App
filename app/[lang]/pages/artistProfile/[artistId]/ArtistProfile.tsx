@@ -88,7 +88,7 @@ const ArtistProfile = ({ profileInfo, artworks }: ArtistProfileProps) => {
       <HeadingContainer>
         <div className='flex justify-center items-center w-[50%] h-full'>
           <NameHeading>
-            {profileInfo.user.name} {profileInfo.user.surname}
+            {profileInfo.user?.name} {profileInfo.user?.surname}
           </NameHeading>
         </div>
         <HeaderImage imageUrl={profileInfo?.coverImage || ''}></HeaderImage>

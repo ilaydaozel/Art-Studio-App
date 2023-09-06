@@ -86,7 +86,7 @@ const ArtistPreview = ({ artist }: ArtistPreviewProps) => {
   return (
     <ArtistBox
       onClick={() => handleArtistClick(artist.id)}
-      profilePic={artistProfile.profilePic ? artistProfile.profilePic : ''}
+      profilePic={artistProfile?.profilePic ? artistProfile.profilePic : ''}
     >
       <NameText isLoading={isLoading}>
         {artist.name} {artist.surname}

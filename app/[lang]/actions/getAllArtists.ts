@@ -9,7 +9,7 @@ export default async function getAllArtists() {
                 userType: 'artist',
             },
             include: {
-                artistProfile: true
+                artistProfile: true,
             }
         });
 
