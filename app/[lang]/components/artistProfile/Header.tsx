@@ -12,8 +12,8 @@ import Popup from '../popup/Popup';
 
 interface HeaderProps {
   artistProfile: IArtistProfile;
-  artworks: IUserArtwork[];
-  isEditable: boolean;
+  artworks?: IUserArtwork[];
+  isEditable?: boolean;
 }
 
 const HeadingContainer = styled.div`
@@ -106,11 +106,15 @@ const Header = ({
           <NameHeading>
             {artistProfile.user?.name} {artistProfile.user?.surname}
           </NameHeading>
-          <TextButton
-            label='Kapak Resmini Değiştir'
-            icon={FaRegEdit}
-            onClick={() => setShowArtworkSelection(true)}
-          ></TextButton>
+          {isEditable ? (
+            <TextButton
+              label='Kapak Resmini Değiştir'
+              icon={FaRegEdit}
+              onClick={() => setShowArtworkSelection(true)}
+            ></TextButton>
+          ) : (
+            <></>
+          )}
         </div>
         <HeaderImage imageUrl={coverImage}></HeaderImage>
       </HeadingContainer>
