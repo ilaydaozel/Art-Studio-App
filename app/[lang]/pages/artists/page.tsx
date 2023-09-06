@@ -1,8 +1,9 @@
 import EmptyState from '@/app/[lang]/components/EmptyState';
 import ClientOnly from '@/app/[lang]/components/ClientOnly';
-import ArtistPreview from './ArtistPreview';
+import ArtistPreview from '../../components/artist/ArtistPreview';
 import { IUser } from '@/app/[lang]/actions/type';
 import getAllArtists from '../../actions/getAllArtists';
+import ArtistAccountsList from '../../components/lists/ArtistAccountsList';
 
 const ArtistsPage = async () => {
   let artists: IUser[] | null = null;
@@ -14,14 +15,7 @@ const ArtistsPage = async () => {
         return (
           <ClientOnly>
             <div className='md:pt-24 pt-16 w-full'>
-              <div className='flex flex-wrap justify-around gap-4 md:px-12 md:my-8 px-6 my-4'>
-                {artists?.map((artist) => (
-                  <ArtistPreview
-                    key={artist.id}
-                    artist={artist}
-                  ></ArtistPreview>
-                ))}
-              </div>
+              <ArtistAccountsList accounts={artists}></ArtistAccountsList>
             </div>
           </ClientOnly>
         );
