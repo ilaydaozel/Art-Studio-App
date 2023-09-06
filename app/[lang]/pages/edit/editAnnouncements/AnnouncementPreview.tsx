@@ -16,8 +16,9 @@ const AnnouncementContainer = styled.div`
 `;
 
 const AnnouncementBox = styled.div`
-  width: 22vw;
-  height: 22vh;
+  width: 25vw;
+  height: 25vh;
+  min-width: 250px;
 `;
 
 const AnnouncementPreviewClient = ({
@@ -26,7 +27,7 @@ const AnnouncementPreviewClient = ({
   return (
     <AnnouncementContainer>
       <AnnouncementBox>
-        <Slide slide={announcement}></Slide>
+        <Slide isMini slide={announcement}></Slide>
       </AnnouncementBox>
       <AnnouncementMenu announcement={announcement}></AnnouncementMenu>
     </AnnouncementContainer>

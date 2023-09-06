@@ -14,10 +14,9 @@ interface AnnouncementCarouselProps {
 
 const NavButton = styled.button<{ position: string }>`
   position: absolute;
-  bottom: 0.5rem;
-  margin: 0.5rem;
-  left: ${(props) => props.position === 'left' && '1rem'};
-  right: ${(props) => props.position === 'right' && '1rem'};
+  bottom: 1.5rem;
+  left: ${(props) => props.position === 'left' && '1.5rem'};
+  right: ${(props) => props.position === 'right' && '1.5rem'};
   background: none;
   border: none;
   cursor: pointer;
@@ -45,14 +44,14 @@ const AnnouncementCarousel = ({ slides }: AnnouncementCarouselProps) => {
   return (
     <div className='w-[100vw] h-[100vh]'>
       <Slide slide={slides[activeIndex]}>
-        <>
+        <div className='w-full'>
           <NavButton position='left' onClick={goToPrevSlide}>
             <BsFillArrowLeftSquareFill />
           </NavButton>
           <NavButton position='right' onClick={goToNextSlide}>
             <BsFillArrowRightSquareFill />
           </NavButton>
-        </>
+        </div>
       </Slide>
     </div>
   );
