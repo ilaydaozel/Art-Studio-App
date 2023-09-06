@@ -5,6 +5,10 @@ import { IArtistProfile } from '../../actions/type';
 import ProfilePicture from './ProfilePicture';
 import HeadingWithUnderline from '../heading/HeadingWithUnderline';
 import Biography from './Biography';
+interface AboutProps {
+  artistProfile: IArtistProfile;
+  isEditable?: boolean;
+}
 
 const InformaionContainer = styled.div`
   width: 100%;
@@ -12,11 +16,6 @@ const InformaionContainer = styled.div`
   flex-direction: column;
   align-items: center;
 `;
-
-interface AboutProps {
-  artistProfile: IArtistProfile;
-  isEditable: boolean;
-}
 
 const About = ({ artistProfile, isEditable = false }: AboutProps) => {
   return (
