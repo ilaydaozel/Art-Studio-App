@@ -14,8 +14,7 @@ import { i18n } from '@/i18n.config';
 
 interface NavbarProps {
   currentUser: IUser | null;
-  routeNames: any;
-  academy: any;
+  navbarMessages: any;
 }
 const NavbarContainer = styled.div<{ bgColor: string }>`
   position: fixed;
@@ -77,10 +76,11 @@ const MenuElement = styled.a<{ color: string; isActive?: boolean }>`
     font-size: 0.4rem;
   }
 `;
-const Navbar = ({ currentUser, routeNames, academy }: NavbarProps) => {
+const Navbar = ({ currentUser, navbarMessages }: NavbarProps) => {
+  const { academy, route_names, login_modal } = navbarMessages;
   const loginModal = useLoginModal();
   const path = usePathname();
-
+  console.log('navbar: ', navbarMessages);
   const isHomePage =
     i18n.locales.find((locale) => path === `/${locale}`) !== undefined;
 
@@ -142,7 +142,7 @@ const Navbar = ({ currentUser, routeNames, academy }: NavbarProps) => {
             <SideIcons>
               <LanguageSwitcher />
               {currentUser ? (
-                <UserMenu currentUser={currentUser} />
+                <UserMenu currentUser={currentUser} routeNames={route_names} />
               ) : (
                 <MenuElement
                   color={menuElementColor}
@@ -160,28 +160,28 @@ const Navbar = ({ currentUser, routeNames, academy }: NavbarProps) => {
               color={menuElementColor}
               href={ROUTE_PATHS.HOME}
             >
-              {routeNames.home}
+              {route_names.home}
             </MenuElement>
             <MenuElement
               isActive={path === ROUTE_PATHS.ARTISTS}
               color={menuElementColor}
               href={ROUTE_PATHS.ARTISTS}
             >
-              {routeNames.artists}
+              {route_names.artists}
             </MenuElement>
             <MenuElement
               isActive={path === ROUTE_PATHS.ABOUT}
               color={menuElementColor}
               href={ROUTE_PATHS.ABOUT}
             >
-              {routeNames.about}
+              {route_names.about}
             </MenuElement>
             <MenuElement
               isActive={path === ROUTE_PATHS.VIRTUAL_EXHIBITIONS}
               color={menuElementColor}
               href={ROUTE_PATHS.VIRTUAL_EXHIBITIONS}
             >
-              {routeNames.virtual_exhibitions}
+              {route_names.virtual_exhibitions}
             </MenuElement>
           </div>
         </div>

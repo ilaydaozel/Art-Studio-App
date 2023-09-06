@@ -11,6 +11,7 @@ import { IUser } from '@/app/[lang]/actions/type';
 
 interface UserMenuProps {
   currentUser: IUser | null;
+  routeNames: any;
 }
 
 const MenuContainer = styled.div`
@@ -42,7 +43,7 @@ const UserMenuElement = styled.a`
   cursor: pointer;
   transition: background-color 0.3s ease;
   white-space: nowrap;
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   &:hover {
     font-weight: 700;
   }
@@ -56,10 +57,11 @@ const UserMenuElement = styled.a`
   }
 `;
 
-const UserTitle = styled.div`
+const NameText = styled.div`
   color: ${COLORS.darkGray};
-  font-weight: 600;
-  padding: 2px 10px 2px 10px;
+  width: 100%;
+  font-size: 0.9rem;
+  font-weight: bold;
   border-bottom: 1px solid ${COLORS.lightGray};
   @media (max-width: 768px) {
     font-size: 0.7rem;
@@ -69,7 +71,7 @@ const UserTitle = styled.div`
   }
 `;
 
-const UserMenu = ({ currentUser }: UserMenuProps) => {
+const UserMenu = ({ currentUser, routeNames }: UserMenuProps) => {
   const router = useRouter();
 
   const [isOpen, setIsOpen] = useState(false);
@@ -117,28 +119,20 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
         <AiOutlineMenu className='md:w-[24px] md:h-[20px] w-[20px] h-[18px] text-neutral-400' />
       </div>
       {isOpen && (
-        <>
+        <MenuContainer>
+          <NameText>
+            {currentUser?.name} {currentUser?.surname}
+          </NameText>
           {currentUser?.userType === 'artist' ? (
-            <MenuContainer>
-              <UserTitle>SANATÇI</UserTitle>
+            <>
               <UserMenuElement
                 href={`${ROUTE_PATHS.EDIT}${ROUTE_PATHS.EDIT_ARTIST_PROFILE}/${currentUser?.id}`}
               >
-                {ROUTE_NAMES.EDIT_ARTIST_PROFILE}
+                {routeNames.edit_artist_profiles}
               </UserMenuElement>
-              <UserMenuElement
-                href={ROUTE_PATHS.HOME}
-                onClick={() => {
-                  signOut();
-                  router.refresh();
-                }}
-              >
-                ÇIKIŞ YAP
-              </UserMenuElement>
-            </MenuContainer>
+            </>
           ) : (
-            <MenuContainer>
-              <UserTitle>ADMİN</UserTitle>
+            <>
               <UserMenuElement
                 href={`${ROUTE_PATHS.EDIT}${ROUTE_PATHS.EDIT_ARTIST_ACCOUNTS}`}
               >
@@ -147,26 +141,25 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
               <UserMenuElement
                 href={`${ROUTE_PATHS.EDIT}${ROUTE_PATHS.EDIT_ANNOUNCEMENTS}`}
               >
-                {ROUTE_NAMES.EDIT_ANNOUNCEMENTS}
+                {routeNames.edit_announcements}
               </UserMenuElement>
               <UserMenuElement
                 href={`${ROUTE_PATHS.ADD}${ROUTE_PATHS.ADD_NEW_ARTIST}`}
               >
-                {ROUTE_NAMES.ADD_NEW_ARTIST}
+                {routeNames.add_new_artist}
               </UserMenuElement>
-
-              <UserMenuElement
-                href={ROUTE_PATHS.HOME}
-                onClick={() => {
-                  signOut();
-                  router.refresh();
-                }}
-              >
-                Çıkış Yap
-              </UserMenuElement>
-            </MenuContainer>
+            </>
           )}
-        </>
+          <UserMenuElement
+            href={ROUTE_PATHS.HOME}
+            onClick={() => {
+              signOut();
+              router.refresh();
+            }}
+          >
+            {routeNames.logout}
+          </UserMenuElement>
+        </MenuContainer>
       )}
     </div>
   );

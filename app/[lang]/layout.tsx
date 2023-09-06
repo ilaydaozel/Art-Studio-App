@@ -35,7 +35,7 @@ export default async function RootLayout({
 }) {
   let { lang } = params;
   const currentUser = await getCurrentUser();
-  const { route_names, academy } = await getDictionary(lang);
+  const { navbar } = await getDictionary(lang);
   // Validate that the incoming `locale` parameter is a valid locale
   if (params.lang !== lang) {
     notFound();
@@ -57,8 +57,7 @@ export default async function RootLayout({
               <ToasterProvider />
               <LoginModal />
               <Navbar
-                academy={academy}
-                routeNames={route_names}
+                navbarMessages={navbar}
                 currentUser={currentUser ? currentUser.currentUser : null}
               />
             </ClientOnly>
