@@ -7,6 +7,9 @@ export default async function getAllArtists() {
         const artists = await prisma.user.findMany({
             where: {
                 userType: 'artist',
+            },
+            include: {
+                artistProfile: true
             }
         });
 
