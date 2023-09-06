@@ -1,7 +1,7 @@
 import EmptyState from '@/app/[lang]/components/EmptyState';
 import ClientOnly from '@/app/[lang]/components/ClientOnly';
 import { IUser } from '@/app/[lang]/actions/type';
-import ArtistAccountsList from './ArtistAccountsList';
+import ArtistAccountsList from './EditArtistAccountsClient';
 import getAllArtists from '@/app/[lang]/actions/getAllArtists';
 
 const EditArtistsPage = async () => {
