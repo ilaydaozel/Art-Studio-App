@@ -1,6 +1,6 @@
 import getArtistProfileById from '@/app/[lang]/actions/getArtistProfileById';
 import ClientOnly from '@/app/[lang]/components/ClientOnly';
-import ArtistProfile from './ArtistProfile';
+import ArtistProfile from '@/app/[lang]/components/artistProfile/ArtistProfile';
 import EmptyState from '@/app/[lang]/components/EmptyState';
 import getAllArtworksByArtistId from '@/app/[lang]/actions/getAllArtworksByArtistId';
 import { IArtistProfile, IUserArtwork } from '@/app/[lang]/actions/type';
@@ -32,8 +32,9 @@ const ArtistProfilePage = async ({ params }: { params: IParams }) => {
   return (
     <ClientOnly>
       <ArtistProfile
-        profileInfo={artistProfile.artistProfile}
+        artistProfile={artistProfile.artistProfile}
         artworks={allArtworks?.allUserArtworks}
+        isEditable
       />
     </ClientOnly>
   );
