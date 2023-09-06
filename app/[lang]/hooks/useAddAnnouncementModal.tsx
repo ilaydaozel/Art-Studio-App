@@ -6,10 +6,10 @@ interface AddAnnouncementModalStore {
   onClose: () => void;
 }
 
-const useAddArtworkModal = create<AddAnnouncementModalStore>((set) => ({
+const useAddAnnouncementModal = create<AddAnnouncementModalStore>((set) => ({
   isOpen: false,
   onOpen: () => set({ isOpen: true }),
   onClose: () => set({ isOpen: false }),
 }));
 
-export default useAddArtworkModal;
+export default useAddAnnouncementModal;
