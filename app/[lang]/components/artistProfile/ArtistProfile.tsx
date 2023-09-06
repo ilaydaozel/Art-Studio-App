@@ -1,11 +1,14 @@
 'use client';
+
 import styled from 'styled-components';
 import { IArtistProfile, IUserArtwork } from '@/app/[lang]/actions/type';
 import ArtworkList from '@/app/[lang]/components/lists/ArtworkList';
 import HeadingWithUnderline from '@/app/[lang]/components/heading/HeadingWithUnderline';
 import Header from '@/app/[lang]/components/artistProfile/Header';
 import About from '@/app/[lang]/components/artistProfile/About';
-
+import SlidingButton from '../buttons/SlidingButton';
+import useAddArtworkModal from '../../hooks/useAddArtworkModal';
+import AddArtworkModal from '../modal/AddArtworkModal';
 interface ArtistProfileProps {
   artistProfile: IArtistProfile;
   artworks?: IUserArtwork[];
@@ -30,6 +33,7 @@ const ArtistProfile = ({
   artworks,
   isEditable = false,
 }: ArtistProfileProps) => {
+  const addArtworkModal = useAddArtworkModal();
   return (
     <Container>
       <Header
@@ -40,6 +44,27 @@ const ArtistProfile = ({
       <About artistProfile={artistProfile} isEditable={isEditable}></About>
       <ArtworksContainer>
         <HeadingWithUnderline title='Seçilmiş Eserler'></HeadingWithUnderline>
+        <AddArtworkModal artistProfile={artistProfile} />
+        {isEditable ? (
+          <div className='w-[84%] flex justify-end mt-2'>
+            {artworks ? (
+              artworks.length < 3 ? (
+                <SlidingButton
+                  label='Yeni Eser Ekle +'
+                  onClick={() => {
+                    addArtworkModal.onOpen();
+                  }}
+                />
+              ) : (
+                <h1>Maximum eser sayısına ulaştınız.</h1>
+              )
+            ) : (
+              <></>
+            )}
+          </div>
+        ) : (
+          <></>
+        )}
         {artworks ? (
           <ArtworkList
             artworks={artworks}
