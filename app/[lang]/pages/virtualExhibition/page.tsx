@@ -1,5 +1,5 @@
 import getAllArtworksByArtistId from '@/app/[lang]/actions/getAllArtworksByArtistId';
-import ExhibitionPreview from './ExhibitionPreview';
+import ExhibitionPreview from '../../components/exhibition/ExhibitionPreview';
 
 const VirtualExhibition = async () => {
   const allArtworks = await getAllArtworksByArtistId({
