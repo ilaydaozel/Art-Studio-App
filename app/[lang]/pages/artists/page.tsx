@@ -1,22 +1,21 @@
 import EmptyState from '@/app/[lang]/components/EmptyState';
 import ClientOnly from '@/app/[lang]/components/ClientOnly';
-import getAllArtistProfiles from '@/app/[lang]/actions/getAllArtistProfiles';
 import ArtistPreview from './ArtistPreview';
-import { IArtistProfile } from '@/app/[lang]/actions/type';
+import { IUser } from '@/app/[lang]/actions/type';
+import getAllArtists from '../../actions/getAllArtists';
 
 const ArtistsPage = async () => {
-  let artistProfiles: IArtistProfile[] = [];
-
+  let artists: IUser[] | null = null;
   try {
-    const result = await getAllArtistProfiles();
-    if (result && result.artistProfiles) {
-      artistProfiles = result.artistProfiles;
-      if (artistProfiles.length > 0) {
+    const result = await getAllArtists();
+    if (result && result.artists) {
+      artists = result.artists;
+      if (artists.length > 0) {
         return (
           <ClientOnly>
             <div className='md:pt-24 pt-16 w-full'>
               <div className='flex flex-wrap justify-around gap-4 md:px-12 md:my-8 px-6 my-4'>
-                {artistProfiles?.map((artist) => (
+                {artists?.map((artist) => (
                   <ArtistPreview
                     key={artist.id}
                     artist={artist}

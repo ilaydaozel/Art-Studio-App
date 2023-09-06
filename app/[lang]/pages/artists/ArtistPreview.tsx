@@ -2,11 +2,11 @@
 import styled from 'styled-components';
 import { ROUTE_PATHS } from '@/constants/routes';
 import { useRouter } from 'next/navigation';
-import { IArtistProfile } from '@/app/[lang]/actions/type';
+import { IUser } from '@/app/[lang]/actions/type';
 import { useState } from 'react';
 
 interface ArtistPreviewProps {
-  artist: IArtistProfile;
+  artist: IUser;
 }
 
 const NameText = styled.div<{ isLoading: boolean }>`
@@ -73,7 +73,7 @@ const ArtistBox = styled.div<{ profilePic: string }>`
 const ArtistPreview = ({ artist }: ArtistPreviewProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
-
+  const { artistProfile } = artist;
   const handleArtistClick = async (artistId: string) => {
     try {
       setIsLoading(true);
@@ -85,11 +85,11 @@ const ArtistPreview = ({ artist }: ArtistPreviewProps) => {
 
   return (
     <ArtistBox
-      onClick={() => handleArtistClick(artist.user.id)}
-      profilePic={artist.profilePic ? artist.profilePic : ''}
+      onClick={() => handleArtistClick(artist.id)}
+      profilePic={artistProfile.profilePic ? artistProfile.profilePic : ''}
     >
       <NameText isLoading={isLoading}>
-        {artist.user.name} {artist.user.surname}
+        {artist.name} {artist.surname}
       </NameText>
     </ArtistBox>
   );
