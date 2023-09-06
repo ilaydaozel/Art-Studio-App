@@ -3,7 +3,7 @@ import EmptyState from '@/app/[lang]/components/EmptyState';
 import ClientOnly from '@/app/[lang]/components/ClientOnly';
 import getAllAnnouncements from '@/app/[lang]/actions/getAllAnnouncements';
 import { IAnnouncement } from '@/app/[lang]/actions/type';
-import AnnouncementsList from './AnnouncementsList';
+import EditAnnouncementsClient from './EditAnnouncementsClient';
 
 const EditAnnouncementsPage = async () => {
   let announcements: IAnnouncement[] = [];
@@ -16,9 +16,9 @@ const EditAnnouncementsPage = async () => {
         return (
           <ClientOnly>
             <div className='pt-28 w-full'>
-              <AnnouncementsList
+              <EditAnnouncementsClient
                 announcements={announcements}
-              ></AnnouncementsList>
+              ></EditAnnouncementsClient>
             </div>
           </ClientOnly>
         );

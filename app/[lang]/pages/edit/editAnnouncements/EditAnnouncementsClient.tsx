@@ -1,18 +1,19 @@
 'use client';
 import { IAnnouncement } from '@/app/[lang]/actions/type';
-import AnnouncementPreview from './AnnouncementPreview';
 import HeadingWithUnderline from '@/app/[lang]/components/heading/HeadingWithUnderline';
 import SlidingButton from '@/app/[lang]/components/buttons/SlidingButton';
 import AddAnnouncementModal from '@/app/[lang]/components/modal/AddAnnouncementModal';
 import useAddAnnouncementModal from '@/app/[lang]/hooks/useAddAnnouncementModal';
+import AnnouncementsList from '@/app/[lang]/components/lists/AnnouncementsList';
 
-interface AnnouncementsListProps {
+interface EditAnnouncementsClientProps {
   announcements: IAnnouncement[];
 }
 
-const AnnouncementsList = ({ announcements }: AnnouncementsListProps) => {
+const EditAnnouncementsClient = ({
+  announcements,
+}: EditAnnouncementsClientProps) => {
   const addAnnouncementModal = useAddAnnouncementModal();
-
   return (
     <div className='flex flex-col gap-4 items-center justify-center'>
       <div className='flex w-[80%] justify-end'>
@@ -23,16 +24,11 @@ const AnnouncementsList = ({ announcements }: AnnouncementsListProps) => {
         ></SlidingButton>
       </div>
       <HeadingWithUnderline title='Duyuruları Düzenle'></HeadingWithUnderline>
-
-      <div className='w-[90%] py-8 flex flex-row flex-wrap items-center justify-around'>
-        {announcements.map((announcement: IAnnouncement) => (
-          <AnnouncementPreview
-            key={announcement.id}
-            announcement={announcement}
-          ></AnnouncementPreview>
-        ))}
-      </div>
+      <AnnouncementsList
+        isEditable
+        announcements={announcements}
+      ></AnnouncementsList>
     </div>
   );
 };
-export default AnnouncementsList;
+export default EditAnnouncementsClient;
