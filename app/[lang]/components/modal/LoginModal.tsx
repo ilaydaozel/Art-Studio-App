@@ -36,13 +36,13 @@ const LoginModal = ({ messages }: LoginModalProps) => {
     }).then((callback) => {
       setIsLoading(false);
       if (callback?.ok) {
-        toast.success('Logged in');
+        toast.success(messages.login_successful_message);
         router.refresh();
         router.push('/');
         loginModal.onClose();
       }
       if (callback?.error) {
-        toast.error(callback.error);
+        toast.error(messages.login_failed_message);
       }
     });
   };
@@ -59,7 +59,7 @@ const LoginModal = ({ messages }: LoginModalProps) => {
       />
       <Input
         id='password'
-        label='Şifre'
+        label={messages.password}
         type='password'
         disabled={isLoading}
         register={register}
@@ -73,9 +73,9 @@ const LoginModal = ({ messages }: LoginModalProps) => {
     <Modal
       disabled={isLoading}
       isOpen={loginModal.isOpen}
-      title='Konak Kültür Sanat Akademisi`ne Hoş Geldiniz!'
-      subtitle='Giriş Yapın'
-      actionLabel='Giriş Yap'
+      title={messages.title}
+      subtitle={messages.subtitle}
+      actionLabel={messages.action_label}
       onClose={loginModal.onClose}
       onSubmit={handleSubmit(onSubmit)}
       body={bodyContent}

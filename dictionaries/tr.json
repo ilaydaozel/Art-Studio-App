@@ -18,7 +18,12 @@
       "logout": "Çıkış Yap"
     },
     "login_modal":{
-      "login_successful_message": "Başarıyla giriş yapıldı"
+      "login_successful_message": "Başarıyla giriş yapıldı",
+      "login_failed_message": "Giriş yapılamadı",
+      "password": "Şifre",
+      "title": "Konak Kültür Sanat Akademisi'ne Hoş Geldiniz!",
+      "subtitle": "Lütfen Giriş Yapın",
+      "action_label": "Giriş Yap"
     }
   },
 

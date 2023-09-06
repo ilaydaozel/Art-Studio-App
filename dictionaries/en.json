@@ -18,7 +18,12 @@
       "logout": "Log out"
     },
     "login_modal":{
-      "login_successful": "Logged in successfully"
+      "login_successful_message": "Logged in successfully",
+      "login_failed_message": "Could not log in",
+      "password": "Password",
+      "title": "Welcome to Konak Academy of Art and Culture!",
+      "subtitle": "Please Log In",
+      "action_label": "Log In"
     }
   },
   "page": {
