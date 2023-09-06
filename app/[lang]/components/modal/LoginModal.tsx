@@ -4,14 +4,15 @@ import { signIn } from 'next-auth/react';
 import { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
-
 import useLoginModal from '@/app/[lang]/hooks/useLoginModal';
-
 import Modal from './Modal';
 import Input from '../inputs/Input';
 import { useRouter } from 'next/navigation';
 
-const LoginModal = () => {
+interface LoginModalProps {
+  messages: any;
+}
+const LoginModal = ({ messages }: LoginModalProps) => {
   const router = useRouter();
   const loginModal = useLoginModal();
   const [isLoading, setIsLoading] = useState(false);
@@ -39,7 +40,6 @@ const LoginModal = () => {
         router.refresh();
         router.push('/');
         loginModal.onClose();
-        console.log('signed in user:  ', data);
       }
       if (callback?.error) {
         toast.error(callback.error);
