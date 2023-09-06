@@ -4,13 +4,15 @@ import HeadingWithUnderline from '@/app/[lang]/components/heading/HeadingWithUnd
 import SlidingButton from '@/app/[lang]/components/buttons/SlidingButton';
 import { ROUTE_PATHS } from '@/constants/routes';
 import { useRouter } from 'next/navigation';
-import ArtistAccountPreview from './ArtistAccountPreview';
+import ArtistAccountsList from '@/app/[lang]/components/lists/ArtistAccountsList';
 
-interface ArtistAccountsListProps {
+interface EditArtistAccountsClientProps {
   accounts: IUser[];
 }
 
-const ArtistAccountsList = ({ accounts }: ArtistAccountsListProps) => {
+const EditArtistAccountsClient = ({
+  accounts,
+}: EditArtistAccountsClientProps) => {
   const router = useRouter();
 
   return (
@@ -24,16 +26,8 @@ const ArtistAccountsList = ({ accounts }: ArtistAccountsListProps) => {
         ></SlidingButton>
       </div>
       <HeadingWithUnderline title='Sanatçı Hesaplarını Düzenle'></HeadingWithUnderline>
-
-      <div className='w-[90%] py-8 flex flex-row flex-wrap items-center justify-around'>
-        {accounts.map((account: IUser) => (
-          <ArtistAccountPreview
-            key={account.id}
-            artist={account}
-          ></ArtistAccountPreview>
-        ))}
-      </div>
+      <ArtistAccountsList isEditable accounts={accounts}></ArtistAccountsList>
     </div>
   );
 };
-export default ArtistAccountsList;
+export default EditArtistAccountsClient;
