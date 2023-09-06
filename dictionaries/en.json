@@ -1,23 +1,25 @@
 {
-  "academy":{
-    "name": "Konak Academy of Art and Culture"
-  },
-  "route_names":{
-    "home": "Homepage",
-    "artists": "Artists",
-    "add": "Add",
-    "add_new_artist": "Add New Artists",
-    "edit": "Edit",
-    "edit_artist_accounts": "Edit Artist Accounts",
-    "edit_artist_profile": "Edit Artist Profile",
-    "edit_announcements": "Edit Announcements",
-    "artist_profile": "Artist",
-    "about": "About",
-    "virtual_exhibitions": "Virtual Exhibitions"
-  },
-  "navigation": {
-    "home": "Home",
-    "about": "About"
+  "navbar":{
+    "academy":{
+      "name": "Konak Academy of Art and Culture"
+    },
+    "route_names":{
+      "home": "Homepage",
+      "artists": "Artists",
+      "add": "Add",
+      "add_new_artist": "Add New Artists",
+      "edit": "Edit",
+      "edit_artist_accounts": "Edit Artist Accounts",
+      "edit_artist_profile": "Edit Artist Profile",
+      "edit_announcements": "Edit Announcements",
+      "artist_profile": "Artist",
+      "about": "About",
+      "virtual_exhibitions": "Virtual Exhibitions",
+      "logout": "Log out"
+    },
+    "login_modal":{
+      "login_successful": "Logged in successfully"
+    }
   },
   "page": {
   }

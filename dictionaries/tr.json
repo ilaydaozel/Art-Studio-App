@@ -1,20 +1,27 @@
 {
-  "academy":{
-    "name": "Konak Kültür Sanat Akademisi"
+  "navbar": {
+    "academy":{
+      "name": "Konak Kültür Sanat Akademisi"
+    },
+    "route_names":{
+      "home": "Anasayfa",
+      "artists": "Sanatçılar",
+      "add": "Ekle",
+      "add_new_artist": "Yeni Sanatçı Ekle",
+      "edit": "Düzenle",
+      "edit_artist_accounts": "Sanatçıları Düzenle",
+      "edit_artist_profile": "Profilimi Düzenle",
+      "edit_announcements": "Duyuruları Düzenle",
+      "artist_profile": "Sanatçı",
+      "about": "Hakkımızda",
+      "virtual_exhibitions": "Sanal Sergiler",
+      "logout": "Çıkış Yap"
+    },
+    "login_modal":{
+      "login_successful_message": "Başarıyla giriş yapıldı"
+    }
   },
-  "route_names":{
-    "home": "Anasayfa",
-    "artists": "Sanatçılar",
-    "add": "Ekle",
-    "add_new_artist": "Yeni Sanatçı Ekle",
-    "edit": "Düzenle",
-    "edit_artist_accounts": "Sanatçıları Düzenle",
-    "edit_artist_profile": "Profilimi Düzenle",
-    "edit_announcements": "Duyuruları Düzenle",
-    "artist_profile": "Sanatçı",
-    "about": "Hakkımızda",
-    "virtual_exhibitions": "Sanal Sergiler"
-  },
+
   "page": {
 
   }
