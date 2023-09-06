@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import { signOut } from 'next-auth/react';
 import styled from 'styled-components';
 import { COLORS } from '@/constants/colors';
-import { ROUTE_PATHS, ROUTE_NAMES } from '@/constants/routes';
+import { ROUTE_PATHS } from '@/constants/routes';
 import { IUser } from '@/app/[lang]/actions/type';
 
 interface UserMenuProps {
@@ -136,7 +136,7 @@ const UserMenu = ({ currentUser, routeNames }: UserMenuProps) => {
               <UserMenuElement
                 href={`${ROUTE_PATHS.EDIT}${ROUTE_PATHS.EDIT_ARTIST_ACCOUNTS}`}
               >
-                {ROUTE_NAMES.EDIT_ARTIST_ACCOUNTS}
+                {routeNames.edit_artist_accounts}
               </UserMenuElement>
               <UserMenuElement
                 href={`${ROUTE_PATHS.EDIT}${ROUTE_PATHS.EDIT_ANNOUNCEMENTS}`}

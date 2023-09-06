@@ -64,7 +64,7 @@ export default async function RootLayout({
             {children}
 
             <ClientOnly>
-              <Footer />
+              <Footer messages={navbar.route_names} />
             </ClientOnly>
           </div>
         </StyledComponentsRegistry>

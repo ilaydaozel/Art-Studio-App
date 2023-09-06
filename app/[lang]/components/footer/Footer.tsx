@@ -2,8 +2,11 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { COLORS } from '@/constants/colors';
-import { ROUTE_PATHS, ROUTE_NAMES } from '@/constants/routes';
+import { ROUTE_PATHS } from '@/constants/routes';
 
+interface FooterProps {
+  messages: any;
+}
 const FooterContainer = styled.div<{ isVisible: boolean }>`
   width: 100%;
   background-color: ${(props) =>
@@ -42,7 +45,7 @@ const LogoTitle = styled.a`
   flex: 2 1 auto;
 `;
 
-const Footer = () => {
+const Footer = ({ messages }: FooterProps) => {
   const [isVisible, setIsVisible] = useState(
     document.documentElement.scrollHeight <= window.innerHeight
   );
@@ -78,13 +81,16 @@ const Footer = () => {
           <LogoTitle>KONAK KÜLTÜR SANAT AKADEMİSİ</LogoTitle>
           <div className='flex flex-col gap-1 items-start my-2'>
             <FooterElement href={ROUTE_PATHS.HOME}>
-              {ROUTE_NAMES.HOME}
+              {messages.home}
             </FooterElement>
             <FooterElement href={ROUTE_PATHS.ARTISTS}>
-              {ROUTE_NAMES.ARTISTS}
+              {messages.artists}
             </FooterElement>
             <FooterElement href={ROUTE_PATHS.ABOUT}>
-              {ROUTE_NAMES.ABOUT}
+              {messages.about}
+            </FooterElement>
+            <FooterElement href={ROUTE_PATHS.VIRTUAL_EXHIBITIONS}>
+              {messages.virtual_exhibitions}
             </FooterElement>
           </div>
         </div>
