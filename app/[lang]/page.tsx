@@ -24,8 +24,6 @@ export default async function ({
             <div className='max-w-[100vw] overflow-x-hidden'>
               <AnnouncementCarousel slides={announcements} />
             </div>
-            <h1 className='text-3xl font-bold'>{page.home.title}</h1>
-            <p className='text-gray-500'>{page.home.description}</p>
           </>
         );
       } else {
