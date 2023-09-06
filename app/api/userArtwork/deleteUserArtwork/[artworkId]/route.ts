@@ -8,14 +8,14 @@ interface IParams {
 
 export async function DELETE(request: Request, { params }: { params: IParams }) {
     const { artworkId } = params;
-    // Check if the UserArtwork record exists
     const existingArtwork = await prisma.userArtwork.findUnique({
         where: {
             id: artworkId,
         },
     });
-
+    console.log("ARTWORK DELETED:", existingArtwork);
     if (!existingArtwork) {
+        console.log("Artwork not found!")
         return NextResponse.error();
     }
 
