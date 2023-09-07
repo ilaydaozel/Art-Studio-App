@@ -57,6 +57,10 @@
       "select_cover_image": "Kapak Resmi Seç",
       "select_button_text": "Seç"
     }
+  },
+  "editAnnouncementsPage":{
+    "heading": "Duyuruları Düzenle",
+    "add_button_text": "Yeni Duyuru Ekle +"
   }
 
 

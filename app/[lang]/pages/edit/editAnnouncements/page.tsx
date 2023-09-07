@@ -5,10 +5,11 @@ import getAllAnnouncements from '@/app/[lang]/actions/getAllAnnouncements';
 import { IAnnouncement } from '@/app/[lang]/types';
 import EditAnnouncementsClient from './EditAnnouncementsClient';
 import { IPageProps } from '@/app/[lang]/types/page';
+import { getDictionary } from '@/lib/dictionary';
 
 const EditAnnouncementsPage = async ({ params }: { params: IPageProps }) => {
+  const { editAnnouncementsPage } = await getDictionary(params.lang);
   let announcements: IAnnouncement[] = [];
-
   try {
     const result = await getAllAnnouncements();
     if (result && result.announcements) {
@@ -19,6 +20,7 @@ const EditAnnouncementsPage = async ({ params }: { params: IPageProps }) => {
             <div className='pt-28 w-full'>
               <EditAnnouncementsClient
                 announcements={announcements}
+                messages={editAnnouncementsPage}
               ></EditAnnouncementsClient>
             </div>
           </ClientOnly>

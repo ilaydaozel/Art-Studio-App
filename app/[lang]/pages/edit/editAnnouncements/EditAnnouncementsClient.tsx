@@ -8,20 +8,22 @@ import ListWithButton from '@/app/[lang]/components/layouts/ListWithButton';
 
 interface EditAnnouncementsClientProps {
   announcements: IAnnouncement[];
+  messages: any;
 }
 
 const EditAnnouncementsClient = ({
   announcements,
+  messages,
 }: EditAnnouncementsClientProps) => {
   const addAnnouncementModal = useAddAnnouncementModal();
   return (
     <>
       <AddAnnouncementModal />
       <ListWithButton
-        buttonText='Yeni Duyuru Ekle +'
+        buttonText={messages.add_button_text}
         onClick={() => addAnnouncementModal.onOpen()}
       >
-        <ComponentWithHeading headingText='Duyuruları Düzenle'>
+        <ComponentWithHeading headingText={messages.heading}>
           <AnnouncementsList
             isEditable
             announcements={announcements}

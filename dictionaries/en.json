@@ -57,6 +57,11 @@
       "select_cover_image": "Select Cover Image",
       "select_button_text": "Select"
     }
+  },
+  "editAnnouncementsPage":{
+    "heading": "Edit Announcements",
+    "add_button_text": "Add New Announcement +"
   }
+
 
 }
