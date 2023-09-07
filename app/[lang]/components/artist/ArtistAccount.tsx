@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { IUser } from '@/app/[lang]/actions/type';
 import { useState } from 'react';
 
-interface ArtistPreviewProps {
+interface ArtistAccountProps {
   artist: IUser;
 }
 
@@ -70,7 +70,7 @@ const ArtistBox = styled.div<{ profilePic: string }>`
   }
 `;
 
-const ArtistPreview = ({ artist }: ArtistPreviewProps) => {
+const ArtistAccount = ({ artist }: ArtistAccountProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const { artistProfile } = artist;
@@ -95,4 +95,4 @@ const ArtistPreview = ({ artist }: ArtistPreviewProps) => {
   );
 };
 
-export default ArtistPreview;
+export default ArtistAccount;
