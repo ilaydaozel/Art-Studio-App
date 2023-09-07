@@ -1,6 +1,6 @@
 import EmptyState from '@/app/[lang]/components/EmptyState';
 import ClientOnly from '@/app/[lang]/components/ClientOnly';
-import ArtistPreview from '../../components/artist/ArtistPreview';
+import ArtistPreview from '../../components/artist/ArtistAccount';
 import { IUser } from '@/app/[lang]/actions/type';
 import getAllArtists from '../../actions/getAllArtists';
 import ArtistAccountsList from '../../components/lists/ArtistAccountsList';

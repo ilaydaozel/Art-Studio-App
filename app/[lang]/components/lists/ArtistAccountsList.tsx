@@ -7,7 +7,7 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 import { useState } from 'react';
 import { ROUTE_PATHS } from '@/constants/routes';
-import ArtistPreview from '../artist/ArtistPreview';
+import ArtistAccount from '../artist/ArtistAccount';
 
 interface ArtistAccountsListProps {
   accounts: IUser[];
@@ -62,7 +62,7 @@ const ArtistAccountsList = ({
       {accounts.map((account: IUser) => (
         <div key={account.id} className='flex flex-col items-end'>
           <ArtworkContainer>
-            <ArtistPreview artist={account}></ArtistPreview>
+            <ArtistAccount artist={account}></ArtistAccount>
             {isEditable ? (
               <EditMenu
                 onEditClick={() => {
