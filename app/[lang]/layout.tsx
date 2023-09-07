@@ -1,5 +1,5 @@
 import React from 'react';
-import './globals.css';
+import './assets/globals.css';
 import { DM_Sans } from 'next/font/google';
 import { notFound } from 'next/navigation';
 import getCurrentUser from './actions/getCurrentUser';
