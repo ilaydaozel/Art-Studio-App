@@ -10,22 +10,24 @@ import ListWithButton from '@/app/[lang]/components/layouts/ListWithButton';
 
 interface EditArtistAccountsClientProps {
   accounts: IUser[];
+  messages: any;
 }
 
 const EditArtistAccountsClient = ({
   accounts,
+  messages,
 }: EditArtistAccountsClientProps) => {
   const router = useRouter();
 
   return (
     <>
       <ListWithButton
-        buttonText='Yeni Sanatçı Ekle +'
+        buttonText={messages.addButtonText}
         onClick={() =>
           router.push(`${ROUTE_PATHS.ADD}${ROUTE_PATHS.ADD_NEW_ARTIST}`)
         }
       >
-        <ComponentWithHeading headingText='Sanatçı Hesaplarını Düzenle'>
+        <ComponentWithHeading headingText={messages.headingText}>
           <ArtistAccountsList
             isEditable
             accounts={accounts}

@@ -30,6 +30,7 @@
     "headingText": "Artists"
   },
   "editArtistAccountsPage":{
-    "headingText": "Edit Artist Accounts"
+    "headingText": "Edit Artist Accounts",
+    "addButtonText": "Add New Artist +"
   }
 }

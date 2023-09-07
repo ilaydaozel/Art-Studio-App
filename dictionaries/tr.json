@@ -30,7 +30,8 @@
       "headingText": "Sanatçılar"
   },
   "editArtistAccountsPage":{
-    "headingText": "Sanatçı Hesaplarını Düzenle"
+    "headingText": "Sanatçı Hesaplarını Düzenle",
+    "addButtonText": "Yeni Sanatçı Ekle +"
   }
 
 

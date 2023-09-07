@@ -4,8 +4,10 @@ import { IUser } from '@/app/[lang]/types';
 import ArtistAccountsList from './EditArtistAccountsClient';
 import getAllArtists from '@/app/[lang]/actions/getAllArtists';
 import { IPageProps } from '@/app/[lang]/types/page';
+import { getDictionary } from '@/lib/dictionary';
 
 const EditArtistsPage = async ({ params }: { params: IPageProps }) => {
+  const { editArtistAccountsPage } = await getDictionary(params.lang);
   let artists: IUser[] | null = null;
   try {
     const result = await getAllArtists();
@@ -15,7 +17,10 @@ const EditArtistsPage = async ({ params }: { params: IPageProps }) => {
         return (
           <ClientOnly>
             <div className='pt-28 w-full'>
-              <ArtistAccountsList accounts={artists}></ArtistAccountsList>
+              <ArtistAccountsList
+                messages={editArtistAccountsPage}
+                accounts={artists}
+              ></ArtistAccountsList>
             </div>
           </ClientOnly>
         );
