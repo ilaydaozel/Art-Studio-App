@@ -4,15 +4,16 @@ import ArtistProfile from '@/app/[lang]/components/artistProfile/ArtistProfile';
 import EmptyState from '@/app/[lang]/components/EmptyState';
 import getAllArtworksByArtistId from '@/app/[lang]/actions/getAllArtworksByArtistId';
 import { IArtistProfile, IUserArtwork } from '@/app/[lang]/types';
+import { IPageProps } from '@/app/[lang]/types/page';
 
-interface IParams {
+interface IParams extends IPageProps {
   artistId?: string;
 }
 
 const ArtistProfilePage = async ({ params }: { params: IParams }) => {
+  let { lang } = params;
   let artistProfile: { artistProfile: IArtistProfile } | null = null;
   let allArtworks: { allUserArtworks: IUserArtwork[] } | null = null;
-
   if (params != undefined && params != undefined) {
     artistProfile = await getArtistProfileById(params);
     allArtworks = await getAllArtworksByArtistId(params);

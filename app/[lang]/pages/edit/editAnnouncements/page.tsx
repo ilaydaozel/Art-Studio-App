@@ -4,8 +4,9 @@ import ClientOnly from '@/app/[lang]/components/ClientOnly';
 import getAllAnnouncements from '@/app/[lang]/actions/getAllAnnouncements';
 import { IAnnouncement } from '@/app/[lang]/types';
 import EditAnnouncementsClient from './EditAnnouncementsClient';
+import { IPageProps } from '@/app/[lang]/types/page';
 
-const EditAnnouncementsPage = async () => {
+const EditAnnouncementsPage = async ({ params }: { params: IPageProps }) => {
   let announcements: IAnnouncement[] = [];
 
   try {

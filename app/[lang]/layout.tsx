@@ -10,6 +10,7 @@ import StyledComponentsRegistry from './libs/registry';
 import ToasterProvider from './providers/ToasterProvider';
 import { Locale, i18n } from '@/i18n.config';
 import { getDictionary } from '@/lib/dictionary';
+import { IPageProps } from './types/page';
 
 export const metadata = {
   title: 'Konak Sanat Akademisi',
@@ -30,7 +31,7 @@ export default async function RootLayout({
   params,
 }: {
   children: React.ReactNode;
-  params: { lang: Locale };
+  params: IPageProps;
 }) {
   let { lang } = params;
   const currentUser = await getCurrentUser();

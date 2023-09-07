@@ -6,9 +6,9 @@ import getAllArtists from '../../actions/getAllArtists';
 import ArtistAccountsList from '../../components/lists/ArtistAccountsList';
 import ComponentWithHeading from '../../components/layouts/ComponentWithHeading';
 import { getDictionary } from '@/lib/dictionary';
-import { Locale } from '@/i18n.config';
+import { IPageProps } from '../../types/page';
 
-const ArtistsPage = async ({ params }: { params: { lang: Locale } }) => {
+const ArtistsPage = async ({ params }: { params: IPageProps }) => {
   const { artistsPage } = await getDictionary(params.lang);
   let artists: IUser[] | null = null;
   try {

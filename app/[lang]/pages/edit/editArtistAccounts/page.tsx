@@ -3,8 +3,9 @@ import ClientOnly from '@/app/[lang]/components/ClientOnly';
 import { IUser } from '@/app/[lang]/types';
 import ArtistAccountsList from './EditArtistAccountsClient';
 import getAllArtists from '@/app/[lang]/actions/getAllArtists';
+import { IPageProps } from '@/app/[lang]/types/page';
 
-const EditArtistsPage = async () => {
+const EditArtistsPage = async ({ params }: { params: IPageProps }) => {
   let artists: IUser[] | null = null;
   try {
     const result = await getAllArtists();
