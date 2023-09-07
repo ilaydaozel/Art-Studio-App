@@ -7,12 +7,12 @@ import ComponentWithHeading from '../layouts/ComponentWithHeading';
 interface AboutProps {
   artistProfile: IArtistProfile;
   isEditable?: boolean;
-  messages: string;
+  messages: any;
 }
 
 const About = ({ artistProfile, isEditable = false, messages }: AboutProps) => {
   return (
-    <ComponentWithHeading headingText={messages}>
+    <ComponentWithHeading headingText={messages.heading}>
       <div className='flex items-center justify-center w-[80%] my-10 gap-10'>
         <ProfilePicture
           artistProfile={artistProfile}

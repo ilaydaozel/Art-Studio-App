@@ -13,6 +13,10 @@ interface BiographyProps {
   isEditable?: boolean;
 }
 
+const BiographyContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 const BiographyContent = styled.div`
   font-size: 1rem;
   font-weight: 500;
@@ -35,16 +39,18 @@ const Biography = ({ artistProfile, isEditable = false }: BiographyProps) => {
         onClose={biographyModal.onClose}
         onUpdate={refreshPage}
       />
-      <BiographyContent>{artistProfile?.biography}</BiographyContent>
-      {isEditable ? (
-        <TextButton
-          label='Düzenle'
-          icon={FaRegEdit}
-          onClick={biographyModal.onOpen}
-        ></TextButton>
-      ) : (
-        <></>
-      )}
+      <BiographyContainer>
+        <BiographyContent>{artistProfile?.biography}</BiographyContent>
+        {isEditable ? (
+          <TextButton
+            label='Düzenle'
+            icon={FaRegEdit}
+            onClick={biographyModal.onOpen}
+          ></TextButton>
+        ) : (
+          <></>
+        )}
+      </BiographyContainer>
     </>
   );
 };

@@ -27,15 +27,36 @@
     }
   },
   "artistsPage":{
-      "listHeading": "Sanatçılar"
+      "list_heading": "Sanatçılar"
   },
   "editArtistAccountsPage":{
-    "listHeading": "Sanatçı Hesaplarını Düzenle",
-    "addButtonText": "Yeni Sanatçı Ekle +"
+    "list_heading": "Sanatçı Hesaplarını Düzenle",
+    "add_button_text": "Yeni Sanatçı Ekle +"
   },
   "artistProfilePage":{
-    "aboutHeading": "Hakkında",
-    "listHeading": "Seçilmiş Eserler"
+    "about":{
+      "heading": "Hakkında"
+    },
+    "list":{
+      "heading": "Seçilmiş Eserler"
+    }
+  },
+  "editArtistProfilePage":{
+    "about":{
+      "heading": "Hakkında"
+    },
+    "list":{
+      "heading": "Seçilmiş Eserler",
+      "add_button_text": "Yeni Eser Ekle +",
+      "max_artwork_number_warning": "Maximum eser sayısına ulaştınız"
+    },
+    "header":{
+      "change_image_button_text": "Kapak Resmini Değiştir",
+      "change_successful_message": "Kapak fotoğrafı güncellendi",
+      "change_failed_message": "Bir şeyler yanlış gitti",
+      "select_cover_image": "Kapak Resmi Seç",
+      "select_button_text": "Seç"
+    }
   }
 
 

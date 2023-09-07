@@ -20,12 +20,12 @@ const EditArtistAccountsClient = ({
   return (
     <>
       <ListWithButton
-        buttonText={messages.addButtonText}
+        buttonText={messages.add_button_text}
         onClick={() =>
           router.push(`${ROUTE_PATHS.ADD}${ROUTE_PATHS.ADD_NEW_ARTIST}`)
         }
       >
-        <ComponentWithHeading headingText={messages.listHeading}>
+        <ComponentWithHeading headingText={messages.list_heading}>
           <ArtistAccountsList
             isEditable
             accounts={accounts}

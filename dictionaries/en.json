@@ -27,14 +27,36 @@
     }
   },
   "artistsPage":{
-    "listHeading": "Artists"
+    "list_heading": "Artists"
   },
   "editArtistAccountsPage":{
-    "listHeading": "Edit Artist Accounts",
-    "addButtonText": "Add New Artist +"
+    "list_heading": "Edit Artist Accounts",
+    "add_button_text": "Add New Artist +"
   },
   "artistProfilePage":{
-    "aboutHeading": "About",
-    "listHeading": "Selected Artworks"
+    "about":{
+      "heading": "About"
+    },
+    "list":{
+      "heading": "Selected Artworks"
+    }
+  },
+  "editArtistProfilePage":{
+    "about":{
+      "heading": "About"
+    },
+    "list":{
+      "heading": "Selected Artworks",
+      "add_button_text": "Add New Artwork +",
+      "max_artwork_number_warning": "You have reached to maximum number of artworks"
+    },
+    "header":{
+      "change_image_button_text": "Change Cover Image",
+      "change_successful_message": "Cover image is updated",
+      "change_failed_message": "Something went wrong",
+      "select_cover_image": "Select Cover Image",
+      "select_button_text": "Select"
+    }
   }
+
 }

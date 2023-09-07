@@ -12,7 +12,8 @@ interface IParams extends IPageProps {
 }
 
 const ArtistProfilePage = async ({ params }: { params: IParams }) => {
-  const { editArtistAccountsPage } = await getDictionary(params.lang);
+  const { editArtistProfilePage } = await getDictionary(params.lang);
+  console.log('messages: ', editArtistProfilePage);
   let artistProfile: { artistProfile: IArtistProfile } | null = null;
   let allArtworks: { allUserArtworks: IUserArtwork[] } | null = null;
   if (params != undefined && params != undefined) {
@@ -37,7 +38,7 @@ const ArtistProfilePage = async ({ params }: { params: IParams }) => {
         artistProfile={artistProfile.artistProfile}
         artworks={allArtworks?.allUserArtworks}
         isEditable
-        messages
+        messages={editArtistProfilePage}
       />
     </ClientOnly>
   );

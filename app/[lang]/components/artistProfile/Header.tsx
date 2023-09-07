@@ -14,6 +14,7 @@ interface HeaderProps {
   artistProfile: IArtistProfile;
   artworks?: IUserArtwork[];
   isEditable?: boolean;
+  messages?: any;
 }
 
 const HeadingContainer = styled.div`
@@ -22,7 +23,6 @@ const HeadingContainer = styled.div`
   min-height: 100vh;
   width: 100%;
 `;
-
 const HeaderImage = styled.div<{ imageUrl: string }>`
   width: 50%;
   height: 100%;
@@ -46,14 +46,6 @@ const NameHeading = styled.text`
     font-size: 1.5rem;
   }
 `;
-
-const ArtworksContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-`;
-
 const ArtworkThumbnail = styled.img`
   width: 20vw;
   height: 40vh;
@@ -63,10 +55,12 @@ const ArtworkThumbnail = styled.img`
     transform: scale(1.02);
   }
 `;
+
 const Header = ({
   artistProfile,
   artworks,
   isEditable = false,
+  messages,
 }: HeaderProps) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
@@ -88,12 +82,11 @@ const Header = ({
       await axios.post(`/api/artistProfile/${artistProfile.artistId}`, {
         coverImage,
       });
-      toast.success('Kapak fotoğrafı güncellendi!');
+      toast.success(messages?.change_successful_message);
       setShowArtworkSelection(false);
       refreshPage();
     } catch (error) {
-      toast.error('Error');
-      console.log('Kapak fotoğrafı error: ', error);
+      toast.error(messages?.change_failed_message);
     } finally {
       setIsLoading(false);
     }
@@ -108,7 +101,7 @@ const Header = ({
           </NameHeading>
           {isEditable ? (
             <TextButton
-              label='Kapak Resmini Değiştir'
+              label={messages?.change_image_button_text}
               icon={FaRegEdit}
               onClick={() => setShowArtworkSelection(true)}
             ></TextButton>
@@ -137,8 +130,8 @@ const Header = ({
               ))}
             </div>
           }
-          title='Kapak Resmi Seç'
-          actionLabel='Tamamla'
+          title={messages.select_cover_image}
+          actionLabel={messages.select_button_text}
           onSubmit={() => handleCoverImageChange(coverImage)}
         ></Popup>
       )}

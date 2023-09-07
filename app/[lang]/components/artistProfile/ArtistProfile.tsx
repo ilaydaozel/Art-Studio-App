@@ -30,32 +30,34 @@ const ArtistProfile = ({
   messages,
 }: ArtistProfileProps) => {
   const addArtworkModal = useAddArtworkModal();
+  console.log('messages: ', messages);
   return (
     <Container>
       <Header
         artistProfile={artistProfile}
         artworks={artworks}
         isEditable={isEditable}
+        messages={messages.header}
       ></Header>
       <About
         artistProfile={artistProfile}
         isEditable={isEditable}
-        messages={messages.aboutHeading}
+        messages={messages.about}
       ></About>
-      <ComponentWithHeading headingText={messages.listHeading}>
+      <ComponentWithHeading headingText={messages.list.heading}>
         <AddArtworkModal artistProfile={artistProfile} />
         {isEditable ? (
           <div className='w-[84%] flex justify-end mt-2'>
             {artworks ? (
               artworks.length < 3 ? (
                 <SlidingButton
-                  label='Yeni Eser Ekle +'
+                  label={messages.list.add_button_text}
                   onClick={() => {
                     addArtworkModal.onOpen();
                   }}
                 />
               ) : (
-                <h1>Maximum eser sayısına ulaştınız.</h1>
+                <h1>{messages.list.max_artwork_number_warning}</h1>
               )
             ) : (
               <></>
