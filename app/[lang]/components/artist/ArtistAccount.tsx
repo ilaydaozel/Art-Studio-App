@@ -1,16 +1,13 @@
 'use client';
 import styled from 'styled-components';
 import { ROUTE_PATHS } from '@/constants/routes';
-import { useRouter } from 'next/navigation';
 import { IUser } from '@/app/[lang]/types';
-import { useState } from 'react';
 
 interface ArtistAccountProps {
   artist: IUser;
 }
 
-const NameText = styled.div<{ isLoading: boolean }>`
-  pointer-events: ${(props) => (props.isLoading ? 'none' : 'auto')};
+const NameText = styled.div`
   color: #fff;
   transition: color 0.2s;
   position: absolute;
@@ -71,27 +68,17 @@ const ArtistBox = styled.div<{ profilePic: string }>`
 `;
 
 const ArtistAccount = ({ artist }: ArtistAccountProps) => {
-  const [isLoading, setIsLoading] = useState(false);
-  const router = useRouter();
   const { artistProfile } = artist;
-  const handleArtistClick = async (artistId: string) => {
-    try {
-      setIsLoading(true);
-      await router.push(`${ROUTE_PATHS.ARTIST_PROFILE}/${artistId}`);
-    } catch (error) {
-      setIsLoading(false);
-    }
-  };
-
   return (
-    <ArtistBox
-      onClick={() => handleArtistClick(artist.id)}
-      profilePic={artistProfile?.profilePic ? artistProfile.profilePic : ''}
-    >
-      <NameText isLoading={isLoading}>
-        {artist.name} {artist.surname}
-      </NameText>
-    </ArtistBox>
+    <a href={`${ROUTE_PATHS.ARTIST_PROFILE}/${artist.id}`}>
+      <ArtistBox
+        profilePic={artistProfile?.profilePic ? artistProfile.profilePic : ''}
+      >
+        <NameText>
+          {artist.name} {artist.surname}
+        </NameText>
+      </ArtistBox>
+    </a>
   );
 };
 
