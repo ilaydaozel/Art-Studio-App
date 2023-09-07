@@ -4,7 +4,7 @@ import SlidingButton from '@/app/[lang]/components/buttons/SlidingButton';
 import { ROUTE_PATHS } from '@/constants/routes';
 import { useRouter } from 'next/navigation';
 import ArtistAccountsList from '@/app/[lang]/components/lists/ArtistAccountsList';
-import ListWithHeading from '@/app/[lang]/components/pageLayout/ListWithHeading';
+import ComponentWithHeading from '@/app/[lang]/components/pageLayout/ComponentWithHeading';
 import styled from 'styled-components';
 import ListWithButton from '@/app/[lang]/components/pageLayout/ListWithButton';
 
@@ -25,12 +25,12 @@ const EditArtistAccountsClient = ({
           router.push(`${ROUTE_PATHS.ADD}${ROUTE_PATHS.ADD_NEW_ARTIST}`)
         }
       >
-        <ListWithHeading headingText='Sanatçı Hesaplarını Düzenle'>
+        <ComponentWithHeading headingText='Sanatçı Hesaplarını Düzenle'>
           <ArtistAccountsList
             isEditable
             accounts={accounts}
           ></ArtistAccountsList>
-        </ListWithHeading>
+        </ComponentWithHeading>
       </ListWithButton>
     </>
   );

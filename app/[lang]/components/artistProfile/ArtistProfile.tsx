@@ -9,6 +9,7 @@ import About from '@/app/[lang]/components/artistProfile/About';
 import SlidingButton from '../buttons/SlidingButton';
 import useAddArtworkModal from '../../hooks/useAddArtworkModal';
 import AddArtworkModal from '../modal/AddArtworkModal';
+import ComponentWithHeading from '../pageLayout/ComponentWithHeading';
 interface ArtistProfileProps {
   artistProfile: IArtistProfile;
   artworks?: IUserArtwork[];
@@ -19,13 +20,6 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   gap: 4rem;
-`;
-
-const ArtworksContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
 `;
 
 const ArtistProfile = ({
@@ -42,8 +36,7 @@ const ArtistProfile = ({
         isEditable={isEditable}
       ></Header>
       <About artistProfile={artistProfile} isEditable={isEditable}></About>
-      <ArtworksContainer>
-        <HeadingWithUnderline title='Seçilmiş Eserler'></HeadingWithUnderline>
+      <ComponentWithHeading headingText='Seçilmiş Eserler'>
         <AddArtworkModal artistProfile={artistProfile} />
         {isEditable ? (
           <div className='w-[84%] flex justify-end mt-2'>
@@ -74,7 +67,7 @@ const ArtistProfile = ({
         ) : (
           <></>
         )}
-      </ArtworksContainer>
+      </ComponentWithHeading>
     </Container>
   );
 };

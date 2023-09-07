@@ -3,7 +3,7 @@ import { IAnnouncement } from '@/app/[lang]/actions/type';
 import AddAnnouncementModal from '@/app/[lang]/components/modal/AddAnnouncementModal';
 import useAddAnnouncementModal from '@/app/[lang]/hooks/useAddAnnouncementModal';
 import AnnouncementsList from '@/app/[lang]/components/lists/AnnouncementsList';
-import ListWithHeading from '@/app/[lang]/components/pageLayout/ListWithHeading';
+import ComponentWithHeading from '@/app/[lang]/components/pageLayout/ComponentWithHeading';
 import ListWithButton from '@/app/[lang]/components/pageLayout/ListWithButton';
 
 interface EditAnnouncementsClientProps {
@@ -21,12 +21,12 @@ const EditAnnouncementsClient = ({
         buttonText='Yeni Duyuru Ekle +'
         onClick={() => addAnnouncementModal.onOpen()}
       >
-        <ListWithHeading headingText='Duyuruları Düzenle'>
+        <ComponentWithHeading headingText='Duyuruları Düzenle'>
           <AnnouncementsList
             isEditable
             announcements={announcements}
           ></AnnouncementsList>
-        </ListWithHeading>
+        </ComponentWithHeading>
       </ListWithButton>
     </>
   );

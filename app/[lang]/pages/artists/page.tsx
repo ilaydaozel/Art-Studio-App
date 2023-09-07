@@ -4,6 +4,7 @@ import ArtistPreview from '../../components/artist/ArtistAccount';
 import { IUser } from '@/app/[lang]/actions/type';
 import getAllArtists from '../../actions/getAllArtists';
 import ArtistAccountsList from '../../components/lists/ArtistAccountsList';
+import ComponentWithHeading from '../../components/pageLayout/ComponentWithHeading';
 
 const ArtistsPage = async () => {
   let artists: IUser[] | null = null;
@@ -15,7 +16,9 @@ const ArtistsPage = async () => {
         return (
           <ClientOnly>
             <div className='md:pt-24 pt-16 w-full'>
-              <ArtistAccountsList accounts={artists}></ArtistAccountsList>
+              <ComponentWithHeading headingText='Sanatçılar'>
+                <ArtistAccountsList accounts={artists}></ArtistAccountsList>
+              </ComponentWithHeading>
             </div>
           </ClientOnly>
         );
