@@ -17,7 +17,10 @@ const ArtistsPage = async () => {
           <ClientOnly>
             <div className='md:pt-24 pt-16 w-full'>
               <ComponentWithHeading headingText='Sanatçılar'>
-                <ArtistAccountsList accounts={artists}></ArtistAccountsList>
+                <ArtistAccountsList
+                  width='90%'
+                  accounts={artists}
+                ></ArtistAccountsList>
               </ComponentWithHeading>
             </div>
           </ClientOnly>
