@@ -14,13 +14,17 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: start;
-  margin: 4px;
   width: 100%;
   max-width: 320px;
   background-color: #fff;
-  gap: 10px;
+  gap: 3rem;
 `;
-
+const ArtworkContainer = styled.div`
+  width: 280px;
+  height: 280px;
+  position: relative;
+  box-shadow: 1.25rem 1.375rem 4.75rem 0 rgba(0, 0, 0, 0.42);
+`;
 const InfoContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -42,7 +46,7 @@ const Artwork = ({ artwork }: ArtworkProps) => {
       ></ArtworkModal>
       <Container onClick={detailedArtworkModal.onOpen}>
         {artwork?.artworkMedias[0] !== undefined ? (
-          <div className='relative w-[280px] h-[280px]'>
+          <ArtworkContainer>
             <Image
               src={artwork?.artworkMedias[0] || ''}
               placeholder='empty'
@@ -50,7 +54,7 @@ const Artwork = ({ artwork }: ArtworkProps) => {
               fill
               className='object-cover'
             />
-          </div>
+          </ArtworkContainer>
         ) : (
           <div>
             <MdOutlinePhotoSizeSelectActual
