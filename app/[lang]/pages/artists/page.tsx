@@ -6,7 +6,7 @@ import getAllArtists from '../../actions/getAllArtists';
 import ArtistAccountsList from '../../components/lists/ArtistAccountsList';
 import ComponentWithHeading from '../../components/layouts/ComponentWithHeading';
 import { getDictionary } from '@/lib/dictionary';
-import { IPageProps } from '../../types/page';
+import { IPageProps } from '../../types/common';
 
 const ArtistsPage = async ({ params }: { params: IPageProps }) => {
   const { artistsPage } = await getDictionary(params.lang);

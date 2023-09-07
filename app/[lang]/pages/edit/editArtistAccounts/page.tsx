@@ -3,7 +3,7 @@ import ClientOnly from '@/app/[lang]/components/ClientOnly';
 import { IUser } from '@/app/[lang]/types';
 import ArtistAccountsList from './EditArtistAccountsClient';
 import getAllArtists from '@/app/[lang]/actions/getAllArtists';
-import { IPageProps } from '@/app/[lang]/types/page';
+import { IPageProps } from '@/app/[lang]/types/common';
 import { getDictionary } from '@/lib/dictionary';
 
 const EditArtistsPage = async ({ params }: { params: IPageProps }) => {

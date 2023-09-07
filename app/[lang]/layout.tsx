@@ -10,7 +10,7 @@ import StyledComponentsRegistry from './libs/registry';
 import ToasterProvider from './providers/ToasterProvider';
 import { Locale, i18n } from '@/i18n.config';
 import { getDictionary } from '@/lib/dictionary';
-import { IPageProps } from './types/page';
+import { IPageProps } from './types/common';
 
 export const metadata = {
   title: 'Konak Sanat Akademisi',

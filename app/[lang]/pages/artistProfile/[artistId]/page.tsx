@@ -5,7 +5,7 @@ import getArtistProfileById from '@/app/[lang]/actions/getArtistProfileById';
 import ArtistProfile from '@/app/[lang]/components/artistProfile/ArtistProfile';
 import getAllArtworksByArtistId from '@/app/[lang]/actions/getAllArtworksByArtistId';
 import { IArtistProfile, IUserArtwork } from '@/app/[lang]/types';
-import { IPageProps } from '@/app/[lang]/types/page';
+import { IPageProps } from '@/app/[lang]/types/common';
 import { getDictionary } from '@/lib/dictionary';
 
 interface IParams extends IPageProps {
