@@ -1,12 +1,14 @@
+'use client';
+
 import { styled } from 'styled-components';
 import HeadingWithUnderline from '../heading/HeadingWithUnderline';
 
-interface ListWithHeadingProps {
+interface ComponentWithHeadingProps {
   headingText: string;
   children: React.ReactNode;
 }
 
-const ListContainer = styled.div`
+const LayoutContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -14,15 +16,15 @@ const ListContainer = styled.div`
   width: 100%;
 `;
 
-const ListWithHeading = ({
+const ComponentWithHeading = ({
   headingText = '',
   children,
-}: ListWithHeadingProps) => {
+}: ComponentWithHeadingProps) => {
   return (
-    <ListContainer>
+    <LayoutContainer>
       <HeadingWithUnderline title={headingText}></HeadingWithUnderline>
       {children}
-    </ListContainer>
+    </LayoutContainer>
   );
 };
-export default ListWithHeading;
+export default ComponentWithHeading;
