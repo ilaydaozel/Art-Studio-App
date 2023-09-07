@@ -4,9 +4,12 @@ import ArtistPreview from '../../components/artist/ArtistAccount';
 import { IUser } from '@/app/[lang]/actions/type';
 import getAllArtists from '../../actions/getAllArtists';
 import ArtistAccountsList from '../../components/lists/ArtistAccountsList';
-import ComponentWithHeading from '../../components/pageLayout/ComponentWithHeading';
+import ComponentWithHeading from '../../components/layouts/ComponentWithHeading';
+import { getDictionary } from '@/lib/dictionary';
+import { Locale } from '@/i18n.config';
 
-const ArtistsPage = async () => {
+const ArtistsPage = async ({ params }: { params: { lang: Locale } }) => {
+  const { artistsPage } = await getDictionary(params.lang);
   let artists: IUser[] | null = null;
   try {
     const result = await getAllArtists();
@@ -16,7 +19,7 @@ const ArtistsPage = async () => {
         return (
           <ClientOnly>
             <div className='md:pt-24 pt-16 w-full'>
-              <ComponentWithHeading headingText='Sanatçılar'>
+              <ComponentWithHeading headingText={artistsPage.headingText}>
                 <ArtistAccountsList
                   width='90%'
                   accounts={artists}

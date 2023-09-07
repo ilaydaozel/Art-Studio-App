@@ -26,6 +26,10 @@
       "action_label": "Log In"
     }
   },
-  "page": {
+  "artistsPage":{
+    "headingText": "Artists"
+  },
+  "editArtistAccountsPage":{
+    "headingText": "Edit Artist Accounts"
   }
 }

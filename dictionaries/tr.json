@@ -26,9 +26,12 @@
       "action_label": "Giriş Yap"
     }
   },
-
-  "page": {
-
+  "artistsPage":{
+      "headingText": "Sanatçılar"
+  },
+  "editArtistAccountsPage":{
+    "headingText": "Sanatçı Hesaplarını Düzenle"
   }
+
 
 }
