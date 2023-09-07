@@ -1,7 +1,7 @@
 import EmptyState from '@/app/[lang]/components/EmptyState';
 import ClientOnly from '@/app/[lang]/components/ClientOnly';
 import ArtistPreview from '../../components/artist/ArtistAccount';
-import { IUser } from '@/app/[lang]/actions/type';
+import { IUser } from '@/app/[lang]/types';
 import getAllArtists from '../../actions/getAllArtists';
 import ArtistAccountsList from '../../components/lists/ArtistAccountsList';
 import ComponentWithHeading from '../../components/layouts/ComponentWithHeading';

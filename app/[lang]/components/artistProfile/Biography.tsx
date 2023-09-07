@@ -1,7 +1,7 @@
 'use client';
 import { COLORS } from '@/constants/colors';
 import styled from 'styled-components';
-import { IArtistProfile } from '../../actions/type';
+import { IArtistProfile } from '../../types';
 import useBiographyModal from '../../hooks/useBiographyModal';
 import { FaRegEdit } from 'react-icons/fa';
 import TextButton from '../buttons/TextButton';

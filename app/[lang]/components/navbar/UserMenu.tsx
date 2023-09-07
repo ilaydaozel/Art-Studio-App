@@ -7,7 +7,7 @@ import { signOut } from 'next-auth/react';
 import styled from 'styled-components';
 import { COLORS } from '@/constants/colors';
 import { ROUTE_PATHS } from '@/constants/routes';
-import { IUser } from '@/app/[lang]/actions/type';
+import { IUser } from '@/app/[lang]/types';
 
 interface UserMenuProps {
   currentUser: IUser | null;

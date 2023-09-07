@@ -9,7 +9,7 @@ import Modal from './Modal';
 import ImageUpload from '../inputs/ImageUpload';
 import Input from '../inputs/Input';
 import Selectbox from '../inputs/Selectbox';
-import { IArtistProfile } from '@/app/[lang]/actions/type';
+import { IArtistProfile } from '@/app/[lang]/types';
 
 enum STEPS {
   INFORMATION = 0,

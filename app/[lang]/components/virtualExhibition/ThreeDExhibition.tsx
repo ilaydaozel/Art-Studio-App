@@ -1,5 +1,5 @@
 'use client';
-import { IUserArtwork } from '@/app/[lang]/actions/type';
+import { IUserArtwork } from '@/app/[lang]/types';
 import React, { useRef, useEffect } from 'react';
 import * as THREE from 'three';
 import { PointerLockControls } from 'three-stdlib';

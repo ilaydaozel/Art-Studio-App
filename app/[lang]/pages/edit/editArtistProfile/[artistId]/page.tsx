@@ -3,7 +3,7 @@ import ClientOnly from '@/app/[lang]/components/ClientOnly';
 import ArtistProfile from '@/app/[lang]/components/artistProfile/ArtistProfile';
 import EmptyState from '@/app/[lang]/components/EmptyState';
 import getAllArtworksByArtistId from '@/app/[lang]/actions/getAllArtworksByArtistId';
-import { IArtistProfile, IUserArtwork } from '@/app/[lang]/actions/type';
+import { IArtistProfile, IUserArtwork } from '@/app/[lang]/types';
 
 interface IParams {
   artistId?: string;

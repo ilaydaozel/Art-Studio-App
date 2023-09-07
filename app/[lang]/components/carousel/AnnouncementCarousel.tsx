@@ -5,7 +5,7 @@ import {
   BsFillArrowRightSquareFill,
   BsFillArrowLeftSquareFill,
 } from 'react-icons/bs';
-import { IAnnouncement } from '@/app/[lang]/actions/type';
+import { IAnnouncement } from '@/app/[lang]/types';
 import Slide from './Slide';
 
 interface AnnouncementCarouselProps {

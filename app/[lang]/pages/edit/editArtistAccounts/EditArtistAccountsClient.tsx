@@ -1,5 +1,5 @@
 'use client';
-import { IUser } from '@/app/[lang]/actions/type';
+import { IUser } from '@/app/[lang]/types';
 import SlidingButton from '@/app/[lang]/components/buttons/SlidingButton';
 import { ROUTE_PATHS } from '@/constants/routes';
 import { useRouter } from 'next/navigation';

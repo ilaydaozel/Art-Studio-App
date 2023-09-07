@@ -1,5 +1,5 @@
 'use client';
-import { IAnnouncement } from '@/app/[lang]/actions/type';
+import { IAnnouncement } from '@/app/[lang]/types';
 import { useRouter } from 'next/navigation';
 import styled from 'styled-components';
 import EditMenu from '../menu/EditMenu';

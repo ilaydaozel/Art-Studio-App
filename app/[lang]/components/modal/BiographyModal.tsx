@@ -4,7 +4,7 @@ import { toast } from 'react-hot-toast';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import useBiographyModal from '@/app/[lang]/hooks/useBiographyModal';
 import Modal from './Modal';
-import { IArtistProfile } from '@/app/[lang]/actions/type';
+import { IArtistProfile } from '@/app/[lang]/types';
 
 interface BiographyModalProps {
   artistProfile: IArtistProfile | null;

@@ -1,5 +1,5 @@
 import getArtistProfileById from "@/app/[lang]/actions/getArtistProfileById";
-import { IUser } from "@/app/[lang]/actions/type";
+import { IUser } from "@/app/[lang]/types";
 import { NextResponse } from "next/server";
 import prisma from "@/app/[lang]/libs/prismadb";
 

@@ -7,7 +7,7 @@ import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import Modal from './Modal';
 import ImageUpload from '../inputs/ImageUpload';
 import useProfilePictureModal from '@/app/[lang]/hooks/useProfilePictureModal';
-import { IArtistProfile } from '@/app/[lang]/actions/type';
+import { IArtistProfile } from '@/app/[lang]/types';
 
 interface ProfilePictureModalProps {
   artistProfile: IArtistProfile | null;

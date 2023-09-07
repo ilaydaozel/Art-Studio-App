@@ -8,7 +8,7 @@ import useLoginModal from '@/app/[lang]/hooks/useLoginModal';
 import { ROUTE_PATHS } from '@/constants/routes';
 import { usePathname } from 'next/navigation';
 import { PiUserCircleLight } from 'react-icons/pi';
-import { IUser } from '@/app/[lang]/actions/type';
+import { IUser } from '@/app/[lang]/types';
 import LanguageSwitcher from './LanguageSwitcher';
 import { i18n } from '@/i18n.config';
 import LoginModal from '../modal/LoginModal';

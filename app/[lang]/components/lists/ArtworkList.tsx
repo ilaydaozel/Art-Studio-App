@@ -1,6 +1,6 @@
 'use client';
 import styled from 'styled-components';
-import { IUserArtwork } from '@/app/[lang]/actions/type';
+import { IUserArtwork } from '@/app/[lang]/types';
 import { useRouter } from 'next/navigation';
 import Artwork from '../artwork/Artwork';
 import EditMenu from '../menu/EditMenu';

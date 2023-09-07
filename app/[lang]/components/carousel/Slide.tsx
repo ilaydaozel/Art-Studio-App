@@ -1,6 +1,6 @@
 import { COLORS } from '@/constants/colors';
 import styled from 'styled-components';
-import { IAnnouncement } from '@/app/[lang]/actions/type';
+import { IAnnouncement } from '@/app/[lang]/types';
 
 interface SlideProps {
   slide: IAnnouncement;

@@ -1,4 +1,4 @@
-import { IUserArtwork } from '@/app/[lang]/actions/type';
+import { IUserArtwork } from '@/app/[lang]/types';
 import * as THREE from 'three';
 
 const paintingDepth: number = 0.5;

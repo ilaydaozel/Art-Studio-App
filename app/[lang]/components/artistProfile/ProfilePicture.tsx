@@ -1,7 +1,7 @@
 'use client';
 
 import styled from 'styled-components';
-import { IArtistProfile } from '../../actions/type';
+import { IArtistProfile } from '../../types';
 import useProfilePictureModal from '../../hooks/useProfilePictureModal';
 import { FaRegEdit } from 'react-icons/fa';
 import TextButton from '../buttons/TextButton';

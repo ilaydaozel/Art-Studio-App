@@ -5,7 +5,7 @@ import { MdOutlinePhotoSizeSelectActual } from 'react-icons/md';
 import { COLORS } from '@/constants/colors';
 import useArtworkModal from '@/app/[lang]/hooks/useArtworkModal';
 import ArtworkModal from '../modal/ArtworkModal';
-import { IUserArtwork } from '@/app/[lang]/actions/type';
+import { IUserArtwork } from '@/app/[lang]/types';
 
 interface ArtworkProps {
   artwork: IUserArtwork | null;

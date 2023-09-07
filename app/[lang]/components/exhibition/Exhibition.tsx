@@ -2,7 +2,7 @@
 import styled from 'styled-components';
 import { useState } from 'react';
 import Popup from '@/app/[lang]/components/popup/Popup';
-import { IUserArtwork } from '@/app/[lang]/actions/type';
+import { IUserArtwork } from '@/app/[lang]/types';
 import StartMenu from '@/app/[lang]/components/virtualExhibition/StartMenu';
 
 interface ExhibitionPreviewProps {

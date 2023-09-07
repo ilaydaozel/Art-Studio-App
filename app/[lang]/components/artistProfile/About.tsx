@@ -1,7 +1,7 @@
 'use client';
 
 import styled from 'styled-components';
-import { IArtistProfile } from '../../actions/type';
+import { IArtistProfile } from '../../types';
 import ProfilePicture from './ProfilePicture';
 import HeadingWithUnderline from '../heading/HeadingWithUnderline';
 import Biography from './Biography';

@@ -1,5 +1,5 @@
 import prisma from "../libs/prismadb";
-import { IArtistProfile } from "./type";
+import { IArtistProfile } from "../types";
 
 interface IParams {
     artistId?: string;

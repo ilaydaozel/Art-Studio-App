@@ -2,7 +2,7 @@ import React from 'react';
 import EmptyState from '@/app/[lang]/components/EmptyState';
 import ClientOnly from '@/app/[lang]/components/ClientOnly';
 import getAllAnnouncements from '@/app/[lang]/actions/getAllAnnouncements';
-import { IAnnouncement } from '@/app/[lang]/actions/type';
+import { IAnnouncement } from '@/app/[lang]/types';
 import EditAnnouncementsClient from './EditAnnouncementsClient';
 
 const EditAnnouncementsPage = async () => {

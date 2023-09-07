@@ -1,7 +1,7 @@
 'use client';
 import { COLORS } from '@/constants/colors';
 import styled from 'styled-components';
-import { IArtistProfile, IUserArtwork } from '../../actions/type';
+import { IArtistProfile, IUserArtwork } from '../../types';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import { useState } from 'react';

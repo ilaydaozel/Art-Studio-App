@@ -1,6 +1,6 @@
 import React from 'react';
 import getAllAnnouncements from './actions/getAllAnnouncements';
-import { IAnnouncement } from './actions/type';
+import { IAnnouncement } from './types';
 import AnnouncementCarousel from './components/carousel/AnnouncementCarousel';
 import ClientOnly from './components/ClientOnly';
 import EmptyState from './components/EmptyState';

@@ -2,7 +2,7 @@
 import styled from 'styled-components';
 import { ROUTE_PATHS } from '@/constants/routes';
 import { useRouter } from 'next/navigation';
-import { IUser } from '@/app/[lang]/actions/type';
+import { IUser } from '@/app/[lang]/types';
 import { useState } from 'react';
 
 interface ArtistAccountProps {

@@ -1,7 +1,7 @@
 'use client';
 
 import styled from 'styled-components';
-import { IArtistProfile, IUserArtwork } from '@/app/[lang]/actions/type';
+import { IArtistProfile, IUserArtwork } from '@/app/[lang]/types';
 import ArtworkList from '@/app/[lang]/components/lists/ArtworkList';
 import HeadingWithUnderline from '@/app/[lang]/components/heading/HeadingWithUnderline';
 import Header from '@/app/[lang]/components/artistProfile/Header';

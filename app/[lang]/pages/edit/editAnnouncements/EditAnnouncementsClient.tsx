@@ -1,5 +1,5 @@
 'use client';
-import { IAnnouncement } from '@/app/[lang]/actions/type';
+import { IAnnouncement } from '@/app/[lang]/types';
 import AddAnnouncementModal from '@/app/[lang]/components/modal/AddAnnouncementModal';
 import useAddAnnouncementModal from '@/app/[lang]/hooks/useAddAnnouncementModal';
 import AnnouncementsList from '@/app/[lang]/components/lists/AnnouncementsList';

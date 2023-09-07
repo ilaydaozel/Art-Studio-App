@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Modal from './Modal';
 import useArtworkModal from '@/app/[lang]/hooks/useArtworkModal';
 import Image from 'next/image';
-import { IUserArtwork } from '@/app/[lang]/actions/type';
+import { IUserArtwork } from '@/app/[lang]/types';
 interface ArtworkModalProps {
   artwork: IUserArtwork | null;
   onClose: () => void;
