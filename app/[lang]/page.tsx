@@ -4,16 +4,10 @@ import { IAnnouncement } from './types';
 import AnnouncementCarousel from './components/carousel/AnnouncementCarousel';
 import ClientOnly from './components/ClientOnly';
 import EmptyState from './components/EmptyState';
-import { getDictionary } from '@/lib/dictionary';
 import { Locale } from '@/i18n.config';
 
-export default async function ({
-  params: { lang },
-}: {
-  params: { lang: Locale };
-}) {
+export default async function ({ params }: { params: { lang: Locale } }) {
   let announcements: IAnnouncement[] = [];
-  const { page } = await getDictionary(lang);
   try {
     const allAnnouncements = await getAllAnnouncements();
     if (allAnnouncements && allAnnouncements.announcements) {
