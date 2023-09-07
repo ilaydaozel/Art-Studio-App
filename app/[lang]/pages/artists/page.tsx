@@ -19,7 +19,7 @@ const ArtistsPage = async ({ params }: { params: IPageProps }) => {
         return (
           <ClientOnly>
             <div className='md:pt-24 pt-16 w-full'>
-              <ComponentWithHeading headingText={artistsPage.headingText}>
+              <ComponentWithHeading headingText={artistsPage.listHeading}>
                 <ArtistAccountsList
                   width='90%'
                   accounts={artists}

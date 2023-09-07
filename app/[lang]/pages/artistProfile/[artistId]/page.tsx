@@ -6,12 +6,14 @@ import ArtistProfile from '@/app/[lang]/components/artistProfile/ArtistProfile';
 import getAllArtworksByArtistId from '@/app/[lang]/actions/getAllArtworksByArtistId';
 import { IArtistProfile, IUserArtwork } from '@/app/[lang]/types';
 import { IPageProps } from '@/app/[lang]/types/page';
+import { getDictionary } from '@/lib/dictionary';
 
 interface IParams extends IPageProps {
   artistId?: string;
 }
 
 const ArtistProfilePage = async ({ params }: { params: IParams }) => {
+  const { artistProfilePage } = await getDictionary(params.lang);
   let artistProfile: { artistProfile: IArtistProfile } | null = null;
   let allArtworks: { allUserArtworks: IUserArtwork[] } | null = null;
 
@@ -34,6 +36,7 @@ const ArtistProfilePage = async ({ params }: { params: IParams }) => {
   return (
     <ClientOnly>
       <ArtistProfile
+        messages={artistProfilePage}
         artistProfile={artistProfile.artistProfile}
         artworks={allArtworks?.allUserArtworks}
       />

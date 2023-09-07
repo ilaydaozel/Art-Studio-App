@@ -1,26 +1,18 @@
 'use client';
 
-import styled from 'styled-components';
 import { IArtistProfile } from '../../types';
 import ProfilePicture from './ProfilePicture';
-import HeadingWithUnderline from '../heading/HeadingWithUnderline';
 import Biography from './Biography';
 import ComponentWithHeading from '../layouts/ComponentWithHeading';
 interface AboutProps {
   artistProfile: IArtistProfile;
   isEditable?: boolean;
+  messages: string;
 }
 
-const InformaionContainer = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-const About = ({ artistProfile, isEditable = false }: AboutProps) => {
+const About = ({ artistProfile, isEditable = false, messages }: AboutProps) => {
   return (
-    <ComponentWithHeading headingText='Hakkında'>
+    <ComponentWithHeading headingText={messages}>
       <div className='flex items-center justify-center w-[80%] my-10 gap-10'>
         <ProfilePicture
           artistProfile={artistProfile}

@@ -14,6 +14,7 @@ interface ArtistProfileProps {
   artistProfile: IArtistProfile;
   artworks?: IUserArtwork[];
   isEditable?: boolean;
+  messages: any;
 }
 
 const Container = styled.div`
@@ -26,6 +27,7 @@ const ArtistProfile = ({
   artistProfile,
   artworks,
   isEditable = false,
+  messages,
 }: ArtistProfileProps) => {
   const addArtworkModal = useAddArtworkModal();
   return (
@@ -35,8 +37,12 @@ const ArtistProfile = ({
         artworks={artworks}
         isEditable={isEditable}
       ></Header>
-      <About artistProfile={artistProfile} isEditable={isEditable}></About>
-      <ComponentWithHeading headingText='Seçilmiş Eserler'>
+      <About
+        artistProfile={artistProfile}
+        isEditable={isEditable}
+        messages={messages.aboutHeading}
+      ></About>
+      <ComponentWithHeading headingText={messages.listHeading}>
         <AddArtworkModal artistProfile={artistProfile} />
         {isEditable ? (
           <div className='w-[84%] flex justify-end mt-2'>

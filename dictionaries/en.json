@@ -27,10 +27,14 @@
     }
   },
   "artistsPage":{
-    "headingText": "Artists"
+    "listHeading": "Artists"
   },
   "editArtistAccountsPage":{
-    "headingText": "Edit Artist Accounts",
+    "listHeading": "Edit Artist Accounts",
     "addButtonText": "Add New Artist +"
+  },
+  "artistProfilePage":{
+    "aboutHeading": "About",
+    "listHeading": "Selected Artworks"
   }
 }

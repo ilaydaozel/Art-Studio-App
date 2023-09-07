@@ -5,13 +5,14 @@ import EmptyState from '@/app/[lang]/components/EmptyState';
 import getAllArtworksByArtistId from '@/app/[lang]/actions/getAllArtworksByArtistId';
 import { IArtistProfile, IUserArtwork } from '@/app/[lang]/types';
 import { IPageProps } from '@/app/[lang]/types/page';
+import { getDictionary } from '@/lib/dictionary';
 
 interface IParams extends IPageProps {
   artistId?: string;
 }
 
 const ArtistProfilePage = async ({ params }: { params: IParams }) => {
-  let { lang } = params;
+  const { editArtistAccountsPage } = await getDictionary(params.lang);
   let artistProfile: { artistProfile: IArtistProfile } | null = null;
   let allArtworks: { allUserArtworks: IUserArtwork[] } | null = null;
   if (params != undefined && params != undefined) {
@@ -36,6 +37,7 @@ const ArtistProfilePage = async ({ params }: { params: IParams }) => {
         artistProfile={artistProfile.artistProfile}
         artworks={allArtworks?.allUserArtworks}
         isEditable
+        messages
       />
     </ClientOnly>
   );

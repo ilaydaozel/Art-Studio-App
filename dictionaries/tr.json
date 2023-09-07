@@ -27,11 +27,15 @@
     }
   },
   "artistsPage":{
-      "headingText": "Sanatçılar"
+      "listHeading": "Sanatçılar"
   },
   "editArtistAccountsPage":{
-    "headingText": "Sanatçı Hesaplarını Düzenle",
+    "listHeading": "Sanatçı Hesaplarını Düzenle",
     "addButtonText": "Yeni Sanatçı Ekle +"
+  },
+  "artistProfilePage":{
+    "aboutHeading": "Hakkında",
+    "listHeading": "Seçilmiş Eserler"
   }
 
 
