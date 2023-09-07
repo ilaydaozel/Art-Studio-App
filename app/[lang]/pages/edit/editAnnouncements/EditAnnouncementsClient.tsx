@@ -3,8 +3,8 @@ import { IAnnouncement } from '@/app/[lang]/actions/type';
 import AddAnnouncementModal from '@/app/[lang]/components/modal/AddAnnouncementModal';
 import useAddAnnouncementModal from '@/app/[lang]/hooks/useAddAnnouncementModal';
 import AnnouncementsList from '@/app/[lang]/components/lists/AnnouncementsList';
-import ComponentWithHeading from '@/app/[lang]/components/pageLayout/ComponentWithHeading';
-import ListWithButton from '@/app/[lang]/components/pageLayout/ListWithButton';
+import ComponentWithHeading from '@/app/[lang]/components/layouts/ComponentWithHeading';
+import ListWithButton from '@/app/[lang]/components/layouts/ListWithButton';
 
 interface EditAnnouncementsClientProps {
   announcements: IAnnouncement[];

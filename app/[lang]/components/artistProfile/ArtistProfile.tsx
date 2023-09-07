@@ -9,7 +9,7 @@ import About from '@/app/[lang]/components/artistProfile/About';
 import SlidingButton from '../buttons/SlidingButton';
 import useAddArtworkModal from '../../hooks/useAddArtworkModal';
 import AddArtworkModal from '../modal/AddArtworkModal';
-import ComponentWithHeading from '../pageLayout/ComponentWithHeading';
+import ComponentWithHeading from '../layouts/ComponentWithHeading';
 interface ArtistProfileProps {
   artistProfile: IArtistProfile;
   artworks?: IUserArtwork[];

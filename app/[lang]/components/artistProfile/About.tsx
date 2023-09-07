@@ -5,7 +5,7 @@ import { IArtistProfile } from '../../actions/type';
 import ProfilePicture from './ProfilePicture';
 import HeadingWithUnderline from '../heading/HeadingWithUnderline';
 import Biography from './Biography';
-import ComponentWithHeading from '../pageLayout/ComponentWithHeading';
+import ComponentWithHeading from '../layouts/ComponentWithHeading';
 interface AboutProps {
   artistProfile: IArtistProfile;
   isEditable?: boolean;
