@@ -1,5 +1,5 @@
 import getAllArtworksByArtistId from '@/app/[lang]/actions/getAllArtworksByArtistId';
-import ExhibitionPreview from '../../components/exhibition/ExhibitionPreview';
+import Exhibition from '../../components/exhibition/Exhibition';
 
 const VirtualExhibition = async () => {
   const allArtworks = await getAllArtworksByArtistId({
@@ -9,9 +9,7 @@ const VirtualExhibition = async () => {
     <>
       <div className='flex flex-col mt-28'>
         <div className='flex flex-wrap justify-around gap-4 md:px-12 md:my-8 px-6 my-4'>
-          <ExhibitionPreview
-            artworks={allArtworks?.allUserArtworks}
-          ></ExhibitionPreview>
+          <Exhibition artworks={allArtworks?.allUserArtworks}></Exhibition>
         </div>
       </div>
     </>
