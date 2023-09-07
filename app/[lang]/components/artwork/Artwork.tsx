@@ -23,7 +23,7 @@ const ArtworkContainer = styled.div`
   width: 280px;
   height: 280px;
   position: relative;
-  box-shadow: 1.25rem 1.375rem 4.75rem 0 rgba(0, 0, 0, 0.42);
+  box-shadow: 1rem 1rem 3rem 0 rgba(0, 0, 0, 0.3);
 `;
 const InfoContainer = styled.div`
   display: flex;
