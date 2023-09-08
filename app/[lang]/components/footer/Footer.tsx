@@ -3,10 +3,8 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { COLORS } from '@/constants/colors';
 import { ROUTE_PATHS } from '@/constants/routes';
+import { useTranslation } from '../../contexts/TranslationContext';
 
-interface FooterProps {
-  messages: any;
-}
 const FooterContainer = styled.div<{ isVisible: boolean }>`
   width: 100%;
   background-color: ${(props) =>
@@ -45,7 +43,9 @@ const LogoTitle = styled.a`
   flex: 2 1 auto;
 `;
 
-const Footer = ({ messages }: FooterProps) => {
+const Footer = () => {
+  const { navbar } = useTranslation();
+  const messages = navbar.route_names;
   const [isVisible, setIsVisible] = useState(
     document.documentElement.scrollHeight <= window.innerHeight
   );

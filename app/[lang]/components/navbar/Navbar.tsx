@@ -12,11 +12,12 @@ import { IUser } from '@/app/[lang]/types';
 import LanguageSwitcher from './LanguageSwitcher';
 import { i18n } from '@/i18n.config';
 import LoginModal from '../modal/LoginModal';
+import { useTranslation } from '../../contexts/TranslationContext';
 
 interface NavbarProps {
   currentUser: IUser | null;
-  messages: any;
 }
+
 const NavbarContainer = styled.div<{ bgColor: string }>`
   position: fixed;
   top: 0;
@@ -80,8 +81,9 @@ const MenuElement = styled.a<{ color: string; isActive?: boolean }>`
     font-size: 0.4rem;
   }
 `;
-const Navbar = ({ currentUser, messages }: NavbarProps) => {
-  const { academy, route_names, login_modal } = messages;
+const Navbar = ({ currentUser }: NavbarProps) => {
+  const { navbar } = useTranslation();
+  const { academy, route_names, login_modal } = navbar;
   const loginModal = useLoginModal();
   const pathname = usePathname();
 
