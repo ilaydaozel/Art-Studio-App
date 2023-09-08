@@ -1,16 +1,16 @@
 import React from 'react';
 import './assets/globals.css';
 import { DM_Sans } from 'next/font/google';
-import { notFound } from 'next/navigation';
 import getCurrentUser from './actions/getCurrentUser';
 import ClientOnly from './components/ClientOnly';
 import Footer from './components/footer/Footer';
 import Navbar from './components/navbar/Navbar';
 import StyledComponentsRegistry from './libs/registry';
 import ToasterProvider from './providers/ToasterProvider';
-import { Locale, i18n } from '@/i18n.config';
+import { i18n } from '@/i18n.config';
 import { getDictionary } from '@/lib/dictionary';
 import { IPageProps } from './types/common';
+import TranslationContextWrapper from './contexts/TranslationContextWrapper';
 
 export const metadata = {
   title: 'Konak Sanat Akademisi',
@@ -33,17 +33,11 @@ export default async function RootLayout({
   children: React.ReactNode;
   params: IPageProps;
 }) {
-  let { lang } = params;
   const currentUser = await getCurrentUser();
-  console.log(currentUser);
-  const { navbar } = await getDictionary(lang);
-
-  if (params.lang !== lang) {
-    notFound();
-  }
+  const translationData = await getDictionary(params.lang);
 
   return (
-    <html lang={lang}>
+    <html lang={params.lang}>
       <body className={font.className}>
         <StyledComponentsRegistry>
           <div
@@ -54,19 +48,20 @@ export default async function RootLayout({
               justifyContent: 'space-between',
             }}
           >
-            <ClientOnly>
-              <ToasterProvider />
-              <Navbar
-                messages={navbar}
-                currentUser={currentUser ? currentUser.currentUser : null}
-              />
-            </ClientOnly>
+            <TranslationContextWrapper translationData={translationData}>
+              <ClientOnly>
+                <ToasterProvider />
+                <Navbar
+                  currentUser={currentUser ? currentUser.currentUser : null}
+                />
+              </ClientOnly>
 
-            {children}
+              {children}
 
-            <ClientOnly>
-              <Footer messages={navbar.route_names} />
-            </ClientOnly>
+              <ClientOnly>
+                <Footer />
+              </ClientOnly>
+            </TranslationContextWrapper>
           </div>
         </StyledComponentsRegistry>
       </body>
