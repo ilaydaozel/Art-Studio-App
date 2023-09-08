@@ -7,9 +7,8 @@ import Footer from './components/footer/Footer';
 import Navbar from './components/navbar/Navbar';
 import StyledComponentsRegistry from './libs/registry';
 import ToasterProvider from './providers/ToasterProvider';
-import { i18n } from '@/i18n.config';
-import { getDictionary } from '@/lib/dictionary';
-import TranslationContextWrapper from './contexts/TranslationContextWrapper';
+import TranslationProvider from './contexts/TranslationProvider';
+import { fetchTranslations } from '@/constants/languageDictionary';
 
 export const metadata = {
   title: 'Konak Sanat Akademisi',
@@ -20,10 +19,6 @@ const font = DM_Sans({
   subsets: ['latin'],
   weight: '400',
 });
-
-export async function generateStaticParams() {
-  return i18n.locales.map((locale: string) => ({ lang: locale }));
-}
 
 export default async function RootLayout({
   children,
@@ -43,18 +38,20 @@ export default async function RootLayout({
               justifyContent: 'space-between',
             }}
           >
-            <ClientOnly>
-              <ToasterProvider />
-              <Navbar
-                currentUser={currentUser ? currentUser.currentUser : null}
-              />
-            </ClientOnly>
+            <TranslationProvider fetchTranslations={fetchTranslations}>
+              <ClientOnly>
+                <ToasterProvider />
+                <Navbar
+                  currentUser={currentUser ? currentUser.currentUser : null}
+                />
+              </ClientOnly>
 
-            {children}
+              {children}
 
-            <ClientOnly>
-              <Footer />
-            </ClientOnly>
+              <ClientOnly>
+                <Footer />
+              </ClientOnly>
+            </TranslationProvider>
           </div>
         </StyledComponentsRegistry>
       </body>
