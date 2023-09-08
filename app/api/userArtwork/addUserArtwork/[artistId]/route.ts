@@ -1,7 +1,7 @@
-import getArtistProfileById from "@/app/[lang]/actions/getArtistProfileById";
-import { IUser } from "@/app/[lang]/types";
+import getArtistProfileById from "@/app/actions/getArtistProfileById";
+import { IUser } from "@/app/types";
 import { NextResponse } from "next/server";
-import prisma from "@/app/[lang]/libs/prismadb";
+import prisma from "@/app/libs/prismadb";
 
 
 interface IParams {
