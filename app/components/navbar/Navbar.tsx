@@ -9,8 +9,6 @@ import { ROUTE_PATHS } from '@/constants/routes';
 import { usePathname } from 'next/navigation';
 import { PiUserCircleLight } from 'react-icons/pi';
 import { IUser } from '@/app/types';
-import LanguageSwitcher from './LanguageSwitcher';
-import { i18n } from '@/i18n.config';
 import LoginModal from '../modal/LoginModal';
 import { TranslationContext } from '../../contexts/TranslationContext';
 import { Language } from '@/app/types/language';
@@ -91,9 +89,7 @@ const Navbar = ({ currentUser }: NavbarProps) => {
   const { academy, route_names, login_modal } = messages.navbar;
   const loginModal = useLoginModal();
   const pathname = usePathname();
-
-  const isHomePage =
-    i18n.locales.find((locale) => pathname === `/${locale}`) !== undefined;
+  const isHomePage = pathname === ROUTE_PATHS.HOME;
 
   const [backgroundColor, setBackgroundColor] = useState(
     isHomePage ? 'transparent' : 'rgba(255, 255, 255, 0.1)'
@@ -156,7 +152,6 @@ const Navbar = ({ currentUser }: NavbarProps) => {
                 <option value='en'>English</option>
                 <option value='tr'>Turkish</option>
               </select>
-              <LanguageSwitcher />
               {currentUser ? (
                 <UserMenu currentUser={currentUser} routeNames={route_names} />
               ) : (
