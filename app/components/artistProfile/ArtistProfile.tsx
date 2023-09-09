@@ -29,7 +29,7 @@ const ArtistProfile = ({
 }: ArtistProfileProps) => {
   const addArtworkModal = useAddArtworkModal();
 
-  const useT = (text: string): string => {
+  const t = (text: string): string => {
     return useTranslate(text, {
       element: 'list',
       superElement: 'artist_profile',
@@ -44,20 +44,20 @@ const ArtistProfile = ({
         isEditable={isEditable}
       ></Header>
       <About artistProfile={artistProfile} isEditable={isEditable}></About>
-      <ComponentWithHeading headingText={useT('heading')}>
+      <ComponentWithHeading headingText={t('heading')}>
         <AddArtworkModal artistProfile={artistProfile} />
         {isEditable ? (
           <div className='w-[84%] flex justify-end mt-2'>
             {artworks ? (
               artworks.length < 3 ? (
                 <SlidingButton
-                  label={useT('add_button_text')}
+                  label={t('add_button_text')}
                   onClick={() => {
                     addArtworkModal.onOpen();
                   }}
                 />
               ) : (
-                <h1>{useT('max_artwork_number_warning')}</h1>
+                <h1>{t('max_artwork_number_warning')}</h1>
               )
             ) : (
               <></>

@@ -96,7 +96,7 @@ const Navbar = ({ currentUser }: NavbarProps) => {
     isHomePage ? '#FFFFFF' : COLORS.darkGray
   );
 
-  const useT = (text: string, element: string): string => {
+  const t = (text: string, element: string): string => {
     return useTranslate(text, {
       element: element,
     });
@@ -145,7 +145,7 @@ const Navbar = ({ currentUser }: NavbarProps) => {
         >
           <div className='w-full relative flex items-center justify-end'>
             <LogoTitle color={logoColor} href='/'>
-              {useT('name', 'academy')}
+              {t('name', 'academy')}
             </LogoTitle>
             <SideIcons>
               <LanguageSwitcher></LanguageSwitcher>
@@ -169,28 +169,28 @@ const Navbar = ({ currentUser }: NavbarProps) => {
               color={menuElementColor}
               href={ROUTE_PATHS.HOME}
             >
-              {useT('home', 'route_names')}
+              {t('home', 'route_names')}
             </MenuElement>
             <MenuElement
               isActive={pathname === ROUTE_PATHS.ARTISTS}
               color={menuElementColor}
               href={ROUTE_PATHS.ARTISTS}
             >
-              {useT('artists', 'route_names')}
+              {t('artists', 'route_names')}
             </MenuElement>
             <MenuElement
               isActive={pathname === ROUTE_PATHS.ABOUT}
               color={menuElementColor}
               href={ROUTE_PATHS.ABOUT}
             >
-              {useT('about', 'route_names')}
+              {t('about', 'route_names')}
             </MenuElement>
             <MenuElement
               isActive={pathname === ROUTE_PATHS.VIRTUAL_EXHIBITIONS}
               color={menuElementColor}
               href={ROUTE_PATHS.VIRTUAL_EXHIBITIONS}
             >
-              {useT('virtual_exhibitions', 'route_names')}
+              {t('virtual_exhibitions', 'route_names')}
             </MenuElement>
           </div>
         </div>

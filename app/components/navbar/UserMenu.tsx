@@ -82,7 +82,7 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
 
   const menuRef = useRef<HTMLDivElement>(null); // Specify the type of menuRef
 
-  const useT = (text: string): string => {
+  const t = (text: string): string => {
     return useTranslate(text, {
       element: 'route_names',
     });
@@ -134,7 +134,7 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
               <UserMenuElement
                 href={`${ROUTE_PATHS.EDIT}${ROUTE_PATHS.EDIT_ARTIST_PROFILE}/${currentUser?.id}`}
               >
-                {useT('edit_artist_profiles')}
+                {t('edit_artist_profiles')}
               </UserMenuElement>
             </>
           ) : (
@@ -142,17 +142,17 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
               <UserMenuElement
                 href={`${ROUTE_PATHS.EDIT}${ROUTE_PATHS.EDIT_ARTIST_ACCOUNTS}`}
               >
-                {useT('edit_artist_accounts')}
+                {t('edit_artist_accounts')}
               </UserMenuElement>
               <UserMenuElement
                 href={`${ROUTE_PATHS.EDIT}${ROUTE_PATHS.EDIT_ANNOUNCEMENTS}`}
               >
-                {useT('edit_announcements')}
+                {t('edit_announcements')}
               </UserMenuElement>
               <UserMenuElement
                 href={`${ROUTE_PATHS.ADD}${ROUTE_PATHS.ADD_NEW_ARTIST}`}
               >
-                {useT('add_new_artist')}
+                {t('add_new_artist')}
               </UserMenuElement>
             </>
           )}
@@ -163,7 +163,7 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
               router.refresh();
             }}
           >
-            {useT('logout')}
+            {t('logout')}
           </UserMenuElement>
         </MenuContainer>
       )}

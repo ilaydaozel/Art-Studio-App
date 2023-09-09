@@ -11,7 +11,7 @@ interface AboutProps {
 }
 
 const About = ({ artistProfile, isEditable = false }: AboutProps) => {
-  const useT = (text: string): string => {
+  const t = (text: string): string => {
     return useTranslate(text, {
       element: 'about',
       superElement: 'artist_profile',
@@ -19,7 +19,7 @@ const About = ({ artistProfile, isEditable = false }: AboutProps) => {
   };
 
   return (
-    <ComponentWithHeading headingText={useT('heading')}>
+    <ComponentWithHeading headingText={t('heading')}>
       <div className='flex items-center justify-center w-[80%] my-10 gap-10'>
         <ProfilePicture
           artistProfile={artistProfile}

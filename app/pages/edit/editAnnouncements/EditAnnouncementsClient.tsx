@@ -15,7 +15,7 @@ const EditAnnouncementsClient = ({
   announcements,
 }: EditAnnouncementsClientProps) => {
   const addAnnouncementModal = useAddAnnouncementModal();
-  const useT = (text: string): string => {
+  const t = (text: string): string => {
     return useTranslate(text, { element: 'edit_announcements' });
   };
 
@@ -23,10 +23,10 @@ const EditAnnouncementsClient = ({
     <>
       <AddAnnouncementModal />
       <ListWithButton
-        buttonText={useT('add_button_text')}
+        buttonText={t('add_button_text')}
         onClick={() => addAnnouncementModal.onOpen()}
       >
-        <ComponentWithHeading headingText={useT('heading')}>
+        <ComponentWithHeading headingText={t('heading')}>
           <AnnouncementsList
             isEditable
             announcements={announcements}

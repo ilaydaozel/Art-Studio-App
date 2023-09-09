@@ -25,7 +25,7 @@ const LoginModal = () => {
     },
   });
 
-  const useT = (text: string): string => {
+  const t = (text: string): string => {
     return useTranslate(text, { element: 'login_modal' });
   };
 
@@ -37,12 +37,12 @@ const LoginModal = () => {
     }).then((callback) => {
       setIsLoading(false);
       if (callback?.ok) {
-        toast.success(useT('login_successful_message'));
+        toast.success(t('login_successful_message'));
         router.refresh();
         loginModal.onClose();
       }
       if (callback?.error) {
-        toast.error(useT('login_failed_message'));
+        toast.error(t('login_failed_message'));
       }
     });
   };
@@ -59,7 +59,7 @@ const LoginModal = () => {
       />
       <Input
         id='password'
-        label={useT('password')}
+        label={t('password')}
         type='password'
         disabled={isLoading}
         register={register}
@@ -73,9 +73,9 @@ const LoginModal = () => {
     <Modal
       disabled={isLoading}
       isOpen={loginModal.isOpen}
-      title={useT('title')}
-      subtitle={useT('subtitle')}
-      actionLabel={useT('action_label')}
+      title={t('title')}
+      subtitle={t('subtitle')}
+      actionLabel={t('action_label')}
       onClose={loginModal.onClose}
       onSubmit={handleSubmit(onSubmit)}
       body={bodyContent}
