@@ -75,7 +75,7 @@ const Header = ({
     setHeaderArtwork(artwork.artworkMedias[0] || '');
   };
 
-  const t = (text: string): string => {
+  const useT = (text: string): string => {
     return useTranslate(text, {
       element: 'about',
       superElement: 'artist_profile',
@@ -88,11 +88,11 @@ const Header = ({
       await axios.post(`/api/artistProfile/${artistProfile.artistId}`, {
         coverImage,
       });
-      toast.success(t('change_successful_message'));
+      toast.success(useT('change_successful_message'));
       setShowArtworkSelection(false);
       refreshPage();
     } catch (error) {
-      toast.error(t('change_failed_message'));
+      toast.error(useT('change_failed_message'));
     } finally {
       setIsLoading(false);
     }
@@ -107,7 +107,7 @@ const Header = ({
           </NameHeading>
           {isEditable ? (
             <TextButton
-              label={t('change_image_button_text')}
+              label={useT('change_image_button_text')}
               icon={FaRegEdit}
               onClick={() => setShowArtworkSelection(true)}
             ></TextButton>
@@ -136,8 +136,8 @@ const Header = ({
               ))}
             </div>
           }
-          title={t('select_cover_image')}
-          actionLabel={t('select_button_text')}
+          title={useT('select_cover_image')}
+          actionLabel={useT('select_button_text')}
           onSubmit={() => handleCoverImageChange(coverImage)}
         ></Popup>
       )}

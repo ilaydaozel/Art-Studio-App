@@ -11,14 +11,14 @@ interface ArtistAccountsClientProps {
 }
 
 const ArtistAccountsClient = ({ accounts }: ArtistAccountsClientProps) => {
-  const t = (text: string): string => {
+  const useT = (text: string): string => {
     return useTranslate(text, {
       element: 'artist_accounts',
     });
   };
   return (
     <>
-      <ComponentWithHeading headingText={t('list_heading')}>
+      <ComponentWithHeading headingText={useT('list_heading')}>
         <ArtistAccountsList
           width='90%'
           accounts={accounts}

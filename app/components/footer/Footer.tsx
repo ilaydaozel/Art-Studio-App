@@ -66,7 +66,7 @@ const Footer = () => {
 
   const footerRef = React.useRef<HTMLDivElement>(null);
 
-  const t = (text: string): string => {
+  const useT = (text: string): string => {
     return useTranslate(text, {
       element: 'route_names',
     });
@@ -85,13 +85,17 @@ const Footer = () => {
         <div className='flex flex-col items-start '>
           <LogoTitle>KONAK KÜLTÜR SANAT AKADEMİSİ</LogoTitle>
           <div className='flex flex-col gap-1 items-start my-2'>
-            <FooterElement href={ROUTE_PATHS.HOME}>{t('home')}</FooterElement>
-            <FooterElement href={ROUTE_PATHS.ARTISTS}>
-              {t('artists')}
+            <FooterElement href={ROUTE_PATHS.HOME}>
+              {useT('home')}
             </FooterElement>
-            <FooterElement href={ROUTE_PATHS.ABOUT}>{t('about')}</FooterElement>
+            <FooterElement href={ROUTE_PATHS.ARTISTS}>
+              {useT('artists')}
+            </FooterElement>
+            <FooterElement href={ROUTE_PATHS.ABOUT}>
+              {useT('about')}
+            </FooterElement>
             <FooterElement href={ROUTE_PATHS.VIRTUAL_EXHIBITIONS}>
-              {t('virtual_exhibitions')}
+              {useT('virtual_exhibitions')}
             </FooterElement>
           </div>
         </div>

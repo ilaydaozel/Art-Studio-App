@@ -15,7 +15,7 @@ const EditArtistAccountsClient = ({
   accounts,
 }: EditArtistAccountsClientProps) => {
   const router = useRouter();
-  const t = (text: string): string => {
+  const useT = (text: string): string => {
     return useTranslate(text, {
       element: 'artist_accounts',
     });
@@ -24,12 +24,12 @@ const EditArtistAccountsClient = ({
   return (
     <>
       <ListWithButton
-        buttonText={t('add_button_text')}
+        buttonText={useT('add_button_text')}
         onClick={() =>
           router.push(`${ROUTE_PATHS.ADD}${ROUTE_PATHS.ADD_NEW_ARTIST}`)
         }
       >
-        <ComponentWithHeading headingText={t('list_heading')}>
+        <ComponentWithHeading headingText={useT('list_heading')}>
           <ArtistAccountsList
             isEditable
             accounts={accounts}
