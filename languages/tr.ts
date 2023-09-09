@@ -33,7 +33,8 @@ const TurkishData: ILanguageData = {
     },
     artist_profile: {
         about: {
-            heading: "Hakkında"
+            heading: "Hakkında",
+            change_image_button_text: "Kapak Fotoğrafını Değiştiriniz"
         },
         list: {
             heading: "Seçilmiş Eserler",

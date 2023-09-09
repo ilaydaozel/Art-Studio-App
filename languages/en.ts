@@ -32,7 +32,8 @@ const EnglishData: ILanguageData = {
     },
     artist_profile: {
         about: {
-            heading: "About"
+            heading: "About",
+            change_image_button_text: "Change Cover Image"
         },
         list: {
             heading: "Selected Artworks",

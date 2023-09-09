@@ -34,6 +34,7 @@ export type ILanguageData = {
     artist_profile: {
         about: {
             heading: string;
+            change_image_button_text: string;
         };
         list: {
             heading: string;
