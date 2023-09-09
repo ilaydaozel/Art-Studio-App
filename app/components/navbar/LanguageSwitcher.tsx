@@ -9,7 +9,11 @@ const LanguageSwitcher = () => {
   };
 
   return (
-    <select value={language} onChange={handleSwitchLanguage}>
+    <select
+      className='bg-transparent outline-none text-neutral-400'
+      value={language}
+      onChange={handleSwitchLanguage}
+    >
       <option value='en'>English</option>
       <option value='tr'>Turkish</option>
     </select>
