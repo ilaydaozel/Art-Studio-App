@@ -1,6 +1,6 @@
 'use client';
 
-import React, { ChangeEvent, useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import UserMenu from './UserMenu';
 import styled from 'styled-components';
 import { COLORS } from '@/constants/colors';
@@ -10,9 +10,8 @@ import { usePathname } from 'next/navigation';
 import { PiUserCircleLight } from 'react-icons/pi';
 import { IUser } from '@/app/types';
 import LoginModal from '../modal/LoginModal';
-import { TranslationContext } from '../../contexts/TranslationContext';
-import { Language } from '@/app/types/language';
 import translate from '../translation/translate';
+import LanguageSwitcher from './LanguageSwitcher';
 
 interface NavbarProps {
   currentUser: IUser | null;
@@ -88,11 +87,6 @@ const t = (text: string, element: string): string => {
 };
 
 const Navbar = ({ currentUser }: NavbarProps) => {
-  const { language, switchLanguage } = useContext(TranslationContext);
-  const handleSwitchLanguage = (event: ChangeEvent<HTMLSelectElement>) => {
-    switchLanguage(event.target.value as Language);
-  };
-
   const loginModal = useLoginModal();
   const pathname = usePathname();
   const isHomePage = pathname === ROUTE_PATHS.HOME;
@@ -153,11 +147,8 @@ const Navbar = ({ currentUser }: NavbarProps) => {
               {t('name', 'academy')}
             </LogoTitle>
             <SideIcons>
+              <LanguageSwitcher></LanguageSwitcher>
               <LoginModal />
-              <select value={language} onChange={handleSwitchLanguage}>
-                <option value='en'>English</option>
-                <option value='tr'>Turkish</option>
-              </select>
               {currentUser ? (
                 <UserMenu currentUser={currentUser} />
               ) : (
