@@ -9,15 +9,14 @@ import React, {
 import {
   TranslationDispatchContext,
   TranslationContext,
-} from './TranslationContext';
-import { ILanguageData } from '@/languages/type';
+} from '../contexts/TranslationContext';
 import { State } from '../reducers/language/type';
 import { languageReducer } from '../reducers/language';
 import { Language } from '../types/language';
 import TurkishData from '@/languages/tr';
 
 const initialState: State = {
-  locale: 'en',
+  locale: 'tr',
 };
 
 const TranslationProvider = ({
@@ -33,23 +32,25 @@ const TranslationProvider = ({
     messages: TurkishData,
   });
 
-  const initialStringsLoaded = useRef(false);
+  const initialStringsLoaded = useRef(false); // store information between re-renders (unlike regular variables, which reset on every render)
 
   const updateLanguage = useCallback(
+    //cache a function definition between re-renders.
     async (newLang: Language) => {
       if (initialStringsLoaded.current && newLang === language) return;
-      console.log('newLang', newLang);
-      const newStrings = await fetchTranslations({ language: newLang });
+
+      const newMessages = await fetchTranslations({ language: newLang });
       initialStringsLoaded.current = true;
 
       setLanguage({
         language: newLang,
-        messages: newStrings,
+        messages: newMessages,
       });
     },
     [language, fetchTranslations]
   );
 
+  //The function you’re passing is later used as a dependency of some Hook. For example, you depend on this function from useEffect.
   useEffect(() => {
     updateLanguage(language);
   }, [language, updateLanguage]);
@@ -59,6 +60,7 @@ const TranslationProvider = ({
     messages,
     switchLanguage: updateLanguage,
   };
+
   return (
     <TranslationContext.Provider value={translationContext}>
       <TranslationDispatchContext.Provider value={dispatch}>
