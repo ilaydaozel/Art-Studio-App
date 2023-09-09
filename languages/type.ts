@@ -1,47 +1,37 @@
 export type ILanguageData = {
-    navbar: {
-        academy: {
-            name: string;
-        };
-        route_names: {
-            home: string;
-            artists: string;
-            add: string;
-            add_new_artist: string;
-            edit: string;
-            edit_artist_accounts: string;
-            edit_artist_profile: string;
-            edit_announcements: string;
-            artist_profile: string;
-            about: string;
-            virtual_exhibitions: string;
-            logout: string;
-        };
-        login_modal: {
-            login_successful_message: string;
-            login_failed_message: string;
-            password: string;
-            title: string;
-            subtitle: string;
-            action_label: string;
-        };
+    [key: string]: {
+        [key: string]: string | { [key: string]: string };
     };
-    artistsPage: {
-        list_heading: string;
+    academy: {
+        name: string;
     };
-    editArtistAccountsPage: {
+    route_names: {
+        home: string;
+        artists: string;
+        add: string;
+        add_new_artist: string;
+        edit: string;
+        edit_artist_accounts: string;
+        edit_artist_profile: string;
+        edit_announcements: string;
+        artist_profile: string;
+        about: string;
+        virtual_exhibitions: string;
+        logout: string;
+    };
+    login_modal: {
+        login_successful_message: string;
+        login_failed_message: string;
+        password: string;
+        title: string;
+        subtitle: string;
+        action_label: string;
+    };
+    artist_accounts: {
         list_heading: string;
         add_button_text: string;
     };
-    artistProfilePage: {
-        about: {
-            heading: string;
-        };
-        list: {
-            heading: string;
-        };
-    };
-    editArtistProfilePage: {
+    artist_profile: {
         about: {
             heading: string;
         };
@@ -58,7 +48,7 @@ export type ILanguageData = {
             select_button_text: string;
         };
     };
-    editAnnouncementsPage: {
+    edit_announcements: {
         heading: string;
         add_button_text: string;
     };

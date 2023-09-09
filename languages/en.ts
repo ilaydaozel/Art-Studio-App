@@ -1,49 +1,36 @@
 import { ILanguageData } from "./type";
 
 const EnglishData: ILanguageData = {
-    navbar: {
-        academy: {
-            name: "Konak Academy of Art and Culture"
-        },
-        route_names: {
-            home: "Homepage",
-            artists: "Artists",
-            add: "Add",
-            add_new_artist: "Add New Artists",
-            edit: "Edit",
-            edit_artist_accounts: "Edit Artist Accounts",
-            edit_artist_profile: "Edit Artist Profile",
-            edit_announcements: "Edit Announcements",
-            artist_profile: "Artist",
-            about: "About",
-            virtual_exhibitions: "Virtual Exhibitions",
-            logout: "Log out"
-        },
-        login_modal: {
-            login_successful_message: "Logged in successfully",
-            login_failed_message: "Could not log in",
-            password: "Password",
-            title: "Welcome to Konak Academy of Art and Culture!",
-            subtitle: "Please Log In",
-            action_label: "Log In"
-        }
+    academy: {
+        name: "Konak Academy of Art and Culture"
     },
-    artistsPage: {
-        list_heading: "Artists"
+    route_names: {
+        home: "Homepage",
+        artists: "Artists",
+        add: "Add",
+        add_new_artist: "Add New Artists",
+        edit: "Edit",
+        edit_artist_accounts: "Edit Artist Accounts",
+        edit_artist_profile: "Edit Artist Profile",
+        edit_announcements: "Edit Announcements",
+        artist_profile: "Artist",
+        about: "About",
+        virtual_exhibitions: "Virtual Exhibitions",
+        logout: "Log out"
     },
-    editArtistAccountsPage: {
-        list_heading: "Edit Artist Accounts",
+    login_modal: {
+        login_successful_message: "Logged in successfully",
+        login_failed_message: "Could not log in",
+        password: "Password",
+        title: "Welcome to Konak Academy of Art and Culture!",
+        subtitle: "Please Log In",
+        action_label: "Log In"
+    },
+    artist_accounts: {
+        list_heading: "Artists",
         add_button_text: "Add New Artist +"
     },
-    artistProfilePage: {
-        about: {
-            heading: "About"
-        },
-        list: {
-            heading: "Selected Artworks"
-        }
-    },
-    editArtistProfilePage: {
+    artist_profile: {
         about: {
             heading: "About"
         },
@@ -60,7 +47,7 @@ const EnglishData: ILanguageData = {
             select_button_text: "Select"
         }
     },
-    editAnnouncementsPage: {
+    edit_announcements: {
         heading: "Edit Announcements",
         add_button_text: "Add New Announcement +"
     }
