@@ -8,15 +8,16 @@ import useLoginModal from '@/app/hooks/useLoginModal';
 import Modal from './Modal';
 import Input from '../inputs/Input';
 import { useRouter } from 'next/navigation';
+import translate from '../translation/translate';
 
-interface LoginModalProps {
-  messages: any;
-}
-const LoginModal = ({ messages }: LoginModalProps) => {
+const t = (text: string): string => {
+  return translate(text, { element: 'login_modal' });
+};
+
+const LoginModal = () => {
   const router = useRouter();
   const loginModal = useLoginModal();
   const [isLoading, setIsLoading] = useState(false);
-
   const {
     register,
     handleSubmit,
@@ -36,12 +37,12 @@ const LoginModal = ({ messages }: LoginModalProps) => {
     }).then((callback) => {
       setIsLoading(false);
       if (callback?.ok) {
-        toast.success(messages.login_successful_message);
+        toast.success(t('login_successful_message'));
         router.refresh();
         loginModal.onClose();
       }
       if (callback?.error) {
-        toast.error(messages.login_failed_message);
+        toast.error(t('login_failed_message'));
       }
     });
   };
@@ -58,7 +59,7 @@ const LoginModal = ({ messages }: LoginModalProps) => {
       />
       <Input
         id='password'
-        label={messages.password}
+        label={t('password')}
         type='password'
         disabled={isLoading}
         register={register}
@@ -72,9 +73,9 @@ const LoginModal = ({ messages }: LoginModalProps) => {
     <Modal
       disabled={isLoading}
       isOpen={loginModal.isOpen}
-      title={messages.title}
-      subtitle={messages.subtitle}
-      actionLabel={messages.action_label}
+      title={t('title')}
+      subtitle={t('subtitle')}
+      actionLabel={t('action_label')}
       onClose={loginModal.onClose}
       onSubmit={handleSubmit(onSubmit)}
       body={bodyContent}

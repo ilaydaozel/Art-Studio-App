@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { COLORS } from '@/constants/colors';
 import { ROUTE_PATHS } from '@/constants/routes';
 import { TranslationContext } from '@/app/contexts/TranslationContext';
+import translate from '../translation/translate';
 
 const FooterContainer = styled.div<{ isVisible: boolean }>`
   width: 100%;
@@ -43,9 +44,13 @@ const LogoTitle = styled.a`
   flex: 2 1 auto;
 `;
 
+const t = (text: string): string => {
+  return translate(text, {
+    element: 'route_names',
+  });
+};
+
 const Footer = () => {
-  const { messages } = useContext(TranslationContext);
-  const route_names = messages.navbar.route_names;
   const [isVisible, setIsVisible] = useState(
     document.documentElement.scrollHeight <= window.innerHeight
   );
@@ -80,17 +85,13 @@ const Footer = () => {
         <div className='flex flex-col items-start '>
           <LogoTitle>KONAK KÜLTÜR SANAT AKADEMİSİ</LogoTitle>
           <div className='flex flex-col gap-1 items-start my-2'>
-            <FooterElement href={ROUTE_PATHS.HOME}>
-              {route_names.home}
-            </FooterElement>
+            <FooterElement href={ROUTE_PATHS.HOME}>{t('home')}</FooterElement>
             <FooterElement href={ROUTE_PATHS.ARTISTS}>
-              {route_names.artists}
+              {t('artists')}
             </FooterElement>
-            <FooterElement href={ROUTE_PATHS.ABOUT}>
-              {route_names.about}
-            </FooterElement>
+            <FooterElement href={ROUTE_PATHS.ABOUT}>{t('about')}</FooterElement>
             <FooterElement href={ROUTE_PATHS.VIRTUAL_EXHIBITIONS}>
-              {route_names.virtual_exhibitions}
+              {t('virtual_exhibitions')}
             </FooterElement>
           </div>
         </div>

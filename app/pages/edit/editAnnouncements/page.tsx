@@ -4,10 +4,8 @@ import ClientOnly from '@/app/components/ClientOnly';
 import getAllAnnouncements from '@/app/actions/getAllAnnouncements';
 import { IAnnouncement } from '@/app/types';
 import EditAnnouncementsClient from './EditAnnouncementsClient';
-import { getDictionary } from '@/lib/dictionary';
 
 const EditAnnouncementsPage = async () => {
-  const { editAnnouncementsPage } = await getDictionary('en');
   let announcements: IAnnouncement[] = [];
   try {
     const result = await getAllAnnouncements();
@@ -19,7 +17,6 @@ const EditAnnouncementsPage = async () => {
             <div className='pt-28 w-full'>
               <EditAnnouncementsClient
                 announcements={announcements}
-                messages={editAnnouncementsPage}
               ></EditAnnouncementsClient>
             </div>
           </ClientOnly>

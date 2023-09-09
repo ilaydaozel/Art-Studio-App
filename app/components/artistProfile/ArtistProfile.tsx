@@ -3,18 +3,17 @@
 import styled from 'styled-components';
 import { IArtistProfile, IUserArtwork } from '@/app/types';
 import ArtworkList from '@/app/components/lists/ArtworkList';
-import HeadingWithUnderline from '@/app/components/heading/HeadingWithUnderline';
 import Header from '@/app/components/artistProfile/Header';
 import About from '@/app/components/artistProfile/About';
 import SlidingButton from '../buttons/SlidingButton';
 import useAddArtworkModal from '../../hooks/useAddArtworkModal';
 import AddArtworkModal from '../modal/AddArtworkModal';
 import ComponentWithHeading from '../layouts/ComponentWithHeading';
+import translate from '../translation/translate';
 interface ArtistProfileProps {
   artistProfile: IArtistProfile;
   artworks?: IUserArtwork[];
   isEditable?: boolean;
-  messages: any;
 }
 
 const Container = styled.div`
@@ -23,41 +22,39 @@ const Container = styled.div`
   gap: 4rem;
 `;
 
+const t = (text: string): string => {
+  return translate(text, { element: 'list', superElement: 'artist_profile' });
+};
+
 const ArtistProfile = ({
   artistProfile,
   artworks,
   isEditable = false,
-  messages,
 }: ArtistProfileProps) => {
   const addArtworkModal = useAddArtworkModal();
-  console.log('messages: ', messages);
+
   return (
     <Container>
       <Header
         artistProfile={artistProfile}
         artworks={artworks}
         isEditable={isEditable}
-        messages={messages.header}
       ></Header>
-      <About
-        artistProfile={artistProfile}
-        isEditable={isEditable}
-        messages={messages.about}
-      ></About>
-      <ComponentWithHeading headingText={messages.list.heading}>
+      <About artistProfile={artistProfile} isEditable={isEditable}></About>
+      <ComponentWithHeading headingText={t('heading')}>
         <AddArtworkModal artistProfile={artistProfile} />
         {isEditable ? (
           <div className='w-[84%] flex justify-end mt-2'>
             {artworks ? (
               artworks.length < 3 ? (
                 <SlidingButton
-                  label={messages.list.add_button_text}
+                  label={t('add_button_text')}
                   onClick={() => {
                     addArtworkModal.onOpen();
                   }}
                 />
               ) : (
-                <h1>{messages.list.max_artwork_number_warning}</h1>
+                <h1>{t('max_artwork_number_warning')}</h1>
               )
             ) : (
               <></>

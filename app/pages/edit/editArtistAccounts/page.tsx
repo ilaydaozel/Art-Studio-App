@@ -3,10 +3,8 @@ import ClientOnly from '@/app/components/ClientOnly';
 import { IUser } from '@/app/types';
 import ArtistAccountsList from './EditArtistAccountsClient';
 import getAllArtists from '@/app/actions/getAllArtists';
-import { getDictionary } from '@/lib/dictionary';
 
 const EditArtistsPage = async () => {
-  const { editArtistAccountsPage } = await getDictionary('en');
   let artists: IUser[] | null = null;
   try {
     const result = await getAllArtists();
@@ -16,10 +14,7 @@ const EditArtistsPage = async () => {
         return (
           <ClientOnly>
             <div className='pt-28 w-full'>
-              <ArtistAccountsList
-                messages={editArtistAccountsPage}
-                accounts={artists}
-              ></ArtistAccountsList>
+              <ArtistAccountsList accounts={artists}></ArtistAccountsList>
             </div>
           </ClientOnly>
         );

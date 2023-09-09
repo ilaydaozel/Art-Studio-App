@@ -8,10 +8,10 @@ import styled from 'styled-components';
 import { COLORS } from '@/constants/colors';
 import { ROUTE_PATHS } from '@/constants/routes';
 import { IUser } from '@/app/types';
+import translate from '../translation/translate';
 
 interface UserMenuProps {
   currentUser: IUser | null;
-  routeNames: any;
 }
 
 const MenuContainer = styled.div`
@@ -71,7 +71,13 @@ const NameText = styled.div`
   }
 `;
 
-const UserMenu = ({ currentUser, routeNames }: UserMenuProps) => {
+const t = (text: string): string => {
+  return translate(text, {
+    element: 'route_names',
+  });
+};
+
+const UserMenu = ({ currentUser }: UserMenuProps) => {
   const router = useRouter();
 
   const [isOpen, setIsOpen] = useState(false);
@@ -128,7 +134,7 @@ const UserMenu = ({ currentUser, routeNames }: UserMenuProps) => {
               <UserMenuElement
                 href={`${ROUTE_PATHS.EDIT}${ROUTE_PATHS.EDIT_ARTIST_PROFILE}/${currentUser?.id}`}
               >
-                {routeNames.edit_artist_profiles}
+                {t('edit_artist_profiles')}
               </UserMenuElement>
             </>
           ) : (
@@ -136,17 +142,17 @@ const UserMenu = ({ currentUser, routeNames }: UserMenuProps) => {
               <UserMenuElement
                 href={`${ROUTE_PATHS.EDIT}${ROUTE_PATHS.EDIT_ARTIST_ACCOUNTS}`}
               >
-                {routeNames.edit_artist_accounts}
+                {t('edit_artist_accounts')}
               </UserMenuElement>
               <UserMenuElement
                 href={`${ROUTE_PATHS.EDIT}${ROUTE_PATHS.EDIT_ANNOUNCEMENTS}`}
               >
-                {routeNames.edit_announcements}
+                {t('edit_announcements')}
               </UserMenuElement>
               <UserMenuElement
                 href={`${ROUTE_PATHS.ADD}${ROUTE_PATHS.ADD_NEW_ARTIST}`}
               >
-                {routeNames.add_new_artist}
+                {t('add_new_artist')}
               </UserMenuElement>
             </>
           )}
@@ -157,7 +163,7 @@ const UserMenu = ({ currentUser, routeNames }: UserMenuProps) => {
               router.refresh();
             }}
           >
-            {routeNames.logout}
+            {t('logout')}
           </UserMenuElement>
         </MenuContainer>
       )}

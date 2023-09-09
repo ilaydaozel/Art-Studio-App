@@ -12,6 +12,7 @@ import { IUser } from '@/app/types';
 import LoginModal from '../modal/LoginModal';
 import { TranslationContext } from '../../contexts/TranslationContext';
 import { Language } from '@/app/types/language';
+import translate from '../translation/translate';
 
 interface NavbarProps {
   currentUser: IUser | null;
@@ -80,13 +81,18 @@ const MenuElement = styled.a<{ color: string; isActive?: boolean }>`
     font-size: 0.4rem;
   }
 `;
+const t = (text: string, element: string): string => {
+  return translate(text, {
+    element: element,
+  });
+};
+
 const Navbar = ({ currentUser }: NavbarProps) => {
-  const { language, messages, switchLanguage } = useContext(TranslationContext);
+  const { language, switchLanguage } = useContext(TranslationContext);
   const handleSwitchLanguage = (event: ChangeEvent<HTMLSelectElement>) => {
     switchLanguage(event.target.value as Language);
   };
-  console.log('messages: ', messages);
-  const { academy, route_names, login_modal } = messages.navbar;
+
   const loginModal = useLoginModal();
   const pathname = usePathname();
   const isHomePage = pathname === ROUTE_PATHS.HOME;
@@ -144,16 +150,16 @@ const Navbar = ({ currentUser }: NavbarProps) => {
         >
           <div className='w-full relative flex items-center justify-end'>
             <LogoTitle color={logoColor} href='/'>
-              {academy.name}
+              {t('name', 'academy')}
             </LogoTitle>
             <SideIcons>
-              <LoginModal messages={login_modal} />
+              <LoginModal />
               <select value={language} onChange={handleSwitchLanguage}>
                 <option value='en'>English</option>
                 <option value='tr'>Turkish</option>
               </select>
               {currentUser ? (
-                <UserMenu currentUser={currentUser} routeNames={route_names} />
+                <UserMenu currentUser={currentUser} />
               ) : (
                 <MenuElement
                   color={menuElementColor}
@@ -171,28 +177,28 @@ const Navbar = ({ currentUser }: NavbarProps) => {
               color={menuElementColor}
               href={ROUTE_PATHS.HOME}
             >
-              {route_names.home}
+              {t('home', 'route_names')}
             </MenuElement>
             <MenuElement
               isActive={pathname === ROUTE_PATHS.ARTISTS}
               color={menuElementColor}
               href={ROUTE_PATHS.ARTISTS}
             >
-              {route_names.artists}
+              {t('artists', 'route_names')}
             </MenuElement>
             <MenuElement
               isActive={pathname === ROUTE_PATHS.ABOUT}
               color={menuElementColor}
               href={ROUTE_PATHS.ABOUT}
             >
-              {route_names.about}
+              {t('about', 'route_names')}
             </MenuElement>
             <MenuElement
               isActive={pathname === ROUTE_PATHS.VIRTUAL_EXHIBITIONS}
               color={menuElementColor}
               href={ROUTE_PATHS.VIRTUAL_EXHIBITIONS}
             >
-              {route_names.virtual_exhibitions}
+              {t('virtual_exhibitions', 'route_names')}
             </MenuElement>
           </div>
         </div>

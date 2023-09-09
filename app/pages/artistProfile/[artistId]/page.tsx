@@ -10,7 +10,6 @@ interface IParams {
 }
 
 const ArtistProfilePage = async ({ params }: { params: IParams }) => {
-  const { artistProfilePage } = await getDictionary('en');
   let artistProfile: { artistProfile: IArtistProfile } | null = null;
   let allArtworks: { allUserArtworks: IUserArtwork[] } | null = null;
 
@@ -33,7 +32,6 @@ const ArtistProfilePage = async ({ params }: { params: IParams }) => {
   return (
     <ClientOnly>
       <ArtistProfile
-        messages={artistProfilePage}
         artistProfile={artistProfile.artistProfile}
         artworks={allArtworks?.allUserArtworks}
       />
