@@ -7,8 +7,8 @@ import Footer from './components/footer/Footer';
 import Navbar from './components/navbar/Navbar';
 import StyledComponentsRegistry from './libs/registry';
 import ToasterProvider from './providers/ToasterProvider';
-import TranslationProvider from './contexts/TranslationProvider';
-import { fetchTranslations } from '@/constants/languageDictionary';
+import TranslationProvider from './providers/TranslationProvider';
+import { fetchTranslations } from '@/app/libs/languageDictionary';
 
 export const metadata = {
   title: 'Konak Sanat Akademisi',
