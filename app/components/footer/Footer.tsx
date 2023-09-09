@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { COLORS } from '@/constants/colors';
 import { ROUTE_PATHS } from '@/constants/routes';
 import { TranslationContext } from '@/app/contexts/TranslationContext';
-import translate from '../translation/translate';
+import useTranslate from '../../hooks/useTranslate';
 
 const FooterContainer = styled.div<{ isVisible: boolean }>`
   width: 100%;
@@ -44,12 +44,6 @@ const LogoTitle = styled.a`
   flex: 2 1 auto;
 `;
 
-const t = (text: string): string => {
-  return translate(text, {
-    element: 'route_names',
-  });
-};
-
 const Footer = () => {
   const [isVisible, setIsVisible] = useState(
     document.documentElement.scrollHeight <= window.innerHeight
@@ -71,6 +65,12 @@ const Footer = () => {
   }, [footerHeight]);
 
   const footerRef = React.useRef<HTMLDivElement>(null);
+
+  const t = (text: string): string => {
+    return useTranslate(text, {
+      element: 'route_names',
+    });
+  };
 
   return (
     <FooterContainer isVisible={isVisible} ref={footerRef}>

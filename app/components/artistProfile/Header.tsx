@@ -9,7 +9,7 @@ import toast from 'react-hot-toast';
 import { FaRegEdit } from 'react-icons/fa';
 import TextButton from '../buttons/TextButton';
 import Popup from '../popup/Popup';
-import translate from '../translation/translate';
+import useTranslate from '../../hooks/useTranslate';
 
 interface HeaderProps {
   artistProfile: IArtistProfile;
@@ -56,13 +56,6 @@ const ArtworkThumbnail = styled.img`
   }
 `;
 
-const t = (text: string): string => {
-  return translate(text, {
-    element: 'about',
-    superElement: 'artist_profile',
-  });
-};
-
 const Header = ({
   artistProfile,
   artworks,
@@ -80,6 +73,13 @@ const Header = ({
 
   const handleHeaderArtworkSelection = (artwork: IUserArtwork) => {
     setHeaderArtwork(artwork.artworkMedias[0] || '');
+  };
+
+  const t = (text: string): string => {
+    return useTranslate(text, {
+      element: 'about',
+      superElement: 'artist_profile',
+    });
   };
 
   const handleCoverImageChange = async (coverImage: String) => {
