@@ -5,20 +5,20 @@ import useAddAnnouncementModal from '@/app/hooks/useAddAnnouncementModal';
 import AnnouncementsList from '@/app/components/lists/AnnouncementsList';
 import ComponentWithHeading from '@/app/components/layouts/ComponentWithHeading';
 import ListWithButton from '@/app/components/layouts/ListWithButton';
-import translate from '@/app/components/translation/translate';
+import useTranslate from '@/app/hooks/useTranslate';
 
 interface EditAnnouncementsClientProps {
   announcements: IAnnouncement[];
 }
 
-const t = (text: string): string => {
-  return translate(text, { element: 'edit_announcements' });
-};
-
 const EditAnnouncementsClient = ({
   announcements,
 }: EditAnnouncementsClientProps) => {
   const addAnnouncementModal = useAddAnnouncementModal();
+  const t = (text: string): string => {
+    return useTranslate(text, { element: 'edit_announcements' });
+  };
+
   return (
     <>
       <AddAnnouncementModal />

@@ -9,7 +9,7 @@ import SlidingButton from '../buttons/SlidingButton';
 import useAddArtworkModal from '../../hooks/useAddArtworkModal';
 import AddArtworkModal from '../modal/AddArtworkModal';
 import ComponentWithHeading from '../layouts/ComponentWithHeading';
-import translate from '../translation/translate';
+import useTranslate from '../../hooks/useTranslate';
 interface ArtistProfileProps {
   artistProfile: IArtistProfile;
   artworks?: IUserArtwork[];
@@ -22,16 +22,19 @@ const Container = styled.div`
   gap: 4rem;
 `;
 
-const t = (text: string): string => {
-  return translate(text, { element: 'list', superElement: 'artist_profile' });
-};
-
 const ArtistProfile = ({
   artistProfile,
   artworks,
   isEditable = false,
 }: ArtistProfileProps) => {
   const addArtworkModal = useAddArtworkModal();
+
+  const t = (text: string): string => {
+    return useTranslate(text, {
+      element: 'list',
+      superElement: 'artist_profile',
+    });
+  };
 
   return (
     <Container>

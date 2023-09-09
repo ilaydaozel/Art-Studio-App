@@ -6,21 +6,20 @@ import { useRouter } from 'next/navigation';
 import ArtistAccountsList from '@/app/components/lists/ArtistAccountsList';
 import ComponentWithHeading from '@/app/components/layouts/ComponentWithHeading';
 import ListWithButton from '@/app/components/layouts/ListWithButton';
-import translate from '@/app/components/translation/translate';
+import useTranslate from '@/app/hooks/useTranslate';
 interface EditArtistAccountsClientProps {
   accounts: IUser[];
 }
-
-const t = (text: string): string => {
-  return translate(text, {
-    element: 'artist_accounts',
-  });
-};
 
 const EditArtistAccountsClient = ({
   accounts,
 }: EditArtistAccountsClientProps) => {
   const router = useRouter();
+  const t = (text: string): string => {
+    return useTranslate(text, {
+      element: 'artist_accounts',
+    });
+  };
 
   return (
     <>

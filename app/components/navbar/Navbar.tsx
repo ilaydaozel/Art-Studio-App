@@ -10,7 +10,7 @@ import { usePathname } from 'next/navigation';
 import { PiUserCircleLight } from 'react-icons/pi';
 import { IUser } from '@/app/types';
 import LoginModal from '../modal/LoginModal';
-import translate from '../translation/translate';
+import useTranslate from '../../hooks/useTranslate';
 import LanguageSwitcher from './LanguageSwitcher';
 
 interface NavbarProps {
@@ -80,11 +80,6 @@ const MenuElement = styled.a<{ color: string; isActive?: boolean }>`
     font-size: 0.4rem;
   }
 `;
-const t = (text: string, element: string): string => {
-  return translate(text, {
-    element: element,
-  });
-};
 
 const Navbar = ({ currentUser }: NavbarProps) => {
   const loginModal = useLoginModal();
@@ -100,6 +95,12 @@ const Navbar = ({ currentUser }: NavbarProps) => {
   const [menuElementColor, setMenuElementColor] = useState(
     isHomePage ? '#FFFFFF' : COLORS.darkGray
   );
+
+  const t = (text: string, element: string): string => {
+    return useTranslate(text, {
+      element: element,
+    });
+  };
 
   useEffect(() => {
     const handleScroll = () => {
