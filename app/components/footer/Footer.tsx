@@ -65,12 +65,10 @@ const Footer = () => {
   }, [footerHeight]);
 
   const footerRef = React.useRef<HTMLDivElement>(null);
-
-  const t = (text: string): string => {
-    return useTranslate(text, {
-      element: 'route_names',
-    });
+  const location = {
+    element: 'route_names',
   };
+  const t = useTranslate();
 
   return (
     <FooterContainer isVisible={isVisible} ref={footerRef}>
@@ -85,13 +83,17 @@ const Footer = () => {
         <div className='flex flex-col items-start '>
           <LogoTitle>KONAK KÜLTÜR SANAT AKADEMİSİ</LogoTitle>
           <div className='flex flex-col gap-1 items-start my-2'>
-            <FooterElement href={ROUTE_PATHS.HOME}>{t('home')}</FooterElement>
-            <FooterElement href={ROUTE_PATHS.ARTISTS}>
-              {t('artists')}
+            <FooterElement href={ROUTE_PATHS.HOME}>
+              {t('home', location)}
             </FooterElement>
-            <FooterElement href={ROUTE_PATHS.ABOUT}>{t('about')}</FooterElement>
+            <FooterElement href={ROUTE_PATHS.ARTISTS}>
+              {t('artists', location)}
+            </FooterElement>
+            <FooterElement href={ROUTE_PATHS.ABOUT}>
+              {t('about', location)}
+            </FooterElement>
             <FooterElement href={ROUTE_PATHS.VIRTUAL_EXHIBITIONS}>
-              {t('virtual_exhibitions')}
+              {t('virtual_exhibitions', location)}
             </FooterElement>
           </div>
         </div>

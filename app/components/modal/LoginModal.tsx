@@ -25,9 +25,8 @@ const LoginModal = () => {
     },
   });
 
-  const t = (text: string): string => {
-    return useTranslate(text, { element: 'login_modal' });
-  };
+  const location = { element: 'login_modal' };
+  const t = useTranslate();
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     setIsLoading(true);
@@ -37,12 +36,12 @@ const LoginModal = () => {
     }).then((callback) => {
       setIsLoading(false);
       if (callback?.ok) {
-        toast.success(t('login_successful_message'));
+        toast.success(t('login_successful_message', location));
         router.refresh();
         loginModal.onClose();
       }
       if (callback?.error) {
-        toast.error(t('login_failed_message'));
+        toast.error(t('login_failed_message', location));
       }
     });
   };
@@ -59,7 +58,7 @@ const LoginModal = () => {
       />
       <Input
         id='password'
-        label={t('password')}
+        label={t('password', location)}
         type='password'
         disabled={isLoading}
         register={register}
@@ -73,9 +72,9 @@ const LoginModal = () => {
     <Modal
       disabled={isLoading}
       isOpen={loginModal.isOpen}
-      title={t('title')}
-      subtitle={t('subtitle')}
-      actionLabel={t('action_label')}
+      title={t('title', location)}
+      subtitle={t('subtitle', location)}
+      actionLabel={t('action_label', location)}
       onClose={loginModal.onClose}
       onSubmit={handleSubmit(onSubmit)}
       body={bodyContent}

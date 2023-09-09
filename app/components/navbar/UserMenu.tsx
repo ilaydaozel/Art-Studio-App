@@ -82,11 +82,8 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
 
   const menuRef = useRef<HTMLDivElement>(null); // Specify the type of menuRef
 
-  const t = (text: string): string => {
-    return useTranslate(text, {
-      element: 'route_names',
-    });
-  };
+  const location = { element: 'route_names' };
+  const t = useTranslate();
 
   // Use useEffect to add a click event listener when the component mounts
   useEffect(() => {
@@ -134,7 +131,7 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
               <UserMenuElement
                 href={`${ROUTE_PATHS.EDIT}${ROUTE_PATHS.EDIT_ARTIST_PROFILE}/${currentUser?.id}`}
               >
-                {t('edit_artist_profiles')}
+                {t('edit_artist_profiles', location)}
               </UserMenuElement>
             </>
           ) : (
@@ -142,17 +139,17 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
               <UserMenuElement
                 href={`${ROUTE_PATHS.EDIT}${ROUTE_PATHS.EDIT_ARTIST_ACCOUNTS}`}
               >
-                {t('edit_artist_accounts')}
+                {t('edit_artist_accounts', location)}
               </UserMenuElement>
               <UserMenuElement
                 href={`${ROUTE_PATHS.EDIT}${ROUTE_PATHS.EDIT_ANNOUNCEMENTS}`}
               >
-                {t('edit_announcements')}
+                {t('edit_announcements', location)}
               </UserMenuElement>
               <UserMenuElement
                 href={`${ROUTE_PATHS.ADD}${ROUTE_PATHS.ADD_NEW_ARTIST}`}
               >
-                {t('add_new_artist')}
+                {t('add_new_artist', location)}
               </UserMenuElement>
             </>
           )}
@@ -163,7 +160,7 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
               router.refresh();
             }}
           >
-            {t('logout')}
+            {t('logout', location)}
           </UserMenuElement>
         </MenuContainer>
       )}

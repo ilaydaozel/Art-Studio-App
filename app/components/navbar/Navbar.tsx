@@ -96,11 +96,7 @@ const Navbar = ({ currentUser }: NavbarProps) => {
     isHomePage ? '#FFFFFF' : COLORS.darkGray
   );
 
-  const t = (text: string, element: string): string => {
-    return useTranslate(text, {
-      element: element,
-    });
-  };
+  const t = useTranslate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -145,7 +141,7 @@ const Navbar = ({ currentUser }: NavbarProps) => {
         >
           <div className='w-full relative flex items-center justify-end'>
             <LogoTitle color={logoColor} href='/'>
-              {t('name', 'academy')}
+              {t('name', { element: 'academy' })}
             </LogoTitle>
             <SideIcons>
               <LanguageSwitcher></LanguageSwitcher>
@@ -169,28 +165,28 @@ const Navbar = ({ currentUser }: NavbarProps) => {
               color={menuElementColor}
               href={ROUTE_PATHS.HOME}
             >
-              {t('home', 'route_names')}
+              {t('home', { element: 'route_names' })}
             </MenuElement>
             <MenuElement
               isActive={pathname === ROUTE_PATHS.ARTISTS}
               color={menuElementColor}
               href={ROUTE_PATHS.ARTISTS}
             >
-              {t('artists', 'route_names')}
+              {t('artists', { element: 'route_names' })}
             </MenuElement>
             <MenuElement
               isActive={pathname === ROUTE_PATHS.ABOUT}
               color={menuElementColor}
               href={ROUTE_PATHS.ABOUT}
             >
-              {t('about', 'route_names')}
+              {t('about', { element: 'route_names' })}
             </MenuElement>
             <MenuElement
               isActive={pathname === ROUTE_PATHS.VIRTUAL_EXHIBITIONS}
               color={menuElementColor}
               href={ROUTE_PATHS.VIRTUAL_EXHIBITIONS}
             >
-              {t('virtual_exhibitions', 'route_names')}
+              {t('virtual_exhibitions', { element: 'route_names' })}
             </MenuElement>
           </div>
         </div>
