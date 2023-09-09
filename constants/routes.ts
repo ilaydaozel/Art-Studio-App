@@ -1,6 +1,3 @@
-import { getDictionary } from '@/lib/dictionary';
-import { ChangeTypes } from './type';
-
 export enum ROUTE_PATHS {
     HOME = '/',
     ARTISTS = '/pages/artists',
