@@ -1,33 +1,34 @@
 import { useContext } from 'react';
 import { TranslationContext } from '@/app/contexts/TranslationContext';
 
-function useTranslate(
-  text: string,
-  { element, superElement }: { element: string; superElement?: string }
-): string {
+export default function useTranslate() {
   const { messages } = useContext(TranslationContext);
-  let translation: string = text;
 
-  if (element && text) {
-    if (superElement) {
-      const superElementObj = messages[superElement];
-      if (superElementObj && element && text) {
-        const elementObj = superElementObj[element];
-        if (typeof elementObj === 'object') {
-          if (elementObj && typeof elementObj[text] === 'string') {
-            translation = elementObj[text] as string;
-          }
-        }
-      }
-    } else {
-      const elementObj = messages[element];
-      if (elementObj && typeof elementObj[text] === 'string') {
-        translation = elementObj[text] as string;
+  return function translate(
+    text: string,
+    { element, superElement }: { element?: string; superElement?: string }
+  ): string {
+    let translation: string = text;
+
+    if (
+      superElement &&
+      element &&
+      messages[superElement] &&
+      messages[superElement][element]
+    ) {
+      const translatedValue = messages[superElement][element];
+      if (typeof translatedValue === 'string') {
+        translation = translatedValue;
       }
     }
-  }
 
-  return translation;
+    if (element && messages[element] && messages[element][text]) {
+      const translatedValue = messages[element][text];
+      if (typeof translatedValue === 'string') {
+        translation = translatedValue;
+      }
+    }
+
+    return translation;
+  };
 }
-
-export default useTranslate;
