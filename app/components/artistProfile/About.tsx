@@ -4,20 +4,20 @@ import { IArtistProfile } from '../../types';
 import ProfilePicture from './ProfilePicture';
 import Biography from './Biography';
 import ComponentWithHeading from '../layouts/ComponentWithHeading';
-import useTranslate from '../../hooks/useTranslate';
+import translate from '../translation/translate';
 interface AboutProps {
   artistProfile: IArtistProfile;
   isEditable?: boolean;
 }
 
-const About = ({ artistProfile, isEditable = false }: AboutProps) => {
-  const t = (text: string): string => {
-    return useTranslate(text, {
-      element: 'about',
-      superElement: 'artist_profile',
-    });
-  };
+const t = (text: string): string => {
+  return translate(text, {
+    element: 'about',
+    superElement: 'artist_profile',
+  });
+};
 
+const About = ({ artistProfile, isEditable = false }: AboutProps) => {
   return (
     <ComponentWithHeading headingText={t('heading')}>
       <div className='flex items-center justify-center w-[80%] my-10 gap-10'>

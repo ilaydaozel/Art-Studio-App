@@ -8,7 +8,11 @@ import useLoginModal from '@/app/hooks/useLoginModal';
 import Modal from './Modal';
 import Input from '../inputs/Input';
 import { useRouter } from 'next/navigation';
-import useTranslate from '../../hooks/useTranslate';
+import translate from '../translation/translate';
+
+const t = (text: string): string => {
+  return translate(text, { element: 'login_modal' });
+};
 
 const LoginModal = () => {
   const router = useRouter();
@@ -24,10 +28,6 @@ const LoginModal = () => {
       password: '',
     },
   });
-
-  const t = (text: string): string => {
-    return useTranslate(text, { element: 'login_modal' });
-  };
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     setIsLoading(true);

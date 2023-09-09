@@ -4,18 +4,19 @@ import { IUser } from '@/app/types';
 import { useRouter } from 'next/navigation';
 import ArtistAccountsList from '@/app/components/lists/ArtistAccountsList';
 import ComponentWithHeading from '@/app/components/layouts/ComponentWithHeading';
-import useTranslate from '@/app/hooks/useTranslate';
+import translate from '@/app/components/translation/translate';
 
 interface ArtistAccountsClientProps {
   accounts: IUser[];
 }
 
+const t = (text: string): string => {
+  return translate(text, {
+    element: 'artist_accounts',
+  });
+};
+
 const ArtistAccountsClient = ({ accounts }: ArtistAccountsClientProps) => {
-  const t = (text: string): string => {
-    return useTranslate(text, {
-      element: 'artist_accounts',
-    });
-  };
   return (
     <>
       <ComponentWithHeading headingText={t('list_heading')}>

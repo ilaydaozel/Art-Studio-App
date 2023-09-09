@@ -8,7 +8,7 @@ import styled from 'styled-components';
 import { COLORS } from '@/constants/colors';
 import { ROUTE_PATHS } from '@/constants/routes';
 import { IUser } from '@/app/types';
-import useTranslate from '../../hooks/useTranslate';
+import translate from '../translation/translate';
 
 interface UserMenuProps {
   currentUser: IUser | null;
@@ -71,6 +71,12 @@ const NameText = styled.div`
   }
 `;
 
+const t = (text: string): string => {
+  return translate(text, {
+    element: 'route_names',
+  });
+};
+
 const UserMenu = ({ currentUser }: UserMenuProps) => {
   const router = useRouter();
 
@@ -81,12 +87,6 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
   }, []);
 
   const menuRef = useRef<HTMLDivElement>(null); // Specify the type of menuRef
-
-  const t = (text: string): string => {
-    return useTranslate(text, {
-      element: 'route_names',
-    });
-  };
 
   // Use useEffect to add a click event listener when the component mounts
   useEffect(() => {
