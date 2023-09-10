@@ -17,7 +17,7 @@ interface ArtworkListProps {
 const ArtworkContainer = styled.div`
   display: flex;
   align-items: baseline;
-  gap: 2px;
+  gap: 0.2rem;
   margin: 16px 4px;
 `;
 
