@@ -2,11 +2,11 @@
 import styled from 'styled-components';
 import { useState } from 'react';
 import Popup from '@/app/components/popup/Popup';
-import { IUserArtwork } from '@/app/types';
+import { IExhibition, IUserArtwork } from '@/app/types';
 import StartMenu from '@/app/components/virtualExhibition/StartMenu';
 
-interface ExhibitionPreviewProps {
-  artworks?: IUserArtwork[];
+interface ExhibitionProps {
+  exhibition: IExhibition;
 }
 
 const ExhibitonBox = styled.div<{ backgroundImgUrl: string }>`
@@ -70,11 +70,10 @@ const InformationContainer = styled.div`
   margin: 10px;
 `;
 
-const ExhibitionPreview = ({ artworks = [] }: ExhibitionPreviewProps) => {
+const Exhibition = ({ exhibition }: ExhibitionProps) => {
   const [showExhibition, setShowExhibition] = useState(false);
   return (
     <>
-      {' '}
       <ExhibitonBox
         onClick={() => setShowExhibition(true)}
         backgroundImgUrl='https://res.cloudinary.com/dnlz4muyb/image/upload/v1691094915/j0dfdld8wjk1cdgb8afs.jpg'
@@ -85,11 +84,11 @@ const ExhibitionPreview = ({ artworks = [] }: ExhibitionPreviewProps) => {
         <Popup
           onClose={() => setShowExhibition(false)}
           width='100%'
-          isFullScreen
-          body={<StartMenu artworks={artworks}></StartMenu>}
+          isFullScreen={true}
+          body={<StartMenu artworks={exhibition.userArtworks}></StartMenu>}
         ></Popup>
       )}
     </>
   );
 };
-export default ExhibitionPreview;
+export default Exhibition;
