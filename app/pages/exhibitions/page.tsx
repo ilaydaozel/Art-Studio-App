@@ -14,7 +14,7 @@ const ExhibitionsPage = async () => {
         return (
           <ClientOnly>
             <div className='pt-28 w-full'>
-              <ExhibitionsClient exhibtions={exhibitons}></ExhibitionsClient>
+              <ExhibitionsClient exhibitions={exhibitons}></ExhibitionsClient>
             </div>
           </ClientOnly>
         );
