@@ -16,9 +16,12 @@ export default function useTranslate() {
       messages[superElement] &&
       messages[superElement][element]
     ) {
-      const translatedValue = messages[superElement][element];
-      if (typeof translatedValue === 'string') {
-        translation = translatedValue;
+      const translatedValueElement = messages[superElement][element];
+      if (typeof translatedValueElement === 'object') {
+        const translatedValue = translatedValueElement[text];
+        if (typeof translatedValue === 'string') {
+          translation = translatedValue;
+        }
       }
     }
 
