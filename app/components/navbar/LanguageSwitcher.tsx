@@ -1,7 +1,21 @@
 import { TranslationContext } from '@/app/contexts/TranslationContext';
 import { Language } from '@/app/types/language';
+import { COLORS } from '@/constants/colors';
 import { useContext, ChangeEvent } from 'react';
+import styled from 'styled-components';
 
+const Select = styled.select`
+  background-color: transparent;
+  outline: none;
+  font-size: 1rem;
+  color: ${COLORS.gray};
+  @media (max-width: 768px) {
+    font-size: 0.8rem;
+  }
+  @media (max-width: 576px) {
+    font-size: 0.6rem; /* Use your sm:text-xs font size value here */
+  }
+`;
 const LanguageSwitcher = () => {
   const { language, switchLanguage } = useContext(TranslationContext);
   const handleSwitchLanguage = (event: ChangeEvent<HTMLSelectElement>) => {
@@ -9,14 +23,10 @@ const LanguageSwitcher = () => {
   };
 
   return (
-    <select
-      className='bg-transparent outline-none text-neutral-400'
-      value={language}
-      onChange={handleSwitchLanguage}
-    >
+    <Select value={language} onChange={handleSwitchLanguage}>
       <option value='en'>English</option>
       <option value='tr'>Turkish</option>
-    </select>
+    </Select>
   );
 };
 export default LanguageSwitcher;
