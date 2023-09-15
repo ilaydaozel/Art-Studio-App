@@ -9,5 +9,6 @@ export enum ROUTE_PATHS {
     EDIT_ANNOUNCEMENTS = 'editAnnouncements',
     ARTIST_PROFILE = '/pages/artistProfile',
     ABOUT = '/pages/about',
-    VIRTUAL_EXHIBITIONS = '/pages/virtualExhibition',
+    EXHIBITIONS = '/pages/exhibitions',
+    EXHIBITION = '/pages/exhibition',
 }

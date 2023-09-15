@@ -92,8 +92,8 @@ const Footer = () => {
             <FooterElement href={ROUTE_PATHS.ABOUT}>
               {t('about', location)}
             </FooterElement>
-            <FooterElement href={ROUTE_PATHS.VIRTUAL_EXHIBITIONS}>
-              {t('virtual_exhibitions', location)}
+            <FooterElement href={ROUTE_PATHS.EXHIBITIONS}>
+              {t('exhibitions', location)}
             </FooterElement>
           </div>
         </div>

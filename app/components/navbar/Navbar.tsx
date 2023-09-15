@@ -182,11 +182,11 @@ const Navbar = ({ currentUser }: NavbarProps) => {
               {t('about', { element: 'route_names' })}
             </MenuElement>
             <MenuElement
-              isActive={pathname === ROUTE_PATHS.VIRTUAL_EXHIBITIONS}
+              isActive={pathname === ROUTE_PATHS.EXHIBITIONS}
               color={menuElementColor}
-              href={ROUTE_PATHS.VIRTUAL_EXHIBITIONS}
+              href={ROUTE_PATHS.EXHIBITIONS}
             >
-              {t('virtual_exhibitions', { element: 'route_names' })}
+              {t('exhibitions', { element: 'route_names' })}
             </MenuElement>
           </div>
         </div>

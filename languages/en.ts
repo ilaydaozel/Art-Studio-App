@@ -15,7 +15,8 @@ const EnglishData: ILanguageData = {
         edit_announcements: "Edit Announcements",
         artist_profile: "Artist",
         about: "About",
-        virtual_exhibitions: "Virtual Exhibitions",
+        exhibitions: "Exhibitions",
+        exhibition: "Exhibition",
         logout: "Log out"
     },
     login_modal: {
