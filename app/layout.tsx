@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import './assets/globals.css';
 import { DM_Sans } from 'next/font/google';
 import getCurrentUser from './actions/getCurrentUser';
@@ -9,6 +9,7 @@ import StyledComponentsRegistry from './libs/registry';
 import ToasterProvider from './providers/ToasterProvider';
 import TranslationProvider from './providers/TranslationProvider';
 import { fetchTranslations } from '@/app/libs/languageDictionary';
+import Loading from './loading';
 
 export const metadata = {
   title: 'Konak Sanat Akademisi',
@@ -39,18 +40,20 @@ export default async function RootLayout({
             }}
           >
             <TranslationProvider fetchTranslations={fetchTranslations}>
-              <ClientOnly>
-                <ToasterProvider />
-                <Navbar
-                  currentUser={currentUser ? currentUser.currentUser : null}
-                />
-              </ClientOnly>
+              <Suspense fallback={<Loading />}>
+                <ClientOnly>
+                  <ToasterProvider />
+                  <Navbar
+                    currentUser={currentUser ? currentUser.currentUser : null}
+                  />
+                </ClientOnly>
 
-              {children}
+                {children}
 
-              <ClientOnly>
-                <Footer />
-              </ClientOnly>
+                <ClientOnly>
+                  <Footer />
+                </ClientOnly>
+              </Suspense>
             </TranslationProvider>
           </div>
         </StyledComponentsRegistry>
