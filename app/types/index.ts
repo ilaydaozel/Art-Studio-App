@@ -21,6 +21,8 @@ export interface IArtistProfile {
 export interface IArtwork {
     id: string;
     title: string;
+    artistName: string;
+    artistSurname: string;
     description?: string;
     creationYear?: string;
     medium?: string;
@@ -30,17 +32,9 @@ export interface IArtwork {
     artworkMedias: string[];
     exhibitionIds: string[];
     exhibitions: IExhibition[];
+    artistId?: string;
+    artist?: IArtistProfile;
 }
-export interface IArtwork extends IArtwork {
-    artistId: string;
-    artist: IArtistProfile;
-}
-
-export interface IGuestArtwork extends IArtwork {
-    artistName: string;
-    artistSurname: string;
-}
-
 export interface IExhibition {
     id: string;
     title: string;
@@ -48,10 +42,8 @@ export interface IExhibition {
     startDate: Date;
     endDate: Date;
     organizedBy?: string;
-    ArtworkIds: string[];
-    guestArtworkIds: string[];
-    Artworks: IArtwork[];
-    guestArtworks: IGuestArtwork[];
+    artworkIds: string[];
+    artworks: IArtwork[];
 }
 
 export interface IAnnouncement {
