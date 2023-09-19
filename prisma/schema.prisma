@@ -27,29 +27,13 @@ model ArtistProfile{
   biography String?
   links String[]
   profilePic String?
-  artworks UserArtwork[]
+  artworks Artwork[]
   coverImage String?
   artistId String @unique @db.ObjectId
   user User @relation(fields: [artistId], references: [id], onDelete: Cascade)
 }
 
-model UserArtwork{
-  id String @id @default(auto()) @map("_id") @db.ObjectId
-  artistId String @db.ObjectId
-  title String
-  description String?
-  creationYear String?
-  medium String?
-  type String?
-  width Int?
-  height Int?
-  artworkMedias String[]
-  exhibitionIds String[] @db.ObjectId
-  artist ArtistProfile @relation(fields: [artistId], references: [artistId], onDelete: Cascade)
-  exhibitions Exhibition[] @relation(fields: [exhibitionIds], references: [id])
-}
-
-model GuestArtwork{
+model Artwork{
   id String @id @default(auto()) @map("_id") @db.ObjectId
   title String
   artistName String
@@ -62,6 +46,8 @@ model GuestArtwork{
   height Int?
   artworkMedias String[]
   exhibitionIds String[] @db.ObjectId
+  artistId String? @db.ObjectId
+  artist ArtistProfile? @relation(fields: [artistId], references: [artistId], onDelete: Cascade)
   exhibitions Exhibition[] @relation(fields: [exhibitionIds], references: [id])
 }
 
@@ -72,10 +58,8 @@ model Exhibition{
   startDate DateTime
   endDate DateTime
   organizedBy String?
-  userArtworkIds String[] @db.ObjectId
-  guestArtworkIds String[] @db.ObjectId
-  userArtworks UserArtwork[] @relation(fields: [userArtworkIds], references: [id])
-  guestArtworks GuestArtwork[] @relation(fields: [guestArtworkIds], references: [id])
+  artworkIds String[] @db.ObjectId
+  artworks Artwork[] @relation(fields: [artworkIds], references: [id])
 }
 
 model Announcement{
