@@ -5,6 +5,9 @@ import React from 'react';
 import styled from 'styled-components';
 import { BsEyeSlash } from 'react-icons/bs';
 
+interface UnauthorizedProps {
+  isAdminAuthorization?: boolean;
+}
 const UnauthorizedContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -12,22 +15,9 @@ const UnauthorizedContainer = styled.div`
   align-items: center;
   gap: 1rem;
   height: 100vh;
-  h2 {
-    font-size: 1rem;
-    color: ${COLORS.darkGray};
-  }
-  @media (max-width: 768px){
-    h2 {
-        font-size: 0.8rem;
-      }
-  }
-  @media (max-width: 576px){
-    h2 {
-        font-size: 0.6rem;
-      }
-  }
   }
 `;
+
 const Caption = styled.div`
   color: ${COLORS.red};
   font-size: 2.2rem;
@@ -42,13 +32,28 @@ const Caption = styled.div`
     font-size: 1.5rem;
   }
 `;
-const Unauthorized = () => {
+const Subcaption = styled.h2`
+  font-size: 1rem;
+  color: ${COLORS.darkGray};
+  @media (max-width: 768px) {
+    font-size: 0.8rem;
+  }
+  @media (max-width: 576px) {
+    font-size: 0.6rem;
+  }
+`;
+
+const Unauthorized = ({ isAdminAuthorization }: UnauthorizedProps) => {
   return (
     <UnauthorizedContainer>
       <Caption>
         Unauthorized Page <BsEyeSlash></BsEyeSlash>
       </Caption>
-      <h2>Access is only allowed for registered users.</h2>
+      {isAdminAuthorization ? (
+        <Subcaption>Access is only allowed for admins.</Subcaption>
+      ) : (
+        <Subcaption>Access is only allowed for registered users.</Subcaption>
+      )}
     </UnauthorizedContainer>
   );
 };
