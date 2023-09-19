@@ -46,9 +46,9 @@ model Artwork{
   height Int?
   artworkMedias String[]
   exhibitionIds String[] @db.ObjectId
+  exhibitions Exhibition[] @relation(fields: [exhibitionIds], references: [id])
   artistId String? @db.ObjectId
   artist ArtistProfile? @relation(fields: [artistId], references: [artistId], onDelete: Cascade)
-  exhibitions Exhibition[] @relation(fields: [exhibitionIds], references: [id])
 }
 
 model Exhibition{
