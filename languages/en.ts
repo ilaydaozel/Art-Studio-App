@@ -52,7 +52,12 @@ const EnglishData: ILanguageData = {
     edit_announcements: {
         heading: "Edit Announcements",
         add_button_text: "Add New Announcement +"
-    }
+    },
+    unauthorized: {
+        caption: "Unauthorized",
+        user_subcaption: "Access is only allowed for registered users",
+        admin_subcaption: "Access is only allowed for admins"
+    },
 };
 
 export default EnglishData;

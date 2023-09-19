@@ -4,6 +4,7 @@ import { COLORS } from '@/constants/colors';
 import React from 'react';
 import styled from 'styled-components';
 import { BsEyeSlash } from 'react-icons/bs';
+import useTranslate from '@/app/hooks/useTranslate';
 
 interface UnauthorizedProps {
   isAdminAuthorization?: boolean;
@@ -44,16 +45,18 @@ const Subcaption = styled.h2`
 `;
 
 const Unauthorized = ({ isAdminAuthorization }: UnauthorizedProps) => {
+  const location = { element: 'unauthorized' };
+  const t = useTranslate();
   return (
     <UnauthorizedContainer>
       <Caption>
-        Unauthorized Page <BsEyeSlash></BsEyeSlash>
+        {t('caption', location)} <BsEyeSlash></BsEyeSlash>
       </Caption>
-      {isAdminAuthorization ? (
-        <Subcaption>Access is only allowed for admins.</Subcaption>
-      ) : (
-        <Subcaption>Access is only allowed for registered users.</Subcaption>
-      )}
+      <Subcaption>
+        {isAdminAuthorization
+          ? t('admin_subcaption', location)
+          : t('user_subcaption', location)}
+      </Subcaption>
     </UnauthorizedContainer>
   );
 };

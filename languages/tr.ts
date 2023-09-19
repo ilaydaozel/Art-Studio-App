@@ -53,7 +53,12 @@ const TurkishData: ILanguageData = {
     edit_announcements: {
         heading: "Duyuruları Düzenle",
         add_button_text: "Yeni Duyuru Ekle +"
-    }
+    },
+    unauthorized: {
+        caption: "Yetki Yok",
+        user_subcaption: "Sadece giriş yapmış kullanıcıların yetkisi vardır",
+        admin_subcaption: "Sadece adminlerin yetkisi vardır"
+    },
 };
 
 export default TurkishData;
