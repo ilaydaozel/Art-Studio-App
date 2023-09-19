@@ -1,7 +1,7 @@
 'use client';
 import { COLORS } from '@/constants/colors';
 import styled from 'styled-components';
-import { IArtistProfile, IUserArtwork } from '../../types';
+import { IArtistProfile, IArtwork } from '../../types';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import { useState } from 'react';
@@ -13,7 +13,7 @@ import useTranslate from '../../hooks/useTranslate';
 
 interface HeaderProps {
   artistProfile: IArtistProfile;
-  artworks?: IUserArtwork[];
+  artworks?: IArtwork[];
   isEditable?: boolean;
 }
 
@@ -71,7 +71,7 @@ const Header = ({
     router.refresh();
   };
 
-  const handleHeaderArtworkSelection = (artwork: IUserArtwork) => {
+  const handleHeaderArtworkSelection = (artwork: IArtwork) => {
     setHeaderArtwork(artwork.artworkMedias[0] || '');
   };
 

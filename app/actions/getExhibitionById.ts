@@ -15,7 +15,7 @@ export default async function getExhibitionById(
                 id: exhibitionId,
             },
             include: {
-                userArtworks: true,
+                Artworks: true,
                 guestArtworks: true,
             },
         });

@@ -5,10 +5,10 @@ import { MdOutlinePhotoSizeSelectActual } from 'react-icons/md';
 import { COLORS } from '@/constants/colors';
 import useArtworkModal from '@/app/hooks/useArtworkModal';
 import ArtworkModal from '../modal/ArtworkModal';
-import { IUserArtwork } from '@/app/types';
+import { IArtwork } from '@/app/types';
 
 interface ArtworkProps {
-  artwork: IUserArtwork | null;
+  artwork: IArtwork | null;
 }
 const Container = styled.div`
   display: flex;

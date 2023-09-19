@@ -3,14 +3,14 @@ import ClientOnly from '@/app/components/ClientOnly';
 import ArtistProfile from '@/app/components/artistProfile/ArtistProfile';
 import EmptyState from '@/app/components/EmptyState';
 import getAllArtworksByArtistId from '@/app/actions/getAllArtworksByArtistId';
-import { IArtistProfile, IUserArtwork } from '@/app/types';
+import { IArtistProfile, IArtwork } from '@/app/types';
 interface IParams {
   artistId?: string;
 }
 
 const ArtistProfilePage = async ({ params }: { params: IParams }) => {
   let artistProfile: { artistProfile: IArtistProfile } | null = null;
-  let allArtworks: { allUserArtworks: IUserArtwork[] } | null = null;
+  let allArtworks: { allArtworks: IArtwork[] } | null = null;
   if (params != undefined && params != undefined) {
     artistProfile = await getArtistProfileById(params);
     allArtworks = await getAllArtworksByArtistId(params);
@@ -31,7 +31,7 @@ const ArtistProfilePage = async ({ params }: { params: IParams }) => {
     <ClientOnly>
       <ArtistProfile
         artistProfile={artistProfile.artistProfile}
-        artworks={allArtworks?.allUserArtworks}
+        artworks={allArtworks?.allArtworks}
         isEditable
       />
     </ClientOnly>

@@ -1,7 +1,7 @@
 'use client';
 
 import styled from 'styled-components';
-import { IArtistProfile, IUserArtwork } from '@/app/types';
+import { IArtistProfile, IArtwork } from '@/app/types';
 import ArtworkList from '@/app/components/lists/ArtworkList';
 import Header from '@/app/components/artistProfile/Header';
 import About from '@/app/components/artistProfile/About';
@@ -12,7 +12,7 @@ import ComponentWithHeading from '../layouts/ComponentWithHeading';
 import useTranslate from '../../hooks/useTranslate';
 interface ArtistProfileProps {
   artistProfile: IArtistProfile;
-  artworks?: IUserArtwork[];
+  artworks?: IArtwork[];
   isEditable?: boolean;
 }
 

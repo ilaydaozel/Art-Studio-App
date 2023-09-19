@@ -1,6 +1,6 @@
 'use client';
 import styled from 'styled-components';
-import { IUserArtwork } from '@/app/types';
+import { IArtwork } from '@/app/types';
 import { useRouter } from 'next/navigation';
 import Artwork from '../artwork/Artwork';
 import EditMenu from '../menu/EditMenu';
@@ -9,7 +9,7 @@ import toast from 'react-hot-toast';
 import { useState } from 'react';
 
 interface ArtworkListProps {
-  artworks: IUserArtwork[];
+  artworks: IArtwork[];
   width?: string;
   isEditable?: boolean;
 }
@@ -45,7 +45,7 @@ const ArtworkList = ({
   const handleDeleteArtwork = (artworkId: string) => {
     setIsLoading(true);
     axios
-      .delete(`/api/userArtwork/deleteUserArtwork/${artworkId}`)
+      .delete(`/api/Artwork/deleteArtwork/${artworkId}`)
       .then(() => {
         toast.success('Eser silindi!');
         refreshPage();
@@ -61,7 +61,7 @@ const ArtworkList = ({
 
   return (
     <ListContainer width={width}>
-      {artworks.map((currentArtwork: IUserArtwork) => (
+      {artworks.map((currentArtwork: IArtwork) => (
         <div key={currentArtwork.id} className='flex flex-col items-end'>
           <ArtworkContainer>
             <Artwork artwork={currentArtwork}></Artwork>

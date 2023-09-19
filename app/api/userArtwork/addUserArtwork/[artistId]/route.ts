@@ -43,7 +43,7 @@ export async function POST(request: Request, { params }: { params: IParams }) {
         }
     });
 
-    const userArtwork = await prisma.userArtwork.create({
+    const Artwork = await prisma.Artwork.create({
         data: {
             artistId: user.id,
             title,
@@ -57,5 +57,5 @@ export async function POST(request: Request, { params }: { params: IParams }) {
         }
     });
 
-    return NextResponse.json(userArtwork);
+    return NextResponse.json(Artwork);
 }

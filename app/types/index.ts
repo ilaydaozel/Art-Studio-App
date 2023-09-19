@@ -12,7 +12,7 @@ export interface IArtistProfile {
     biography?: string;
     links: string[];
     profilePic?: string;
-    artworks?: IUserArtwork[];
+    artworks?: IArtwork[];
     coverImage?: string;
     artistId: string;
     user?: IUser;
@@ -31,7 +31,7 @@ export interface IArtwork {
     exhibitionIds: string[];
     exhibitions: IExhibition[];
 }
-export interface IUserArtwork extends IArtwork {
+export interface IArtwork extends IArtwork {
     artistId: string;
     artist: IArtistProfile;
 }
@@ -48,9 +48,9 @@ export interface IExhibition {
     startDate: Date;
     endDate: Date;
     organizedBy?: string;
-    userArtworkIds: string[];
+    ArtworkIds: string[];
     guestArtworkIds: string[];
-    userArtworks: IUserArtwork[];
+    Artworks: IArtwork[];
     guestArtworks: IGuestArtwork[];
 }
 

@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 import ThreeDExhibition from './ThreeDExhibition';
-import { IUserArtwork } from '@/app/types';
+import { IArtwork } from '@/app/types';
 import Image from 'next/image';
 import { COLORS } from '@/constants/colors';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { AiOutlineMenu } from 'react-icons/ai';
 interface GalleryProps {
-  artworks?: IUserArtwork[];
+  artworks?: IArtwork[];
 }
 
 const MenuContainer = styled.div`

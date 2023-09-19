@@ -1,4 +1,4 @@
-import { IUserArtwork } from '@/app/types';
+import { IArtwork } from '@/app/types';
 import * as THREE from 'three';
 
 const paintingDepth: number = 0.5;
@@ -18,7 +18,7 @@ export const createPainting = (
 };
 
 export const createAndHangPaintings = (
-  artworks: IUserArtwork[],
+  artworks: IArtwork[],
   floorDimensions: { width: number; height: number }
 ) => {
   let distanceBetween = 30;
@@ -31,7 +31,7 @@ export const createAndHangPaintings = (
   const floorHeight = floorDimensions.height;
   const paintings: THREE.Mesh[] = [];
   for (let i = 0; i < artworks.length; i++) {
-    const artwork: IUserArtwork = artworks[i];
+    const artwork: IArtwork = artworks[i];
     const artworkWidth: number = artwork.width ? artwork.width / 5 : 10;
     const artworkHeight: number = artwork.height ? artwork.height / 5 : 10;
     const painting = createPainting(artwork.artworkMedias[0], {

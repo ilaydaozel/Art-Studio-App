@@ -2,7 +2,7 @@
 import styled from 'styled-components';
 import { useState } from 'react';
 import Popup from '@/app/components/popup/Popup';
-import { IExhibition, IUserArtwork } from '@/app/types';
+import { IExhibition, IArtwork } from '@/app/types';
 import StartMenu from '@/app/components/virtualExhibition/StartMenu';
 
 interface ExhibitionProps {
@@ -85,7 +85,7 @@ const Exhibition = ({ exhibition }: ExhibitionProps) => {
           onClose={() => setShowExhibition(false)}
           width='100%'
           isFullScreen={true}
-          body={<StartMenu artworks={exhibition.userArtworks}></StartMenu>}
+          body={<StartMenu artworks={exhibition.Artworks}></StartMenu>}
         ></Popup>
       )}
     </>

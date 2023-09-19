@@ -1,5 +1,5 @@
 'use client';
-import { IUserArtwork } from '@/app/types';
+import { IArtwork } from '@/app/types';
 import React, { useRef, useEffect } from 'react';
 import * as THREE from 'three';
 import { PointerLockControls } from 'three-stdlib';
@@ -12,7 +12,7 @@ import {
 import { createInitialRoomLight, createSpotlightForTarget } from './Light';
 
 interface ThreeDExhibitionProps {
-  artworks?: IUserArtwork[];
+  artworks?: IArtwork[];
 }
 const ThreeDExhibition = ({ artworks = [] }: ThreeDExhibitionProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
