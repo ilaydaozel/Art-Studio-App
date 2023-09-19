@@ -131,7 +131,7 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
               <UserMenuElement
                 href={`${ROUTE_PATHS.EDIT}${ROUTE_PATHS.EDIT_ARTIST_PROFILE}/${currentUser?.id}`}
               >
-                {t('edit_artist_profiles', location)}
+                {t('edit_artist_profile', location)}
               </UserMenuElement>
             </>
           ) : (
