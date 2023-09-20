@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import Image from 'next/image';
 import { MdOutlinePhotoSizeSelectActual } from 'react-icons/md';
 import { COLORS } from '@/constants/colors';
-import useArtworkModal from '@/app/hooks/useArtworkModal';
 import ArtworkModal from '../modal/ArtworkModal';
 import { IArtwork } from '@/app/types';
 
@@ -37,14 +36,9 @@ const InfoContent = styled.p`
 `;
 
 const Artwork = ({ artwork }: ArtworkProps) => {
-  const detailedArtworkModal = useArtworkModal();
   return (
     <div>
-      <ArtworkModal
-        artwork={artwork}
-        onClose={detailedArtworkModal.onClose}
-      ></ArtworkModal>
-      <Container onClick={detailedArtworkModal.onOpen}>
+      <Container>
         {artwork?.artworkMedias[0] !== undefined ? (
           <ArtworkContainer>
             <Image

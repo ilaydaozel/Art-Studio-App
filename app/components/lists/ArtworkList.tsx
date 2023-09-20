@@ -7,6 +7,7 @@ import EditMenu from '../menu/EditMenu';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import { useState } from 'react';
+import Link from 'next/link';
 
 interface ArtworkListProps {
   artworks: IArtwork[];
@@ -63,16 +64,18 @@ const ArtworkList = ({
     <ListContainer width={width}>
       {artworks.map((currentArtwork: IArtwork) => (
         <div key={currentArtwork.id} className='flex flex-col items-end'>
-          <ArtworkContainer>
-            <Artwork artwork={currentArtwork}></Artwork>
-            {isEditable ? (
-              <EditMenu
-                onDeleteClick={() => handleDeleteArtwork(currentArtwork.id)}
-              ></EditMenu>
-            ) : (
-              <></>
-            )}
-          </ArtworkContainer>
+          <Link href={`/artwork/${currentArtwork.id}`}>
+            <ArtworkContainer>
+              <Artwork artwork={currentArtwork}></Artwork>
+              {isEditable ? (
+                <EditMenu
+                  onDeleteClick={() => handleDeleteArtwork(currentArtwork.id)}
+                ></EditMenu>
+              ) : (
+                <></>
+              )}
+            </ArtworkContainer>
+          </Link>
         </div>
       ))}
     </ListContainer>
