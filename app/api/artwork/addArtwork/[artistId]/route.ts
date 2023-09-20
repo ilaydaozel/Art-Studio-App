@@ -28,6 +28,8 @@ export async function POST(request: Request, { params }: { params: IParams }) {
     const body = await request.json();
     const {
         title,
+        artistName,
+        artistSurname,
         description,
         creationYear,
         medium,
@@ -43,10 +45,11 @@ export async function POST(request: Request, { params }: { params: IParams }) {
         }
     });
 
-    const Artwork = await prisma.Artwork.create({
+    const artwork = await prisma.artwork.create({
         data: {
-            artistId: user.id,
             title,
+            artistName,
+            artistSurname,
             description,
             creationYear,
             medium,
@@ -54,8 +57,9 @@ export async function POST(request: Request, { params }: { params: IParams }) {
             width,
             height,
             artworkMedias: mediaLink[0],
+            artistId: user.id,
         }
     });
 
-    return NextResponse.json(Artwork);
+    return NextResponse.json(artwork);
 }

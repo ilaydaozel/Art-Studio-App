@@ -8,7 +8,7 @@ interface IParams {
 
 export async function DELETE(request: Request, { params }: { params: IParams }) {
     const { artworkId } = params;
-    const existingArtwork = await prisma.Artwork.findUnique({
+    const existingArtwork = await prisma.artwork.findUnique({
         where: {
             id: artworkId,
         },
@@ -20,7 +20,7 @@ export async function DELETE(request: Request, { params }: { params: IParams }) 
     }
 
     // Delete the Artwork record
-    const deleteArtwork = await prisma.Artwork.delete({
+    const deleteArtwork = await prisma.artwork.delete({
         where: {
             id: artworkId,
         },
