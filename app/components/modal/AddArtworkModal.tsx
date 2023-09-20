@@ -79,6 +79,8 @@ const AddArtworkModal = ({ artistProfile }: AddArtworkModalProps) => {
 
     const artwork = {
       title: title,
+      artistName: artistProfile.user?.name,
+      artistSurname: artistProfile.user?.surname,
       description: description,
       creationYear: creationYear,
       medium: medium,
@@ -90,7 +92,7 @@ const AddArtworkModal = ({ artistProfile }: AddArtworkModalProps) => {
     };
 
     axios
-      .post(`/api/Artwork/addArtwork/${artistId}`, artwork)
+      .post(`/api/artwork/addArtwork/${artistId}`, artwork)
       .then(() => {
         toast.success('Eser eklendi!');
         window.location.reload();
