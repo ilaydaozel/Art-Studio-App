@@ -1,7 +1,7 @@
 import EmptyState from '@/app/components/EmptyState';
 import ClientOnly from '@/app/components/ClientOnly';
 import { IExhibition, IUser } from '@/app/types';
-import getAllExhibitions from '@/app/actions/getAllExhibitions';
+import getAllExhibitions from '@/app/actions/exhibition/getAllExhibitions';
 import ExhibitionsClient from './ExhibitionsClient';
 
 const ExhibitionsPage = async () => {

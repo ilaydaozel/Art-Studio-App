@@ -1,5 +1,5 @@
-import prisma from "../libs/prismadb";
-import { IUser } from "../types";
+import prisma from "../../libs/prismadb";
+import { IUser } from "../../types";
 
 
 export default async function getAllArtists() {

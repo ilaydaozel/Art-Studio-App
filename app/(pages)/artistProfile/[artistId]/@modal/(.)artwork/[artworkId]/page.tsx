@@ -1,4 +1,4 @@
-import getArtworkById from '@/app/actions/getArtworkById';
+import getArtworkById from '@/app/actions/artwork/getArtworkById';
 import ClientOnly from '@/app/components/ClientOnly';
 import EmptyState from '@/app/components/EmptyState';
 import { IArtwork } from '@/app/types';

@@ -1,8 +1,8 @@
-import getArtistProfileById from '@/app/actions/getArtistProfileById';
+import getArtistProfileById from '@/app/actions/artistProfile/getArtistProfileById';
 import ClientOnly from '@/app/components/ClientOnly';
 import ArtistProfile from '@/app/components/artistProfile/ArtistProfile';
 import EmptyState from '@/app/components/EmptyState';
-import getAllArtworksByArtistId from '@/app/actions/getAllArtworksByArtistId';
+import getAllArtworksByArtistId from '@/app/actions/artwork/getAllArtworksByArtistId';
 import { IArtistProfile, IArtwork } from '@/app/types';
 interface IParams {
   artistId?: string;

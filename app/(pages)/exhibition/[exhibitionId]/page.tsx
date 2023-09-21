@@ -2,7 +2,7 @@ import ClientOnly from '@/app/components/ClientOnly';
 import EmptyState from '@/app/components/EmptyState';
 import { IExhibition } from '@/app/types';
 import Exhibition from '@/app/components/exhibition/Exhibition';
-import getExhibitionById from '@/app/actions/getExhibitionById';
+import getExhibitionById from '@/app/actions/exhibition/getExhibitionById';
 
 interface IParams {
   exhibitionId?: string;

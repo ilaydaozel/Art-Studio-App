@@ -1,7 +1,7 @@
 import EmptyState from '@/app/components/EmptyState';
 import ClientOnly from '@/app/components/ClientOnly';
 import { IUser } from '@/app/types';
-import getAllArtists from '../../actions/getAllArtists';
+import getAllArtists from '../../actions/user/getAllArtists';
 import ArtistAccountsClient from './ArtistAccountsClient';
 
 const ArtistsPage = async () => {

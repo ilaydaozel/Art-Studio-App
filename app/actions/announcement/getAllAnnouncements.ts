@@ -1,5 +1,5 @@
-import prisma from "../libs/prismadb";
-import { IAnnouncement } from "../types";
+import prisma from "../../libs/prismadb";
+import { IAnnouncement } from "../../types";
 
 
 export default async function getAllAnnouncements() {

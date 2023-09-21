@@ -1,5 +1,5 @@
-import prisma from "../libs/prismadb";
-import { IArtistProfile } from "../types";
+import prisma from "../../libs/prismadb";
+import { IArtistProfile } from "../../types";
 
 
 export default async function getAllArtistProfiles() {

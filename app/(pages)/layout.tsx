@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react';
 import '@/app/assets/globals.css';
 import { DM_Sans } from 'next/font/google';
-import getCurrentUser from '../actions/getCurrentUser';
+import getCurrentUser from '../actions/user/getCurrentUser';
 import ClientOnly from '../components/ClientOnly';
 import Footer from '../components/footer/Footer';
 import Navbar from '../components/navbar/Navbar';

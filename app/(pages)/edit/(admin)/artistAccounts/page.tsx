@@ -2,7 +2,7 @@ import EmptyState from '@/app/components/EmptyState';
 import ClientOnly from '@/app/components/ClientOnly';
 import { IUser } from '@/app/types';
 import ArtistAccountsList from './EditArtistAccountsClient';
-import getAllArtists from '@/app/actions/getAllArtists';
+import getAllArtists from '@/app/actions/user/getAllArtists';
 
 const EditArtistsPage = async () => {
   let artists: IUser[] | null = null;

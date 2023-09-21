@@ -1,7 +1,7 @@
 import React from 'react';
 import EmptyState from '@/app/components/EmptyState';
 import ClientOnly from '@/app/components/ClientOnly';
-import getAllAnnouncements from '@/app/actions/getAllAnnouncements';
+import getAllAnnouncements from '@/app/actions/announcement/getAllAnnouncements';
 import { IAnnouncement } from '@/app/types';
 import EditAnnouncementsClient from './EditAnnouncementsClient';
 

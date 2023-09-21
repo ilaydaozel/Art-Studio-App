@@ -1,5 +1,5 @@
 import React from 'react';
-import getAllAnnouncements from '../actions/getAllAnnouncements';
+import getAllAnnouncements from '../actions/announcement/getAllAnnouncements';
 import ClientOnly from '../components/ClientOnly';
 import EmptyState from '../components/EmptyState';
 import AnnouncementCarousel from '../components/carousel/AnnouncementCarousel';

@@ -1,5 +1,5 @@
-import prisma from "../libs/prismadb";
-import { IExhibition } from "../types";
+import prisma from "../../libs/prismadb";
+import { IExhibition } from "../../types";
 
 
 export default async function getAllExhibitions() {

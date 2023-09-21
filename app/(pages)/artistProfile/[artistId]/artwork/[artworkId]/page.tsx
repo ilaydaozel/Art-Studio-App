@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { IArtwork } from '@/app/types';
-import getArtworkById from '@/app/actions/getArtworkById';
+import getArtworkById from '@/app/actions/artwork/getArtworkById';
 import ClientOnly from '@/app/components/ClientOnly';
 import EmptyState from '@/app/components/EmptyState';
 

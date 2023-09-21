@@ -1,4 +1,4 @@
-import getCurrentUser from '@/app/actions/getCurrentUser';
+import getCurrentUser from '@/app/actions/user/getCurrentUser';
 import Unauthorized from '../Unauthorized';
 
 export default async function Layout({
