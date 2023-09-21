@@ -1,3 +1,5 @@
+'use client';
+
 import ComponentWithHeading from '@/app/components/layouts/ComponentWithHeading';
 import ListWithButton from '@/app/components/layouts/ListWithButton';
 import ExhibitionsList from '@/app/components/lists/ExhibitionsList';
@@ -12,7 +14,7 @@ interface EditExhibitionsClientProps {
 const EditExhibitionsClient = ({ exhibitions }: EditExhibitionsClientProps) => {
   const router = useRouter();
 
-  const location = { element: 'artist_accounts' };
+  const location = { element: 'exhibitions' };
   const t = useTranslate();
   return (
     <ListWithButton
@@ -21,7 +23,7 @@ const EditExhibitionsClient = ({ exhibitions }: EditExhibitionsClientProps) => {
         router.push(`${ROUTE_PATHS.ADD}${ROUTE_PATHS.ADD_NEW_ARTIST}`)
       }
     >
-      <ComponentWithHeading headingText='hello'>
+      <ComponentWithHeading headingText={t('list_heading', location)}>
         <ExhibitionsList exhibitions={exhibitions}></ExhibitionsList>
       </ComponentWithHeading>
     </ListWithButton>
