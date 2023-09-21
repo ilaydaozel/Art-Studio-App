@@ -23,6 +23,7 @@ const font = DM_Sans({
 
 export default async function RootLayout({
   children,
+  modal,
 }: {
   children: React.ReactNode;
   modal: React.ReactNode;
@@ -50,6 +51,7 @@ export default async function RootLayout({
                 </ClientOnly>
 
                 {children}
+                {modal}
 
                 <ClientOnly>
                   <Footer />
