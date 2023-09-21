@@ -14,6 +14,8 @@ const TurkishData: ILanguageData = {
         edit_artist_accounts: "Sanatçıları Düzenle",
         edit_artist_profile: "Profilimi Düzenle",
         edit_announcements: "Duyuruları Düzenle",
+        edit_exhibition: "Sergiyi Düzenle",
+        edit_exhibitions: "Sergileri Düzenle",
         artist_profile: "Sanatçı",
         about: "Hakkımızda",
         exhibitions: "Sergiler",
@@ -49,6 +51,10 @@ const TurkishData: ILanguageData = {
             select_cover_image: "Kapak Resmi Seç",
             select_button_text: "Seç"
         }
+    },
+    exhibitions: {
+        list_heading: "Sergileri Düzenle",
+        add_button_text: "Yeni Sergi Ekle +"
     },
     edit_announcements: {
         heading: "Duyuruları Düzenle",

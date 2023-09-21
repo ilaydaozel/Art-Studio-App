@@ -14,6 +14,8 @@ export type ILanguageData = {
         edit_artist_accounts: string;
         edit_artist_profile: string;
         edit_announcements: string;
+        edit_exhibition: string;
+        edit_exhibitions: string;
         artist_profile: string;
         about: string;
         exhibitions: string;
@@ -49,6 +51,10 @@ export type ILanguageData = {
             select_cover_image: string;
             select_button_text: string;
         };
+    };
+    exhibitions: {
+        list_heading: string;
+        add_button_text: string;
     };
     edit_announcements: {
         heading: string;

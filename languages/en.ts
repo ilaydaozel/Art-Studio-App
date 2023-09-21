@@ -13,6 +13,8 @@ const EnglishData: ILanguageData = {
         edit_artist_accounts: "Edit Artist Accounts",
         edit_artist_profile: "Edit Artist Profile",
         edit_announcements: "Edit Announcements",
+        edit_exhibition: "Edit Exhibition",
+        edit_exhibitions: "Edit Exhibitions",
         artist_profile: "Artist",
         about: "About",
         exhibitions: "Exhibitions",
@@ -48,6 +50,10 @@ const EnglishData: ILanguageData = {
             select_cover_image: "Select Cover Image",
             select_button_text: "Select"
         }
+    },
+    exhibitions: {
+        list_heading: "Edit Exhibitions",
+        add_button_text: "Add New Exhibition +"
     },
     edit_announcements: {
         heading: "Edit Announcements",
