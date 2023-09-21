@@ -2,7 +2,7 @@ import getArtworkById from '@/app/actions/artwork/getArtworkById';
 import ClientOnly from '@/app/components/ClientOnly';
 import EmptyState from '@/app/components/EmptyState';
 import { IArtwork } from '@/app/types';
-import Modal from '../../../../../../components/modal/InterceptionModal';
+import Modal from '@/app/components/modal/InterceptionModal';
 import Image from 'next/image';
 
 interface IParams {

@@ -64,9 +64,7 @@ const ArtworkList = ({
     <ListContainer width={width}>
       {artworks.map((currentArtwork: IArtwork) => (
         <div key={currentArtwork.id} className='flex flex-col items-end'>
-          <Link
-            href={`/artistProfile/${currentArtwork.artistId}/artwork/${currentArtwork.id}`}
-          >
+          <Link href={`/artwork/${currentArtwork.id}`}>
             <ArtworkContainer>
               <Artwork artwork={currentArtwork}></Artwork>
               {isEditable ? (
