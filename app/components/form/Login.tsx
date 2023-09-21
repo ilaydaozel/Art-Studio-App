@@ -39,6 +39,7 @@ const LoginForm = () => {
         router.back();
       }
       if (callback?.error) {
+        console.log(callback.error);
         toast.error(t('login_failed_message', location));
       }
     });
