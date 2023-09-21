@@ -10,7 +10,7 @@ export default async function getAllArtworksByArtistId(
 ) {
     try {
         const { artistId } = params;
-        const allArtworks = await prisma.Artwork.findMany({
+        const allArtworks = await prisma.artwork.findMany({
             where: {
                 artistId: artistId,
             },
