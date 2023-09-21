@@ -1,15 +1,18 @@
+import Link from 'next/link';
 import Image from 'next/image';
 import { IArtwork } from '@/app/types';
 import getArtworkById from '@/app/actions/getArtworkById';
 import ClientOnly from '@/app/components/ClientOnly';
 import EmptyState from '@/app/components/EmptyState';
-import NextModal from '@/app/components/modal/NextModal';
 
 interface IParams {
   artworkId?: string;
 }
 
-const ArtworkModal = async ({ params }: { params: IParams }) => {
+const Artwork = async ({ params }: { params: IParams }) => {
+  console.log('ARTWORK NORMAL');
+  console.log();
+  console.log('**************************************');
   let artwork: { artwork: IArtwork } | null = null;
   if (params != undefined && params != undefined) {
     artwork = await getArtworkById(params);
@@ -26,15 +29,13 @@ const ArtworkModal = async ({ params }: { params: IParams }) => {
   }
 
   return (
-    <NextModal>
-      <Image
-        alt=''
-        src={artwork.artwork.artworkMedias[0]}
-        height={500}
-        width={500}
-        className='w-full object-cover aspect-square'
-      />
-    </NextModal>
+    <Image
+      alt=''
+      src={artwork.artwork.artworkMedias[0]}
+      height={500}
+      width={500}
+      className='w-full object-cover aspect-square'
+    />
   );
 };
-export default ArtworkModal;
+export default Artwork;

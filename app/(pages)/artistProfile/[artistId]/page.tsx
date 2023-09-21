@@ -4,6 +4,8 @@ import getArtistProfileById from '@/app/actions/getArtistProfileById';
 import ArtistProfile from '@/app/components/artistProfile/ArtistProfile';
 import getAllArtworksByArtistId from '@/app/actions/getAllArtworksByArtistId';
 import { IArtistProfile, IArtwork } from '@/app/types';
+import Link from 'next/link';
+import Artwork from '@/app/components/artwork/Artwork';
 
 interface IParams {
   artistId?: string;
@@ -35,6 +37,15 @@ const ArtistProfilePage = async ({ params }: { params: IParams }) => {
         artistProfile={artistProfile.artistProfile}
         artworks={allArtworks?.allArtworks}
       />
+      {allArtworks?.allArtworks.map((currentArtwork: IArtwork) => (
+        <div key={currentArtwork.id} className='flex flex-col items-end'>
+          <Link
+            href={`/artistProfile/${params.artistId}/artwork2/${currentArtwork.id}`}
+          >
+            <Artwork artwork={currentArtwork}></Artwork>
+          </Link>
+        </div>
+      ))}
     </ClientOnly>
   );
 };
