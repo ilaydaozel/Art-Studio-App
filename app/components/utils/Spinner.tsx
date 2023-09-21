@@ -1,56 +1,99 @@
 'use client';
-import { COLORS } from '@/constants/colors';
+
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
 
-const spinAnimation = keyframes`
-  0% {
-    top: 8px;
-    height: 64px;
+const gridAnimation = keyframes`
+  0%, 100% {
+    opacity: 1;
   }
-  50%, 100% {
-    top: 24px;
-    height: 32px;
+  50% {
+    opacity: 0.5;
   }
 `;
 
-const SpinnerContainer = styled.div`
+const GridSpinner = styled.div`
   display: inline-block;
   position: relative;
-  width: 68px;
-  height: 68px;
+  width: 60px;
+  height: 60px;
 
   div {
-    display: inline-block;
     position: absolute;
-    left: 8px;
     width: 12px;
-    background: ${COLORS.lightGray};
-    animation: ${spinAnimation} 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+    height: 12px;
+    border-radius: 50%;
+    background: #fff;
+    animation: ${gridAnimation} 1.2s linear infinite;
   }
 
   div:nth-child(1) {
-    left: 4px;
-    animation-delay: -0.24s;
+    top: 6px;
+    left: 6px;
+    animation-delay: 0s;
   }
 
   div:nth-child(2) {
+    top: 6px;
     left: 24px;
-    animation-delay: -0.12s;
+    animation-delay: -0.4s;
   }
 
   div:nth-child(3) {
-    left: 48px;
-    animation-delay: 0;
+    top: 6px;
+    left: 42px;
+    animation-delay: -0.8s;
+  }
+
+  div:nth-child(4) {
+    top: 24px;
+    left: 6px;
+    animation-delay: -0.4s;
+  }
+
+  div:nth-child(5) {
+    top: 24px;
+    left: 24px;
+    animation-delay: -0.8s;
+  }
+
+  div:nth-child(6) {
+    top: 24px;
+    left: 42px;
+    animation-delay: -1.2s;
+  }
+
+  div:nth-child(7) {
+    top: 42px;
+    left: 6px;
+    animation-delay: -0.8s;
+  }
+
+  div:nth-child(8) {
+    top: 42px;
+    left: 24px;
+    animation-delay: -1.2s;
+  }
+
+  div:nth-child(9) {
+    top: 42px;
+    left: 42px;
+    animation-delay: -1.6s;
   }
 `;
 
 export default function Spinner() {
   return (
-    <SpinnerContainer>
+    <GridSpinner>
       <div></div>
       <div></div>
       <div></div>
-    </SpinnerContainer>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </GridSpinner>
   );
 }
