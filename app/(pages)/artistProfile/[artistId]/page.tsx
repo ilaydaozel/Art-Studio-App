@@ -37,15 +37,6 @@ const ArtistProfilePage = async ({ params }: { params: IParams }) => {
         artistProfile={artistProfile.artistProfile}
         artworks={allArtworks?.allArtworks}
       />
-      {allArtworks?.allArtworks.map((currentArtwork: IArtwork) => (
-        <div key={currentArtwork.id} className='flex flex-col items-end'>
-          <Link
-            href={`/artistProfile/${params.artistId}/artwork2/${currentArtwork.id}`}
-          >
-            <Artwork artwork={currentArtwork}></Artwork>
-          </Link>
-        </div>
-      ))}
     </ClientOnly>
   );
 };
