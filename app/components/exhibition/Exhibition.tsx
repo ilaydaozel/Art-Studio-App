@@ -85,7 +85,7 @@ const Exhibition = ({ exhibition }: ExhibitionProps) => {
           onClose={() => setShowExhibition(false)}
           width='100%'
           isFullScreen={true}
-          body={<StartMenu artworks={exhibition.Artworks}></StartMenu>}
+          body={<StartMenu artworks={exhibition.artworks}></StartMenu>}
         ></Popup>
       )}
     </>

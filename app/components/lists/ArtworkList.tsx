@@ -46,7 +46,7 @@ const ArtworkList = ({
   const handleDeleteArtwork = (artworkId: string) => {
     setIsLoading(true);
     axios
-      .delete(`/api/Artwork/deleteArtwork/${artworkId}`)
+      .delete(`/api/artwork/deleteArtwork/${artworkId}`)
       .then(() => {
         toast.success('Eser silindi!');
         refreshPage();
