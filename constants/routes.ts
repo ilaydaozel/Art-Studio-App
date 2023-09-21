@@ -1,5 +1,6 @@
 export enum ROUTE_PATHS {
     HOME = '/',
+    LOGIN = '/login',
     ARTISTS = '/artistAccounts',
     ADD = '/add/',
     ADD_NEW_ARTIST = 'addNewArtist',

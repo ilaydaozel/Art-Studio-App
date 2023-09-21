@@ -126,8 +126,7 @@ const Navbar = ({ currentUser }: NavbarProps) => {
         className='    
             max-w-[2520px]
             mx-auto 
-            xl:px-10
-            md:px-10
+            md:px-8
             sm:px-2'
       >
         <div
@@ -141,7 +140,7 @@ const Navbar = ({ currentUser }: NavbarProps) => {
           '
         >
           <div className='w-full relative flex items-center justify-end'>
-            <LogoTitle color={logoColor} href='/'>
+            <LogoTitle color={logoColor} href={ROUTE_PATHS.HOME}>
               {t('name', { element: 'academy' })}
             </LogoTitle>
             <SideIcons>
@@ -150,10 +149,8 @@ const Navbar = ({ currentUser }: NavbarProps) => {
               {currentUser ? (
                 <UserMenu currentUser={currentUser} />
               ) : (
-                <Link href='/login'>
-                  <MenuElement color={menuElementColor}>
-                    <PiUserCircleLight className='sm:h-[28px] sm:w-[28px] text-neutral-400 w-[20px] h-[20px]' />
-                  </MenuElement>
+                <Link href={ROUTE_PATHS.LOGIN}>
+                  <PiUserCircleLight className='sm:h-[28px] sm:w-[28px] text-neutral-400 w-[20px] h-[20px]' />
                 </Link>
               )}
             </SideIcons>
