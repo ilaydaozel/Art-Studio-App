@@ -12,6 +12,7 @@ import { IUser } from '@/app/types';
 import LoginModal from '../modal/LoginModal';
 import useTranslate from '../../hooks/useTranslate';
 import LanguageSwitcher from './LanguageSwitcher';
+import Link from 'next/link';
 
 interface NavbarProps {
   currentUser: IUser | null;
@@ -149,12 +150,11 @@ const Navbar = ({ currentUser }: NavbarProps) => {
               {currentUser ? (
                 <UserMenu currentUser={currentUser} />
               ) : (
-                <MenuElement
-                  color={menuElementColor}
-                  onClick={loginModal.onOpen}
-                >
-                  <PiUserCircleLight className='sm:h-[28px] sm:w-[28px] text-neutral-400 w-[20px] h-[20px]' />
-                </MenuElement>
+                <Link href='/login'>
+                  <MenuElement color={menuElementColor}>
+                    <PiUserCircleLight className='sm:h-[28px] sm:w-[28px] text-neutral-400 w-[20px] h-[20px]' />
+                  </MenuElement>
+                </Link>
               )}
             </SideIcons>
           </div>
