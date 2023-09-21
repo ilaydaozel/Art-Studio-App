@@ -1,12 +1,14 @@
 import React from 'react';
-import getAllAnnouncements from './actions/getAllAnnouncements';
-import { IAnnouncement } from './types';
-import AnnouncementCarousel from './components/carousel/AnnouncementCarousel';
-import ClientOnly from './components/ClientOnly';
-import EmptyState from './components/EmptyState';
+import getAllAnnouncements from '../actions/getAllAnnouncements';
+import ClientOnly from '../components/ClientOnly';
+import EmptyState from '../components/EmptyState';
+import AnnouncementCarousel from '../components/carousel/AnnouncementCarousel';
+import { IAnnouncement } from '../types';
+import Link from 'next/link';
 
 export default async function () {
   let announcements: IAnnouncement[] = [];
+
   try {
     const allAnnouncements = await getAllAnnouncements();
     if (allAnnouncements && allAnnouncements.announcements) {
@@ -17,6 +19,9 @@ export default async function () {
             <div className='max-w-[100vw] overflow-x-hidden'>
               <AnnouncementCarousel slides={announcements} />
             </div>
+            <Link href={`/artwork/650b5f38e7df8f9355ce5ae3`}>
+              <button> Click HERE</button>
+            </Link>
           </>
         );
       } else {

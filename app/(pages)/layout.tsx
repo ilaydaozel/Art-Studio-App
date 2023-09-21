@@ -1,13 +1,13 @@
 import React, { Suspense } from 'react';
-import './assets/globals.css';
+import '@/app/assets/globals.css';
 import { DM_Sans } from 'next/font/google';
-import getCurrentUser from './actions/getCurrentUser';
-import ClientOnly from './components/ClientOnly';
-import Footer from './components/footer/Footer';
-import Navbar from './components/navbar/Navbar';
-import StyledComponentsRegistry from './libs/registry';
-import ToasterProvider from './providers/ToasterProvider';
-import TranslationProvider from './providers/TranslationProvider';
+import getCurrentUser from '../actions/getCurrentUser';
+import ClientOnly from '../components/ClientOnly';
+import Footer from '../components/footer/Footer';
+import Navbar from '../components/navbar/Navbar';
+import StyledComponentsRegistry from '../libs/registry';
+import ToasterProvider from '../providers/ToasterProvider';
+import TranslationProvider from '../providers/TranslationProvider';
 import { fetchTranslations } from '@/app/libs/languageDictionary';
 import Loading from './loading';
 
@@ -25,6 +25,7 @@ export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
+  modal: React.ReactNode;
 }) {
   const currentUser = await getCurrentUser();
   return (
