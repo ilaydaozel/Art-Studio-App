@@ -8,6 +8,8 @@ export enum ROUTE_PATHS {
     EDIT_ARTIST_ACCOUNTS = 'artistAccounts',
     EDIT_ARTIST_PROFILE = 'artistProfile',
     EDIT_ANNOUNCEMENTS = 'announcements',
+    EDIT_EXHIBITIONS = 'exhibitions',
+    EDIT_EXHIBITION = 'exhibition',
     ARTIST_PROFILE = '/artistProfile',
     ABOUT = '/about',
     EXHIBITIONS = '/exhibitions',
