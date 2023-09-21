@@ -4,7 +4,7 @@ import { IArtwork } from "../types";
 
 export default async function getAllArtworks() {
     try {
-        const artworks = await prisma.Artwork.findMany({
+        const artworks = await prisma.artwork.findMany({
 
         });
 
