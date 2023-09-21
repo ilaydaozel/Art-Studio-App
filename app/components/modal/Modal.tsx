@@ -1,6 +1,12 @@
 'use client';
 
-import { useCallback, useEffect, useState } from 'react';
+import {
+  MouseEventHandler,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import { IoMdClose } from 'react-icons/io';
 import Button from '../buttons/Button';
 
@@ -30,10 +36,8 @@ const Modal = ({
   secondaryActionLabel,
 }: ModalProps) => {
   const [showModal, setShowModal] = useState(isOpen);
-
-  useEffect(() => {
-    setShowModal(isOpen);
-  }, [isOpen]);
+  const overlay = useRef(null);
+  const wrapper = useRef(null);
 
   const handleClose = useCallback(() => {
     if (disabled) {
@@ -45,6 +49,31 @@ const Modal = ({
       onClose();
     }, 300);
   }, [onClose, disabled]);
+
+  useEffect(() => {
+    setShowModal(isOpen);
+  }, [isOpen]);
+
+  const onClick: MouseEventHandler = useCallback(
+    (e) => {
+      if (e.target === overlay.current || e.target === wrapper.current) {
+        if (handleClose) handleClose();
+      }
+    },
+    [handleClose, overlay, wrapper]
+  );
+
+  const onKeyDown = useCallback(
+    (e: KeyboardEvent) => {
+      if (e.key === 'Escape') handleClose();
+    },
+    [handleClose]
+  );
+
+  useEffect(() => {
+    document.addEventListener('keydown', onKeyDown);
+    return () => document.removeEventListener('keydown', onKeyDown);
+  }, [onKeyDown]);
 
   const handleSubmit = useCallback(() => {
     if (disabled) {
@@ -69,6 +98,8 @@ const Modal = ({
   return (
     <>
       <div
+        ref={overlay}
+        onClick={onClick}
         className='
           justify-center 
           items-center 
@@ -80,7 +111,7 @@ const Modal = ({
           z-50
           outline-none 
           focus:outline-none
-          bg-neutral-800/70        
+          bg-black/60        
         '
       >
         <div
@@ -92,7 +123,6 @@ const Modal = ({
           h-auto
           '
         >
-          {/*content*/}
           <div
             className={`
             translate
@@ -103,15 +133,13 @@ const Modal = ({
           `}
           >
             <div
+              ref={wrapper}
               className='
               translate
               h-full
               w-full
               lg:h-full
               md:h-auto
-              border-0 
-              rounded-lg 
-              shadow-lg 
               relative 
               flex 
               flex-col 
@@ -122,7 +150,6 @@ const Modal = ({
               focus:outline-none
             '
             >
-              {/*header*/}
               <div
                 className='
                 flex 
@@ -160,9 +187,8 @@ const Modal = ({
                 </div>
               </div>
 
-              {/*body*/}
               <div className='relative flex-auto px-6'>{body}</div>
-              {/*footer*/}
+
               <div
                 className='
                     flex 
