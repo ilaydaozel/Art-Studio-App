@@ -19,9 +19,6 @@ export default async function () {
             <div className='max-w-[100vw] overflow-x-hidden'>
               <AnnouncementCarousel slides={announcements} />
             </div>
-            <Link href={`/artwork/650b5f38e7df8f9355ce5ae3`}>
-              <button> Click HERE</button>
-            </Link>
           </>
         );
       } else {
