@@ -55,8 +55,8 @@ model Exhibition{
   id String @id @default(auto()) @map("_id") @db.ObjectId
   title String
   description String?
-  startDate DateTime
-  endDate DateTime
+  startDate String
+  endDate String
   organizedBy String?
   coverImage String?
   artworkIds String[] @db.ObjectId
