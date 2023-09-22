@@ -10,7 +10,7 @@ import Input from '../inputs/Input';
 import useCreateAnnouncementModal from '@/app/hooks/useCreateAnnouncementModal';
 
 const CreateAnnouncementModal = () => {
-  const CreateAnnouncementModal = useCreateAnnouncementModal();
+  const createAnnouncementModal = useCreateAnnouncementModal();
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -115,11 +115,11 @@ const CreateAnnouncementModal = () => {
   return (
     <Modal
       disabled={isLoading}
-      isOpen={CreateAnnouncementModal.isOpen}
+      isOpen={createAnnouncementModal.isOpen}
       title='Duyuru Ekle'
       actionLabel={'Tamamla'}
       onSubmit={handleSubmit(onSubmit)}
-      onClose={CreateAnnouncementModal.onClose}
+      onClose={createAnnouncementModal.onClose}
       body={bodyContent}
     />
   );
