@@ -7,7 +7,6 @@ import Header from '@/app/components/artistProfile/Header';
 import About from '@/app/components/artistProfile/About';
 import SlidingButton from '../buttons/SlidingButton';
 import useCreateArtworkModal from '../../hooks/useCreateArtworkModal';
-import CreateArtworkModal from '../modal/CreateArtworkModal';
 import ComponentWithHeading from '../layouts/ComponentWithHeading';
 import useTranslate from '../../hooks/useTranslate';
 interface ArtistProfileProps {
@@ -43,7 +42,6 @@ const ArtistProfile = ({
       ></Header>
       <About artistProfile={artistProfile} isEditable={isEditable}></About>
       <ComponentWithHeading headingText={t('heading', location)}>
-        <CreateArtworkModal artistProfile={artistProfile} />
         {isEditable ? (
           <div className='w-[84%] flex justify-end mt-2'>
             {artworks ? (
