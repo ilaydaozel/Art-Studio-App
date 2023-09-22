@@ -15,13 +15,8 @@ enum STEPS {
   INFORMATION = 0,
   PHOTO = 1,
 }
-interface CreateExhibitionModalProps {
-  artistProfile: IArtistProfile;
-}
 
-const CreateExhibitionModal = ({
-  artistProfile,
-}: CreateExhibitionModalProps) => {
+const CreateExhibitionModal = () => {
   const createExhibitionModal = useCreateExhibitionModal();
   const [isLoading, setIsLoading] = useState(false);
   const [step, setStep] = useState(STEPS.INFORMATION);
@@ -88,7 +83,7 @@ const CreateExhibitionModal = ({
         toast.success('Sergi oluşturuldu!');
       })
       .catch((error) => {
-        toast.error('Error');
+        toast.error('Error!');
         console.log('error: ', error);
       })
       .finally(() => {
@@ -98,7 +93,7 @@ const CreateExhibitionModal = ({
 
   const actionLabel = useMemo(() => {
     if (step === STEPS.PHOTO) {
-      return 'Tamamla';
+      t('action_label', location);
     }
 
     return 'İleri';
@@ -169,7 +164,7 @@ const CreateExhibitionModal = ({
   return (
     <Modal
       title={t('form_title', location)}
-      actionLabel={t('action_label', location)}
+      actionLabel={actionLabel}
       onSubmit={handleSubmit(onSubmit)}
       disabled={isLoading}
       isOpen={createExhibitionModal.isOpen}
