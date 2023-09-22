@@ -1,7 +1,7 @@
 'use client';
 import { IAnnouncement } from '@/app/types';
 import CreateAnnouncementModal from '@/app/components/modal/CreateAnnouncementModal';
-import useCreateAnnouncementModal from '@/app/hooks/useCreateAnnAnnouncementModal';
+import useCreateAnnouncementModal from '@/app/hooks/useCreateAnnouncementModal';
 import AnnouncementsList from '@/app/components/lists/AnnouncementsList';
 import ComponentWithHeading from '@/app/components/layouts/ComponentWithHeading';
 import ListWithButton from '@/app/components/layouts/ListWithButton';
@@ -14,7 +14,7 @@ interface EditAnnouncementsClientProps {
 const EditAnnouncementsClient = ({
   announcements,
 }: EditAnnouncementsClientProps) => {
-  const CreateAnnouncementModal = useCreateAnnouncementModal();
+  const createAnnouncementModal = useCreateAnnouncementModal();
 
   const location = { element: 'edit_announcements' };
   const t = useTranslate();
@@ -24,7 +24,7 @@ const EditAnnouncementsClient = ({
       <CreateAnnouncementModal />
       <ListWithButton
         buttonText={t('add_button_text', location)}
-        onClick={() => CreateAnnouncementModal.onOpen()}
+        onClick={() => createAnnouncementModal.onOpen()}
       >
         <ComponentWithHeading headingText={t('heading', location)}>
           <AnnouncementsList
