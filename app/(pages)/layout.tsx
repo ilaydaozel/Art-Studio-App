@@ -5,10 +5,10 @@ import getCurrentUser from '../actions/user/getCurrentUser';
 import ClientOnly from '../components/ClientOnly';
 import Footer from '../components/footer/Footer';
 import Navbar from '../components/navbar/Navbar';
-import StyledComponentsRegistry from '../libs/registry';
+import StyledComponentsRegistry from '../lib/registry';
 import ToasterProvider from '../providers/ToasterProvider';
 import TranslationProvider from '../providers/TranslationProvider';
-import { fetchTranslations } from '@/app/libs/languageDictionary';
+import { fetchTranslations } from '@/app/lib/languageDictionary';
 import Loading from './loading';
 
 export const metadata = {
