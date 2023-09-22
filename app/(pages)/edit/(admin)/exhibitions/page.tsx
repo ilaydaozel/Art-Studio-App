@@ -10,46 +10,28 @@ const ExhibitionsPage = async () => {
     const result = await getAllExhibitions();
     if (result && result.exhibitons) {
       exhibitons = result.exhibitons;
-      if (exhibitons.length > 0) {
-        return (
-          <ClientOnly>
-            <div className='pt-28 w-full'>
-              <EditExhibitionsClient
-                exhibitions={exhibitons}
-              ></EditExhibitionsClient>
-            </div>
-          </ClientOnly>
-        );
-      } else {
-        return (
-          <ClientOnly>
-            <EmptyState
-              title='No exhibitons found'
-              subtitle='Looks like you have no exhibitons.'
-            />
-          </ClientOnly>
-        );
-      }
-    } else {
       return (
         <ClientOnly>
-          <EmptyState
-            title='An error occured.'
-            subtitle='Looks like you have no exhibitons.'
-          />
+          <div className='pt-28 w-full'>
+            <EditExhibitionsClient
+              exhibitions={exhibitons}
+            ></EditExhibitionsClient>
+          </div>
         </ClientOnly>
       );
     }
   } catch (error) {
     return (
       <ClientOnly>
-        <EmptyState
-          title='An error occured.'
-          subtitle='Looks like you have no exhibitons.'
-        />
+        <EmptyState title='An error occured.' />
       </ClientOnly>
     );
   }
+  return (
+    <ClientOnly>
+      <EmptyState title='An error occured.' />
+    </ClientOnly>
+  );
 };
 
 export default ExhibitionsPage;
