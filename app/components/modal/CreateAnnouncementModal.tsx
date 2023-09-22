@@ -57,7 +57,7 @@ const CreateAnnouncementModal = () => {
     };
 
     axios
-      .post(`/api/announcement/CreateAnnouncement/`, announcement)
+      .post(`/api/announcement/createAnnouncement/`, announcement)
       .then(() => {
         toast.success('Duyuru eklendi!');
         window.location.reload();
