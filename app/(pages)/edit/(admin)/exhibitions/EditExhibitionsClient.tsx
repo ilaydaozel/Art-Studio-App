@@ -3,9 +3,10 @@
 import ComponentWithHeading from '@/app/components/layouts/ComponentWithHeading';
 import ListWithButton from '@/app/components/layouts/ListWithButton';
 import ExhibitionsList from '@/app/components/lists/ExhibitionsList';
+import CreateExhibitionModal from '@/app/components/modal/CreateExhibitionModal';
+import useCreateExhibitionModal from '@/app/hooks/useCreateExhibitionModal';
 import useTranslate from '@/app/hooks/useTranslate';
 import { IExhibition } from '@/app/types';
-import { ROUTE_PATHS } from '@/constants/routes';
 import { useRouter } from 'next/navigation';
 
 interface EditExhibitionsClientProps {
@@ -13,20 +14,22 @@ interface EditExhibitionsClientProps {
 }
 const EditExhibitionsClient = ({ exhibitions }: EditExhibitionsClientProps) => {
   const router = useRouter();
+  const createExhibitionModal = useCreateExhibitionModal();
 
   const location = { element: 'exhibitions' };
   const t = useTranslate();
   return (
-    <ListWithButton
-      buttonText={t('add_button_text', location)}
-      onClick={() =>
-        router.push(`${ROUTE_PATHS.ADD}${ROUTE_PATHS.ADD_NEW_ARTIST}`)
-      }
-    >
-      <ComponentWithHeading headingText={t('list_heading', location)}>
-        <ExhibitionsList exhibitions={exhibitions}></ExhibitionsList>
-      </ComponentWithHeading>
-    </ListWithButton>
+    <>
+      <CreateExhibitionModal />
+      <ListWithButton
+        buttonText={t('add_button_text', location)}
+        onClick={() => createExhibitionModal.onOpen()}
+      >
+        <ComponentWithHeading headingText={t('list_heading', location)}>
+          <ExhibitionsList exhibitions={exhibitions}></ExhibitionsList>
+        </ComponentWithHeading>
+      </ListWithButton>
+    </>
   );
 };
 export default EditExhibitionsClient;
