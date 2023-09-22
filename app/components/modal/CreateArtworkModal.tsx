@@ -92,7 +92,7 @@ const CreateArtworkModal = ({ artistProfile }: CreateArtworkModalProps) => {
     };
 
     axios
-      .post(`/api/artwork/addArtwork/${artistId}`, artwork)
+      .post(`/api/artwork/createArtwork/${artistId}`, artwork)
       .then(() => {
         toast.success('Eser eklendi!');
         window.location.reload();
