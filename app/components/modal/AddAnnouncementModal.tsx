@@ -7,10 +7,10 @@ import { useState } from 'react';
 import Modal from './Modal';
 import ImageUpload from '../inputs/ImageUpload';
 import Input from '../inputs/Input';
-import useAddAnnouncementModal from '@/app/hooks/useAddAnnouncementModal';
+import useCreateAnnouncementModal from '@/app/hooks/useCreateAnnAnnouncementModal';
 
-const AddAnnouncementModal = () => {
-  const addAnnouncementModal = useAddAnnouncementModal();
+const CreateAnnouncementModal = () => {
+  const CreateAnnouncementModal = useCreateAnnouncementModal();
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -57,7 +57,7 @@ const AddAnnouncementModal = () => {
     };
 
     axios
-      .post(`/api/announcement/addAnnouncement/`, announcement)
+      .post(`/api/announcement/CreateAnnouncement/`, announcement)
       .then(() => {
         toast.success('Duyuru eklendi!');
         window.location.reload();
@@ -115,14 +115,14 @@ const AddAnnouncementModal = () => {
   return (
     <Modal
       disabled={isLoading}
-      isOpen={addAnnouncementModal.isOpen}
+      isOpen={CreateAnnouncementModal.isOpen}
       title='Duyuru Ekle'
       actionLabel={'Tamamla'}
       onSubmit={handleSubmit(onSubmit)}
-      onClose={addAnnouncementModal.onClose}
+      onClose={CreateAnnouncementModal.onClose}
       body={bodyContent}
     />
   );
 };
 
-export default AddAnnouncementModal;
+export default CreateAnnouncementModal;

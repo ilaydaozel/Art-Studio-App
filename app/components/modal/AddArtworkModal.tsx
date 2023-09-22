@@ -4,7 +4,7 @@ import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { useMemo, useState } from 'react';
-import useAddArtworkModal from '@/app/hooks/useAddArtworkModal';
+import useCreateArtworkModal from '@/app/hooks/useCreateArtworkModal';
 import Modal from './Modal';
 import ImageUpload from '../inputs/ImageUpload';
 import Input from '../inputs/Input';
@@ -15,12 +15,12 @@ enum STEPS {
   INFORMATION = 0,
   PHOTO = 1,
 }
-interface AddArtworkModalProps {
+interface CreateArtworkModalProps {
   artistProfile: IArtistProfile;
 }
 
-const AddArtworkModal = ({ artistProfile }: AddArtworkModalProps) => {
-  const addArtworkModal = useAddArtworkModal();
+const CreateArtworkModal = ({ artistProfile }: CreateArtworkModalProps) => {
+  const CreateArtworkModal = useCreateArtworkModal();
 
   const [isLoading, setIsLoading] = useState(false);
   const [step, setStep] = useState(STEPS.INFORMATION);
@@ -200,16 +200,16 @@ const AddArtworkModal = ({ artistProfile }: AddArtworkModalProps) => {
   return (
     <Modal
       disabled={isLoading}
-      isOpen={addArtworkModal.isOpen}
+      isOpen={CreateArtworkModal.isOpen}
       title='Eser Ekle'
       actionLabel={actionLabel}
       onSubmit={handleSubmit(onSubmit)}
       secondaryActionLabel={secondaryActionLabel}
       secondaryAction={step === STEPS.INFORMATION ? undefined : onBack}
-      onClose={addArtworkModal.onClose}
+      onClose={CreateArtworkModal.onClose}
       body={bodyContent}
     />
   );
 };
 
-export default AddArtworkModal;
+export default CreateArtworkModal;
