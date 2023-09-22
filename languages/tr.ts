@@ -30,6 +30,15 @@ const TurkishData: ILanguageData = {
         subtitle: "Lütfen Giriş Yapın",
         action_label: "Giriş Yap"
     },
+    add_exhibition_modal: {
+        form_title: "Yeni Sergi",
+        action_label: "Kaydet",
+        title: "Başlık",
+        description: "Açıklama",
+        startDate: "Başlangıç Tarihi",
+        endDate: "Bitiş Tarihi",
+        organizedBy: "Düzenleyen",
+    },
     artist_accounts: {
         list_heading: "Sanatçılar",
         add_button_text: "Yeni Sanatçı Ekle +"

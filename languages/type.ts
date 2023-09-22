@@ -30,6 +30,15 @@ export type ILanguageData = {
         subtitle: string;
         action_label: string;
     };
+    add_exhibition_modal: {
+        form_title: string;
+        action_label: string;
+        title: string;
+        description: string;
+        startDate: string;
+        endDate: string;
+        organizedBy: string;
+    };
     artist_accounts: {
         list_heading: string;
         add_button_text: string;

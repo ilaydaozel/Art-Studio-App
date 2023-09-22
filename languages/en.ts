@@ -29,6 +29,15 @@ const EnglishData: ILanguageData = {
         subtitle: "Please Log In",
         action_label: "Log In"
     },
+    add_exhibition_modal: {
+        form_title: "New Exhibition",
+        action_label: "Save",
+        title: "Title",
+        description: "Description",
+        startDate: "Start Date",
+        endDate: "End Date",
+        organizedBy: "Organized By",
+    },
     artist_accounts: {
         list_heading: "Artists",
         add_button_text: "Add New Artist +"
