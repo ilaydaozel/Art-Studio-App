@@ -10,6 +10,7 @@ export async function POST(request: Request) {
         startDate,
         endDate,
         organizedBy,
+        coverImage,
     } = body;
 
     const exhibition = await prisma.exhibition.create({
@@ -19,6 +20,7 @@ export async function POST(request: Request) {
             startDate,
             endDate,
             organizedBy,
+            coverImage,
         }
     });
 

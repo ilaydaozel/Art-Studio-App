@@ -38,6 +38,7 @@ const TurkishData: ILanguageData = {
         startDate: "Başlangıç Tarihi",
         endDate: "Bitiş Tarihi",
         organizedBy: "Düzenleyen",
+        coverImage: "Kapak Fotoğrafı",
     },
     artist_accounts: {
         list_heading: "Sanatçılar",

@@ -37,6 +37,7 @@ const EnglishData: ILanguageData = {
         startDate: "Start Date",
         endDate: "End Date",
         organizedBy: "Organized By",
+        coverImage: "Cover Image",
     },
     artist_accounts: {
         list_heading: "Artists",

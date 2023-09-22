@@ -58,6 +58,7 @@ model Exhibition{
   startDate DateTime
   endDate DateTime
   organizedBy String?
+  coverImage String?
   artworkIds String[] @db.ObjectId
   artworks Artwork[] @relation(fields: [artworkIds], references: [id])
 }

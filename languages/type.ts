@@ -38,6 +38,7 @@ export type ILanguageData = {
         startDate: string;
         endDate: string;
         organizedBy: string;
+        coverImage: string;
     };
     artist_accounts: {
         list_heading: string;

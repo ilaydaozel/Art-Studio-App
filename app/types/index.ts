@@ -42,6 +42,7 @@ export interface IExhibition {
     startDate: Date;
     endDate: Date;
     organizedBy?: string;
+    coverImage?: string;
     artworkIds: string[];
     artworks: IArtwork[];
 }

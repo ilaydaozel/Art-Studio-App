@@ -69,10 +69,10 @@ const CreateExhibitionModal = ({
   };
 
   const onSubmit: SubmitHandler<FieldValues> = (data: FieldValues) => {
-    const artistId = artistProfile?.artistId;
     if (step !== STEPS.PHOTO) {
       return onNext();
     }
+
     setIsLoading(true);
     const exhibitionData = {
       title: title,
@@ -80,6 +80,7 @@ const CreateExhibitionModal = ({
       startDate: startDate,
       endDate: endDate,
       organizedBy: organizedBy,
+      coverImage: coverImage,
     };
     axios
       .post('/api/exhibition/createExhibition', exhibitionData)
