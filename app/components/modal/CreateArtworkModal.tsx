@@ -20,7 +20,7 @@ interface CreateArtworkModalProps {
 }
 
 const CreateArtworkModal = ({ artistProfile }: CreateArtworkModalProps) => {
-  const CreateArtworkModal = useCreateArtworkModal();
+  const createArtworkModal = useCreateArtworkModal();
 
   const [isLoading, setIsLoading] = useState(false);
   const [step, setStep] = useState(STEPS.INFORMATION);
@@ -200,13 +200,13 @@ const CreateArtworkModal = ({ artistProfile }: CreateArtworkModalProps) => {
   return (
     <Modal
       disabled={isLoading}
-      isOpen={CreateArtworkModal.isOpen}
+      isOpen={createArtworkModal.isOpen}
       title='Eser Ekle'
       actionLabel={actionLabel}
       onSubmit={handleSubmit(onSubmit)}
       secondaryActionLabel={secondaryActionLabel}
       secondaryAction={step === STEPS.INFORMATION ? undefined : onBack}
-      onClose={CreateArtworkModal.onClose}
+      onClose={createArtworkModal.onClose}
       body={bodyContent}
     />
   );
