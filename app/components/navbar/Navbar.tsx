@@ -4,12 +4,10 @@ import React, { useEffect, useState } from 'react';
 import UserMenu from './UserMenu';
 import styled from 'styled-components';
 import { COLORS } from '@/constants/colors';
-import useLoginModal from '@/app/hooks/useLoginModal';
 import { ROUTE_PATHS } from '@/constants/routes';
 import { usePathname } from 'next/navigation';
 import { PiUserCircleLight } from 'react-icons/pi';
 import { IUser } from '@/app/types';
-import LoginModal from '../modal/LoginModal';
 import useTranslate from '../../hooks/useTranslate';
 import LanguageSwitcher from './LanguageSwitcher';
 import Link from 'next/link';
@@ -83,7 +81,6 @@ const MenuElement = styled.a<{ color: string; isActive?: boolean }>`
 `;
 
 const Navbar = ({ currentUser }: NavbarProps) => {
-  const loginModal = useLoginModal();
   const pathname = usePathname();
   const isHomePage = pathname === ROUTE_PATHS.HOME;
 
@@ -145,7 +142,6 @@ const Navbar = ({ currentUser }: NavbarProps) => {
             </LogoTitle>
             <SideIcons>
               <LanguageSwitcher></LanguageSwitcher>
-              <LoginModal />
               {currentUser ? (
                 <UserMenu currentUser={currentUser} />
               ) : (
