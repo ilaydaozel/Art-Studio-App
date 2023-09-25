@@ -1,8 +1,8 @@
 import ClientOnly from '@/app/components/ClientOnly';
 import EmptyState from '@/app/components/EmptyState';
 import { IExhibition } from '@/app/types';
-import Exhibition from '@/app/components/exhibition/Exhibition';
 import getExhibitionById from '@/app/actions/exhibition/getExhibitionById';
+import ExhibitionProfile from '@/app/components/exhibition/ExhibitionProfile';
 
 interface IParams {
   exhibitionId?: string;
@@ -28,7 +28,11 @@ const ExhibitionPage = async ({ params }: { params: IParams }) => {
 
   return (
     <ClientOnly>
-      <Exhibition exhibition={exhibition.exhibition}></Exhibition>
+      <div className='pt-28'>
+        <ExhibitionProfile
+          exhibition={exhibition.exhibition}
+        ></ExhibitionProfile>
+      </div>
     </ClientOnly>
   );
 };
