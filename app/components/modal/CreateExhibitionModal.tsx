@@ -81,6 +81,8 @@ const CreateExhibitionModal = () => {
       .post('/api/exhibition/createExhibition ', exhibitionData)
       .then(() => {
         toast.success('Sergi oluşturuldu!');
+        window.location.reload();
+        reset();
       })
       .catch((error) => {
         toast.error('Error!');
