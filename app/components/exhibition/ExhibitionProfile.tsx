@@ -4,8 +4,11 @@ import styled from 'styled-components';
 import useTranslate from '../../hooks/useTranslate';
 import { IExhibition } from '@/app/types';
 import { useState } from 'react';
-import Popup from '../popup/Popup';
-import StartMenu from '../virtualExhibition/StartMenu';
+import Link from 'next/link';
+import { ROUTE_PATHS } from '@/constants/routes';
+import Header from './Header';
+import About from './About';
+import VirtualExhibitionPreview from './VirtualExhibitionPreview';
 
 interface ExhibitionProfileProps {
   exhibition: IExhibition;
@@ -16,6 +19,8 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   gap: 4rem;
+  justify-content: center;
+  align-items: center;
 `;
 
 const ExhibitionProfile = ({
@@ -28,20 +33,19 @@ const ExhibitionProfile = ({
     element: 'list',
     superElement: 'artist_profile',
   };
+
   const t = useTranslate();
 
   return (
     <Container>
-      <button onClick={() => setShowExhibition(true)}>Virtual Reality</button>
+      <Header exhibition={exhibition}></Header>
+      <About exhibition={exhibition}></About>
 
-      {showExhibition && (
-        <Popup
-          onClose={() => setShowExhibition(false)}
-          width='100%'
-          isFullScreen={true}
-          body={<StartMenu artworks={exhibition.artworks}></StartMenu>}
-        ></Popup>
-      )}
+      <Link href={`${ROUTE_PATHS.VIRTUAL_EXHIBITION}/${exhibition.id}`}>
+        <VirtualExhibitionPreview
+          exhibition={exhibition}
+        ></VirtualExhibitionPreview>
+      </Link>
     </Container>
   );
 };
