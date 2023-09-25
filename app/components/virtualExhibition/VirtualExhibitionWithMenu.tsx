@@ -1,3 +1,4 @@
+'use client';
 import styled from 'styled-components';
 import ThreeDExhibition from './ThreeDExhibition';
 import { IArtwork } from '@/app/types';
@@ -6,7 +7,7 @@ import { COLORS } from '@/constants/colors';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { AiOutlineMenu } from 'react-icons/ai';
 interface GalleryProps {
-  artworks?: IArtwork[];
+  artworks: IArtwork[];
 }
 
 const MenuContainer = styled.div`
@@ -57,7 +58,7 @@ const InfoText = styled.text`
   color: ${COLORS.darkGray};
 `;
 
-const StartMenu = ({ artworks = [] }: GalleryProps) => {
+const VirtualExhibitionWithMenu = ({ artworks }: GalleryProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(true);
 
   const toggleOpen = useCallback(() => {
@@ -141,4 +142,4 @@ const StartMenu = ({ artworks = [] }: GalleryProps) => {
     </>
   );
 };
-export default StartMenu;
+export default VirtualExhibitionWithMenu;
