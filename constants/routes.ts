@@ -14,4 +14,5 @@ export enum ROUTE_PATHS {
     ABOUT = '/about',
     EXHIBITIONS = '/exhibitions',
     EXHIBITION = '/exhibition',
+    VIRTUAL_EXHIBITION = '/virtualExhibition',
 }
