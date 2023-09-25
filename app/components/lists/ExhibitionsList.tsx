@@ -7,7 +7,7 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 import { useState } from 'react';
 import { ROUTE_PATHS } from '@/constants/routes';
-import Exhibition from '../exhibition/Exhibition';
+import Exhibition from '../exhibition/ExhibitionPreview';
 
 interface ExhibitionsListProps {
   exhibitions: IExhibition[];
