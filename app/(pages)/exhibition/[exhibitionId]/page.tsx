@@ -28,11 +28,7 @@ const ExhibitionPage = async ({ params }: { params: IParams }) => {
 
   return (
     <ClientOnly>
-      <div className='pt-28'>
-        <ExhibitionProfile
-          exhibition={exhibition.exhibition}
-        ></ExhibitionProfile>
-      </div>
+      <ExhibitionProfile exhibition={exhibition.exhibition}></ExhibitionProfile>
     </ClientOnly>
   );
 };
