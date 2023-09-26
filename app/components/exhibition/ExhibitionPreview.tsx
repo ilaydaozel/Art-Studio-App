@@ -4,6 +4,7 @@ import { IExhibition } from '@/app/types';
 import Link from 'next/link';
 import { ROUTE_PATHS } from '@/constants/routes';
 import { getDateString } from '../utils/Helper';
+import { COLORS } from '@/constants/colors';
 
 interface ExhibitionProps {
   exhibition: IExhibition;
@@ -23,6 +24,7 @@ const Wrapper = styled.div`
 const TitleText = styled.div`
   font-size: 1rem;
   font-weight: bold;
+  color: ${COLORS.darkGray};
   @media (max-width: 768px) {
     font-size: 1 rem;
   }
@@ -33,6 +35,7 @@ const TitleText = styled.div`
 
 const DateText = styled.div`
   font-size: 0.8rem;
+  color: ${COLORS.gray};
   @media (max-width: 768px) {
     font-size: 0.6 rem;
   }
@@ -42,20 +45,15 @@ const DateText = styled.div`
 `;
 
 const ExhibitonImage = styled.div<{ backgroundImgUrl: string }>`
-  width: 20vw;
-  height: 20vw;
+  width: 35vw;
+  height: 21vw;
   background-image: url(${(props) => props.backgroundImgUrl});
   background-size: cover;
   overflow: hidden;
 
-  @media (max-width: 768px) {
-    width: 30vw;
-    height: 30vw;
-  }
-
   @media (max-width: 576px) {
-    width: 40vw;
-    height: 40vw;
+    width: 60vw;
+    height: 36vw;
   }
 `;
 
