@@ -9,6 +9,8 @@ import { ROUTE_PATHS } from '@/constants/routes';
 import Header from './Header';
 import About from './About';
 import VirtualExhibitionPreview from './VirtualExhibitionPreview';
+import ArtworkList from '../lists/ArtworkList';
+import ComponentWithHeading from '../layouts/ComponentWithHeading';
 
 interface ExhibitionProfileProps {
   exhibition: IExhibition;
@@ -40,12 +42,9 @@ const ExhibitionProfile = ({
     <Container>
       <Header exhibition={exhibition}></Header>
       <About exhibition={exhibition}></About>
-
-      <Link href={`${ROUTE_PATHS.VIRTUAL_EXHIBITION}/${exhibition.id}`}>
-        <VirtualExhibitionPreview
-          exhibition={exhibition}
-        ></VirtualExhibitionPreview>
-      </Link>
+      <ComponentWithHeading headingText='Katılan Eserler'>
+        <ArtworkList artworks={exhibition.artworks}></ArtworkList>
+      </ComponentWithHeading>
     </Container>
   );
 };
