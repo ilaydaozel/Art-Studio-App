@@ -16,6 +16,7 @@ export default async function getAllArtworksByArtistId(
             },
             include: {
                 artist: true,
+                exhibitions: true,
             }
         });
 

@@ -39,8 +39,8 @@ export interface IExhibition {
     id: string;
     title: string;
     description?: string;
-    startDate: Date;
-    endDate: Date;
+    startDate: string;
+    endDate: string;
     organizedBy?: string;
     coverImage?: string;
     artworkIds: string[];

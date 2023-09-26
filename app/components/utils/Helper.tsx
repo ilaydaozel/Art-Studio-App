@@ -1,6 +1,6 @@
 export const getDateString = (
-  startDateInput: Date,
-  endDateInput: Date
+  startDateInput: string,
+  endDateInput: string
 ): string => {
   let startDateString = '';
   let endDateString = '';
