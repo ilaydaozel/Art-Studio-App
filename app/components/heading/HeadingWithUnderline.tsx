@@ -22,6 +22,12 @@ const SectionTitle = styled.div<{ size: string }>`
   text-align: left;
   margin: 2rem 0 0.25rem 0;
   border-bottom: 1px solid #e5e7eb;
+  @media (max-width: 768px) {
+    font-size: 0.8rem;
+  }
+  @media (max-width: 480px) {
+    font-size: 0.7rem;
+  }
 `;
 
 const HeadingWithUnderline = ({

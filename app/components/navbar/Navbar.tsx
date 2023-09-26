@@ -22,10 +22,16 @@ const NavbarContainer = styled.div<{ bgColor: string }>`
   width: 100%;
   background-color: ${(props) => props.bgColor};
   z-index: 10;
-  padding: 2% 0 2% 0;
+  padding: 2% 0;
   box-shadow: ${(props) =>
     props.bgColor != '#FFFFFF' ? 'none' : '0 2px 4px rgba(0, 0, 0, 0.1)'};
   transition: background-color 0.6s ease;
+  @media (max-width: 992px) {
+    padding: 3% 0;
+  }
+  @media (max-width: 768px) {
+    padding: 4% 0;
+  }
 `;
 
 const LogoTitle = styled.a<{ color: string }>`
@@ -44,20 +50,22 @@ const LogoTitle = styled.a<{ color: string }>`
   overflow: hidden;
   text-overflow: ellipsis;
   @media (max-width: 992px) {
-    font-size: 1rem;
+    font-size: 1.2rem;
   }
   @media (max-width: 768px) {
-    font-size: 0.8rem;
+    font-size: 1rem;
   }
   @media (max-width: 576px) {
-    font-size: 0.6rem;
+    font-size: 0.9rem;
   }
 `;
+
 const SideIcons = styled.div`
   display: flex;
   gap: 0.5rem;
   align-items: center;
 `;
+
 const MenuElement = styled.a<{ color: string; isActive?: boolean }>`
   text-align: center;
   padding: 2px 4px;
@@ -73,10 +81,10 @@ const MenuElement = styled.a<{ color: string; isActive?: boolean }>`
     font-size: 0.8rem;
   }
   @media (max-width: 768px) {
-    font-size: 0.6rem;
+    font-size: 0.7rem;
   }
   @media (max-width: 576px) {
-    font-size: 0.4rem;
+    font-size: 0.6rem;
   }
 `;
 

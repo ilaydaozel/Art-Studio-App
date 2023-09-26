@@ -28,7 +28,8 @@ const EditAnnouncementsClient = ({
       >
         <ComponentWithHeading headingText={t('heading', location)}>
           <AnnouncementsList
-            isEditable
+            width='90%'
+            isEditable={true}
             announcements={announcements}
           ></AnnouncementsList>
         </ComponentWithHeading>

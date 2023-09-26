@@ -17,17 +17,27 @@ const ButtonStyle = styled.button<{ width: string }>`
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  padding: 0.5rem 1rem;
-  font-size: 14px;
+
   width: ${(props) => props.width};
   border-radius: 0.5rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   cursor: pointer;
-  transition: transform 0.5s;
   background-color: ${COLORS.darkGray};
   color: white;
+  transition: transform 0.3s;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.9rem;
+
   &:hover {
-    transform: translateY(0.5rem);
+    transform: translateY(-0.5rem);
+  }
+  @media (max-width: 768px) {
+    font-size: 0.7rem;
+    padding: 0.3rem 0.6rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.5rem;
+    padding: 0.2rem 0.4rem;
   }
 `;
 
