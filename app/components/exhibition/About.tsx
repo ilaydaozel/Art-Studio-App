@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import useTranslate from '../../hooks/useTranslate';
 import { IExhibition } from '@/app/types';
 import { COLORS } from '@/constants/colors';
+import { getDateString } from '../utils/Helper';
 
 interface AboutProps {
   exhibition: IExhibition;
@@ -40,35 +41,15 @@ const About = ({ exhibition, isEditable = false }: AboutProps) => {
     superElement: 'artist_profile',
   };
   const t = useTranslate();
-  const getDateString = (): string => {
-    let startDateString = '';
-    let endDateString = '';
-
-    if (exhibition.startDate) {
-      const startDate = new Date(exhibition.startDate);
-      const startDay = startDate.getDate();
-      const startMonth = startDate.toLocaleString('default', {
-        month: 'short',
-      });
-      startDateString = `${startDay} ${startMonth}`;
-    }
-
-    if (exhibition.endDate) {
-      const endDate = new Date(exhibition.endDate);
-      const endDay = endDate.getDate();
-      const endMonth = endDate.toLocaleString('default', { month: 'short' });
-      endDateString = `${endDay} ${endMonth}`;
-    }
-
-    return startDateString + ' - ' + endDateString;
-  };
 
   return (
     <>
       <Container>
         <LeftWrapper>
           <TitleText>{exhibition.title}</TitleText>
-          <DateText>{getDateString()}</DateText>
+          <DateText>
+            {getDateString(exhibition.startDate, exhibition.endDate)}
+          </DateText>
         </LeftWrapper>
         <DescriptionText>{exhibition.description}</DescriptionText>
       </Container>
