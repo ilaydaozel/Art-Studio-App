@@ -29,6 +29,9 @@ const Container = styled.div`
 const HeaderImage = styled.div<{ backgroundImgUrl: string }>`
   width: 100%;
   height: 60vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   background-image: url(${(props) => props.backgroundImgUrl});
   margin-bottom: 2rem;
 `;

@@ -20,14 +20,14 @@ interface HeaderProps {
 const HeadingContainer = styled.div`
   display: flex;
   align-items: center;
-  min-height: 100vh;
+  justify-content: right;
+  height: 100vh;
   width: 100%;
+  padding: 1rem;
 `;
 const HeaderImage = styled.div<{ imageUrl: string }>`
-  width: 50%;
-  height: 100%;
-  position: absolute;
-  transform: translateX(100%);
+  width: 55%;
+  height: 65%;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -35,7 +35,7 @@ const HeaderImage = styled.div<{ imageUrl: string }>`
 `;
 const NameHeading = styled.text`
   font-size: 2.5rem;
-  font-weight: 500;
+  font-weight: bold;
   text-align: center;
   margin: 10px;
   color: ${COLORS.darkGray};
@@ -97,7 +97,8 @@ const Header = ({
   return (
     <>
       <HeadingContainer>
-        <div className='flex flex-col justify-center items-center w-[50%] h-full'>
+        <HeaderImage imageUrl={coverImage}></HeaderImage>
+        <div className='flex flex-col justify-center items-center w-[40%] h-full'>
           <NameHeading>
             {artistProfile.user?.name} {artistProfile.user?.surname}
           </NameHeading>
@@ -111,7 +112,6 @@ const Header = ({
             <></>
           )}
         </div>
-        <HeaderImage imageUrl={coverImage}></HeaderImage>
       </HeadingContainer>
 
       {showArtworkSelection && (
