@@ -46,11 +46,12 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
         {({ open }) => {
           return (
             <div
-              onClick={() => open?.()}
+              onClick={() => open && open()}
               className='
               relative
               w-[80%]
-              min-h-[30vh]
+              h-[40vh]
+              md:h-[60vh]
               m-4
               p-4
               flex
