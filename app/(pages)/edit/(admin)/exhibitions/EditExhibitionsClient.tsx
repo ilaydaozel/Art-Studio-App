@@ -26,7 +26,10 @@ const EditExhibitionsClient = ({ exhibitions }: EditExhibitionsClientProps) => {
         onClick={() => createExhibitionModal.onOpen()}
       >
         <ComponentWithHeading headingText={t('list_heading', location)}>
-          <ExhibitionsList exhibitions={exhibitions}></ExhibitionsList>
+          <ExhibitionsList
+            width='90%'
+            exhibitions={exhibitions}
+          ></ExhibitionsList>
         </ComponentWithHeading>
       </ListWithButton>
     </>
