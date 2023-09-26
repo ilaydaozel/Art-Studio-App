@@ -31,12 +31,8 @@ const ListContainer = styled.div<{ width: string }>`
   margin: 2rem 1rem;
   grid-template-columns: 1fr;
 
-  @media (min-width: 640px) {
+  @media (min-width: 576px) {
     grid-template-columns: repeat(2, 1fr);
-  }
-
-  @media (min-width: 768px) {
-    grid-template-columns: repeat(3, 1fr);
   }
 `;
 
