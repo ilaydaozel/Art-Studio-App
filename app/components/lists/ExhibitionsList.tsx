@@ -69,12 +69,10 @@ const ExhibitionsList = ({
         <div key={exhibition.id} className='flex flex-col items-end'>
           <ExhibitionContainer>
             <Exhibition exhibition={exhibition}></Exhibition>
-            {isEditable ? (
+            {isEditable && (
               <EditMenu
                 onDeleteClick={() => handleDeleteExhibition(exhibition.id)}
               ></EditMenu>
-            ) : (
-              <></>
             )}
           </ExhibitionContainer>
         </div>
