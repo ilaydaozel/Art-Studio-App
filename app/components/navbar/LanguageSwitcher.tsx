@@ -13,7 +13,7 @@ const Select = styled.select`
     font-size: 0.8rem;
   }
   @media (max-width: 576px) {
-    font-size: 0.6rem; /* Use your sm:text-xs font size value here */
+    font-size: 0.6rem;
   }
 `;
 const LanguageSwitcher = () => {
@@ -25,7 +25,7 @@ const LanguageSwitcher = () => {
   return (
     <Select value={language} onChange={handleSwitchLanguage}>
       <option value='en'>English</option>
-      <option value='tr'>Turkish</option>
+      <option value='tr'>Türkçe</option>
     </Select>
   );
 };
