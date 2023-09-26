@@ -13,18 +13,18 @@ export async function DELETE(request: Request, { params }: { params: IParams }) 
             id: artworkId,
         },
     });
-    console.log("ARTWORK DELETED:", existingArtwork);
     if (!existingArtwork) {
         console.log("Artwork not found!")
+        console.log(NextResponse.error());
         return NextResponse.error();
     }
 
     // Delete the Artwork record
-    const deleteArtwork = await prisma.artwork.delete({
+    const deletedArtwork = await prisma.artwork.delete({
         where: {
             id: artworkId,
         },
     });
 
-    return NextResponse.json(deleteArtwork);
+    return NextResponse.json(deletedArtwork);
 }
