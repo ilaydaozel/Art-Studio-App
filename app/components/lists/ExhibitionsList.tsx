@@ -43,14 +43,14 @@ const ExhibitionsList = ({
 }: ExhibitionsListProps) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
-
+  console.log('isEditable: ', isEditable);
   const refreshPage = () => {
     router.refresh();
   };
   const handleDeleteExhibition = (exhibitionId: string) => {
     setIsLoading(true);
     axios
-      .delete(`/api/user/${exhibitionId}`)
+      .delete(`/api/exhibition/deleteExhibition/${exhibitionId}`)
       .then(() => {
         toast.success('Sergi sistemden silindi!');
         refreshPage();
@@ -71,11 +71,6 @@ const ExhibitionsList = ({
             <Exhibition exhibition={exhibition}></Exhibition>
             {isEditable ? (
               <EditMenu
-                onEditClick={() => {
-                  router.push(
-                    `${ROUTE_PATHS.EDIT}${ROUTE_PATHS.EDIT_ARTIST_PROFILE}/${exhibition.id}`
-                  );
-                }}
                 onDeleteClick={() => handleDeleteExhibition(exhibition.id)}
               ></EditMenu>
             ) : (

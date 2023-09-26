@@ -29,6 +29,7 @@ const EditExhibitionsClient = ({ exhibitions }: EditExhibitionsClientProps) => {
           <ExhibitionsList
             width='90%'
             exhibitions={exhibitions}
+            isEditable={true}
           ></ExhibitionsList>
         </ComponentWithHeading>
       </ListWithButton>
