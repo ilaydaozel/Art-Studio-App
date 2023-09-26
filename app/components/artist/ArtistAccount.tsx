@@ -2,6 +2,7 @@
 import styled from 'styled-components';
 import { ROUTE_PATHS } from '@/constants/routes';
 import { IUser } from '@/app/types';
+import { COLORS } from '@/constants/colors';
 
 interface ArtistAccountProps {
   artist: IUser;
@@ -20,6 +21,7 @@ const Wrapper = styled.div`
 
 const NameText = styled.div`
   font-size: 1rem;
+  font-color: ${COLORS.gray};
   @media (max-width: 768px) {
     font-size: 1 rem;
   }
