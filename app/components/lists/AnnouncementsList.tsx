@@ -24,16 +24,23 @@ const AnnouncementBox = styled.div`
   height: 25vh;
   min-width: 250px;
 `;
-
 const ListContainer = styled.div<{ width: string }>`
-  display: flex;
-  justify-content: space-around;
-  align-items: flex-start;
-  flex-wrap: wrap;
-  margin: 5rem 0;
+  display: grid;
+  grid-auto-rows: max-content;
+  align-items: start;
+  justify-items: center;
   width: ${(props) => props.width};
-`;
+  margin: 2rem 1rem;
+  grid-template-columns: 1fr;
 
+  @media (min-width: 640px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+`;
 const AnnouncementsList = ({
   announcements,
   width = '100%',
