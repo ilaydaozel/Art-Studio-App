@@ -39,7 +39,7 @@ const LogoTitle = styled.a<{ color: string }>`
   left: 50%;
   transform: translateX(-50%);
   color: ${(props) => props.color};
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   font-weight: bold;
   letter-spacing: 3px;
   cursor: pointer;
@@ -72,11 +72,27 @@ const MenuElement = styled.a<{ color: string; isActive?: boolean }>`
   color: ${(props) => props.color};
   cursor: pointer;
   transition: text-decoration 0.3s;
-  font-weight: ${(props) => (props.isActive ? 800 : 500)};
-  font-size: 0.8rem;
-  &:hover {
-    text-decoration: underline;
+  font-weight: ${(props) => props.isActive && 'bold'};
+  font-size: 0.85rem;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0.8px;
+    background-color: ${(props) => props.color + '50'};
+    transform: translateX(-100%);
+    transition: transform 0.5s ease;
   }
+
+  &:hover::before {
+    transform: translateX(0);
+  }
+
   @media (max-width: 992px) {
     font-size: 0.8rem;
   }
@@ -141,7 +157,7 @@ const Navbar = ({ currentUser }: NavbarProps) => {
           flex-grow
           items-center
           justify-between
-          gap-1
+          gap-2
           '
         >
           <div className='w-full relative flex items-center justify-end'>
