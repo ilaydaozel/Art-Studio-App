@@ -2,10 +2,9 @@
 
 type ErrorProps = {
   error: Error;
-  reset: () => void;
 };
 
-export default function Error({ error, reset }: ErrorProps) {
+export default function Error({ error }: ErrorProps) {
   return (
     <div className='grid h-screen px-4 bg-white place-content-center'>
       <div className='text-center'>
@@ -19,7 +18,7 @@ export default function Error({ error, reset }: ErrorProps) {
 
         <button
           type='button'
-          onClick={() => reset()}
+          onClick={() => window.location.reload()}
           className='inline-block px-5 py-3 mt-6 text-sm font-medium text-white bg-black rounded hover:bg-gray-800 focus:outline-none focus:ring cursor-pointer'
         >
           Try Again
