@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import Image from 'next/image';
 import { MdOutlinePhotoSizeSelectActual } from 'react-icons/md';
 import { COLORS } from '@/constants/colors';
-import ArtworkModal from '../modal/ArtworkModal';
 import { IArtwork } from '@/app/types';
 
 interface ArtworkProps {
