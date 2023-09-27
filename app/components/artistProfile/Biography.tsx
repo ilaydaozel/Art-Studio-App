@@ -23,6 +23,9 @@ const BiographyContent = styled.div`
   color: ${COLORS.darkGray};
   word-break: break-all;
   padding: 10px 0;
+  @media (max-width: 992px) {
+    font-size: 0.8rem;
+  }
 `;
 
 const Biography = ({ artistProfile, isEditable = false }: BiographyProps) => {

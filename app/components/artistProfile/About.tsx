@@ -5,11 +5,24 @@ import ProfilePicture from './ProfilePicture';
 import Biography from './Biography';
 import ComponentWithHeading from '../layouts/ComponentWithHeading';
 import useTranslate from '../../hooks/useTranslate';
+import styled from 'styled-components';
 interface AboutProps {
   artistProfile: IArtistProfile;
   isEditable?: boolean;
 }
-
+const Container = styled.div`
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  flex-direction: row;
+  width: 80%;
+  gap: 2rem;
+  margin: 2rem 0;
+  @media (max-width: 576px) {
+    flex-direction: column;
+    gap: 1rem;
+  }
+`;
 const About = ({ artistProfile, isEditable = false }: AboutProps) => {
   const t = useTranslate();
   const location = {
@@ -19,7 +32,7 @@ const About = ({ artistProfile, isEditable = false }: AboutProps) => {
 
   return (
     <ComponentWithHeading headingText={t('heading', location)}>
-      <div className='flex items-center justify-center w-[80%] my-10 gap-10'>
+      <Container>
         <ProfilePicture
           artistProfile={artistProfile}
           isEditable={isEditable}
@@ -28,7 +41,7 @@ const About = ({ artistProfile, isEditable = false }: AboutProps) => {
           artistProfile={artistProfile}
           isEditable={isEditable}
         ></Biography>
-      </div>
+      </Container>
     </ComponentWithHeading>
   );
 };

@@ -16,6 +16,10 @@ const ProfileImage = styled.img<{ imageUrl: string }>`
 const ProfileImageContainer = styled.div`
   display: flex;
   flex-direction: column;
+  width: 35%;
+  @media (max-width: 992px) {
+    width: 40%;
+  }
 `;
 
 interface ProfilePictureProps {
@@ -40,7 +44,7 @@ const ProfilePicture = ({
         onClose={profilePictureModal.onClose}
         onUpdate={refreshPage}
       />
-      <ProfileImageContainer className='xl:w-[35%] md:w-[40%] sm:w-[50%]'>
+      <ProfileImageContainer>
         <ProfileImage imageUrl={artistProfile?.profilePic || ''}></ProfileImage>
         {isEditable ? (
           <TextButton
