@@ -85,7 +85,6 @@ const Form = ({
                 disabled={disabled}
                 label={secondaryActionLabel}
                 onClick={handleSecondaryAction}
-                outline
               />
             )}
             <Button

@@ -68,11 +68,7 @@ const FormLayout = ({
 
       <ButtonsContainer>
         {secondaryAction && secondaryActionLabel && (
-          <Button
-            label={secondaryActionLabel}
-            onClick={secondaryAction}
-            outline
-          />
+          <Button label={secondaryActionLabel} onClick={secondaryAction} />
         )}
         <Button label={actionLabel} onClick={onSubmit} />
       </ButtonsContainer>
