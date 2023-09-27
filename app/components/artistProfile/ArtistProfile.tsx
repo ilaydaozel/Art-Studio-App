@@ -9,6 +9,7 @@ import SlidingButton from '../buttons/SlidingButton';
 import useCreateArtworkModal from '../../hooks/useCreateArtworkModal';
 import ComponentWithHeading from '../layouts/ComponentWithHeading';
 import useTranslate from '../../hooks/useTranslate';
+import CreateArtworkModal from '../modal/CreateArtworkModal';
 interface ArtistProfileProps {
   artistProfile: IArtistProfile;
   artworks?: IArtwork[];
@@ -26,7 +27,7 @@ const ArtistProfile = ({
   artworks,
   isEditable = false,
 }: ArtistProfileProps) => {
-  const CreateArtworkModal = useCreateArtworkModal();
+  const createArtworkModal = useCreateArtworkModal();
   const location = {
     element: 'list',
     superElement: 'artist_profile',
@@ -42,6 +43,7 @@ const ArtistProfile = ({
       ></Header>
       <About artistProfile={artistProfile} isEditable={isEditable}></About>
       <ComponentWithHeading headingText={t('heading', location)}>
+        <CreateArtworkModal artistProfile={artistProfile}></CreateArtworkModal>
         {isEditable ? (
           <div className='w-[84%] flex justify-end mt-2'>
             {artworks ? (
@@ -49,7 +51,7 @@ const ArtistProfile = ({
                 <SlidingButton
                   label={t('add_button_text', location)}
                   onClick={() => {
-                    CreateArtworkModal.onOpen();
+                    createArtworkModal.onOpen();
                   }}
                 />
               ) : (
