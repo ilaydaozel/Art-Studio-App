@@ -75,7 +75,7 @@ const Header = ({
     setHeaderArtwork(artwork.artworkMedias[0] || '');
   };
 
-  const location = { element: 'artist_profile', superElement: 'header' };
+  const location = { element: 'header', superElement: 'artist_profile' };
   const t = useTranslate();
 
   const handleCoverImageChange = async (coverImage: String) => {
