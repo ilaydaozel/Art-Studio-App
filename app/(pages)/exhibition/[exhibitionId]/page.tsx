@@ -1,8 +1,10 @@
 import ClientOnly from '@/app/components/ClientOnly';
 import EmptyState from '@/app/components/EmptyState';
-import { IExhibition } from '@/app/types';
+import { IArtwork, IExhibition } from '@/app/types';
 import getExhibitionById from '@/app/actions/exhibition/getExhibitionById';
 import ExhibitionProfile from '@/app/components/exhibition/ExhibitionProfile';
+import { PiArrowSquareInThin } from 'react-icons/pi';
+import getAllArtworks from '@/app/actions/artwork/getAllArtworks';
 
 interface IParams {
   exhibitionId?: string;
@@ -10,9 +12,11 @@ interface IParams {
 
 const ExhibitionPage = async ({ params }: { params: IParams }) => {
   let exhibition: { exhibition: IExhibition } | null = null;
+  let artworks: { artworks: IArtwork[] } | null = null;
 
   if (params != undefined && params != undefined) {
     exhibition = await getExhibitionById(params);
+    artworks = await getAllArtworks();
   }
 
   if (!exhibition) {
@@ -28,7 +32,10 @@ const ExhibitionPage = async ({ params }: { params: IParams }) => {
 
   return (
     <ClientOnly>
-      <ExhibitionProfile exhibition={exhibition.exhibition}></ExhibitionProfile>
+      <ExhibitionProfile
+        artworks={artworks?.artworks}
+        exhibition={exhibition.exhibition}
+      ></ExhibitionProfile>
     </ClientOnly>
   );
 };
