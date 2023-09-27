@@ -175,6 +175,7 @@ const CreateArtworkModal = ({ artistProfile }: CreateArtworkModalProps) => {
         register={register}
         errors={errors}
         type='number'
+        required
       />
       <Input
         id='height'
@@ -184,6 +185,7 @@ const CreateArtworkModal = ({ artistProfile }: CreateArtworkModalProps) => {
         register={register}
         errors={errors}
         type='number'
+        required
       />
     </div>
   );

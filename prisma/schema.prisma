@@ -42,8 +42,8 @@ model Artwork{
   creationYear String?
   medium String?
   type String?
-  width Int?
-  height Int?
+  width Int
+  height Int
   artworkMedias String[]
   exhibitionIds String[] @db.ObjectId
   exhibitions Exhibition[] @relation(fields: [exhibitionIds], references: [id])

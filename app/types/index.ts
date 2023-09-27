@@ -27,8 +27,8 @@ export interface IArtwork {
     creationYear?: string;
     medium?: string;
     type?: string;
-    width?: number;
-    height?: number;
+    width: number;
+    height: number;
     artworkMedias: string[];
     exhibitionIds: string[];
     exhibitions: IExhibition[];
