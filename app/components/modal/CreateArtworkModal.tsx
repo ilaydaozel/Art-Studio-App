@@ -87,7 +87,7 @@ const CreateArtworkModal = ({ artistProfile }: CreateArtworkModalProps) => {
       type: type,
       width: typeof width === 'string' ? Number(width) : width,
       height: typeof height === 'string' ? Number(height) : height,
-      mediaLink: [media],
+      artworkMedias: [media],
       exhibitionIds: [],
     };
 

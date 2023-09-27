@@ -36,7 +36,7 @@ export async function POST(request: Request, { params }: { params: IParams }) {
         type,
         width,
         height,
-        mediaLink,
+        artworkMedias,
     } = body;
 
     Object.keys(body).forEach((value: any) => {
@@ -56,7 +56,7 @@ export async function POST(request: Request, { params }: { params: IParams }) {
             type,
             width,
             height,
-            artworkMedias: mediaLink[0],
+            artworkMedias: artworkMedias,
             artistId: user.id,
         }
     });

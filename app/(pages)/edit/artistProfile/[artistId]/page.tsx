@@ -32,7 +32,7 @@ const ArtistProfilePage = async ({ params }: { params: IParams }) => {
       <ArtistProfile
         artistProfile={artistProfile.artistProfile}
         artworks={allArtworks?.allArtworks}
-        isEditable
+        isEditable={true}
       />
     </ClientOnly>
   );
