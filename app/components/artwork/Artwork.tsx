@@ -1,12 +1,13 @@
 'use client';
 import styled from 'styled-components';
 import Image from 'next/image';
-import { MdOutlinePhotoSizeSelectActual } from 'react-icons/md';
 import { COLORS } from '@/constants/colors';
 import { IArtwork } from '@/app/types';
+import { ROUTE_PATHS } from '@/constants/routes';
+import Link from 'next/link';
 
 interface ArtworkProps {
-  artwork: IArtwork | null;
+  artwork: IArtwork;
 }
 const Container = styled.div`
   display: flex;
@@ -27,43 +28,78 @@ const InfoContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  font-size: 14px;
-`;
-const InfoContent = styled.p`
-  font-size: 12px;
+  font-size: 0.9rem;
   color: ${COLORS.darkGray};
+  @media (max-width: 768px) {
+    font-size: 0.7rem;
+  }
+`;
+
+const ArtistName = styled.p<{ isLink: boolean }>`
+  font-weight: bold;
+  ${(props) =>
+    props.isLink &&
+    `
+    position: relative;
+    overflow: hidden;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 0.8px;
+      background-color: ${COLORS.darkGray};
+      transform: translateX(-100%);
+      transition: transform 0.5s ease;
+    }
+    &:hover::before {
+      transform: translateX(0);
+    }
+  `}
+`;
+const Title = styled.p`
+  font-style: italic;
+`;
+const Info = styled.p`
+  font-style: normal;
 `;
 
 const Artwork = ({ artwork }: ArtworkProps) => {
   return (
     <div>
       <Container>
-        {artwork?.artworkMedias[0] !== undefined ? (
-          <ArtworkContainer>
-            <Image
-              src={artwork?.artworkMedias[0] || ''}
-              placeholder='empty'
-              alt='artwork'
-              fill
-              className='object-cover'
-            />
-          </ArtworkContainer>
-        ) : (
-          <div>
-            <MdOutlinePhotoSizeSelectActual
-              style={{ color: `${COLORS.gray}`, fontSize: '5em' }}
-            />
-          </div>
-        )}
+        <ArtworkContainer>
+          <Image
+            src={artwork.artworkMedias[0] || ''}
+            placeholder='empty'
+            alt='artwork'
+            fill
+            className='object-cover'
+          />
+        </ArtworkContainer>
+
         <InfoContainer>
-          <InfoContent>{artwork?.title || ''}</InfoContent>
-          <InfoContent>{artwork?.description || ''}</InfoContent>
-          <InfoContent>{artwork?.creationYear || ''}</InfoContent>
-          <InfoContent>{artwork?.medium || ''}</InfoContent>
-          <InfoContent>{artwork?.type || ''}</InfoContent>
-          <InfoContent>
-            {artwork?.width || ''} x {artwork?.height || ''}
-          </InfoContent>
+          {artwork.artistId ? (
+            <Link href={`${ROUTE_PATHS.ARTIST_PROFILE}/${artwork.artistId}`}>
+              <ArtistName isLink={true}>
+                {artwork.artistName} {artwork.artistSurname}
+              </ArtistName>
+            </Link>
+          ) : (
+            <ArtistName isLink={false}>
+              {artwork.artistName} {artwork.artistSurname}
+            </ArtistName>
+          )}
+          <Title>{artwork.title}</Title>
+          <Info>{artwork.description || ''}</Info>
+          <Info>{artwork.creationYear || ''}</Info>
+          <Info>{artwork.medium || ''}</Info>
+          <Info>{artwork.type || ''}</Info>
+          <Info>
+            {artwork.width} x {artwork.height}
+          </Info>
         </InfoContainer>
       </Container>
     </div>
