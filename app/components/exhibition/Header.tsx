@@ -1,15 +1,7 @@
 'use client';
 import { COLORS } from '@/constants/colors';
 import styled from 'styled-components';
-import { IArtistProfile, IArtwork, IExhibition } from '../../types';
-import { useRouter } from 'next/navigation';
-import axios from 'axios';
-import { useState } from 'react';
-import toast from 'react-hot-toast';
-import { FaRegEdit } from 'react-icons/fa';
-import TextButton from '../buttons/TextButton';
-import Popup from '../popup/Popup';
-import useTranslate from '../../hooks/useTranslate';
+import { IExhibition } from '../../types';
 import { getDateString } from '../utils/Helper';
 
 interface HeaderProps {
@@ -70,16 +62,9 @@ const DateHeading = styled.text`
 `;
 
 const Header = ({ exhibition }: HeaderProps) => {
-  const router = useRouter();
-  const [isLoading, setIsLoading] = useState(false);
-  const [coverImage, setHeaderArtwork] = useState(exhibition?.coverImage || '');
-
-  const location = { element: 'artist_profile', superElement: 'header' };
-  const t = useTranslate();
-
   return (
     <Container>
-      <HeaderImage backgroundImgUrl={coverImage} />
+      <HeaderImage backgroundImgUrl={exhibition?.coverImage || ''} />
       <InfoContainer>
         <InfoHeading>{exhibition.title}</InfoHeading>
         <DateHeading>
