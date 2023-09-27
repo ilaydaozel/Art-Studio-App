@@ -11,29 +11,27 @@ interface PopupProps {
   onClose: () => void;
   onSubmit?: () => void;
   width: string;
-  isFullScreen?: boolean;
 }
 
 const PopupContainer = styled.div<{
   width: string;
-  isFullScreen: boolean;
 }>`
   position: fixed;
   width: ${(props) => props.width};
-  top: ${(props) => (props.isFullScreen ? '0' : '50%')};
-  left: ${(props) => (props.isFullScreen ? '0' : '50%')};
+  top: ${(props) => (props.width === '100%' ? '0' : '50%')};
+  left: ${(props) => (props.width === '100%' ? '0' : '50%')};
   transform: ${(props) =>
-    props.isFullScreen ? 'none' : 'translate(-50%, -50%)'};
-  height: auto;
+    props.width === '100%' ? 'none' : 'translate(-50%, -50%)'};
+  height: ${(props) => (props.width === '100%' ? '100vh' : 'auto')};
   max-height: 100vh;
-  padding: ${(props) => (props.isFullScreen ? 'none' : '1.6rem')};
-  border-radius: ${(props) => (props.isFullScreen ? '0' : '0.5rem')};
+  padding: ${(props) => (props.width === '100%' ? 'none' : '1.6rem')};
+  border-radius: ${(props) => (props.width === '100%' ? '0' : '0.5rem')};
   background-color: white;
   z-index: 1000;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
   gap: 10px;
   box-shadow: 1rem 1rem 3rem 0 rgba(0, 0, 0, 0.3);
 `;
@@ -65,10 +63,9 @@ const Popup = ({
   onClose,
   onSubmit,
   width,
-  isFullScreen = false,
 }: PopupProps) => {
   return (
-    <PopupContainer width={width} isFullScreen={isFullScreen}>
+    <PopupContainer width={width}>
       <CloseButton onClick={onClose}>X</CloseButton>
       {title && <Title>{title}</Title>}
       {subtitle && <Subtitle>{subtitle}</Subtitle>}
