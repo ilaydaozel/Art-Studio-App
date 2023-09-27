@@ -10,6 +10,7 @@ import ArtworkList from '../lists/ArtworkList';
 import ComponentWithHeading from '../layouts/ComponentWithHeading';
 import Popup from '../popup/Popup';
 import SlidingButton from '../buttons/SlidingButton';
+import SelectExhibitionArtworkPopup from '../popup/SelectExhibitionArtworkPopup';
 
 interface ExhibitionProfileProps {
   exhibition: IExhibition;
@@ -25,15 +26,6 @@ const Container = styled.div`
   align-items: center;
 `;
 
-const ArtworkThumbnail = styled.img`
-  width: 20vw;
-  height: 40vh;
-  object-fit: cover;
-  cursor: pointer;
-  &:hover {
-    transform: scale(1.02);
-  }
-`;
 const ExhibitionProfile = ({
   exhibition,
   artworks = [],
@@ -50,29 +42,12 @@ const ExhibitionProfile = ({
         label='Sistemden Resim Seç'
       ></SlidingButton>
       {showArtworkSelection && (
-        <Popup
+        <SelectExhibitionArtworkPopup
           onClose={() => {
             setShowArtworkSelection(false);
           }}
-          width='100%'
-          body={
-            <div className='flex justify-between gap-2'>
-              {artworks ? (
-                artworks.map((artwork) => (
-                  <ArtworkThumbnail
-                    key={artwork.id}
-                    src={artwork.artworkMedias[0] || ''}
-                  />
-                ))
-              ) : (
-                <p>There are no artworks!</p>
-              )}
-            </div>
-          }
-          title={'Resim seç'}
-          actionLabel={'Tamamla'}
-          onSubmit={() => {}}
-        ></Popup>
+          artworks={artworks}
+        ></SelectExhibitionArtworkPopup>
       )}
       <ComponentWithHeading headingText='Katılan Eserler'>
         <ArtworkList artworks={exhibition.artworks}></ArtworkList>
