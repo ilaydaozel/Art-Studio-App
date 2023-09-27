@@ -6,7 +6,7 @@ import Artwork from '../artwork/Artwork';
 import EditMenu from '../menu/EditMenu';
 import axios from 'axios';
 import toast from 'react-hot-toast';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 
 interface ArtworkListProps {
@@ -67,11 +67,57 @@ const ArtworkList = ({
         setIsLoading(false);
       });
   };
+  const containerRef = useRef<HTMLDivElement | null>(null);
+
+  const handleIntersection = (
+    entries: IntersectionObserverEntry[],
+    observer: IntersectionObserver
+  ) => {
+    entries.forEach((entry) => {
+      const artworkElement = entry.target as HTMLDivElement;
+      if (entry.isIntersecting) {
+        artworkElement.style.opacity = '1';
+        artworkElement.style.transform = 'translateY(0)';
+        artworkElement.style.transition =
+          'transform 0.6s ease-out, opacity 0.5s ease-in-out';
+        observer.unobserve(artworkElement);
+      }
+    });
+  };
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const observer = new IntersectionObserver(handleIntersection, {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.3,
+    });
+
+    artworks.forEach((currentArtwork: IArtwork) => {
+      const artworkElement = container.querySelector(
+        `#artwork-${currentArtwork.id}`
+      );
+      if (artworkElement) {
+        observer.observe(artworkElement);
+      }
+    });
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [artworks]);
 
   return (
-    <ListContainer width={width}>
+    <ListContainer width={width} ref={containerRef}>
       {artworks.map((currentArtwork: IArtwork) => (
-        <div key={currentArtwork.id} className='flex flex-col items-end'>
+        <div
+          key={currentArtwork.id}
+          className='flex flex-col items-end'
+          id={`artwork-${currentArtwork.id}`}
+          style={{ opacity: 0, transform: 'translateY(5rem)' }}
+        >
           <Link href={`/artwork/${currentArtwork.id}`}>
             <ArtworkContainer>
               <Artwork artwork={currentArtwork}></Artwork>
