@@ -26,7 +26,7 @@ const PopupContainer = styled.div<{
     props.isFullScreen ? 'none' : 'translate(-50%, -50%)'};
   height: auto;
   max-height: 100vh;
-  padding: ${(props) => (props.isFullScreen ? 'none' : '2rem')};
+  padding: ${(props) => (props.isFullScreen ? 'none' : '1.6rem')};
   border-radius: ${(props) => (props.isFullScreen ? '0' : '0.5rem')};
   background-color: white;
   z-index: 1000;
@@ -35,6 +35,7 @@ const PopupContainer = styled.div<{
   align-items: center;
   justify-content: center;
   gap: 10px;
+  box-shadow: 1rem 1rem 3rem 0 rgba(0, 0, 0, 0.3);
 `;
 
 const CloseButton = styled.button`
