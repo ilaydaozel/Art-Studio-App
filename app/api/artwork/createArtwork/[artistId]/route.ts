@@ -56,7 +56,7 @@ export async function POST(request: Request, { params }: { params: IParams }) {
             type,
             width,
             height,
-            artworkMedias: artworkMedias,
+            artworkMedias,
             artistId: user.id,
         }
     });
