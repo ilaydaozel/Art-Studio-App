@@ -3,7 +3,7 @@
 import styled from 'styled-components';
 import useTranslate from '../../hooks/useTranslate';
 import { IArtwork, IExhibition } from '@/app/types';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Header from './Header';
 import About from './About';
 import ArtworkList from '../lists/ArtworkList';
@@ -33,11 +33,8 @@ const ExhibitionProfile = ({
   isEditable = false,
 }: ExhibitionProfileProps) => {
   const [showArtworkSelection, setShowArtworkSelection] = useState(false);
+  const [remainingArtworks, setRemainingArtworks] = useState<IArtwork[]>([]);
   const router = useRouter();
-
-  const refreshPage = () => {
-    router.refresh();
-  };
 
   const handleDeleteArtworkFromExhibition = (artworkId: string) => {
     axios
@@ -46,14 +43,22 @@ const ExhibitionProfile = ({
       })
       .then(() => {
         toast.success('Eser sergiden silindi!');
-        refreshPage();
+        router.refresh();
       })
       .catch((error) => {
         console.log('error: ', error);
         toast.error('Bir şeyler yanlış gitti');
-        refreshPage();
+        router.refresh();
       });
   };
+
+  useEffect(() => {
+    setRemainingArtworks(
+      artworks.filter(
+        (artwork: IArtwork) => !exhibition.artworkIds.includes(artwork.id)
+      )
+    );
+  }, [exhibition.artworkIds]);
 
   return (
     <Container>
@@ -68,7 +73,7 @@ const ExhibitionProfile = ({
           onClose={() => {
             setShowArtworkSelection(false);
           }}
-          artworks={artworks}
+          artworks={remainingArtworks}
           exhibition={exhibition}
         ></SelectExhibitionArtworkPopup>
       )}
