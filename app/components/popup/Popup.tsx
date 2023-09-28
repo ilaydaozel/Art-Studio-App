@@ -32,7 +32,7 @@ const PopupContainer = styled.div<{
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  gap: 10px;
+  gap: 4px;
   box-shadow: 1rem 1rem 3rem 0 rgba(0, 0, 0, 0.3);
 `;
 
@@ -71,7 +71,9 @@ const Popup = ({
       {subtitle && <Subtitle>{subtitle}</Subtitle>}
       {body}
       {onSubmit && (
-        <SlidingButton label={actionLabel} onClick={onSubmit}></SlidingButton>
+        <div className='flex justify-end w-[90%]'>
+          <SlidingButton label={actionLabel} onClick={onSubmit}></SlidingButton>
+        </div>
       )}
     </PopupContainer>
   );
