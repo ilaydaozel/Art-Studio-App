@@ -6,6 +6,7 @@ import { COLORS } from '@/constants/colors';
 import { AiFillMinusCircle, AiFillCheckCircle } from 'react-icons/ai';
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import { useRouter } from 'next/navigation';
 interface PopupProps {
   onClose: () => void;
   artworks?: IArtwork[];
@@ -78,6 +79,10 @@ const Heading = styled.p`
   font-weight: bold;
   color: ${COLORS.darkGray};
 `;
+const EmptyText = styled.p`
+  font-size: 1.5rem;
+  text-align: center;
+`;
 
 const SelectExhibitionArtworkPopup = ({
   onClose,
@@ -87,6 +92,7 @@ const SelectExhibitionArtworkPopup = ({
   const [searchText, setSearchText] = useState('');
   const [selectedArtworks, setSelectedArtworks] = useState([] as IArtwork[]);
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
   const filteredArtworks = artworks.filter((artwork) =>
     `${artwork.artistName} ${artwork.artistSurname}`
@@ -117,6 +123,7 @@ const SelectExhibitionArtworkPopup = ({
         toast.error(response.data.error);
       } else {
         toast.success('Eserler sergiye eklendi!');
+        router.refresh();
       }
     } catch (error) {
       // Handle other errors here
@@ -127,19 +134,19 @@ const SelectExhibitionArtworkPopup = ({
     }
   };
 
-  let bodyContent = (
-    <div className='w-[90%] flex flex-col justify-around items-end'>
-      <SearchInput
-        type='text'
-        placeholder='Search by artist name'
-        value={searchText}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-          setSearchText(e.target.value)
-        }
-      />
-      <ArtworksContainer>
-        {artworks ? (
-          filteredArtworks.map((artwork) => (
+  let bodyContent =
+    artworks.length !== 0 ? (
+      <div className='w-[90%] flex flex-col justify-around items-end'>
+        <SearchInput
+          type='text'
+          placeholder='Search by artist name'
+          value={searchText}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setSearchText(e.target.value)
+          }
+        />
+        <ArtworksContainer>
+          {filteredArtworks.map((artwork) => (
             <ArtworkBox key={artwork.id}>
               {selectedArtworks.includes(artwork) && (
                 <AiFillCheckCircle className='absolute right-0 top-0 text-green-600' />
@@ -152,34 +159,36 @@ const SelectExhibitionArtworkPopup = ({
                 {artwork.artistName} {artwork.artistSurname}
               </ArtistName>
             </ArtworkBox>
-          ))
-        ) : (
-          <p>There are no artworks!</p>
-        )}
-      </ArtworksContainer>
-      <SelectedArtworksWrapper>
-        <Heading>Sergiye Eklenecek Resimler</Heading>
-        <ArtworksContainer>
-          {selectedArtworks.map((artwork) => (
-            <ArtworkBox
-              key={artwork.id}
-              onClick={() => {
-                setSelectedArtworks(
-                  selectedArtworks.filter((a) => a.id !== artwork.id)
-                );
-              }}
-            >
-              <AiFillMinusCircle className='absolute right-0 top-0 text-red-600' />
-              <ArtworkImage src={artwork.artworkMedias[0] || ''} />
-              <ArtistName>
-                {artwork.artistName} {artwork.artistSurname}
-              </ArtistName>
-            </ArtworkBox>
           ))}
         </ArtworksContainer>
-      </SelectedArtworksWrapper>
-    </div>
-  );
+        <SelectedArtworksWrapper>
+          <Heading>Sergiye Eklenecek Resimler</Heading>
+          <ArtworksContainer>
+            {selectedArtworks.map((artwork) => (
+              <ArtworkBox
+                key={artwork.id}
+                onClick={() => {
+                  setSelectedArtworks(
+                    selectedArtworks.filter((a) => a.id !== artwork.id)
+                  );
+                }}
+              >
+                <AiFillMinusCircle className='absolute right-0 top-0 text-red-600' />
+                <ArtworkImage src={artwork.artworkMedias[0] || ''} />
+                <ArtistName>
+                  {artwork.artistName} {artwork.artistSurname}
+                </ArtistName>
+              </ArtworkBox>
+            ))}
+          </ArtworksContainer>
+        </SelectedArtworksWrapper>
+      </div>
+    ) : (
+      <div>
+        <EmptyText>There are no artworks!</EmptyText>
+        <EmptyText>All the artworks are chosen.</EmptyText>
+      </div>
+    );
 
   return (
     <Popup
