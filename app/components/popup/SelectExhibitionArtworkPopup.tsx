@@ -105,9 +105,12 @@ const SelectExhibitionArtworkPopup = ({
   const onSubmit = async () => {
     setIsLoading(true);
     try {
-      await axios.post(`/api/exhibition/${exhibition.id}`, {
-        selectedArtworks,
-      });
+      await axios.post(
+        `/api/exhibition/addArtworksToExhibition/${exhibition.id}`,
+        {
+          selectedArtworks,
+        }
+      );
       toast.success('Eserler sergiye eklendi!');
     } catch (error) {
       toast.error('Error');
