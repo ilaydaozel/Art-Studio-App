@@ -33,41 +33,34 @@ model ArtistProfile{
   user User @relation(fields: [artistId], references: [id], onDelete: Cascade)
 }
 
-model ExhibitionArtwork {
-  id          String @id @default(auto()) @map("_id") @db.ObjectId
-  exhibition  Exhibition @relation(fields: [exhibitionId], references: [id])
-  exhibitionId String @db.ObjectId
-  artwork     Artwork @relation(fields: [artworkId], references: [id])
-  artworkId   String @db.ObjectId
+model Artwork{
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  title String
+  artistName String
+  artistSurname String
+  description String?
+  creationYear String?
+  medium String?
+  type String?
+  width Int
+  height Int
+  artworkMedias String[]
+  exhibitionIds String[] @db.ObjectId
+  exhibitions Exhibition[] @relation(fields: [exhibitionIds], references: [id])
+  artistId String? @db.ObjectId
+  artist ArtistProfile? @relation(fields: [artistId], references: [artistId], onDelete: Cascade)
 }
 
-
-model Exhibition {
-  id            String @id @default(auto()) @map("_id") @db.ObjectId
-  title         String
-  description   String?
-  startDate     String?
-  endDate       String?
-  organizedBy   String?
-  coverImage    String?
-  exhibitionArtworks ExhibitionArtwork[]  // Add this field to represent the many-to-many relationship
-}
-
-model Artwork {
-  id              String @id @default(auto()) @map("_id") @db.ObjectId
-  title           String
-  artistName      String
-  artistSurname   String
-  description     String?
-  creationYear    String?
-  medium          String?
-  type            String?
-  width           Int
-  height          Int
-  artworkMedias   String[]
-  exhibitionArtworks ExhibitionArtwork[]  // Add this field to represent the many-to-many relationship
-  artistId        String? @db.ObjectId
-  artist          ArtistProfile? @relation(fields: [artistId], references: [artistId], onDelete: Cascade)
+model Exhibition{
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  title String
+  description String?
+  startDate String
+  endDate String
+  organizedBy String?
+  coverImage String?
+  artworkIds String[] @db.ObjectId
+  artworks Artwork[] @relation(fields: [artworkIds], references: [id])
 }
 
 model Announcement{
