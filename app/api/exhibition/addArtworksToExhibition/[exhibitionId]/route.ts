@@ -26,7 +26,7 @@ export async function POST(request: Request, { params }: { params: IParams }) {
         }
 
         const newArtworkIds = selectedArtworkIds.filter(
-            (artwork: IArtwork) => !exhibition.artworkIds.includes(artwork.id)
+            (artworkId: string) => !exhibition.artworkIds.includes(artworkId)
         );
 
         if (newArtworkIds.length === 0) {
