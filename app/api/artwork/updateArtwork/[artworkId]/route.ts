@@ -24,15 +24,18 @@ export async function POST(request: Request, { params }: { params: IParams }) {
                 id: artworkId,
             },
             data: {
-                exhibitions: selectedExhibition
-            },
+                exhibitions: {
+                    set: selectedExhibition,
+                },
+            }
         });
     } else {
         return NextResponse.json({ error: "exhibition not found." });
     }
 
 
-    return NextResponse.json(artwork);
+    return NextResponse.json(artwork
+    );
 }
 
 
