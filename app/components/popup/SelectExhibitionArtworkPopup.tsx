@@ -3,7 +3,7 @@ import Popup from './Popup';
 import styled from 'styled-components';
 import { useState } from 'react';
 import { COLORS } from '@/constants/colors';
-import { AiOutlineMinusCircle } from 'react-icons/ai';
+import { AiFillMinusCircle, AiFillCheckCircle } from 'react-icons/ai';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 interface PopupProps {
@@ -15,7 +15,7 @@ const SelectedArtworksWrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  min-height: 10vw;
+  min-height: 100px;
   gap: 0.5rem;
   margin: 0.5rem;
   padding: 0.5rem;
@@ -30,7 +30,6 @@ const ArtworksContainer = styled.div`
   align-items: start;
   justify-items: center;
   width: 100%;
-
   grid-template-columns: repeat(8, 1fr);
   gap: 2rem;
 
@@ -49,15 +48,16 @@ const ArtworkBox = styled.div`
   gap: 0.5rem;
   justify-content: center;
   align-items: center;
+  padding: 0.6rem 0.6rem 0 0.6rem;
   &:hover {
-    transform: scale(1.02);
+    transform: translateY(-0.4rem);
   }
-  padding: 0.4rem;
+  transition: transform 0.5s;
 `;
 
 const ArtworkImage = styled.img`
-  width: 10vw;
-  height: 10vw;
+  width: 100px;
+  height: 100px;
   object-fit: cover;
   cursor: pointer;
 `;
@@ -105,15 +105,8 @@ const SelectExhibitionArtworkPopup = ({
   const onSubmit = async () => {
     setIsLoading(true);
     try {
-      console.log('selectedArtworks: ', selectedArtworks);
-      const updatedArtworks = selectedArtworks.map((artwork) => ({
-        ...artwork,
-        exhibitionIds: [...artwork.exhibitionIds, exhibition.id], // Add exhibition ID to the existing ones
-        exhibitions: [...artwork.exhibitions, exhibition],
-      }));
-      console.log('updatedArtworks: ', updatedArtworks);
       await axios.post(`/api/exhibition/updateExhibition/${exhibition.id}`, {
-        selectedArtworks: updatedArtworks,
+        selectedArtworks,
       });
       toast.success('Eserler sergiye eklendi!');
     } catch (error) {
@@ -137,14 +130,10 @@ const SelectExhibitionArtworkPopup = ({
       <ArtworksContainer>
         {artworks ? (
           filteredArtworks.map((artwork) => (
-            <ArtworkBox
-              key={artwork.id}
-              className={
-                selectedArtworks.includes(artwork)
-                  ? 'saturate-50 bg-slate-200'
-                  : ''
-              }
-            >
+            <ArtworkBox key={artwork.id}>
+              {selectedArtworks.includes(artwork) && (
+                <AiFillCheckCircle className='absolute right-0 top-0 text-green-600' />
+              )}
               <ArtworkImage
                 src={artwork.artworkMedias[0] || ''}
                 onClick={() => toggleArtworkSelection(artwork)}
@@ -162,15 +151,15 @@ const SelectExhibitionArtworkPopup = ({
         <Heading>Sergiye Eklenecek Resimler</Heading>
         <ArtworksContainer>
           {selectedArtworks.map((artwork) => (
-            <ArtworkBox key={artwork.id}>
-              <AiOutlineMinusCircle
-                onClick={() => {
-                  setSelectedArtworks(
-                    selectedArtworks.filter((a) => a.id !== artwork.id)
-                  );
-                }}
-                className='absolute right-0 top-0 hover:text-red-600'
-              />
+            <ArtworkBox
+              key={artwork.id}
+              onClick={() => {
+                setSelectedArtworks(
+                  selectedArtworks.filter((a) => a.id !== artwork.id)
+                );
+              }}
+            >
+              <AiFillMinusCircle className='absolute right-0 top-0 text-red-600' />
               <ArtworkImage src={artwork.artworkMedias[0] || ''} />
               <ArtistName>
                 {artwork.artistName} {artwork.artistSurname}
