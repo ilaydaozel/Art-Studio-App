@@ -47,6 +47,7 @@ const ExhibitionProfile = ({
             setShowArtworkSelection(false);
           }}
           artworks={artworks}
+          exhibition={exhibition}
         ></SelectExhibitionArtworkPopup>
       )}
       <ComponentWithHeading headingText='Katılan Eserler'>
