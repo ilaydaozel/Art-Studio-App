@@ -10,6 +10,9 @@ import useCreateArtworkModal from '../../hooks/useCreateArtworkModal';
 import ComponentWithHeading from '../layouts/ComponentWithHeading';
 import useTranslate from '../../hooks/useTranslate';
 import CreateArtworkModal from '../modal/CreateArtworkModal';
+import axios from 'axios';
+import toast from 'react-hot-toast';
+import { useRouter } from 'next/navigation';
 interface ArtistProfileProps {
   artistProfile: IArtistProfile;
   artworks?: IArtwork[];
@@ -33,7 +36,24 @@ const ArtistProfile = ({
     superElement: 'artist_profile',
   };
   const t = useTranslate();
+  const router = useRouter();
 
+  const refreshPage = () => {
+    router.refresh();
+  };
+
+  const handleDeleteArtwork = (artworkId: string) => {
+    axios
+      .delete(`/api/artwork/deleteArtwork/${artworkId}`)
+      .then(() => {
+        toast.success('Eser silindi!');
+        refreshPage();
+      })
+      .catch(() => {
+        toast.error('Bir şeyler yanlış gitti');
+        refreshPage();
+      });
+  };
   return (
     <Container>
       <Header
@@ -69,6 +89,7 @@ const ArtistProfile = ({
             artworks={artworks}
             width='90%'
             isEditable={isEditable}
+            onDelete={handleDeleteArtwork}
           ></ArtworkList>
         ) : (
           <></>

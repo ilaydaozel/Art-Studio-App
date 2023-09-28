@@ -1,18 +1,16 @@
 'use client';
 import styled from 'styled-components';
 import { IArtwork } from '@/app/types';
-import { useRouter } from 'next/navigation';
 import Artwork from '../artwork/Artwork';
 import EditMenu from '../menu/EditMenu';
-import axios from 'axios';
-import toast from 'react-hot-toast';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import Link from 'next/link';
 
 interface ArtworkListProps {
   artworks: IArtwork[];
   width?: string;
   isEditable?: boolean;
+  onDelete: (artworkId: string) => void;
 }
 
 const ArtworkContainer = styled.div`
@@ -43,30 +41,8 @@ const ArtworkList = ({
   artworks,
   width = '100%',
   isEditable = false,
+  onDelete,
 }: ArtworkListProps) => {
-  const router = useRouter();
-  const [isLoading, setIsLoading] = useState(false);
-
-  const refreshPage = () => {
-    router.refresh();
-  };
-
-  const handleDeleteArtwork = (artworkId: string) => {
-    setIsLoading(true);
-    axios
-      .delete(`/api/artwork/deleteArtwork/${artworkId}`)
-      .then(() => {
-        toast.success('Eser silindi!');
-        refreshPage();
-      })
-      .catch(() => {
-        toast.error('Bir şeyler yanlış gitti');
-        refreshPage();
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  };
   const containerRef = useRef<HTMLDivElement | null>(null);
 
   const handleIntersection = (
@@ -118,18 +94,18 @@ const ArtworkList = ({
           id={`artwork-${currentArtwork.id}`}
           style={{ opacity: 0, transform: 'translateY(5rem)' }}
         >
-          <Link href={`/artwork/${currentArtwork.id}`}>
-            <ArtworkContainer>
+          <ArtworkContainer>
+            <Link href={`/artwork/${currentArtwork.id}`}>
               <Artwork artwork={currentArtwork}></Artwork>
-              {isEditable ? (
-                <EditMenu
-                  onDeleteClick={() => handleDeleteArtwork(currentArtwork.id)}
-                ></EditMenu>
-              ) : (
-                <></>
-              )}
-            </ArtworkContainer>
-          </Link>
+            </Link>
+            {isEditable ? (
+              <EditMenu
+                onDeleteClick={() => onDelete(currentArtwork.id)}
+              ></EditMenu>
+            ) : (
+              <></>
+            )}
+          </ArtworkContainer>
         </div>
       ))}
     </ListContainer>

@@ -8,10 +8,11 @@ import Header from './Header';
 import About from './About';
 import ArtworkList from '../lists/ArtworkList';
 import ComponentWithHeading from '../layouts/ComponentWithHeading';
-import Popup from '../popup/Popup';
 import SlidingButton from '../buttons/SlidingButton';
 import SelectExhibitionArtworkPopup from '../popup/SelectExhibitionArtworkPopup';
-
+import axios from 'axios';
+import toast from 'react-hot-toast';
+import { useRouter } from 'next/navigation';
 interface ExhibitionProfileProps {
   exhibition: IExhibition;
   artworks?: IArtwork[];
@@ -32,6 +33,27 @@ const ExhibitionProfile = ({
   isEditable = false,
 }: ExhibitionProfileProps) => {
   const [showArtworkSelection, setShowArtworkSelection] = useState(false);
+  const router = useRouter();
+
+  const refreshPage = () => {
+    router.refresh();
+  };
+
+  const handleDeleteArtworkFromExhibition = (artworkId: string) => {
+    axios
+      .post(`/api/exhibition/deleteArtworkFromExhibition/${exhibition.id}`, {
+        artworkId,
+      })
+      .then(() => {
+        toast.success('Eser sergiden silindi!');
+        refreshPage();
+      })
+      .catch((error) => {
+        console.log('error: ', error);
+        toast.error('Bir şeyler yanlış gitti');
+        refreshPage();
+      });
+  };
 
   return (
     <Container>
@@ -51,7 +73,11 @@ const ExhibitionProfile = ({
         ></SelectExhibitionArtworkPopup>
       )}
       <ComponentWithHeading headingText='Katılan Eserler'>
-        <ArtworkList artworks={exhibition.artworks}></ArtworkList>
+        <ArtworkList
+          artworks={exhibition.artworks}
+          onDelete={handleDeleteArtworkFromExhibition}
+          isEditable={true}
+        ></ArtworkList>
       </ComponentWithHeading>
     </Container>
   );
