@@ -50,7 +50,7 @@ const ExhibitionsList = ({
   const handleDeleteExhibition = (exhibitionId: string) => {
     setIsLoading(true);
     axios
-      .delete(`/api/exhibition/deleteExhibition/${exhibitionId}`)
+      .delete(`/api/exhibition/${exhibitionId}`)
       .then(() => {
         toast.success('Sergi sistemden silindi!');
         refreshPage();
