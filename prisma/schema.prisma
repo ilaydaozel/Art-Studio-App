@@ -50,7 +50,7 @@ model Exhibition {
   endDate       String?
   organizedBy   String?
   coverImage    String?
-  exhibitionArtworks ExhibitionArtwork[]  // Add this field to represent the many-to-many relationship
+  artworks ExhibitionArtwork[]  // Add this field to represent the many-to-many relationship
 }
 
 model Artwork {
@@ -65,7 +65,7 @@ model Artwork {
   width           Int
   height          Int
   artworkMedias   String[]
-  exhibitionArtworks ExhibitionArtwork[]  // Add this field to represent the many-to-many relationship
+  exhibitions ExhibitionArtwork[]  // Add this field to represent the many-to-many relationship
   artistId        String? @db.ObjectId
   artist          ArtistProfile? @relation(fields: [artistId], references: [artistId], onDelete: Cascade)
 }
