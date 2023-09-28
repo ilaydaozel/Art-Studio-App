@@ -72,7 +72,13 @@ const Popup = ({
       {body}
       {onSubmit && (
         <div className='flex justify-end w-[90%]'>
-          <SlidingButton label={actionLabel} onClick={onSubmit}></SlidingButton>
+          <SlidingButton
+            label={actionLabel}
+            onClick={() => {
+              onSubmit();
+              onClose();
+            }}
+          ></SlidingButton>
         </div>
       )}
     </PopupContainer>
