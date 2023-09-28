@@ -78,7 +78,7 @@ const CreateExhibitionModal = () => {
       coverImage: coverImage,
     };
     axios
-      .post('/api/exhibition', exhibitionData)
+      .post('/api/exhibition/createExhibition', exhibitionData)
       .then(() => {
         toast.success('Sergi oluşturuldu!');
         window.location.reload();
