@@ -17,7 +17,7 @@ export default async function getAllArtists() {
             return null;
         }
         return {
-            artists: artists as IUser[],
+            artists: artists as unknown as IUser[],
         };
     } catch (error: any) {
         throw new Error(error);
