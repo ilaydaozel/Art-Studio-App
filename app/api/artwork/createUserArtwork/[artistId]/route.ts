@@ -9,20 +9,18 @@ interface IParams {
 }
 
 export async function POST(request: Request, { params }: { params: IParams }) {
-    const currentProfile = await getArtistProfileById(params);
+    const { artistId } = params;
 
-    if (!currentProfile) {
-        return NextResponse.error();
-    }
+    const existingArtistProfile = await prisma.artistProfile.findUnique({
+        where: {
+            artistId: artistId,
+        }, include: {
+            user: true,
+        }
+    });
 
-    const user: IUser | undefined = currentProfile.artistProfile.user;
-
-    if (user === undefined) {
-        return NextResponse.error();
-    }
-
-    if (user.userType != "artist") {
-        return NextResponse.error();
+    if (!existingArtistProfile) {
+        return NextResponse.json({ error: "nonExistingArtistProfileError", status: "400" });
     }
 
     const body = await request.json();
@@ -39,12 +37,6 @@ export async function POST(request: Request, { params }: { params: IParams }) {
         artworkMedias,
     } = body;
 
-    Object.keys(body).forEach((value: any) => {
-        if (!body[value]) {
-            NextResponse.error();
-        }
-    });
-
     const artwork = await prisma.artwork.create({
         data: {
             title,
@@ -57,7 +49,7 @@ export async function POST(request: Request, { params }: { params: IParams }) {
             width,
             height,
             artworkMedias,
-            artistId: user.id,
+            artistId: artistId,
         }
     });
 
