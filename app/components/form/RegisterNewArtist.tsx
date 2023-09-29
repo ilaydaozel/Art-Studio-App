@@ -6,6 +6,11 @@ import { useForm, FieldValues, SubmitHandler } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import Form from './Form';
 import Selectbox from '../inputs/Selectbox';
+import {
+  PasswordLengthError,
+  PasswordMismatchError,
+  UnknownError,
+} from '@/app/lib/exceptions';
 
 const ArtistForm = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -13,8 +18,8 @@ const ArtistForm = () => {
   const {
     register,
     handleSubmit,
-    setValue,
     formState: { errors },
+    reset,
   } = useForm<FieldValues>({
     defaultValues: {
       name: '',
@@ -26,39 +31,42 @@ const ArtistForm = () => {
     },
   });
 
-  const setCustomValue = (id: string, value: any) => {
-    setValue(id, value, {
-      shouldDirty: true,
-      shouldTouch: true,
-      shouldValidate: true,
-    });
-  };
-
-  const onSubmit: SubmitHandler<FieldValues> = (data: FieldValues) => {
+  const onSubmit: SubmitHandler<FieldValues> = async (data: FieldValues) => {
     setIsLoading(true);
     const userData = {
       name: data.name,
       surname: data.surname,
       password: data.password,
-      userType: 'artist', // Add the user type value here
-      email: data.email, // Add the email value here
-      gender: data.gender, // Add the gender value here
+      userType: 'artist',
+      email: data.email,
+      gender: data.gender,
     };
-    if (data.password === data.password_again) {
-      axios
-        .post('/api/register', userData)
-        .then(() => {
-          toast.success('Kayıt olundu!');
-        })
-        .catch((error) => {
-          toast.error('Error');
-          console.log('Register error: ', error);
-        })
-        .finally(() => {
-          setIsLoading(false);
-        });
-    } else {
-      toast.error('Şifreler aynı değil!');
+
+    try {
+      if (data.password.length < 4) {
+        throw new PasswordLengthError();
+      }
+
+      if (data.password !== data.password_again) {
+        throw new PasswordMismatchError();
+      }
+
+      const response = await axios.post('/api/register', userData);
+      if (response.data.error) {
+        toast.error(response.data.error);
+      } else {
+        toast.success('Kayıt olundu!');
+        reset();
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        toast.error(error.message);
+      } else {
+        const unkownError = new UnknownError();
+        toast.error(unkownError.message);
+        console.error('Error: ', error);
+      }
+    } finally {
       setIsLoading(false);
     }
   };
