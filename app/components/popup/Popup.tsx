@@ -2,6 +2,7 @@
 
 import styled from 'styled-components';
 import SlidingButton from '../buttons/SlidingButton';
+import { useCallback, useEffect } from 'react';
 
 interface PopupProps {
   title?: string;
@@ -64,6 +65,18 @@ const Popup = ({
   onSubmit,
   width,
 }: PopupProps) => {
+  const onKeyDown = useCallback(
+    (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    },
+    [onClose]
+  );
+
+  useEffect(() => {
+    document.addEventListener('keydown', onKeyDown);
+    return () => document.removeEventListener('keydown', onKeyDown);
+  }, [onKeyDown]);
+
   return (
     <PopupContainer width={width}>
       <CloseButton onClick={onClose}>X</CloseButton>
