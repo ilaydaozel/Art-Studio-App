@@ -55,6 +55,25 @@ export type ILanguageData = {
         forward_label: string;
         creation_successful_message: string;
     };
+    create_exhibition_artwork_modal: {
+        form_title: string;
+        action_label: string;
+        guest_label: string;
+        user_label: string;
+        artist_fullname: string,
+        artist_name: string;
+        artist_surname: string;
+        title: string;
+        description: string;
+        creation_year: string;
+        medium: string;
+        type: string;
+        width: string;
+        height: string;
+        back_label: string;
+        forward_label: string;
+        creation_successful_message: string;
+    };
     artist_accounts: {
         list_heading: string;
         add_button_text: string;

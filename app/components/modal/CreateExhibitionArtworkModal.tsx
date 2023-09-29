@@ -39,7 +39,7 @@ const CreateExhibitionArtworkModal = ({
   const [selectedOption, setSelectedOption] = useState('user');
   const t = useTranslate();
   const exceptionsLocation = { element: 'exceptions' };
-  const location = { element: 'create_artwork_modal' };
+  const location = { element: 'create_exhibition_artwork_modal' };
   const handleOptionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedOption(event.target.value);
   };
@@ -161,10 +161,10 @@ const CreateExhibitionArtworkModal = ({
 
   const actionLabel = useMemo(() => {
     if (step === STEPS.PHOTO) {
-      return 'Tamamla';
+      return t('action_label', location);
     }
 
-    return 'İleri';
+    return t('forward_label', location);
   }, [step]);
 
   const secondaryActionLabel = useMemo(() => {
@@ -172,7 +172,7 @@ const CreateExhibitionArtworkModal = ({
       return undefined;
     }
 
-    return 'Geri';
+    return t('back_label', location);
   }, [step]);
 
   let bodyContent = (
@@ -180,7 +180,7 @@ const CreateExhibitionArtworkModal = ({
       <RadioWrapper>
         <Radio
           id='option1'
-          label='Akademi Sanatçısı'
+          label={t('user_label', location)}
           value='user'
           checked={selectedOption === 'user'}
           onChange={handleOptionChange}
@@ -188,7 +188,7 @@ const CreateExhibitionArtworkModal = ({
 
         <Radio
           id='option2'
-          label='Akademi Dışı'
+          label={t('guest_label', location)}
           value='guest'
           checked={selectedOption === 'guest'}
           onChange={handleOptionChange}
@@ -197,7 +197,7 @@ const CreateExhibitionArtworkModal = ({
       {selectedOption === 'user' && (
         <SelectboxArtists
           id='artistId'
-          label='Sanatçı Adı Soyadı'
+          label={t('artist_fullname', location)}
           disabled={isLoading}
           register={register}
           errors={errors}
@@ -208,17 +208,17 @@ const CreateExhibitionArtworkModal = ({
         <>
           <Input
             id='artistName'
-            label='Sanatçı Adı'
+            label={t('artist_name', location)}
             width='49%'
-            disabled={isLoading}
+            disabled={true}
             register={register}
             errors={errors}
           />
           <Input
             id='artistSurname'
-            label='Sanatçı Soyadı'
+            label={t('artist_surname', location)}
             width='49%'
-            disabled={isLoading}
+            disabled={true}
             register={register}
             errors={errors}
           />
@@ -226,7 +226,7 @@ const CreateExhibitionArtworkModal = ({
       )}
       <Input
         id='title'
-        label='Başlık'
+        label={t('title', location)}
         disabled={isLoading}
         register={register}
         errors={errors}
@@ -234,7 +234,7 @@ const CreateExhibitionArtworkModal = ({
       />
       <Input
         id='description'
-        label='Açıklama'
+        label={t('description', location)}
         width='49%'
         disabled={isLoading}
         register={register}
@@ -242,7 +242,7 @@ const CreateExhibitionArtworkModal = ({
       />
       <Input
         id='creationYear'
-        label='Yapım Yılı'
+        label={t('creation_year', location)}
         width='49%'
         disabled={isLoading}
         register={register}
@@ -250,7 +250,7 @@ const CreateExhibitionArtworkModal = ({
       />
       <Selectbox
         id='medium'
-        label='Teknik'
+        label={t('medium', location)}
         width='49%'
         disabled={isLoading}
         register={register}
@@ -259,7 +259,7 @@ const CreateExhibitionArtworkModal = ({
       />
       <Selectbox
         id='type'
-        label='Tür'
+        label={t('type', location)}
         width='49%'
         disabled={isLoading}
         register={register}
@@ -268,7 +268,7 @@ const CreateExhibitionArtworkModal = ({
       />
       <Input
         id='width'
-        label='Yükseklik'
+        label={t('width', location)}
         width='49%'
         disabled={isLoading}
         register={register}
@@ -278,7 +278,7 @@ const CreateExhibitionArtworkModal = ({
       />
       <Input
         id='height'
-        label='Uzunluk'
+        label={t('height', location)}
         width='49%'
         disabled={isLoading}
         register={register}
