@@ -23,9 +23,7 @@ const EditArtistAccountsClient = ({
     <>
       <ListWithButton
         buttonText={t('add_button_text', location)}
-        onClick={() =>
-          router.push(`${ROUTE_PATHS.ADD}${ROUTE_PATHS.ADD_NEW_ARTIST}`)
-        }
+        onClick={() => router.push(`${ROUTE_PATHS.REGISTER}`)}
       >
         <ComponentWithHeading headingText={t('list_heading', location)}>
           <ArtistAccountsList
