@@ -39,6 +39,22 @@ export type ILanguageData = {
         organizedBy: string;
         coverImage: string;
     };
+    create_artwork_modal: {
+        form_title: string;
+        action_label: string;
+        artist_name: string;
+        artist_surname: string;
+        title: string;
+        description: string;
+        creation_year: string;
+        medium: string;
+        type: string;
+        width: string;
+        height: string;
+        back_label: string;
+        forward_label: string;
+        creation_successful_message: string;
+    };
     artist_accounts: {
         list_heading: string;
         add_button_text: string;
@@ -76,6 +92,7 @@ export type ILanguageData = {
         passwordMismatchError: string;
         unknownError: string;
         nonUniqueEmailError: string;
+        nonExistingArtistProfileError: string;
     };
 
 }

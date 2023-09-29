@@ -39,6 +39,22 @@ const TurkishData: ILanguageData = {
         organizedBy: "Düzenleyen",
         coverImage: "Kapak Fotoğrafı",
     },
+    create_artwork_modal: {
+        form_title: 'Eser Oluştur',
+        action_label: 'Tamam',
+        artist_name: 'Sanatçı Adı',
+        artist_surname: 'Sanatçı Soyadı',
+        title: 'Başlık',
+        description: 'Açıklama',
+        creation_year: 'Yapım Yılı',
+        medium: 'Teknik',
+        type: 'Tür',
+        width: 'Genişlik',
+        height: 'Yükseklik',
+        back_label: 'Geri',
+        forward_label: 'İleri',
+        creation_successful_message: 'Eser başarıyla oluşturuldu!',
+    },
     artist_accounts: {
         list_heading: "Sanatçılar",
         add_button_text: "Yeni Sanatçı Ekle +"
@@ -75,7 +91,8 @@ const TurkishData: ILanguageData = {
         passwordLengthError: "Şifre en az 4 karakter uzunluğunda olmalıdır!",
         passwordMismatchError: "Şifreler eşleşmiyor!",
         unknownError: "Bilinmeyen bir hata oluştu!",
-        nonUniqueEmailError: "Bu e-posta zaten kullanılıyor!"
+        nonUniqueEmailError: "Bu e-posta zaten kullanılıyor!",
+        nonExistingArtistProfileError: "Böyle bir sanatçı profili bulunmuyor!",
 
     },
 };

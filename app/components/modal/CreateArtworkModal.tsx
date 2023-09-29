@@ -10,6 +10,7 @@ import ImageUpload from '../inputs/ImageUpload';
 import Input from '../inputs/Input';
 import Selectbox from '../inputs/Selectbox';
 import { IArtistProfile } from '@/app/types';
+import useTranslate from '@/app/hooks/useTranslate';
 
 enum STEPS {
   INFORMATION = 0,
@@ -21,9 +22,11 @@ interface CreateArtworkModalProps {
 
 const CreateArtworkModal = ({ artistProfile }: CreateArtworkModalProps) => {
   const createArtworkModal = useCreateArtworkModal();
-
   const [isLoading, setIsLoading] = useState(false);
   const [step, setStep] = useState(STEPS.INFORMATION);
+  const t = useTranslate();
+  const exceptionsLocation = { element: 'exceptions' };
+  const location = { element: 'create_artwork_modal' };
 
   const {
     register,
@@ -72,14 +75,12 @@ const CreateArtworkModal = ({ artistProfile }: CreateArtworkModalProps) => {
   const onNext = () => {
     setStep((value) => value + 1);
   };
-  console.log('artist profile: ', artistProfile);
-  console.log('artistName: ', artistName);
-  const onSubmit: SubmitHandler<FieldValues> = (data) => {
+
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const artistId = artistProfile.artistId;
     if (step !== STEPS.PHOTO) {
       return onNext();
     }
-
     setIsLoading(true);
 
     const artwork = {
@@ -96,28 +97,35 @@ const CreateArtworkModal = ({ artistProfile }: CreateArtworkModalProps) => {
       exhibitionIds: [],
     };
 
-    axios
-      .post(`/api/artwork/createUserArtwork/${artistId}`, artwork)
-      .then(() => {
-        toast.success('Eser eklendi!');
+    try {
+      const response = await axios.post(
+        `/api/artwork/createUserArtwork/${artistId}`,
+        artwork
+      );
+      if (response.data.error) {
+        toast.error(t(response.data.error, exceptionsLocation));
+      } else {
+        toast.success(t('creation_successful_message', location));
         window.location.reload();
         reset();
-      })
-      .catch((e) => {
-        toast.error('Bir şeyler yanlış gitti');
-        console.log(' error ', e);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
+      }
+    } catch (error) {
+      toast.error(
+        error instanceof Error
+          ? t(error.message, exceptionsLocation)
+          : t('unknownError', exceptionsLocation)
+      );
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const actionLabel = useMemo(() => {
     if (step === STEPS.PHOTO) {
-      return 'Tamamla';
+      return t('action_label', location);
     }
 
-    return 'İleri';
+    return t('forward_label', location);
   }, [step]);
 
   const secondaryActionLabel = useMemo(() => {
@@ -125,14 +133,14 @@ const CreateArtworkModal = ({ artistProfile }: CreateArtworkModalProps) => {
       return undefined;
     }
 
-    return 'Geri';
+    return t('back_label', location);
   }, [step]);
 
   let bodyContent = (
     <div className='flex flex-row justify-between flex-wrap'>
       <Input
         id='artistName'
-        label='Sanatçı Adı'
+        label={t('artist_name', location)}
         width='49%'
         disabled={true}
         register={register}
@@ -140,7 +148,7 @@ const CreateArtworkModal = ({ artistProfile }: CreateArtworkModalProps) => {
       />
       <Input
         id='artistSurname'
-        label='Sanatçı Soyadı'
+        label={t('artist_surname', location)}
         width='49%'
         disabled={true}
         register={register}
@@ -148,7 +156,7 @@ const CreateArtworkModal = ({ artistProfile }: CreateArtworkModalProps) => {
       />
       <Input
         id='title'
-        label='Başlık'
+        label={t('title', location)}
         disabled={isLoading}
         register={register}
         errors={errors}
@@ -156,7 +164,7 @@ const CreateArtworkModal = ({ artistProfile }: CreateArtworkModalProps) => {
       />
       <Input
         id='description'
-        label='Açıklama'
+        label={t('description', location)}
         width='49%'
         disabled={isLoading}
         register={register}
@@ -164,7 +172,7 @@ const CreateArtworkModal = ({ artistProfile }: CreateArtworkModalProps) => {
       />
       <Input
         id='creationYear'
-        label='Yapım Yılı'
+        label={t('creation_year', location)}
         width='49%'
         disabled={isLoading}
         register={register}
@@ -172,7 +180,7 @@ const CreateArtworkModal = ({ artistProfile }: CreateArtworkModalProps) => {
       />
       <Selectbox
         id='medium'
-        label='Teknik'
+        label={t('medium', location)}
         width='49%'
         disabled={isLoading}
         register={register}
@@ -181,7 +189,7 @@ const CreateArtworkModal = ({ artistProfile }: CreateArtworkModalProps) => {
       />
       <Selectbox
         id='type'
-        label='Tür'
+        label={t('type', location)}
         width='49%'
         disabled={isLoading}
         register={register}
@@ -190,7 +198,7 @@ const CreateArtworkModal = ({ artistProfile }: CreateArtworkModalProps) => {
       />
       <Input
         id='width'
-        label='Yükseklik'
+        label={t('width', location)}
         width='49%'
         disabled={isLoading}
         register={register}
@@ -200,7 +208,7 @@ const CreateArtworkModal = ({ artistProfile }: CreateArtworkModalProps) => {
       />
       <Input
         id='height'
-        label='Uzunluk'
+        label={t('height', location)}
         width='49%'
         disabled={isLoading}
         register={register}
@@ -224,7 +232,7 @@ const CreateArtworkModal = ({ artistProfile }: CreateArtworkModalProps) => {
     <Modal
       disabled={isLoading}
       isOpen={createArtworkModal.isOpen}
-      title='Eser Ekle'
+      title={t('form_title', location)}
       actionLabel={actionLabel}
       onSubmit={handleSubmit(onSubmit)}
       secondaryActionLabel={secondaryActionLabel}

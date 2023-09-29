@@ -38,6 +38,22 @@ const EnglishData: ILanguageData = {
         organizedBy: "Organized By",
         coverImage: "Cover Image",
     },
+    create_artwork_modal: {
+        form_title: 'Create Artwork',
+        action_label: 'Done',
+        artist_name: 'Artist Name',
+        artist_surname: 'Artist Surname',
+        title: 'Title',
+        description: 'Description',
+        creation_year: 'Creation Year',
+        medium: 'Medium',
+        type: 'Type',
+        width: 'Width',
+        height: 'Height',
+        back_label: 'Back',
+        forward_label: 'Forward',
+        creation_successful_message: 'Artwork created successfully!',
+    },
     artist_accounts: {
         list_heading: "Artists",
         add_button_text: "Add New Artist +"
@@ -74,7 +90,8 @@ const EnglishData: ILanguageData = {
         passwordLengthError: "The password must be at least 4 characters long!",
         passwordMismatchError: "Passwords do not match!",
         unknownError: "An error occurred!",
-        nonUniqueEmailError: "This email is already in use!"
+        nonUniqueEmailError: "This email is already in use!",
+        nonExistingArtistProfileError: "There is no such artist profile!",
     },
 };
 
