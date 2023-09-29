@@ -169,9 +169,9 @@ const Navbar = ({ currentUser }: NavbarProps) => {
               {currentUser ? (
                 <UserMenu currentUser={currentUser} />
               ) : (
-                <Link href={ROUTE_PATHS.LOGIN}>
+                <a href={ROUTE_PATHS.LOGIN}>
                   <PiUserCircleLight className='sm:h-[28px] sm:w-[28px] text-neutral-400 w-[20px] h-[20px]' />
-                </Link>
+                </a>
               )}
             </SideIcons>
           </div>
