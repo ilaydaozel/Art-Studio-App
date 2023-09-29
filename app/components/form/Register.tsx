@@ -62,13 +62,11 @@ const RegisterForm = () => {
         reset();
       }
     } catch (error) {
-      if (error instanceof Error) {
-        toast.error(t(error.message, exceptionsLocation));
-      } else {
-        const unkownError = new UnknownError();
-        toast.error(t(unkownError.message, exceptionsLocation));
-        console.error('Error: ', error);
-      }
+      toast.error(
+        error instanceof Error
+          ? t(error.message, exceptionsLocation)
+          : t('unknownError', exceptionsLocation)
+      );
     } finally {
       setIsLoading(false);
     }
