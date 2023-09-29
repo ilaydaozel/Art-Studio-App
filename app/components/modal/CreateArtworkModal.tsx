@@ -97,7 +97,7 @@ const CreateArtworkModal = ({ artistProfile }: CreateArtworkModalProps) => {
     };
 
     axios
-      .post(`/api/artwork/createArtwork/${artistId}`, artwork)
+      .post(`/api/artwork/createUserArtwork/${artistId}`, artwork)
       .then(() => {
         toast.success('Eser eklendi!');
         window.location.reload();
@@ -131,6 +131,22 @@ const CreateArtworkModal = ({ artistProfile }: CreateArtworkModalProps) => {
   let bodyContent = (
     <div className='flex flex-row justify-between flex-wrap'>
       <Input
+        id='artistName'
+        label='Sanatçı Adı'
+        width='49%'
+        disabled={true}
+        register={register}
+        errors={errors}
+      />
+      <Input
+        id='artistSurname'
+        label='Sanatçı Soyadı'
+        width='49%'
+        disabled={true}
+        register={register}
+        errors={errors}
+      />
+      <Input
         id='title'
         label='Başlık'
         disabled={isLoading}
@@ -151,22 +167,6 @@ const CreateArtworkModal = ({ artistProfile }: CreateArtworkModalProps) => {
         label='Yapım Yılı'
         width='49%'
         disabled={isLoading}
-        register={register}
-        errors={errors}
-      />
-      <Input
-        id='artistName'
-        label='Sanatçı Adı'
-        width='49%'
-        disabled={true}
-        register={register}
-        errors={errors}
-      />
-      <Input
-        id='artistSurname'
-        label='Sanatçı Soyadı'
-        width='49%'
-        disabled={true}
         register={register}
         errors={errors}
       />
