@@ -2,7 +2,7 @@
 
 import styled from 'styled-components';
 import useTranslate from '../../hooks/useTranslate';
-import { IArtwork, IExhibition } from '@/app/types';
+import { IArtistProfile, IArtwork, IExhibition } from '@/app/types';
 import { useEffect, useState } from 'react';
 import Header from './Header';
 import About from './About';
@@ -13,10 +13,15 @@ import SelectExhibitionArtworkPopup from '../popup/SelectExhibitionArtworkPopup'
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
+import CreateArtworkModal from '../modal/CreateArtworkModal';
+import useCreateArtworkModal from '@/app/hooks/useCreateArtworkModal';
+import CreateExhibitionArtworkModal from '../modal/CreateExhibitionArtworkModal';
+import useCreateExhibitionArtworkModal from '@/app/hooks/useCreateExhibitionArtworkModal';
 interface ExhibitionProfileProps {
   exhibition: IExhibition;
   artworks?: IArtwork[];
   isEditable?: boolean;
+  allArtistProfiles?: IArtistProfile[];
 }
 
 const Container = styled.div`
@@ -31,10 +36,12 @@ const ExhibitionProfile = ({
   exhibition,
   artworks = [],
   isEditable = false,
+  allArtistProfiles,
 }: ExhibitionProfileProps) => {
   const [showArtworkSelection, setShowArtworkSelection] = useState(false);
   const [remainingArtworks, setRemainingArtworks] = useState<IArtwork[]>([]);
   const router = useRouter();
+  const createExhibitionArtworkModal = useCreateExhibitionArtworkModal();
 
   const handleDeleteArtworkFromExhibition = (artworkId: string) => {
     axios
@@ -64,6 +71,15 @@ const ExhibitionProfile = ({
     <Container>
       <Header exhibition={exhibition}></Header>
       <About exhibition={exhibition}></About>
+      <CreateExhibitionArtworkModal
+        allArtistProfiles={allArtistProfiles}
+      ></CreateExhibitionArtworkModal>
+      <SlidingButton
+        label='Resim Ekle'
+        onClick={() => {
+          createExhibitionArtworkModal.onOpen();
+        }}
+      />
       <SlidingButton
         onClick={() => setShowArtworkSelection(true)}
         label='Sistemden Resim Seç'
