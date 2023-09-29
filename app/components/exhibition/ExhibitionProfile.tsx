@@ -13,8 +13,6 @@ import SelectExhibitionArtworkPopup from '../popup/SelectExhibitionArtworkPopup'
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
-import CreateArtworkModal from '../modal/CreateArtworkModal';
-import useCreateArtworkModal from '@/app/hooks/useCreateArtworkModal';
 import CreateExhibitionArtworkModal from '../modal/CreateExhibitionArtworkModal';
 import useCreateExhibitionArtworkModal from '@/app/hooks/useCreateExhibitionArtworkModal';
 interface ExhibitionProfileProps {
@@ -72,7 +70,7 @@ const ExhibitionProfile = ({
       <Header exhibition={exhibition}></Header>
       <About exhibition={exhibition}></About>
       <CreateExhibitionArtworkModal
-        allArtistProfiles={allArtistProfiles}
+        allArtistProfiles={allArtistProfiles || []}
       ></CreateExhibitionArtworkModal>
       <SlidingButton
         label='Resim Ekle'
