@@ -15,7 +15,7 @@ export interface IArtistProfile {
     artworks?: IArtwork[];
     coverImage?: string;
     artistId: string;
-    user?: IUser;
+    user: IUser;
 }
 
 export interface IArtwork {

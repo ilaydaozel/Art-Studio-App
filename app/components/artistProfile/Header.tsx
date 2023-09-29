@@ -100,7 +100,7 @@ const Header = ({
         <HeaderImage imageUrl={coverImage}></HeaderImage>
         <div className='flex flex-col justify-center items-center w-[40%] h-full'>
           <NameHeading>
-            {artistProfile.user?.name} {artistProfile.user?.surname}
+            {artistProfile.user.name} {artistProfile.user.surname}
           </NameHeading>
           {isEditable ? (
             <TextButton
