@@ -25,7 +25,9 @@ const About = ({ exhibition, isEditable = false }: AboutProps) => {
 
   return (
     <ComponentWithHeading headingText={'Hakkında'}>
-      <DescriptionText>{exhibition.description}</DescriptionText>
+      <div className='w-[84%] text-left'>
+        <DescriptionText>{exhibition.description}</DescriptionText>
+      </div>
     </ComponentWithHeading>
   );
 };
