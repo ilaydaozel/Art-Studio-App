@@ -37,6 +37,8 @@ const CreateArtworkModal = ({ artistProfile }: CreateArtworkModalProps) => {
       title: '',
       description: '',
       creationYear: '',
+      artistName: artistProfile.user.name,
+      artistSurname: artistProfile.user.surname,
       medium: '',
       type: '',
       width: 0,
@@ -44,6 +46,7 @@ const CreateArtworkModal = ({ artistProfile }: CreateArtworkModalProps) => {
       media: '',
     },
   });
+
   const title = watch('title');
   const description = watch('description');
   const creationYear = watch('creationYear');
@@ -52,6 +55,7 @@ const CreateArtworkModal = ({ artistProfile }: CreateArtworkModalProps) => {
   const width = watch('width');
   const height = watch('height');
   const media = watch('media');
+  const artistName = watch('artistName');
 
   const setCustomValue = (id: string, value: any) => {
     setValue(id, value, {
@@ -68,9 +72,10 @@ const CreateArtworkModal = ({ artistProfile }: CreateArtworkModalProps) => {
   const onNext = () => {
     setStep((value) => value + 1);
   };
-
+  console.log('artist profile: ', artistProfile);
+  console.log('artistName: ', artistName);
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    const artistId = artistProfile?.artistId;
+    const artistId = artistProfile.artistId;
     if (step !== STEPS.PHOTO) {
       return onNext();
     }
@@ -79,8 +84,8 @@ const CreateArtworkModal = ({ artistProfile }: CreateArtworkModalProps) => {
 
     const artwork = {
       title: title,
-      artistName: artistProfile.user?.name,
-      artistSurname: artistProfile.user?.surname,
+      artistName: artistProfile.user.name,
+      artistSurname: artistProfile.user.surname,
       description: description,
       creationYear: creationYear,
       medium: medium,
@@ -146,6 +151,22 @@ const CreateArtworkModal = ({ artistProfile }: CreateArtworkModalProps) => {
         label='Yapım Yılı'
         width='49%'
         disabled={isLoading}
+        register={register}
+        errors={errors}
+      />
+      <Input
+        id='artistName'
+        label='Sanatçı Adı'
+        width='49%'
+        disabled={true}
+        register={register}
+        errors={errors}
+      />
+      <Input
+        id='artistSurname'
+        label='Sanatçı Soyadı'
+        width='49%'
+        disabled={true}
         register={register}
         errors={errors}
       />
