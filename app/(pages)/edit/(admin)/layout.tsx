@@ -1,5 +1,5 @@
 import getCurrentUser from '@/app/actions/user/getCurrentUser';
-import Unauthorized from '../Unauthorized';
+import { AdminAuthRequiredError } from '@/app/lib/exceptions';
 
 export default async function Layout({
   children,
@@ -8,14 +8,9 @@ export default async function Layout({
 }) {
   const currentUser = await getCurrentUser();
   const user = currentUser?.currentUser;
-
-  if (!user) {
-    return <Unauthorized />;
-  } else {
-    const isAdmin: boolean = user?.userType === 'admin';
-    if (!isAdmin) {
-      return <Unauthorized isAdminAuthorization={true} />;
-    }
+  const isAdmin: boolean = user?.userType === 'admin';
+  if (!isAdmin) {
+    throw new AdminAuthRequiredError();
   }
 
   return <>{children}</>;

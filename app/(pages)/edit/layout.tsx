@@ -1,5 +1,5 @@
 import getCurrentUser from '@/app/actions/user/getCurrentUser';
-import Unauthorized from './Unauthorized';
+import { AuthRequiredError } from '@/app/lib/exceptions';
 
 export default async function Layout({
   children,
@@ -7,10 +7,9 @@ export default async function Layout({
   children: React.ReactNode;
 }) {
   const currentUser = await getCurrentUser();
-  const isLoggedIn = currentUser?.currentUser;
-  if (!isLoggedIn) {
-    return <Unauthorized />;
+  const user = currentUser?.currentUser;
+  if (!user) {
+    throw new AuthRequiredError();
   }
-
   return <>{children}</>;
 }
