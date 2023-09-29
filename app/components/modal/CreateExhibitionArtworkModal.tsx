@@ -12,14 +12,22 @@ import { IArtistProfile, IArtwork } from '@/app/types';
 import SelectboxArtists from '../inputs/SelectboxArtists';
 import Radio from '../inputs/Radio';
 import useCreateExhibitionArtworkModal from '@/app/hooks/useCreateExhibitionArtworkModal';
+import styled from 'styled-components';
+import useTranslate from '@/app/hooks/useTranslate';
 
 enum STEPS {
   INFORMATION = 0,
   PHOTO = 1,
 }
 interface CreateExhibitionArtworkModalProps {
-  allArtistProfiles?: IArtistProfile[];
+  allArtistProfiles: IArtistProfile[];
 }
+
+const RadioWrapper = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  width: 100%;
+`;
 
 const CreateExhibitionArtworkModal = ({
   allArtistProfiles,
@@ -28,8 +36,10 @@ const CreateExhibitionArtworkModal = ({
 
   const [isLoading, setIsLoading] = useState(false);
   const [step, setStep] = useState(STEPS.INFORMATION);
-  const [selectedOption, setSelectedOption] = useState('');
-
+  const [selectedOption, setSelectedOption] = useState('user');
+  const t = useTranslate();
+  const exceptionsLocation = { element: 'exceptions' };
+  const location = { element: 'create_artwork_modal' };
   const handleOptionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedOption(event.target.value);
   };
@@ -46,6 +56,8 @@ const CreateExhibitionArtworkModal = ({
       title: '',
       description: '',
       creationYear: '',
+      artistName: '',
+      artistSurname: '',
       artistId: '',
       medium: '',
       type: '',
@@ -62,6 +74,8 @@ const CreateExhibitionArtworkModal = ({
   const width = watch('width');
   const height = watch('height');
   const media = watch('media');
+  const artistName = watch('artistName');
+  const artistSurname = watch('artistSurname');
   const artistId = watch('artistId');
 
   const setCustomValue = (id: string, value: any) => {
@@ -80,7 +94,7 @@ const CreateExhibitionArtworkModal = ({
     setStep((value) => value + 1);
   };
 
-  const onSubmit: SubmitHandler<FieldValues> = (data) => {
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     if (step !== STEPS.PHOTO) {
       return onNext();
     }
@@ -88,10 +102,11 @@ const CreateExhibitionArtworkModal = ({
     setIsLoading(true);
 
     let artwork: any;
-
-    if (allArtistProfiles) {
+    let apiLink: string = '';
+    if (selectedOption === 'user') {
+      apiLink = `/api/artwork/createUserArtwork/${artistId}`;
       const selectedArtist = allArtistProfiles.find(
-        (artist) => artist.id === artistId
+        (artist) => artist.user.id === artistId
       );
       if (selectedArtist) {
         artwork = {
@@ -106,25 +121,42 @@ const CreateExhibitionArtworkModal = ({
           height: typeof height === 'string' ? Number(height) : height,
           artworkMedias: [media],
           exhibitionIds: [],
-          artistId: artistId,
         };
       }
+    } else if (selectedOption === 'guest') {
+      apiLink = `/api/artwork/createGuestArtwork`;
+      artwork = {
+        title: title,
+        artistName: artistName,
+        artistSurname: artistSurname,
+        description: description,
+        creationYear: creationYear,
+        medium: medium,
+        type: type,
+        width: typeof width === 'string' ? Number(width) : width,
+        height: typeof height === 'string' ? Number(height) : height,
+        artworkMedias: [media],
+      };
     }
 
-    axios
-      .post(`/api/artwork/createArtwork/${artistId}`, artwork)
-      .then(() => {
-        toast.success('Eser eklendi!');
+    try {
+      const response = await axios.post(apiLink, artwork);
+      if (response.data.error) {
+        toast.error(t(response.data.error, exceptionsLocation));
+      } else {
+        toast.success(t('creation_successful_message', location));
         window.location.reload();
         reset();
-      })
-      .catch((e) => {
-        toast.error('Bir şeyler yanlış gitti');
-        console.log(' error ', e);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
+      }
+    } catch (error) {
+      toast.error(
+        error instanceof Error
+          ? t(error.message, exceptionsLocation)
+          : t('unknownError', exceptionsLocation)
+      );
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const actionLabel = useMemo(() => {
@@ -145,6 +177,53 @@ const CreateExhibitionArtworkModal = ({
 
   let bodyContent = (
     <div className='flex flex-row justify-between flex-wrap'>
+      <RadioWrapper>
+        <Radio
+          id='option1'
+          label='Akademi Sanatçısı'
+          value='user'
+          checked={selectedOption === 'user'}
+          onChange={handleOptionChange}
+        />
+
+        <Radio
+          id='option2'
+          label='Akademi Dışı'
+          value='guest'
+          checked={selectedOption === 'guest'}
+          onChange={handleOptionChange}
+        />
+      </RadioWrapper>
+      {selectedOption === 'user' && (
+        <SelectboxArtists
+          id='artistId'
+          label='Sanatçı Adı Soyadı'
+          disabled={isLoading}
+          register={register}
+          errors={errors}
+          choices={allArtistProfiles || []}
+        />
+      )}
+      {selectedOption === 'guest' && (
+        <>
+          <Input
+            id='artistName'
+            label='Sanatçı Adı'
+            width='49%'
+            disabled={isLoading}
+            register={register}
+            errors={errors}
+          />
+          <Input
+            id='artistSurname'
+            label='Sanatçı Soyadı'
+            width='49%'
+            disabled={isLoading}
+            register={register}
+            errors={errors}
+          />
+        </>
+      )}
       <Input
         id='title'
         label='Başlık'
@@ -168,32 +247,6 @@ const CreateExhibitionArtworkModal = ({
         disabled={isLoading}
         register={register}
         errors={errors}
-      />
-      <div>
-        <Radio
-          id='option1'
-          label='Option 1'
-          value='option1'
-          checked={selectedOption === 'option1'}
-          onChange={handleOptionChange}
-        />
-
-        <Radio
-          id='option2'
-          label='Option 2'
-          value='option2'
-          checked={selectedOption === 'option2'}
-          onChange={handleOptionChange}
-        />
-      </div>
-      <SelectboxArtists
-        id='artistId'
-        label='Sanatçı Adı Soyadı'
-        width='49%'
-        disabled={isLoading}
-        register={register}
-        errors={errors}
-        choices={allArtistProfiles || []}
       />
       <Selectbox
         id='medium'
