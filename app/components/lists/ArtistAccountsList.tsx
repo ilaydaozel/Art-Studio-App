@@ -53,7 +53,7 @@ const ArtistAccountsList = ({
   const handleDeleteArtistAccount = (accountId: string) => {
     setIsLoading(true);
     axios
-      .delete(`/api/user/${accountId}`)
+      .delete(`/api/user/deleteUser/${accountId}`)
       .then(() => {
         toast.success('Sanatçı sistemden silindi!');
         refreshPage();

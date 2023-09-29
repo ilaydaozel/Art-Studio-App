@@ -54,7 +54,7 @@ const ArtistForm = () => {
         throw new PasswordMismatchError();
       }
 
-      const response = await axios.post('/api/register', userData);
+      const response = await axios.post('/api/user/register', userData);
       if (response.data.error) {
         toast.error(t(response.data.error, exceptionsLocation));
       } else {
