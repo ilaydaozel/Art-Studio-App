@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useForm, FieldValues, SubmitHandler } from 'react-hook-form';
 import toast from 'react-hot-toast';
-import FormLayout from '../layouts/FormLayout';
+import FormLayout from './FormLayout';
 
 const LoginForm = () => {
   const router = useRouter();

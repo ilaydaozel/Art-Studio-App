@@ -8,8 +8,7 @@ export type ILanguageData = {
     route_names: {
         home: string;
         artists: string;
-        add: string;
-        add_new_artist: string;
+        register: string;
         edit: string;
         edit_artist_accounts: string;
         edit_artist_profile: string;

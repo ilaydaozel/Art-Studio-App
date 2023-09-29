@@ -8,8 +8,7 @@ const TurkishData: ILanguageData = {
     route_names: {
         home: "Anasayfa",
         artists: "Sanatçılar",
-        add: "Ekle",
-        add_new_artist: "Yeni Sanatçı Ekle",
+        register: "Yeni Sanatçı Kaydet",
         edit: "Düzenle",
         edit_artist_accounts: "Sanatçıları Düzenle",
         edit_artist_profile: "Profilimi Düzenle",

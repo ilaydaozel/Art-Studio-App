@@ -151,10 +151,8 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
               >
                 {t('edit_exhibitions', location)}
               </UserMenuElement>
-              <UserMenuElement
-                href={`${ROUTE_PATHS.ADD}${ROUTE_PATHS.ADD_NEW_ARTIST}`}
-              >
-                {t('add_new_artist', location)}
+              <UserMenuElement href={`${ROUTE_PATHS.REGISTER}`}>
+                {t('register', location)}
               </UserMenuElement>
             </>
           )}

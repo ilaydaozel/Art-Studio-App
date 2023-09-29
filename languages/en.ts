@@ -7,8 +7,7 @@ const EnglishData: ILanguageData = {
     route_names: {
         home: "Homepage",
         artists: "Artists",
-        add: "Add",
-        add_new_artist: "Add New Artists",
+        register: "Register Artist",
         edit: "Edit",
         edit_artist_accounts: "Edit Artist Accounts",
         edit_artist_profile: "Edit Artist Profile",
