@@ -57,7 +57,7 @@ const Selectbox = ({
       >
         <option value='' disabled hidden></option>
         {choices.map((option) => (
-          <option key={option.id} value={option.id}>
+          <option key={option.id} value={option.user.id}>
             {option.user.name} {option.user.surname}
           </option>
         ))}
