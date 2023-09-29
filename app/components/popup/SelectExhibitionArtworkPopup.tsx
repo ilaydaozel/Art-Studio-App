@@ -75,6 +75,12 @@ const SearchInput = styled.input`
   padding: 2px;
   outline: 1px solid ${COLORS.lightGray};
   border-radius: 0.5rem;
+  @media (max-width: 992px) {
+    width: 30%;
+  }
+  @media (max-width: 768px) {
+    width: 40%;
+  }
 `;
 
 const Heading = styled.p`
