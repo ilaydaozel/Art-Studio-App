@@ -10,12 +10,9 @@ interface IParams {
 
 export async function POST(request: Request, { params }: { params: IParams }) {
     const { artistId } = params;
-
     const existingArtistProfile = await prisma.artistProfile.findUnique({
         where: {
             artistId: artistId,
-        }, include: {
-            user: true,
         }
     });
 
@@ -35,6 +32,7 @@ export async function POST(request: Request, { params }: { params: IParams }) {
         width,
         height,
         artworkMedias,
+        exhibitionIds,
     } = body;
 
     const artwork = await prisma.artwork.create({
@@ -49,6 +47,7 @@ export async function POST(request: Request, { params }: { params: IParams }) {
             width,
             height,
             artworkMedias,
+            exhibitionIds,
             artistId: artistId,
         }
     });
