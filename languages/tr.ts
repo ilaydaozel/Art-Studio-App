@@ -70,10 +70,14 @@ const TurkishData: ILanguageData = {
         heading: "Duyuruları Düzenle",
         add_button_text: "Yeni Duyuru Ekle +"
     },
-    unauthorized: {
-        caption: "Yetki Yok",
-        user_subcaption: "Sadece giriş yapmış kullanıcıların yetkisi vardır",
-        admin_subcaption: "Sadece adminlerin yetkisi vardır"
+    exceptions: {
+        authRequiredError: "Bu sayfaya erişim için kimlik doğrulaması gereklidir!",
+        adminAuthRequiredError: "Bu sayfaya erişim için yönetici kimlik doğrulaması gereklidir!",
+        passwordLengthError: "Şifre en az 4 karakter uzunluğunda olmalıdır!",
+        passwordMismatchError: "Şifreler eşleşmiyor!",
+        unknownError: "Bilinmeyen bir hata oluştu!",
+        nonUniqueEmailError: "Bu e-posta zaten kullanılıyor!"
+
     },
 };
 

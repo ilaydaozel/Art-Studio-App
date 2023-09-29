@@ -70,9 +70,13 @@ export type ILanguageData = {
         heading: string;
         add_button_text: string;
     };
-    unauthorized: {
-        caption: string;
-        user_subcaption: string;
-        admin_subcaption: string;
+    exceptions: {
+        authRequiredError: string;
+        adminAuthRequiredError: string;
+        passwordLengthError: string;
+        passwordMismatchError: string;
+        unknownError: string;
+        nonUniqueEmailError: string;
     };
+
 }

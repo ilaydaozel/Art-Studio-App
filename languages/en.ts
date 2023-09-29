@@ -69,10 +69,13 @@ const EnglishData: ILanguageData = {
         heading: "Edit Announcements",
         add_button_text: "Add New Announcement +"
     },
-    unauthorized: {
-        caption: "Unauthorized",
-        user_subcaption: "Access is only allowed for registered users",
-        admin_subcaption: "Access is only allowed for admins"
+    exceptions: {
+        authRequiredError: "Authentication is required to access this page!",
+        adminAuthRequiredError: "Admin authentication is required to access this page!",
+        passwordLengthError: "The password must be at least 4 characters long!",
+        passwordMismatchError: "Passwords do not match!",
+        unknownError: "An error occurred!",
+        nonUniqueEmailError: "This email is already in use!"
     },
 };
 
