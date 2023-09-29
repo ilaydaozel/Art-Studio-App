@@ -23,7 +23,7 @@ export async function POST(
     });
 
     if (existingUser) {
-        return NextResponse.json({ error: "nonUniqueEmail", status: "400" });
+        return NextResponse.json({ error: "nonUniqueEmailError", status: "400" });
     }
 
     const hashedPassword = await bcrypt.hash(password, 12);

@@ -56,7 +56,7 @@ const ArtistForm = () => {
 
       const response = await axios.post('/api/register', userData);
       if (response.data.error) {
-        toast.error(response.data.error);
+        toast.error(t(response.data.error, exceptionsLocation));
       } else {
         toast.success('Kayıt olundu!');
         reset();
