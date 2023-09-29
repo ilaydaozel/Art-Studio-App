@@ -3,7 +3,7 @@ import Popup from './Popup';
 import styled from 'styled-components';
 import { useState } from 'react';
 import { COLORS } from '@/constants/colors';
-import { AiFillMinusCircle, AiFillCheckCircle } from 'react-icons/ai';
+import { AiFillCheckCircle, AiOutlineSearch } from 'react-icons/ai';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
@@ -16,30 +16,24 @@ const SelectedArtworksWrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  min-height: 100px;
+  height: 150px;
   gap: 0.5rem;
-  margin: 0.5rem;
-  padding: 0.5rem;
-  box-shadow: 6px 6px 3px rgba(0, 0, 0, 0.3);
-  border-radius: 0.5rem;
-  border: 2px solid #f5f5f5;
+  border-top: 1px solid ${COLORS.lightGray};
+  overflow: auto;
+  padding: 1rem 1rem 0 1rem;
 `;
 
-const ArtworksContainer = styled.div`
+const ArtworksContainer = styled.div<{ minWidth: string }>`
   display: grid;
   grid-auto-rows: max-content;
   align-items: start;
   justify-items: center;
   width: 100%;
-  grid-template-columns: repeat(8, 1fr);
-  gap: 2rem;
-
-  @media (max-width: 768px) {
-    grid-template-columns: repeat(6, 1fr);
-  }
-  @media (max-width: 576px) {
-    grid-template-columns: repeat(4, 1fr);
-  }
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(${(props) => props.minWidth}, 1fr)
+  );
+  gap: 1rem;
 `;
 
 const ArtworkBox = styled.div`
@@ -62,6 +56,14 @@ const ArtworkImage = styled.img`
   object-fit: cover;
   cursor: pointer;
 `;
+
+const ArtworkImageMini = styled.img`
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  cursor: pointer;
+`;
+
 const ArtistName = styled.text`
   font-size: 0.8rem;
   font-weight: bold;
@@ -70,8 +72,9 @@ const ArtistName = styled.text`
 
 const SearchInput = styled.input`
   width: 20%;
-  padding: 6px;
-  outline: 1px solid ${COLORS.darkGray};
+  padding: 2px;
+  outline: 1px solid ${COLORS.lightGray};
+  border-radius: 0.5rem;
 `;
 
 const Heading = styled.p`
@@ -136,34 +139,40 @@ const SelectExhibitionArtworkPopup = ({
 
   let bodyContent =
     artworks.length !== 0 ? (
-      <div className='w-[90%] flex flex-col justify-around items-end'>
-        <SearchInput
-          type='text'
-          placeholder='Search by artist name'
-          value={searchText}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setSearchText(e.target.value)
-          }
-        />
-        <ArtworksContainer>
-          {filteredArtworks.map((artwork) => (
-            <ArtworkBox key={artwork.id}>
-              {selectedArtworks.includes(artwork) && (
-                <AiFillCheckCircle className='absolute right-0 top-0 text-green-600' />
-              )}
-              <ArtworkImage
-                src={artwork.artworkMedias[0] || ''}
-                onClick={() => toggleArtworkSelection(artwork)}
-              />
-              <ArtistName>
-                {artwork.artistName} {artwork.artistSurname}
-              </ArtistName>
-            </ArtworkBox>
-          ))}
-        </ArtworksContainer>
+      <div className='w-full h-[80%] flex flex-col justify-between items-center'>
+        <div className='flex gap-1 w-full items-center justify-end mr-5'>
+          <AiOutlineSearch />
+          <SearchInput
+            type='text'
+            placeholder='Search by artist name'
+            value={searchText}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setSearchText(e.target.value)
+            }
+          />
+        </div>
+
+        <div className='w-[96%] max-h-[80vh] p-2 overflow-y-auto'>
+          <ArtworksContainer minWidth='120px'>
+            {filteredArtworks.map((artwork) => (
+              <ArtworkBox key={artwork.id}>
+                {selectedArtworks.includes(artwork) && (
+                  <AiFillCheckCircle className='absolute right-0 top-0 text-green-600' />
+                )}
+                <ArtworkImage
+                  src={artwork.artworkMedias[0] || ''}
+                  onClick={() => toggleArtworkSelection(artwork)}
+                />
+                <ArtistName>
+                  {artwork.artistName} {artwork.artistSurname}
+                </ArtistName>
+              </ArtworkBox>
+            ))}
+          </ArtworksContainer>
+        </div>
         <SelectedArtworksWrapper>
           <Heading>Sergiye Eklenecek Resimler</Heading>
-          <ArtworksContainer>
+          <ArtworksContainer minWidth='80px'>
             {selectedArtworks.map((artwork) => (
               <ArtworkBox
                 key={artwork.id}
@@ -173,11 +182,7 @@ const SelectExhibitionArtworkPopup = ({
                   );
                 }}
               >
-                <AiFillMinusCircle className='absolute right-0 top-0 text-red-600' />
-                <ArtworkImage src={artwork.artworkMedias[0] || ''} />
-                <ArtistName>
-                  {artwork.artistName} {artwork.artistSurname}
-                </ArtistName>
+                <ArtworkImageMini src={artwork.artworkMedias[0] || ''} />
               </ArtworkBox>
             ))}
           </ArtworksContainer>
