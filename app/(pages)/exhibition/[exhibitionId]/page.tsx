@@ -1,10 +1,11 @@
 import ClientOnly from '@/app/components/ClientOnly';
 import EmptyState from '@/app/components/EmptyState';
-import { IArtwork, IExhibition } from '@/app/types';
+import { IArtistProfile, IArtwork, IExhibition } from '@/app/types';
 import getExhibitionById from '@/app/actions/exhibition/getExhibitionById';
 import ExhibitionProfile from '@/app/components/exhibition/ExhibitionProfile';
 import { PiArrowSquareInThin } from 'react-icons/pi';
 import getAllArtworks from '@/app/actions/artwork/getAllArtworks';
+import getAllArtistProfiles from '@/app/actions/artistProfile/getAllArtistProfiles';
 
 interface IParams {
   exhibitionId?: string;
@@ -12,11 +13,13 @@ interface IParams {
 
 const ExhibitionPage = async ({ params }: { params: IParams }) => {
   let exhibition: { exhibition: IExhibition } | null = null;
-  let artworks: { artworks: IArtwork[] } | null = null;
+  let allArtworks: { artworks: IArtwork[] } | null = null;
+  let allArtistProfiles: { artistProfiles: IArtistProfile[] } | null = null;
 
   if (params != undefined && params != undefined) {
     exhibition = await getExhibitionById(params);
-    artworks = await getAllArtworks();
+    allArtworks = await getAllArtworks();
+    allArtistProfiles = await getAllArtistProfiles();
   }
 
   if (!exhibition) {
@@ -33,8 +36,9 @@ const ExhibitionPage = async ({ params }: { params: IParams }) => {
   return (
     <ClientOnly>
       <ExhibitionProfile
-        artworks={artworks?.artworks}
+        artworks={allArtworks?.artworks}
         exhibition={exhibition.exhibition}
+        allArtistProfiles={allArtistProfiles?.artistProfiles}
       ></ExhibitionProfile>
     </ClientOnly>
   );
