@@ -11,9 +11,12 @@ import {
   PasswordMismatchError,
   UnknownError,
 } from '@/app/lib/exceptions';
+import useTranslate from '@/app/hooks/useTranslate';
 
 const ArtistForm = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const exceptionsLocation = { element: 'exceptions' };
+  const t = useTranslate();
 
   const {
     register,
@@ -60,10 +63,10 @@ const ArtistForm = () => {
       }
     } catch (error) {
       if (error instanceof Error) {
-        toast.error(error.message);
+        toast.error(t(error.message, exceptionsLocation));
       } else {
         const unkownError = new UnknownError();
-        toast.error(unkownError.message);
+        toast.error(t(unkownError.message, exceptionsLocation));
         console.error('Error: ', error);
       }
     } finally {
