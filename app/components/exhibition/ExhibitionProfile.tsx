@@ -82,6 +82,7 @@ const ExhibitionProfile = ({
           artworks={exhibition.artworks}
           onDelete={handleDeleteArtworkFromExhibition}
           isEditable={true}
+          width='90%'
         ></ArtworkList>
       </ComponentWithHeading>
     </Container>
