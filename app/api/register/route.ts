@@ -16,6 +16,16 @@ export async function POST(
         password,
     } = body;
 
+    const existingUser = await prisma.user.findUnique({
+        where: {
+            email: email,
+        },
+    });
+
+    if (existingUser) {
+        return NextResponse.json({ error: "nonUniqueEmail", status: "400" });
+    }
+
     const hashedPassword = await bcrypt.hash(password, 12);
     let user: Prisma.UserCreateInput;
     if (userType === 'artist') {
