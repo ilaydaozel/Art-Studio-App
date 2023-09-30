@@ -7,11 +7,18 @@ import { ILanguageData } from '@/languages/type';
 import EnglishData from '@/languages/en';
 
 function getSelectedLanguage(): Language {
-  return (sessionStorage.getItem('selectedLanguage') as Language) || 'tr';
+  if (typeof window !== 'undefined') {
+    return (
+      (window.sessionStorage.getItem('selectedLanguage') as Language) || 'tr'
+    );
+  }
+  return 'tr'; // Default value when sessionStorage is not available
 }
 
 function setSelectedLanguage(language: Language) {
-  sessionStorage.setItem('selectedLanguage', language);
+  if (typeof window !== 'undefined') {
+    window.sessionStorage.setItem('selectedLanguage', language);
+  }
 }
 
 const TranslationProvider = ({
