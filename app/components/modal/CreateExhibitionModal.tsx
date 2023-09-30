@@ -8,8 +8,8 @@ import useCreateExhibitionModal from '@/app/hooks/useCreateExhibitionModal';
 import Modal from './Modal';
 import ImageUpload from '../inputs/ImageUpload';
 import Input from '../inputs/Input';
-import { IArtistProfile } from '@/app/types';
 import useTranslate from '@/app/hooks/useTranslate';
+import DatePicker from '../inputs/DatePicker';
 
 enum STEPS {
   INFORMATION = 0,
@@ -20,6 +20,7 @@ const CreateExhibitionModal = () => {
   const createExhibitionModal = useCreateExhibitionModal();
   const [isLoading, setIsLoading] = useState(false);
   const [step, setStep] = useState(STEPS.INFORMATION);
+
   const location = { element: 'add_exhibition_modal' };
   const t = useTranslate();
 
@@ -34,8 +35,8 @@ const CreateExhibitionModal = () => {
     defaultValues: {
       title: '',
       description: '',
-      startDate: Date(),
-      endDate: Date(),
+      startDate: '',
+      endDate: '',
       organizedBy: '',
       coverImage: '',
     },
@@ -77,6 +78,7 @@ const CreateExhibitionModal = () => {
       organizedBy: organizedBy,
       coverImage: coverImage,
     };
+
     axios
       .post('/api/exhibition/createExhibition', exhibitionData)
       .then(() => {
@@ -125,9 +127,8 @@ const CreateExhibitionModal = () => {
         disabled={isLoading}
         register={register}
         errors={errors}
-        required
       />
-      <Input
+      <DatePicker
         id='startDate'
         label={t('startDate', location)}
         disabled={isLoading}
@@ -135,7 +136,7 @@ const CreateExhibitionModal = () => {
         errors={errors}
         required
       />
-      <Input
+      <DatePicker
         id='endDate'
         label={t('endDate', location)}
         disabled={isLoading}
@@ -149,7 +150,6 @@ const CreateExhibitionModal = () => {
         disabled={isLoading}
         register={register}
         errors={errors}
-        required
       />
     </div>
   );
