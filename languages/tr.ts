@@ -117,6 +117,11 @@ const TurkishData: ILanguageData = {
         heading: "Duyuruları Düzenle",
         add_button_text: "Yeni Duyuru Ekle +"
     },
+    error_page: {
+        caption: "Hay aksi.. Doğru olmayan bir şeyler var",
+        reset_button_label: "Tekrar Dene",
+        home_button_label: "Anasayfaya git",
+    },
     exceptions: {
         authRequiredError: "Bu sayfaya erişim için kimlik doğrulaması gereklidir!",
         adminAuthRequiredError: "Bu sayfaya erişim için yönetici kimlik doğrulaması gereklidir!",

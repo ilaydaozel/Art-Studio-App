@@ -116,6 +116,11 @@ const EnglishData: ILanguageData = {
         heading: "Edit Announcements",
         add_button_text: "Add New Announcement +"
     },
+    error_page: {
+        caption: "Oops.. Something isn't right",
+        reset_button_label: "Try Again",
+        home_button_label: "Go To Homepage",
+    },
     exceptions: {
         authRequiredError: "Authentication is required to access this page!",
         adminAuthRequiredError: "Admin authentication is required to access this page!",
