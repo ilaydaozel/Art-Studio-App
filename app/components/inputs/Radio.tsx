@@ -26,14 +26,12 @@ const Radio = ({
         checked={checked}
         onChange={onChange}
         className={`
-          peer
           h-5 w-5
           mt-2
           bg-white 
           border-2
           rounded-md
           outline-none
-          transition
           disabled:opacity-70
           disabled:cursor-not-allowed
         `}
