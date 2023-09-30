@@ -77,6 +77,16 @@ export type ILanguageData = {
         forward_label: string;
         creation_successful_message: string;
     };
+    create_announcement_modal: {
+        form_title: string;
+        action_label: string;
+        title: string;
+        description: string;
+        short_description: string;
+        link: string;
+        cover_image: string;
+        creation_successful_message: string;
+    };
     artist_accounts: {
         list_heading: string;
         add_button_text: string;

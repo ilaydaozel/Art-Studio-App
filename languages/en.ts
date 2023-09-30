@@ -76,6 +76,16 @@ const EnglishData: ILanguageData = {
         forward_label: 'Forward',
         creation_successful_message: 'Artwork created successfully!',
     },
+    create_announcement_modal: {
+        form_title: 'Create Announcement',
+        action_label: 'Done',
+        title: 'Title',
+        description: 'Description',
+        short_description: 'Short Description',
+        link: 'Link',
+        cover_image: 'Cover Image',
+        creation_successful_message: 'Announcement created successfully!',
+    },
     artist_accounts: {
         list_heading: "Artists",
         add_button_text: "Add New Artist +"

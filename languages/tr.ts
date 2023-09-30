@@ -77,6 +77,16 @@ const TurkishData: ILanguageData = {
         forward_label: 'İleri',
         creation_successful_message: 'Eser başarıyla oluşturuldu!',
     },
+    create_announcement_modal: {
+        form_title: 'Duyuru Oluştur',
+        action_label: 'Tamam',
+        title: 'Başlık',
+        description: 'Açıklama',
+        short_description: 'Kısa Açıklama',
+        link: 'Link',
+        cover_image: 'Kapak Fotorafı',
+        creation_successful_message: 'Duyuru başarıyla oluşturuldu!',
+    },
     artist_accounts: {
         list_heading: "Sanatçılar",
         add_button_text: "Yeni Sanatçı Ekle +"

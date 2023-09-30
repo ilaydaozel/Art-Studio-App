@@ -8,11 +8,14 @@ import Modal from './Modal';
 import ImageUpload from '../inputs/ImageUpload';
 import Input from '../inputs/Input';
 import useCreateAnnouncementModal from '@/app/hooks/useCreateAnnouncementModal';
+import useTranslate from '@/app/hooks/useTranslate';
 
 const CreateAnnouncementModal = () => {
   const createAnnouncementModal = useCreateAnnouncementModal();
-
   const [isLoading, setIsLoading] = useState(false);
+  const t = useTranslate();
+  const exceptionsLocation = { element: 'exceptions' };
+  const location = { element: 'create_announcement_modal' };
 
   const {
     register,
@@ -44,7 +47,7 @@ const CreateAnnouncementModal = () => {
     });
   };
 
-  const onSubmit: SubmitHandler<FieldValues> = (data) => {
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     setIsLoading(true);
 
     const announcement = {
@@ -55,28 +58,34 @@ const CreateAnnouncementModal = () => {
       coverImage: coverImage,
       isActive: true,
     };
-
-    axios
-      .post(`/api/announcement/createAnnouncement/`, announcement)
-      .then(() => {
-        toast.success('Duyuru eklendi!');
+    try {
+      const response = await axios.post(
+        `/api/announcement/createAnnouncement/`,
+        announcement
+      );
+      if (response.data.error) {
+        toast.error(t(response.data.error, exceptionsLocation));
+      } else {
+        toast.success(t('creation_successful_message', location));
         window.location.reload();
         reset();
-      })
-      .catch((e) => {
-        toast.error('Bir şeyler yanlış gitti');
-        console.log(' error ', e);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
+      }
+    } catch (error) {
+      toast.error(
+        error instanceof Error
+          ? t(error.message, exceptionsLocation)
+          : t('unknownError', exceptionsLocation)
+      );
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   let bodyContent = (
     <div className='flex flex-row align-center justify-between flex-wrap'>
       <Input
         id='caption'
-        label='Başlık'
+        label={t('title', location)}
         disabled={isLoading}
         register={register}
         errors={errors}
@@ -84,7 +93,7 @@ const CreateAnnouncementModal = () => {
       />
       <Input
         id='subcaption'
-        label='Açıklama'
+        label={t('description', location)}
         width='49%'
         disabled={isLoading}
         register={register}
@@ -92,7 +101,7 @@ const CreateAnnouncementModal = () => {
       />
       <Input
         id='smallCaption'
-        label='Kısa Açıklama'
+        label={t('short_description', location)}
         width='49%'
         disabled={isLoading}
         register={register}
@@ -100,7 +109,7 @@ const CreateAnnouncementModal = () => {
       />
       <Input
         id='link'
-        label='Link'
+        label={t('link', location)}
         disabled={isLoading}
         register={register}
         errors={errors}
@@ -108,6 +117,7 @@ const CreateAnnouncementModal = () => {
       <ImageUpload
         onChange={(value) => setCustomValue('coverImage', value)}
         value={coverImage}
+        label={t('cover_image', location)}
       />
     </div>
   );
@@ -116,8 +126,8 @@ const CreateAnnouncementModal = () => {
     <Modal
       disabled={isLoading}
       isOpen={createAnnouncementModal.isOpen}
-      title='Duyuru Ekle'
-      actionLabel={'Tamamla'}
+      title={t('form_title', location)}
+      actionLabel={t('action_label', location)}
       onSubmit={handleSubmit(onSubmit)}
       onClose={createAnnouncementModal.onClose}
       body={bodyContent}
