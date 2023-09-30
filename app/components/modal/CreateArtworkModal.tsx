@@ -58,7 +58,6 @@ const CreateArtworkModal = ({ artistProfile }: CreateArtworkModalProps) => {
   const width = watch('width');
   const height = watch('height');
   const media = watch('media');
-  const artistName = watch('artistName');
 
   const setCustomValue = (id: string, value: any) => {
     setValue(id, value, {
