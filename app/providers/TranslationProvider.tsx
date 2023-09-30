@@ -1,23 +1,18 @@
 'use client';
-import React, {
-  useCallback,
-  useEffect,
-  useReducer,
-  useRef,
-  useState,
-} from 'react';
-import {
-  TranslationDispatchContext,
-  TranslationContext,
-} from '../contexts/TranslationContext';
-import { State } from '../reducers/language/type';
-import { languageReducer } from '../reducers/language';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { TranslationContext } from '../contexts/TranslationContext';
 import { Language } from '../types/language';
 import TurkishData from '@/languages/tr';
+import { ILanguageData } from '@/languages/type';
+import EnglishData from '@/languages/en';
 
-const initialState: State = {
-  locale: 'tr',
-};
+function getSelectedLanguage(): Language {
+  return (sessionStorage.getItem('selectedLanguage') as Language) || 'tr';
+}
+
+function setSelectedLanguage(language: Language) {
+  sessionStorage.setItem('selectedLanguage', language);
+}
 
 const TranslationProvider = ({
   children,
@@ -26,13 +21,25 @@ const TranslationProvider = ({
   children: React.ReactNode;
   fetchTranslations: any;
 }) => {
-  const [languageState, dispatch] = useReducer(languageReducer, initialState);
-  const [{ language, messages }, setLanguage] = useState({
-    language: 'tr' as Language,
-    messages: TurkishData,
+  const [{ language, messages }, setLanguage] = useState<{
+    language: Language;
+    messages: ILanguageData;
+  }>({
+    language: getSelectedLanguage(),
+    messages: (() => {
+      const selectedLanguage = getSelectedLanguage();
+      switch (selectedLanguage) {
+        case 'tr':
+          return TurkishData;
+        case 'en':
+          return EnglishData;
+        default:
+          return TurkishData; // Default to Turkish if the selected language is not recognized
+      }
+    })(),
   });
 
-  const initialStringsLoaded = useRef(false); // store information between re-renders (unlike regular variables, which reset on every render)
+  const initialStringsLoaded = useRef(true);
 
   const updateLanguage = useCallback(
     //cache a function definition between re-renders.
@@ -46,6 +53,7 @@ const TranslationProvider = ({
         language: newLang,
         messages: newMessages,
       });
+      setSelectedLanguage(newLang);
     },
     [language, fetchTranslations]
   );
@@ -63,9 +71,7 @@ const TranslationProvider = ({
 
   return (
     <TranslationContext.Provider value={translationContext}>
-      <TranslationDispatchContext.Provider value={dispatch}>
-        {children}
-      </TranslationDispatchContext.Provider>
+      {children}
     </TranslationContext.Provider>
   );
 };
