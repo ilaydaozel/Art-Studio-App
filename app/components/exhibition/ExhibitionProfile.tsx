@@ -15,6 +15,8 @@ import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
 import CreateExhibitionArtworkModal from '../modal/CreateExhibitionArtworkModal';
 import useCreateExhibitionArtworkModal from '@/app/hooks/useCreateExhibitionArtworkModal';
+import VirtualExhibitionWithMenu from '../virtualExhibition/VirtualExhibitionWithMenu';
+import Popup from '../popup/Popup';
 interface ExhibitionProfileProps {
   exhibition: IExhibition;
   artworks?: IArtwork[];
@@ -38,6 +40,7 @@ const ExhibitionProfile = ({
 }: ExhibitionProfileProps) => {
   const [showArtworkSelection, setShowArtworkSelection] = useState(false);
   const [remainingArtworks, setRemainingArtworks] = useState<IArtwork[]>([]);
+  const [showExhibition, setShowExhibition] = useState(false);
   const router = useRouter();
   const createExhibitionArtworkModal = useCreateExhibitionArtworkModal();
 
@@ -68,20 +71,40 @@ const ExhibitionProfile = ({
   return (
     <Container>
       <Header exhibition={exhibition}></Header>
+      <SlidingButton
+        onClick={() => setShowExhibition(true)}
+        label='Online sergi'
+      ></SlidingButton>
+
+      {showExhibition && (
+        <Popup
+          onClose={() => setShowExhibition(false)}
+          width='100%'
+          body={
+            <VirtualExhibitionWithMenu
+              artworks={exhibition.artworks}
+            ></VirtualExhibitionWithMenu>
+          }
+        ></Popup>
+      )}
       <About exhibition={exhibition}></About>
       <CreateExhibitionArtworkModal
         allArtistProfiles={allArtistProfiles || []}
       ></CreateExhibitionArtworkModal>
-      <SlidingButton
-        label='Resim Ekle'
-        onClick={() => {
-          createExhibitionArtworkModal.onOpen();
-        }}
-      />
-      <SlidingButton
-        onClick={() => setShowArtworkSelection(true)}
-        label='Sistemden Resim Seç'
-      ></SlidingButton>
+
+      <div className='flex gap-2'>
+        <SlidingButton
+          label='Yeni Resim Ekle'
+          onClick={() => {
+            createExhibitionArtworkModal.onOpen();
+          }}
+        />
+        <SlidingButton
+          onClick={() => setShowArtworkSelection(true)}
+          label='Sistemden Resim Seç'
+        ></SlidingButton>
+      </div>
+
       {showArtworkSelection && (
         <SelectExhibitionArtworkPopup
           onClose={() => {
