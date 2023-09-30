@@ -28,15 +28,18 @@ const EnglishData: ILanguageData = {
         subtitle: "Please Log In",
         action_label: "Log In"
     },
-    add_exhibition_modal: {
+    create_exhibition_modal: {
         form_title: "New Exhibition",
         action_label: "Save",
         title: "Title",
         description: "Description",
-        startDate: "Start Date",
-        endDate: "End Date",
-        organizedBy: "Organized By",
-        coverImage: "Cover Image",
+        start_date: "Start Date",
+        end_date: "End Date",
+        organized_by: "Organized By",
+        cover_image: "Cover Image",
+        back_label: 'Back',
+        forward_label: 'Forward',
+        creation_successful_message: 'Exhibition created successfully!',
     },
     create_artwork_modal: {
         form_title: 'Create Artwork',

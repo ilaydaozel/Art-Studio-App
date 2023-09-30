@@ -29,15 +29,18 @@ export type ILanguageData = {
         subtitle: string;
         action_label: string;
     };
-    add_exhibition_modal: {
+    create_exhibition_modal: {
         form_title: string;
         action_label: string;
         title: string;
         description: string;
-        startDate: string;
-        endDate: string;
-        organizedBy: string;
-        coverImage: string;
+        start_date: string;
+        end_date: string;
+        organized_by: string;
+        cover_image: string;
+        back_label: string;
+        forward_label: string;
+        creation_successful_message: string;
     };
     create_artwork_modal: {
         form_title: string;

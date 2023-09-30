@@ -20,9 +20,10 @@ const CreateExhibitionModal = () => {
   const createExhibitionModal = useCreateExhibitionModal();
   const [isLoading, setIsLoading] = useState(false);
   const [step, setStep] = useState(STEPS.INFORMATION);
-
-  const location = { element: 'add_exhibition_modal' };
   const t = useTranslate();
+
+  const location = { element: 'create_exhibition_modal' };
+  const exceptionsLocation = { element: 'exceptions' };
 
   const {
     register,
@@ -64,7 +65,7 @@ const CreateExhibitionModal = () => {
     setStep((value) => value + 1);
   };
 
-  const onSubmit: SubmitHandler<FieldValues> = (data: FieldValues) => {
+  const onSubmit: SubmitHandler<FieldValues> = async (data: FieldValues) => {
     if (step !== STEPS.PHOTO) {
       return onNext();
     }
@@ -78,29 +79,35 @@ const CreateExhibitionModal = () => {
       organizedBy: organizedBy,
       coverImage: coverImage,
     };
-
-    axios
-      .post('/api/exhibition/createExhibition', exhibitionData)
-      .then(() => {
-        toast.success('Sergi oluşturuldu!');
+    try {
+      const response = await axios.post(
+        '/api/exhibition/createExhibition',
+        exhibitionData
+      );
+      if (response.data.error) {
+        toast.error(t(response.data.error, exceptionsLocation));
+      } else {
+        toast.success(t('creation_successful_message', location));
         window.location.reload();
         reset();
-      })
-      .catch((error) => {
-        toast.error('Error!');
-        console.log('error: ', error);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
+      }
+    } catch (error) {
+      toast.error(
+        error instanceof Error
+          ? t(error.message, exceptionsLocation)
+          : t('unknownError', exceptionsLocation)
+      );
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const actionLabel = useMemo(() => {
     if (step === STEPS.PHOTO) {
-      t('action_label', location);
+      return t('action_label', location);
     }
 
-    return 'İleri';
+    return t('forward_label', location);
   }, [step]);
 
   const secondaryActionLabel = useMemo(() => {
@@ -108,7 +115,7 @@ const CreateExhibitionModal = () => {
       return undefined;
     }
 
-    return 'Geri';
+    return t('back_label', location);
   }, [step]);
 
   let bodyContent = (
@@ -130,7 +137,7 @@ const CreateExhibitionModal = () => {
       />
       <DatePicker
         id='startDate'
-        label={t('startDate', location)}
+        label={t('start_date', location)}
         disabled={isLoading}
         register={register}
         errors={errors}
@@ -138,7 +145,7 @@ const CreateExhibitionModal = () => {
       />
       <DatePicker
         id='endDate'
-        label={t('endDate', location)}
+        label={t('end_date', location)}
         disabled={isLoading}
         register={register}
         errors={errors}
@@ -146,7 +153,7 @@ const CreateExhibitionModal = () => {
       />
       <Input
         id='organizedBy'
-        label={t('organizedBy', location)}
+        label={t('organized_by', location)}
         disabled={isLoading}
         register={register}
         errors={errors}
@@ -157,6 +164,7 @@ const CreateExhibitionModal = () => {
   if (step === STEPS.PHOTO) {
     bodyContent = (
       <ImageUpload
+        label={t('cover_image', location)}
         onChange={(value) => setCustomValue('coverImage', value)}
         value={coverImage}
       />

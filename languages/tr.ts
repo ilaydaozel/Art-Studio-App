@@ -29,15 +29,18 @@ const TurkishData: ILanguageData = {
         subtitle: "Lütfen Giriş Yapın",
         action_label: "Giriş Yap"
     },
-    add_exhibition_modal: {
+    create_exhibition_modal: {
         form_title: "Yeni Sergi",
         action_label: "Kaydet",
         title: "Başlık",
         description: "Açıklama",
-        startDate: "Başlangıç Tarihi",
-        endDate: "Bitiş Tarihi",
-        organizedBy: "Düzenleyen",
-        coverImage: "Kapak Fotoğrafı",
+        start_date: "Başlangıç Tarihi",
+        end_date: "Bitiş Tarihi",
+        organized_by: "Düzenleyen",
+        cover_image: "Kapak Fotoğrafı",
+        back_label: 'Geri',
+        forward_label: 'İleri',
+        creation_successful_message: 'Sergi başarıyla oluşturuldu!',
     },
     create_artwork_modal: {
         form_title: 'Eser Oluştur',
