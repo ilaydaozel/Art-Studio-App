@@ -3,7 +3,11 @@ import Popup from './Popup';
 import styled from 'styled-components';
 import { useState } from 'react';
 import { COLORS } from '@/constants/colors';
-import { AiFillCheckCircle, AiOutlineSearch } from 'react-icons/ai';
+import {
+  AiFillCheckCircle,
+  AiOutlineSearch,
+  AiFillMinusCircle,
+} from 'react-icons/ai';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
@@ -188,7 +192,11 @@ const SelectExhibitionArtworkPopup = ({
                   );
                 }}
               >
-                <ArtworkImageMini src={artwork.artworkMedias[0] || ''} />
+                <ArtworkImageMini
+                  className='peer'
+                  src={artwork.artworkMedias[0] || ''}
+                />
+                <AiFillMinusCircle className='peer-hover:visible invisible absolute right-0 top-0 text-red-600' />
               </ArtworkBox>
             ))}
           </ArtworksContainer>
