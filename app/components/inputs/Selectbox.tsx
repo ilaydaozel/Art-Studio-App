@@ -11,7 +11,6 @@ interface SelectboxProps {
   type?: string;
   width?: string;
   disabled?: boolean;
-  formatPrice?: boolean;
   required?: boolean;
   register: UseFormRegister<FieldValues>;
   errors: FieldErrors;
@@ -23,7 +22,6 @@ const Selectbox = ({
   choices,
   width = '100%',
   disabled,
-  formatPrice,
   register,
   required,
   errors,
