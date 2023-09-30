@@ -20,7 +20,7 @@ interface ImageUploadProps {
 const ImageUpload: React.FC<ImageUploadProps> = ({
   onChange,
   value,
-  label = '',
+  label,
 }) => {
   const handleUpload = useCallback(
     (result: any) => {
@@ -31,10 +31,8 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
 
   return (
     <div className='w-full flex flex-col items-center justify-center'>
-      {label != '' ? (
+      {label && (
         <h1 className='font-semibold text-neutral-600 text-lg m-2'>{label}</h1>
-      ) : (
-        <></>
       )}
       <CldUploadWidget
         onUpload={handleUpload}
