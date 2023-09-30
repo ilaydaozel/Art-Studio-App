@@ -43,7 +43,7 @@ const ExhibitionsList = ({
 }: ExhibitionsListProps) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
-  console.log('isEditable: ', isEditable);
+
   const refreshPage = () => {
     router.refresh();
   };
