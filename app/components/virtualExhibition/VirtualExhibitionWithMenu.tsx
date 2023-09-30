@@ -11,9 +11,13 @@ interface GalleryProps {
 }
 
 const MenuContainer = styled.div`
-  position: fixed;
-  width: 50vw;
-  height: 60vh;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  height: auto;
+  max-height: 80%;
+  overflow-y: auto;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -48,12 +52,12 @@ const InformationContainer = styled.div`
 `;
 
 const ExhibitionTitle = styled.text`
-  font-size: 1.5rem;
+  font-size: 1rem;
   color: ${COLORS.darkGray};
   font-weight: bold;
 `;
 const InfoText = styled.text`
-  font-size: 1rem;
+  font-size: 0.5rem;
   color: ${COLORS.darkGray};
 `;
 
@@ -64,9 +68,8 @@ const VirtualExhibitionWithMenu = ({ artworks }: GalleryProps) => {
     setIsMenuOpen((value) => !value);
   }, []);
 
-  const menuRef = useRef<HTMLDivElement>(null); // Specify the type of menuRef
+  const menuRef = useRef<HTMLDivElement>(null);
 
-  // Use useEffect to add a click event listener when the component mounts
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       // If the click is outside the menu and the menu is open, close it
@@ -86,11 +89,12 @@ const VirtualExhibitionWithMenu = ({ artworks }: GalleryProps) => {
   }, [isMenuOpen]);
 
   const handleStartClick = () => {
-    setIsMenuOpen(false); // Close the menu when the start button is clicked
+    setIsMenuOpen(false);
   };
 
   return (
-    <>
+    <div className='relative max-w-full'>
+      <ThreeDExhibition artworks={artworks}></ThreeDExhibition>
       <div className='absolute bottom-10 right-6' id='menuRef' ref={menuRef}>
         <div
           onClick={toggleOpen}
@@ -98,47 +102,37 @@ const VirtualExhibitionWithMenu = ({ artworks }: GalleryProps) => {
         >
           <AiOutlineMenu className='md:w-[16px] md:h-[16px] w-[14px] h-[14px] text-neutral-500' />
         </div>
-        {isMenuOpen && (
-          <>
-            <MenuContainer id='menu'>
-              <div className='relative w-full h-[40%]'>
-                <Image
-                  style={{
-                    borderTopRightRadius: '0.5rem',
-                    borderTopLeftRadius: '0.5rem',
-                  }}
-                  src={
-                    'https://res.cloudinary.com/dnlz4muyb/image/upload/v1691094915/j0dfdld8wjk1cdgb8afs.jpg'
-                  }
-                  placeholder='empty'
-                  alt='artwork'
-                  fill
-                  className='object-cover'
-                />
-              </div>
-              <InformationContainer>
-                <ExhibitionTitle>Sanal Sergi Deneyimi</ExhibitionTitle>
-                <div className='flex flex-col justify-center items-center'>
-                  <InfoText>Başlamak için ENTER a basın.</InfoText>
-                  <InfoText>
-                    Gezinmek için ok tuşlarını veya W A S D tuşlarını kullanın.
-                  </InfoText>
-                  <InfoText>
-                    Etrafa bakmak için fareyi hareket ettirin.
-                  </InfoText>
-                  <InfoText>Çıkmak için sağ üstteki çarpıya basın.</InfoText>
-                </div>
-                <StartButton id='start_button' onClick={handleStartClick}>
-                  Sergiyi Gör
-                </StartButton>
-              </InformationContainer>
-            </MenuContainer>
-          </>
-        )}
       </div>
+      {isMenuOpen && (
+        <MenuContainer id='menu'>
+          <Image
+            src={
+              'https://res.cloudinary.com/dnlz4muyb/image/upload/v1691094915/j0dfdld8wjk1cdgb8afs.jpg'
+            }
+            placeholder='empty'
+            alt='artwork'
+            width={100}
+            height={100}
+            className='object-cover'
+          />
 
-      <ThreeDExhibition artworks={artworks}></ThreeDExhibition>
-    </>
+          <InformationContainer>
+            <ExhibitionTitle>Sanal Sergi Deneyimi</ExhibitionTitle>
+            <div className='flex flex-col justify-center items-center'>
+              <InfoText>Başlamak için ENTER a basın.</InfoText>
+              <InfoText>
+                Gezinmek için ok tuşlarını veya W A S D tuşlarını kullanın.
+              </InfoText>
+              <InfoText>Etrafa bakmak için fareyi hareket ettirin.</InfoText>
+              <InfoText>Çıkmak için sağ üstteki çarpıya basın.</InfoText>
+            </div>
+            <StartButton id='start_button' onClick={handleStartClick}>
+              Sergiyi Gör
+            </StartButton>
+          </InformationContainer>
+        </MenuContainer>
+      )}
+    </div>
   );
 };
 export default VirtualExhibitionWithMenu;
