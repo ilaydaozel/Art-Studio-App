@@ -1,5 +1,6 @@
 'use client';
 
+import { COLORS } from '@/constants/colors';
 import { IconType } from 'react-icons';
 
 interface ButtonProps {
@@ -8,6 +9,7 @@ interface ButtonProps {
   disabled?: boolean;
   icon?: IconType;
   width?: string;
+  bgColor?: string;
 }
 
 const Button = ({
@@ -16,6 +18,7 @@ const Button = ({
   disabled,
   icon: Icon,
   width = '100%',
+  bgColor,
 }: ButtonProps) => {
   return (
     <button
@@ -23,6 +26,8 @@ const Button = ({
       onClick={onClick}
       style={{
         width: width,
+        backgroundColor: bgColor,
+        color: bgColor !== '#000000' ? COLORS.darkGray : '#ffffff',
       }}
       className={`
         relative
