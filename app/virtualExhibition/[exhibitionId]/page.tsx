@@ -2,14 +2,13 @@ import ClientOnly from '@/app/components/ClientOnly';
 import EmptyState from '@/app/components/EmptyState';
 import { IExhibition } from '@/app/types';
 import getExhibitionById from '@/app/actions/exhibition/getExhibitionById';
-import ExhibitionProfile from '@/app/components/exhibition/ExhibitionProfile';
-import StartMenu from '@/app/components/virtualExhibition/VirtualExhibitionWithMenu';
+import VirtualExhibitionWithMenu from '@/app/components/virtualExhibition/VirtualExhibitionWithMenu';
 
 interface IParams {
   exhibitionId?: string;
 }
 
-const ExhibitionPage = async ({ params }: { params: IParams }) => {
+const VirtualExhibition = async ({ params }: { params: IParams }) => {
   let exhibition: { exhibition: IExhibition } | null = null;
 
   if (params != undefined && params != undefined) {
@@ -29,9 +28,13 @@ const ExhibitionPage = async ({ params }: { params: IParams }) => {
 
   return (
     <ClientOnly>
-      <StartMenu artworks={exhibition.exhibition.artworks}></StartMenu>
+      <div className='relative'>
+        <VirtualExhibitionWithMenu
+          exhibition={exhibition.exhibition}
+        ></VirtualExhibitionWithMenu>
+      </div>
     </ClientOnly>
   );
 };
 
-export default ExhibitionPage;
+export default VirtualExhibition;
