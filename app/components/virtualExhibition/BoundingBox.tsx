@@ -13,6 +13,7 @@ export const checkCollisionWithTheBoundingBox = (
   camera: THREE.Camera,
   boundingBox: THREE.Box3[]
 ) => {
+  const minDistance = 10;
   const playerBoundingBox = new THREE.Box3();
   const roomBoundingBox = boundingBox;
   const cameraWorldPosition = new THREE.Vector3();
@@ -22,8 +23,10 @@ export const checkCollisionWithTheBoundingBox = (
     new THREE.Vector3(1, 1, 1)
   );
   for (let i = 0; i < roomBoundingBox.length; i++) {
-    if (playerBoundingBox.intersectsBox(roomBoundingBox[i])) {
+    const distance = roomBoundingBox[i].distanceToPoint(cameraWorldPosition);
+    if (distance < minDistance) {
       return true;
     }
   }
+  return false;
 };
