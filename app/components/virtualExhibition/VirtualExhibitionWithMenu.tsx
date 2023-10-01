@@ -1,13 +1,13 @@
 'use client';
 import styled from 'styled-components';
 import ThreeDExhibition from './ThreeDExhibition';
-import { IArtwork } from '@/app/types';
+import { IExhibition } from '@/app/types';
 import Image from 'next/image';
 import { COLORS } from '@/constants/colors';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { AiOutlineMenu } from 'react-icons/ai';
 interface GalleryProps {
-  artworks: IArtwork[];
+  exhibition: IExhibition;
 }
 
 const MenuContainer = styled.div`
@@ -22,7 +22,6 @@ const MenuContainer = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: white;
-  z-index: 1000;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 `;
 
@@ -61,7 +60,7 @@ const InfoText = styled.text`
   color: ${COLORS.darkGray};
 `;
 
-const VirtualExhibitionWithMenu = ({ artworks }: GalleryProps) => {
+const VirtualExhibitionWithMenu = ({ exhibition }: GalleryProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(true);
 
   const toggleOpen = useCallback(() => {
@@ -93,16 +92,20 @@ const VirtualExhibitionWithMenu = ({ artworks }: GalleryProps) => {
   };
 
   return (
-    <div className='relative max-w-full'>
-      <ThreeDExhibition artworks={artworks}></ThreeDExhibition>
-      <div className='absolute bottom-10 right-6' id='menuRef' ref={menuRef}>
-        <div
-          onClick={toggleOpen}
-          className='cursor-pointer flex items-center justify-center md:w-[30px] md:h-[30px] w-[24px] h-[24px] rounded-full bg-white'
-        >
-          <AiOutlineMenu className='md:w-[16px] md:h-[16px] w-[14px] h-[14px] text-neutral-500' />
-        </div>
+    <div className='relative'>
+      <div className='relative'>
+        <ThreeDExhibition artworks={exhibition.artworks}></ThreeDExhibition>
       </div>
+
+      <div
+        id='menuRef'
+        ref={menuRef}
+        onClick={toggleOpen}
+        className='absolute bottom-10 right-6 cursor-pointer flex items-center justify-center md:w-[30px] md:h-[30px] w-[24px] h-[24px] rounded-full bg-white'
+      >
+        <AiOutlineMenu className='md:w-[16px] md:h-[16px] w-[14px] h-[14px] text-neutral-500' />
+      </div>
+
       {isMenuOpen && (
         <MenuContainer id='menu'>
           <Image

@@ -82,11 +82,12 @@ const ExhibitionProfile = ({
           width='100%'
           body={
             <VirtualExhibitionWithMenu
-              artworks={exhibition.artworks}
+              exhibition={exhibition}
             ></VirtualExhibitionWithMenu>
           }
         ></Popup>
       )}
+
       <About exhibition={exhibition}></About>
       <CreateExhibitionArtworkModal
         allArtistProfiles={allArtistProfiles || []}
