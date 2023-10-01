@@ -6,23 +6,28 @@ export const createInitialRoomLight = (scene: THREE.Scene) => {
   const directionalLight = new THREE.DirectionalLight(0xffffff, 1.5);
   scene.add(directionalLight);
 };
-export const createDirectionalLight = (scene: THREE.Scene) => {
-  const directionallight = new THREE.DirectionalLight(0xffffff, Math.PI);
-  directionallight.target.position.set(-50, 0, 100);
-  directionallight.position.set(0, 40, -100);
-  directionallight.castShadow = true;
-  directionallight.shadow.mapSize.width = 512;
-  directionallight.shadow.mapSize.height = 512;
-  directionallight.shadow.camera.near = 0.5;
-  directionallight.shadow.camera.far = 100;
-  scene.add(directionallight);
+export const createDirectionalLightWithTarget = (
+  target: THREE.Object3D,
+  position: THREE.Vector3
+) => {
+  const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+  //the position is relative to the glass and also relative to the wall
+  directionalLight.position.set(position.x, position.y, position.z);
+  directionalLight.target = target;
+
+  directionalLight.castShadow = true;
+  directionalLight.shadow.mapSize.width = 512;
+  directionalLight.shadow.mapSize.height = 512;
+  directionalLight.shadow.camera.near = 0.5;
+  directionalLight.shadow.camera.far = 100;
+  target.add(directionalLight);
 };
 
-export const createSpotlightForTarget = (targetObject: THREE.Object3D) => {
+export const createSpotlightWithTarget = (target: THREE.Object3D) => {
   const spotlight = new THREE.SpotLight(0xffff00, 30);
-  const { x, z } = targetObject.position;
+  const { x, z } = target.position;
   spotlight.position.set(x, 38, z);
-  spotlight.target = targetObject;
+  spotlight.target = target;
   spotlight.castShadow = true;
   spotlight.angle = Math.PI / 2;
   spotlight.penumbra = 1;
