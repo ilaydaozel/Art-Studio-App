@@ -1,7 +1,7 @@
 import * as THREE from 'three';
-import { CSG } from 'three-csg-ts';
+import { createWindowIntheWall } from './Window';
 
-const roomHeight = 40;
+const roomHeight = 50;
 
 const createFloor = (width: number, height: number) => {
   const planeGeometry = new THREE.PlaneGeometry(width, height);
@@ -41,41 +41,11 @@ const createCeiling = (width: number, height: number) => {
 
 const createWall = (wallColor: string, width: number) => {
   const wall = new THREE.Mesh(
-    new THREE.BoxGeometry(width, roomHeight, 0.1),
+    new THREE.BoxGeometry(width, roomHeight, 1),
     new THREE.MeshPhongMaterial({ color: wallColor })
   );
   wall.position.y = roomHeight / 2;
   return wall;
-};
-
-const createWallWithWindow = (floorHeight: number) => {
-  const rightWall = createWall('#F8F3FF', floorHeight);
-
-  // Create the window geometry and material
-  const windowGeometry = new THREE.BoxGeometry(30, 30, 1); // Adjust the size as needed
-  const windowMaterial = new THREE.MeshLambertMaterial({ color: 'brown' });
-  const window = new THREE.Mesh(windowGeometry, windowMaterial);
-
-  // Position the window within the right wall (adjust coordinates as needed)
-  window.position.set(20, 0, 0);
-
-  rightWall.updateMatrix();
-  window.updateMatrix();
-
-  // Convert meshes to CSG objects
-  const rightWallCSG = CSG.fromMesh(rightWall);
-  const windowCSG = CSG.fromMesh(window);
-  // Subtract the window from the right wall using CSG
-  const wallWithHoleCSG = rightWallCSG.subtract(windowCSG);
-
-  // Create a new mesh from the resulting CSG object
-  const wallWithHoleMesh = CSG.toMesh(
-    wallWithHoleCSG,
-    rightWall.matrix,
-    rightWall.material
-  );
-
-  return wallWithHoleMesh;
 };
 
 const createAllWalls = (floorWidth: number, floorHeight: number) => {
@@ -88,7 +58,13 @@ const createAllWalls = (floorWidth: number, floorHeight: number) => {
   leftWall.position.x = -floorWidth / 2;
   leftWall.rotation.y = Math.PI / 2;
 
-  const rightWall = createWallWithWindow(floorHeight);
+  let rightWall: THREE.Mesh = createWall('#F8F3FF', floorHeight);
+  const rightWallWithWindow: THREE.Mesh = createWindowIntheWall(
+    rightWall,
+    new THREE.Vector2(30, 30),
+    new THREE.Vector3(30, 25, 0)
+  );
+  rightWall = rightWallWithWindow;
   rightWall.position.x = floorWidth / 2;
   rightWall.rotation.y = Math.PI / 2;
 
