@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { CSG } from 'three-csg-ts';
+import { createDirectionalLightWithTarget } from './Light';
 
 const createHole = (size: THREE.Vector2, position: THREE.Vector3) => {
   const geometry = new THREE.BoxGeometry(size.x, size.y, 1);
@@ -26,11 +27,13 @@ const subtractTheHoleFromTheWall = (wall: THREE.Mesh, hole: THREE.Mesh) => {
 const createGlass = (size: THREE.Vector2) => {
   const iceBlue = '#d3f2f5';
   const glassGeometry = new THREE.BoxGeometry(size.x, size.y, 0.5);
-  const glassMaterial = new THREE.MeshLambertMaterial({
+  const glassMaterial = new THREE.MeshPhongMaterial({
     color: iceBlue,
     transparent: true,
-    opacity: 0.4,
+    opacity: 0.2,
+    shininess: 0.8,
   });
+
   const glass = new THREE.Mesh(glassGeometry, glassMaterial);
 
   return glass;
@@ -45,10 +48,12 @@ export const createWindowIntheWall = (
   const wallWithHole = subtractTheHoleFromTheWall(wall, windowHole);
   const glass = createGlass(size);
   glass.position.set(
-    position.x,
+    position.x - wall.position.x,
     position.y - wall.position.y,
-    position.z - 0.5
+    position.z - wall.position.z - 0.5
   );
+  createDirectionalLightWithTarget(glass, new THREE.Vector3(-30, 10, 50));
+
   wallWithHole.add(glass);
   return wallWithHole;
 };
