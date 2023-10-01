@@ -20,6 +20,7 @@ const createFloor = (width: number, height: number) => {
   floor.rotation.x = Math.PI / 2; //90 degrees
   floor.rotation.y = -Math.PI; //180 degrees
   floor.position.y = 0;
+  floor.receiveShadow = true;
   return floor;
 };
 
@@ -36,6 +37,7 @@ const createCeiling = (width: number, height: number) => {
   );
   ceiling.rotation.x = Math.PI / 2;
   ceiling.position.y = roomHeight;
+  ceiling.receiveShadow = true;
   return ceiling;
 };
 
@@ -45,6 +47,8 @@ const createWall = (wallColor: string, width: number) => {
     new THREE.MeshPhongMaterial({ color: wallColor })
   );
   wall.position.y = roomHeight / 2;
+  wall.receiveShadow = true;
+  wall.castShadow = true;
   return wall;
 };
 
@@ -59,19 +63,24 @@ const createAllWalls = (floorWidth: number, floorHeight: number) => {
   leftWall.rotation.y = Math.PI / 2;
 
   let rightWall: THREE.Mesh = createWall('#F8F3FF', floorHeight);
-  const rightWallWithWindow: THREE.Mesh = createWindowIntheWall(
+  const rightWallWithFirstWindow: THREE.Mesh = createWindowIntheWall(
     rightWall,
-    new THREE.Vector2(30, 30),
-    new THREE.Vector3(30, 25, 0)
+    new THREE.Vector2(20, 35),
+    new THREE.Vector3(-40, 25, 0)
   );
-  rightWall = rightWallWithWindow;
+  const rightWallWithSecondWindow: THREE.Mesh = createWindowIntheWall(
+    rightWallWithFirstWindow,
+    new THREE.Vector2(20, 35),
+    new THREE.Vector3(40, 25, 0)
+  );
+  rightWall = rightWallWithSecondWindow;
   rightWall.position.x = floorWidth / 2;
   rightWall.rotation.y = Math.PI / 2;
 
   const backWall = createWall(wallColor, floorWidth);
   backWall.position.z = floorHeight / 2;
 
-  wallGroup.add(leftWall, frontWall, rightWall, backWall);
+  wallGroup.add(leftWall, frontWall, backWall, rightWall);
   return wallGroup;
 };
 
