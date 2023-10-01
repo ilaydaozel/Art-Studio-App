@@ -9,7 +9,7 @@ import {
   checkCollisionWithTheBoundingBox,
   createBoundingBoxOfGroup,
 } from './BoundingBox';
-import { createInitialRoomLight, createSpotlightForTarget } from './Light';
+import { createInitialRoomLight, createSpotlightWithTarget } from './Light';
 
 interface ThreeDExhibitionProps {
   artworks?: IArtwork[];
@@ -48,7 +48,7 @@ const ThreeDExhibition = ({ artworks = [] }: ThreeDExhibitionProps) => {
       const paintings = createAndHangPaintings(artworks, floorDimensions);
       for (let i = 0; i < paintings.length; i++) {
         scene.add(paintings[i]);
-        const spotlightOfPainting = createSpotlightForTarget(paintings[i]);
+        const spotlightOfPainting = createSpotlightWithTarget(paintings[i]);
         scene.add(spotlightOfPainting);
       }
       //controls
