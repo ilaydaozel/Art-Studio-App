@@ -2,18 +2,18 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { checkCollisionWithTheBoundingBox } from './BoundingBox';
 import { PointerLockControls } from 'three-stdlib';
-import Hammer from 'hammerjs';
 
 const setUpOrbitControls = (camera: THREE.Camera, renderer: THREE.Renderer) => {
   const controls = new OrbitControls(camera, renderer.domElement);
 
-  controls.enableDamping = true;
-  controls.dampingFactor = 0.05;
   controls.enableZoom = true;
   controls.autoRotate = false;
   controls.touches = {
     ONE: THREE.TOUCH.DOLLY_PAN,
+    TWO: THREE.TOUCH.DOLLY_ROTATE,
   };
+
+  controls.target.set(0, 20, -50);
 
   return controls;
 };
@@ -28,7 +28,6 @@ export const createMobileControls = (
   roomBoundingBox: THREE.Box3[]
 ) => {
   const controls = setUpOrbitControls(camera, renderer);
-  const sensitivity = 0.1;
 
   const keysPressed: { [key: string]: boolean } = {
     iconUp: false,
@@ -37,29 +36,25 @@ export const createMobileControls = (
     iconRight: false,
   };
 
-  function onIconPress(event: HammerInput) {
-    const iconId = event.target.id;
-    if (iconId && iconId in keysPressed) {
-      keysPressed[iconId] = true;
-    }
-  }
-
-  function onIconPressUp(event: HammerInput) {
-    const iconId = event.target?.id;
-    if (iconId && iconId in keysPressed) {
-      keysPressed[iconId] = false;
-    }
-  }
-
   const movementIcons = document.getElementById('movementIconsMenu');
   if (movementIcons) {
-    const hammerIcons = new Hammer(movementIcons);
-    hammerIcons.on('press', onIconPress);
-    hammerIcons.on('pressUp', onIconPressUp);
+    movementIcons.addEventListener('touchstart', (event: TouchEvent) => {
+      const iconId = (event.target as HTMLElement).id;
+      if (iconId && iconId in keysPressed) {
+        keysPressed[iconId] = true;
+      }
+    });
+
+    movementIcons.addEventListener('touchend', (event: TouchEvent) => {
+      const iconId = (event.target as HTMLElement).id;
+      if (iconId && iconId in keysPressed) {
+        keysPressed[iconId] = false;
+      }
+    });
   }
 
   const updateMovement = (delta: number) => {
-    const moveSpeed = 15 * delta * sensitivity;
+    const moveSpeed = 15 * delta;
     const previousPosition = camera.position.clone();
     controls.update();
 
@@ -72,12 +67,26 @@ export const createMobileControls = (
       controls.target.addScaledVector(left, moveSpeed);
     }
     if (keysPressed.iconUp) {
-      const forward = new THREE.Vector3(0, 0, -1);
-      controls.target.addScaledVector(forward, moveSpeed);
+      const cameraDirection = new THREE.Vector3(0, 0, -1);
+      const cameraQuaternion = camera.getWorldQuaternion(
+        new THREE.Quaternion()
+      );
+      cameraDirection.applyQuaternion(cameraQuaternion);
+      cameraDirection.normalize();
+      cameraDirection.multiplyScalar(moveSpeed);
+
+      camera.position.add(cameraDirection);
     }
     if (keysPressed.iconDown) {
-      const backward = new THREE.Vector3(0, 0, 1);
-      controls.target.addScaledVector(backward, moveSpeed);
+      const cameraDirection = new THREE.Vector3(0, 0, 1);
+      const cameraQuaternion = camera.getWorldQuaternion(
+        new THREE.Quaternion()
+      );
+      cameraDirection.applyQuaternion(cameraQuaternion);
+      cameraDirection.normalize();
+      cameraDirection.multiplyScalar(moveSpeed);
+
+      camera.position.add(cameraDirection);
     }
     if (checkCollisionWithTheBoundingBox(camera, roomBoundingBox)) {
       camera.position.copy(previousPosition);
