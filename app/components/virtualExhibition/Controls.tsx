@@ -6,11 +6,21 @@ import { PointerLockControls } from 'three-stdlib';
 const setUpOrbitControls = (camera: THREE.Camera, renderer: THREE.Renderer) => {
   const controls = new OrbitControls(camera, renderer.domElement);
 
-  controls.enableZoom = true;
+  controls.enableZoom = false;
   controls.autoRotate = false;
+  controls.enableDamping = true;
+  controls.dampingFactor = 0.01;
+  controls.rotateSpeed = 0.1; //lower value returns it slower
+  controls.minDistance = 10;
+  // Ensure that the camera does not move below the floor level.
+  controls.minPolarAngle = 0;
+  controls.maxPolarAngle = Math.PI / 2;
+  controls.minAzimuthAngle = -Math.PI / 4;
+  controls.maxAzimuthAngle = Math.PI / 4;
+
   controls.touches = {
-    ONE: THREE.TOUCH.DOLLY_PAN,
-    TWO: THREE.TOUCH.DOLLY_ROTATE,
+    ONE: THREE.TOUCH.ROTATE,
+    TWO: THREE.TOUCH.DOLLY_PAN,
   };
 
   controls.target.set(0, 20, -50);
