@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { checkCollisionWithTheBoundingBox } from './BoundingBox';
 import { PointerLockControls } from 'three-stdlib';
+import Hammer from 'hammerjs';
 
 const setUpOrbitControls = (camera: THREE.Camera, renderer: THREE.Renderer) => {
   const controls = new OrbitControls(camera, renderer.domElement);
@@ -11,8 +12,7 @@ const setUpOrbitControls = (camera: THREE.Camera, renderer: THREE.Renderer) => {
   controls.enableZoom = true;
   controls.autoRotate = false;
   controls.touches = {
-    ONE: THREE.TOUCH.ROTATE,
-    TWO: THREE.TOUCH.DOLLY_PAN,
+    ONE: THREE.TOUCH.DOLLY_PAN,
   };
 
   return controls;
@@ -28,44 +28,64 @@ export const createMobileControls = (
   roomBoundingBox: THREE.Box3[]
 ) => {
   const controls = setUpOrbitControls(camera, renderer);
-  const touchState = {
-    touchStart: new THREE.Vector3(),
-    touchEnd: new THREE.Vector3(),
-    touchDelta: new THREE.Vector3(),
+  const sensitivity = 0.1;
+
+  const keysPressed: { [key: string]: boolean } = {
+    iconUp: false,
+    iconDown: false,
+    iconLeft: false,
+    iconRight: false,
   };
 
-  function onTouchStart(event: TouchEvent) {
-    const touch = event.touches[0];
-    touchState.touchStart.set(touch.clientX, touch.clientY, 0);
+  function onIconPress(event: HammerInput) {
+    const iconId = event.target.id;
+    if (iconId && iconId in keysPressed) {
+      keysPressed[iconId] = true;
+    }
   }
 
-  function onTouchMove(event: TouchEvent) {
-    const touch = event.touches[0];
-    touchState.touchEnd.set(touch.clientX, touch.clientY, 0);
-    touchState.touchDelta.subVectors(
-      touchState.touchEnd,
-      touchState.touchStart
-    );
-
-    const sensitivity = 0.1;
-    controls.target.addScaledVector(touchState.touchDelta, sensitivity);
-
-    touchState.touchStart.copy(touchState.touchEnd);
+  function onIconPressUp(event: HammerInput) {
+    const iconId = event.target?.id;
+    if (iconId && iconId in keysPressed) {
+      keysPressed[iconId] = false;
+    }
   }
 
-  renderer.domElement.addEventListener('touchstart', onTouchStart);
-  renderer.domElement.addEventListener('touchmove', onTouchMove);
+  const movementIcons = document.getElementById('movementIconsMenu');
+  if (movementIcons) {
+    const hammerIcons = new Hammer(movementIcons);
+    hammerIcons.on('press', onIconPress);
+    hammerIcons.on('pressUp', onIconPressUp);
+  }
 
   const updateMovement = (delta: number) => {
-    const moveSpeed = 15 * delta;
+    const moveSpeed = 15 * delta * sensitivity;
     const previousPosition = camera.position.clone();
     controls.update();
+
+    if (keysPressed.iconRight) {
+      const right = new THREE.Vector3(1, 0, 0);
+      controls.target.addScaledVector(right, moveSpeed);
+    }
+    if (keysPressed.iconLeft) {
+      const left = new THREE.Vector3(-1, 0, 0);
+      controls.target.addScaledVector(left, moveSpeed);
+    }
+    if (keysPressed.iconUp) {
+      const forward = new THREE.Vector3(0, 0, -1);
+      controls.target.addScaledVector(forward, moveSpeed);
+    }
+    if (keysPressed.iconDown) {
+      const backward = new THREE.Vector3(0, 0, 1);
+      controls.target.addScaledVector(backward, moveSpeed);
+    }
     if (checkCollisionWithTheBoundingBox(camera, roomBoundingBox)) {
       camera.position.copy(previousPosition);
     }
   };
   return updateMovement;
 };
+
 export const createPointerLockControls = (
   camera: THREE.Camera,
   roomBoundingBox: THREE.Box3[]
@@ -125,10 +145,10 @@ export const createPointerLockControls = (
     }
   };
 
-  const movementKeys = document.getElementById('movementIconsMenu');
-  if (movementKeys) {
-    movementKeys.addEventListener('mousedown', onMouseDown, false);
-    movementKeys.addEventListener('mouseup', onMouseUp, false);
+  const movementIcons = document.getElementById('movementIconsMenu');
+  if (movementIcons) {
+    movementIcons.addEventListener('mousedown', onMouseDown, false);
+    movementIcons.addEventListener('mouseup', onMouseUp, false);
   }
 
   const updateMovement = (delta: number) => {
