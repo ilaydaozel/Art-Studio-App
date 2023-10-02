@@ -10,7 +10,7 @@ const setUpOrbitControls = (camera: THREE.Camera, renderer: THREE.Renderer) => {
   controls.autoRotate = false;
   controls.enableDamping = true;
   controls.dampingFactor = 0.01;
-  controls.rotateSpeed = 0.1; //lower value returns it slower
+  controls.rotateSpeed = 0.4; //lower value returns it slower
   controls.minDistance = 10;
   // Ensure that the camera does not move below the floor level.
   controls.minPolarAngle = 0;
@@ -19,8 +19,8 @@ const setUpOrbitControls = (camera: THREE.Camera, renderer: THREE.Renderer) => {
   controls.maxAzimuthAngle = Math.PI / 4;
 
   controls.touches = {
-    ONE: THREE.TOUCH.ROTATE,
-    TWO: THREE.TOUCH.DOLLY_PAN,
+    ONE: THREE.TOUCH.DOLLY_PAN,
+    TWO: THREE.TOUCH.ROTATE,
   };
 
   controls.target.set(0, 20, -50);
