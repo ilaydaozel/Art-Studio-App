@@ -5,7 +5,7 @@ import {
   HiArrowDown,
 } from 'react-icons/hi';
 
-export const MovementKeysMenu = () => {
+const MovementIconsMenu = () => {
   return (
     <div className='relative'>
       <HiArrowUp
@@ -28,3 +28,4 @@ export const MovementKeysMenu = () => {
     </div>
   );
 };
+export default MovementIconsMenu;

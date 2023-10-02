@@ -125,7 +125,7 @@ export const createPointerLockControls = (
     }
   };
 
-  const movementKeys = document.getElementById('movementKeysMenu');
+  const movementKeys = document.getElementById('movementIconsMenu');
   if (movementKeys) {
     movementKeys.addEventListener('mousedown', onMouseDown, false);
     movementKeys.addEventListener('mouseup', onMouseUp, false);
