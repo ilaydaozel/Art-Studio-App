@@ -30,8 +30,8 @@ const createGlass = (size: THREE.Vector2) => {
   const glassMaterial = new THREE.MeshPhongMaterial({
     color: iceBlue,
     transparent: true,
-    opacity: 0.2,
-    shininess: 0.8,
+    opacity: 0.5,
+    shininess: 1.0,
   });
 
   const glass = new THREE.Mesh(glassGeometry, glassMaterial);
