@@ -10,6 +10,7 @@ import {
   createBoundingBoxOfGroup,
 } from './BoundingBox';
 import { createInitialRoomLight, createSpotlightWithTarget } from './Light';
+import { createMobileControls, createPointerLockControls } from './Controls';
 
 interface ThreeDExhibitionProps {
   artworks?: IArtwork[];
@@ -52,69 +53,17 @@ const ThreeDExhibition = ({ artworks = [] }: ThreeDExhibitionProps) => {
         scene.add(spotlightOfPainting);
       }
       //controls
-      const controls = new PointerLockControls(camera, document.body);
-      controls.lock();
+      /*const isMobile =
+        /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+          navigator.userAgent
+        );*/
 
-      const keysPressed: { [key: string]: boolean } = {
-        ArrowUp: false,
-        ArrowDown: false,
-        ArrowLeft: false,
-        ArrowRight: false,
-        w: false,
-        a: false,
-        s: false,
-        d: false,
-      };
+      const isMobileDevice =
+        'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
-      const onKeyDown = (e: KeyboardEvent) => {
-        const key: string = e.key;
-        if (key in keysPressed) {
-          keysPressed[key] = true;
-        }
-        if (key === 'Escape') {
-          controls.unlock();
-        }
-        if (key === 'Enter' || key === 'Return' || key === ' ') {
-          controls.lock();
-        }
-      };
-
-      const onKeyUp = (e: KeyboardEvent) => {
-        const key: string = e.key;
-        if (key in keysPressed) {
-          keysPressed[key] = false;
-        }
-      };
-
-      document.addEventListener('keydown', onKeyDown, false);
-      document.addEventListener('keyup', onKeyUp, false);
-
-      const clock = new THREE.Clock();
-
-      const updateMovement = (delta: number) => {
-        const moveSpeed = 15 * delta;
-        const previousPosition = camera.position.clone();
-        if (keysPressed.ArrowRight || keysPressed.d) {
-          controls.moveRight(moveSpeed);
-        }
-        if (keysPressed.ArrowLeft || keysPressed.a) {
-          controls.moveRight(-moveSpeed);
-        }
-        if (keysPressed.ArrowUp || keysPressed.w) {
-          controls.moveForward(moveSpeed);
-        }
-        if (keysPressed.ArrowDown || keysPressed.s) {
-          controls.moveForward(-moveSpeed);
-        }
-        if (keysPressed.Touch) {
-          controls.moveForward(-moveSpeed);
-        }
-
-        if (checkCollisionWithTheBoundingBox(camera, roomBoundingBox)) {
-          camera.position.copy(previousPosition);
-        }
-      };
-
+      const updateMovement = isMobileDevice
+        ? createMobileControls(camera, renderer, roomBoundingBox)
+        : createPointerLockControls(camera, roomBoundingBox);
       const onWindowResize = () => {
         camera.aspect = window.innerWidth / window.innerHeight;
         camera.updateProjectionMatrix();
@@ -124,6 +73,7 @@ const ThreeDExhibition = ({ artworks = [] }: ThreeDExhibitionProps) => {
       window.addEventListener('resize', onWindowResize, false);
 
       // Render with animation
+      const clock = new THREE.Clock();
       const renderLoop = () => {
         requestAnimationFrame(renderLoop);
         const delta = clock.getDelta();
