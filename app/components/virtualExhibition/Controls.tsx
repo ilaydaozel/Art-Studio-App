@@ -2,34 +2,6 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { checkCollisionWithTheBoundingBox } from './BoundingBox';
 import { PointerLockControls } from 'three-stdlib';
-/*
-export const setUpOrbitControls = (
-  camera: THREE.PerspectiveCamera,
-  rendererDomElement: HTMLCanvasElement
-) => {
-  const controls = new OrbitControls(camera, rendererDomElement);
-  controls.listenToKeyEvents(document.body);
-  controls.keys = {
-    LEFT: 'ArrowLeft', //left arrow
-    UP: 'ArrowUp', // up arrow
-    RIGHT: 'ArrowRight', // right arrow
-    BOTTOM: 'ArrowDown', // down arrow
-  };
-  controls.mouseButtons = {
-    LEFT: THREE.MOUSE.ROTATE,
-    MIDDLE: THREE.MOUSE.DOLLY,
-    RIGHT: THREE.MOUSE.PAN,
-  };
-  controls.touches = {
-    ONE: THREE.TOUCH.ROTATE,
-    TWO: THREE.TOUCH.DOLLY_PAN,
-  };
-  controls.panSpeed = 5;
-  controls.target.set(0, 20, -10);
-  controls.maxDistance = 2;
-  controls.minDistance = 4;
-  return controls;
-};*/
 
 const setUpOrbitControls = (camera: THREE.Camera, renderer: THREE.Renderer) => {
   const controls = new OrbitControls(camera, renderer.domElement);
@@ -44,6 +16,10 @@ const setUpOrbitControls = (camera: THREE.Camera, renderer: THREE.Renderer) => {
   };
 
   return controls;
+};
+
+const setUpPointerLockControls = (camera: THREE.Camera) => {
+  return new PointerLockControls(camera, document.body);
 };
 
 export const createMobileControls = (
@@ -90,12 +66,11 @@ export const createMobileControls = (
   };
   return updateMovement;
 };
-
 export const createPointerLockControls = (
   camera: THREE.Camera,
   roomBoundingBox: THREE.Box3[]
 ) => {
-  const controls = new PointerLockControls(camera, document.body);
+  const controls = setUpPointerLockControls(camera);
   controls.lock();
 
   const keysPressed: { [key: string]: boolean } = {
@@ -107,10 +82,15 @@ export const createPointerLockControls = (
     a: false,
     s: false,
     d: false,
+    iconUp: false,
+    iconDown: false,
+    iconLeft: false,
+    iconRight: false,
   };
 
   const onKeyDown = (e: KeyboardEvent) => {
     const key: string = e.key;
+    console.log();
     if (key in keysPressed) {
       keysPressed[key] = true;
     }
@@ -132,22 +112,38 @@ export const createPointerLockControls = (
   document.addEventListener('keydown', onKeyDown, false);
   document.addEventListener('keyup', onKeyUp, false);
 
+  const onMouseDown = (e: MouseEvent) => {
+    const clickedIconId = (e.target as HTMLElement)?.id; // Get the id attribute of the clicked icon
+    if (clickedIconId && clickedIconId in keysPressed) {
+      keysPressed[clickedIconId] = true;
+    }
+  };
+  const onMouseUp = (e: MouseEvent) => {
+    const clickedIconId = (e.target as HTMLElement)?.id; // Get the id attribute of the clicked icon
+    if (clickedIconId && clickedIconId in keysPressed) {
+      keysPressed[clickedIconId] = false;
+    }
+  };
+
+  const movementKeys = document.getElementById('movementKeysMenu');
+  if (movementKeys) {
+    movementKeys.addEventListener('mousedown', onMouseDown, false);
+    movementKeys.addEventListener('mouseup', onMouseUp, false);
+  }
+
   const updateMovement = (delta: number) => {
     const moveSpeed = 15 * delta;
     const previousPosition = camera.position.clone();
-    if (keysPressed.ArrowRight || keysPressed.d) {
+    if (keysPressed.ArrowRight || keysPressed.d || keysPressed.iconRight) {
       controls.moveRight(moveSpeed);
     }
-    if (keysPressed.ArrowLeft || keysPressed.a) {
+    if (keysPressed.ArrowLeft || keysPressed.a || keysPressed.iconLeft) {
       controls.moveRight(-moveSpeed);
     }
-    if (keysPressed.ArrowUp || keysPressed.w) {
+    if (keysPressed.ArrowUp || keysPressed.w || keysPressed.iconUp) {
       controls.moveForward(moveSpeed);
     }
-    if (keysPressed.ArrowDown || keysPressed.s) {
-      controls.moveForward(-moveSpeed);
-    }
-    if (keysPressed.Touch) {
+    if (keysPressed.ArrowDown || keysPressed.s || keysPressed.iconDown) {
       controls.moveForward(-moveSpeed);
     }
 
