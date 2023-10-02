@@ -35,25 +35,46 @@ const createGlass = (size: THREE.Vector2) => {
   });
 
   const glass = new THREE.Mesh(glassGeometry, glassMaterial);
-
   return glass;
 };
 
-export const createWindowIntheWall = (
-  wall: THREE.Mesh,
-  size: THREE.Vector2,
-  position: THREE.Vector3
+const addLightToTheGlass = (
+  glass: THREE.Mesh,
+  lightDirection: THREE.Vector3
 ) => {
-  const windowHole = createHole(size, position);
-  const wallWithHole = subtractTheHoleFromTheWall(wall, windowHole);
-  const glass = createGlass(size);
-  glass.position.set(
-    position.x - wall.position.x,
-    position.y - wall.position.y,
-    position.z - wall.position.z - 0.5
-  );
-  createDirectionalLightWithTarget(glass, new THREE.Vector3(-30, 10, 50));
+  createDirectionalLightWithTarget(glass, lightDirection);
+};
 
-  wallWithHole.add(glass);
-  return wallWithHole;
+export const createWindowsInTheWall = (
+  wall: THREE.Mesh,
+  windows: {
+    size: THREE.Vector2;
+    position: THREE.Vector3;
+    lightDirection: THREE.Vector3;
+  }[]
+) => {
+  let wallWithWindows: THREE.Mesh = wall;
+  for (let i = 0; i < windows.length; i++) {
+    const { size, position } = windows[i];
+    const windowHole = createHole(size, position);
+    const wallWithHole = subtractTheHoleFromTheWall(
+      wallWithWindows,
+      windowHole
+    );
+    wallWithWindows = wallWithHole;
+  }
+
+  for (let i = 0; i < windows.length; i++) {
+    const { size, position, lightDirection } = windows[i];
+    const glass = createGlass(size);
+    glass.position.set(
+      position.x - wall.position.x,
+      position.y - wall.position.y,
+      position.z - wall.position.z - 0.5
+    );
+    wallWithWindows.add(glass);
+    addLightToTheGlass(glass, lightDirection);
+  }
+
+  return wallWithWindows;
 };
