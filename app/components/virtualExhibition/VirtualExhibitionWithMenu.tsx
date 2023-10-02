@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { COLORS } from '@/constants/colors';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { AiOutlineMenu } from 'react-icons/ai';
+import MovementIconsMenu from './MovementIconsMenu';
 interface GalleryProps {
   exhibition: IExhibition;
 }
@@ -14,6 +15,9 @@ const MenuContainer = styled.div`
   position: absolute;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
   width: 50%;
   height: auto;
   max-height: 80%;
@@ -49,7 +53,14 @@ const InformationContainer = styled.div`
   margin: 1rem;
   gap: 5px;
 `;
-
+const CoverImage = styled.div<{ backgroundImgUrl: string }>`
+  width: 100%;
+  height: 30vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url(${(props) => props.backgroundImgUrl});
+`;
 const ExhibitionTitle = styled.text`
   font-size: 1rem;
   color: ${COLORS.darkGray};
@@ -98,36 +109,32 @@ const VirtualExhibitionWithMenu = ({ exhibition }: GalleryProps) => {
       </div>
 
       <div
-        id='menuRef'
+        id='hamburgerMenu'
         ref={menuRef}
         onClick={toggleOpen}
         className='absolute bottom-10 right-6 cursor-pointer flex items-center justify-center md:w-[30px] md:h-[30px] w-[24px] h-[24px] rounded-full bg-white'
       >
         <AiOutlineMenu className='md:w-[16px] md:h-[16px] w-[14px] h-[14px] text-neutral-500' />
       </div>
+      <div
+        id='movementIconsMenu'
+        className='absolute bottom-6 left-6 cursor-pointer'
+      >
+        <MovementIconsMenu />
+      </div>
 
       {isMenuOpen && (
         <MenuContainer id='menu'>
-          <Image
-            src={
-              'https://res.cloudinary.com/dnlz4muyb/image/upload/v1691094915/j0dfdld8wjk1cdgb8afs.jpg'
-            }
-            placeholder='empty'
-            alt='artwork'
-            width={100}
-            height={100}
-            className='object-cover'
-          />
-
+          <CoverImage
+            backgroundImgUrl={exhibition.coverImage || ''}
+          ></CoverImage>
           <InformationContainer>
-            <ExhibitionTitle>Sanal Sergi Deneyimi</ExhibitionTitle>
+            <ExhibitionTitle>{exhibition.title}</ExhibitionTitle>
             <div className='flex flex-col justify-center items-center'>
+              {exhibition.description && (
+                <InfoText>{exhibition.description}</InfoText>
+              )}
               <InfoText>Başlamak için ENTER a basın.</InfoText>
-              <InfoText>
-                Gezinmek için ok tuşlarını veya W A S D tuşlarını kullanın.
-              </InfoText>
-              <InfoText>Etrafa bakmak için fareyi hareket ettirin.</InfoText>
-              <InfoText>Çıkmak için sağ üstteki çarpıya basın.</InfoText>
             </div>
             <StartButton id='start_button' onClick={handleStartClick}>
               Sergiyi Gör
