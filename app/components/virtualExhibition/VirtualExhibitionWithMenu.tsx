@@ -125,9 +125,19 @@ const VirtualExhibitionWithMenu = ({ exhibition }: GalleryProps) => {
 
       {isMenuOpen && (
         <MenuContainer id='menu'>
-          <CoverImage
-            backgroundImgUrl={exhibition.coverImage || ''}
-          ></CoverImage>
+          <div className='w-[100%] h-[30vh] relative'>
+            <Image
+              src={exhibition?.coverImage || ''}
+              alt={'exhibition cover image'}
+              fill
+              priority
+              placeholder='blur'
+              blurDataURL={exhibition?.coverImage || ''}
+              style={{
+                objectFit: 'cover',
+              }}
+            />
+          </div>
           <InformationContainer>
             <ExhibitionTitle>{exhibition.title}</ExhibitionTitle>
             <div className='flex flex-col justify-center items-center'>
