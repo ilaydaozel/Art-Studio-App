@@ -10,6 +10,7 @@ import { FaRegEdit } from 'react-icons/fa';
 import TextButton from '../buttons/TextButton';
 import Popup from '../popup/Popup';
 import useTranslate from '../../hooks/useTranslate';
+import Image from 'next/image';
 
 interface HeaderProps {
   artistProfile: IArtistProfile;
@@ -24,14 +25,6 @@ const HeadingContainer = styled.div`
   height: 100vh;
   width: 100%;
   padding: 1rem;
-`;
-const HeaderImage = styled.div<{ imageUrl: string }>`
-  width: 55%;
-  height: 65%;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-image: url(${(props) => props.imageUrl});
 `;
 const NameHeading = styled.text`
   font-size: 2.5rem;
@@ -97,7 +90,20 @@ const Header = ({
   return (
     <>
       <HeadingContainer>
-        <HeaderImage imageUrl={coverImage}></HeaderImage>
+        <div className='w-[55%] h-[65%] relative'>
+          <Image
+            src={artistProfile.coverImage || ''}
+            alt={'Header image'}
+            fill
+            priority={true}
+            placeholder='blur'
+            sizes='55vw'
+            blurDataURL={artistProfile?.coverImage || ''}
+            style={{
+              objectFit: 'cover',
+            }}
+          />
+        </div>
         <div className='flex flex-col justify-center items-center w-[40%] h-full'>
           <NameHeading>
             {artistProfile.user.name} {artistProfile.user.surname}

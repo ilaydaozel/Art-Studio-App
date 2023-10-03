@@ -73,9 +73,11 @@ const Artwork = ({ artwork }: ArtworkProps) => {
         <ArtworkContainer>
           <Image
             src={artwork.artworkMedias[0] || ''}
-            placeholder='empty'
             alt='artwork'
             fill
+            quality={100}
+            placeholder='blur'
+            blurDataURL={artwork.artworkMedias[0] || ''}
             className='object-cover'
           />
         </ArtworkContainer>

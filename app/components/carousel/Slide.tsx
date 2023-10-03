@@ -1,32 +1,12 @@
 import { COLORS } from '@/constants/colors';
 import styled from 'styled-components';
 import { IAnnouncement } from '@/app/types';
-
+import Image from 'next/image';
 interface SlideProps {
   slide: IAnnouncement;
   children?: React.ReactNode;
   isMini?: boolean;
 }
-
-const SlideContainer = styled.div<{ src: string }>`
-  position: relative;
-  background-image: url(${(props) => props.src});
-  background-size: cover;
-  background-position: center;
-  transition: background-image 0.4s ease-in-out;
-  width: 100%;
-  height: 100%;
-  min-width: 200px;
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.3);
-  }
-`;
 
 const ContentContainer = styled.div`
   position: absolute;
@@ -86,7 +66,21 @@ const SmallCaption = styled.p<{ isMini: boolean }>`
 
 const Slide = ({ slide, children, isMini = false }: SlideProps) => {
   return (
-    <SlideContainer src={slide.coverImage || ''}>
+    <div className='w-[100%] h-[100vh]'>
+      <Image
+        src={slide.coverImage || ''}
+        alt={'Slide image'}
+        fill
+        quality={80}
+        sizes={'100vw'}
+        priority={true}
+        placeholder='blur'
+        blurDataURL={slide.coverImage || ''}
+        style={{
+          objectFit: 'cover',
+        }}
+        className='brightness-75'
+      />
       {children}
       <ContentContainer onClick={() => window.open(slide.link, '_blank')}>
         {slide.smallCaption && (
@@ -97,7 +91,7 @@ const Slide = ({ slide, children, isMini = false }: SlideProps) => {
           <Subcaption isMini={isMini}>{slide.subcaption || ''}</Subcaption>
         </CaptionContainer>
       </ContentContainer>
-    </SlideContainer>
+    </div>
   );
 };
 export default Slide;

@@ -3,7 +3,7 @@ import { COLORS } from '@/constants/colors';
 import styled from 'styled-components';
 import { IExhibition } from '../../types';
 import { getDateString } from '../utils/Helper';
-
+import Image from 'next/image';
 interface HeaderProps {
   exhibition: IExhibition;
 }
@@ -16,16 +16,6 @@ const Container = styled.div`
   align-items: start;
   justify-content: end;
   padding-bottom: 1rem;
-`;
-
-const HeaderImage = styled.div<{ backgroundImgUrl: string }>`
-  width: 100%;
-  height: 60vh;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-image: url(${(props) => props.backgroundImgUrl});
-  margin-bottom: 2rem;
 `;
 
 const InfoContainer = styled.div`
@@ -64,7 +54,20 @@ const DateHeading = styled.text`
 const Header = ({ exhibition }: HeaderProps) => {
   return (
     <Container>
-      <HeaderImage backgroundImgUrl={exhibition?.coverImage || ''} />
+      <div className='w-[100%] h-[60%] mb-2 relative'>
+        <Image
+          src={exhibition?.coverImage || ''}
+          alt={'Header image'}
+          fill
+          priority
+          placeholder='blur'
+          blurDataURL={exhibition?.coverImage || ''}
+          style={{
+            objectFit: 'cover',
+          }}
+        />
+      </div>
+
       <InfoContainer>
         <InfoHeading>{exhibition.title}</InfoHeading>
         <DateHeading>
