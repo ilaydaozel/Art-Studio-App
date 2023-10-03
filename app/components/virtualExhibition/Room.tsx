@@ -67,12 +67,12 @@ const createAllWalls = (floorWidth: number, floorHeight: number) => {
     {
       size: new THREE.Vector2(20, 35),
       position: new THREE.Vector3(-40, 25, 0),
-      lightDirection: new THREE.Vector3(-30, 10, 50),
+      lightDirection: new THREE.Vector3(-50, 20, 30),
     },
     {
       size: new THREE.Vector2(20, 35),
       position: new THREE.Vector3(40, 25, 0),
-      lightDirection: new THREE.Vector3(30, 10, 50),
+      lightDirection: new THREE.Vector3(50, 20, 30),
     },
   ]);
   rightWall = rightWallWithWindows;
