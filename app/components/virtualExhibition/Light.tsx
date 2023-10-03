@@ -10,7 +10,7 @@ export const createDirectionalLightWithTarget = (
   target: THREE.Object3D,
   position: THREE.Vector3
 ) => {
-  const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+  const directionalLight = new THREE.DirectionalLight(0xffffff, 1.0);
   //the position is relative to the glass and also relative to the wall
   directionalLight.position.set(position.x, position.y, position.z);
   directionalLight.target = target;
