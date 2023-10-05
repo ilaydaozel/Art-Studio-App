@@ -17,6 +17,7 @@ import CreateExhibitionArtworkModal from '../modal/CreateExhibitionArtworkModal'
 import useCreateExhibitionArtworkModal from '@/app/hooks/useCreateExhibitionArtworkModal';
 import VirtualExhibitionWithMenu from '../virtualExhibition/VirtualExhibitionWithMenu';
 import Popup from '../popup/Popup';
+import VirtualExhibitionPreview from './VirtualExhibitionPreview';
 interface ExhibitionProfileProps {
   exhibition: IExhibition;
   artworks?: IArtwork[];
@@ -40,7 +41,6 @@ const ExhibitionProfile = ({
 }: ExhibitionProfileProps) => {
   const [showArtworkSelection, setShowArtworkSelection] = useState(false);
   const [remainingArtworks, setRemainingArtworks] = useState<IArtwork[]>([]);
-  const [showExhibition, setShowExhibition] = useState(false);
   const router = useRouter();
   const createExhibitionArtworkModal = useCreateExhibitionArtworkModal();
 
@@ -71,41 +71,11 @@ const ExhibitionProfile = ({
   return (
     <Container>
       <Header exhibition={exhibition}></Header>
-      <SlidingButton
-        onClick={() => setShowExhibition(true)}
-        label='Online sergi'
-      ></SlidingButton>
-
-      {showExhibition && (
-        <Popup
-          onClose={() => setShowExhibition(false)}
-          width='100%'
-          body={
-            <VirtualExhibitionWithMenu
-              exhibition={exhibition}
-            ></VirtualExhibitionWithMenu>
-          }
-        ></Popup>
-      )}
-
       <About exhibition={exhibition}></About>
       <CreateExhibitionArtworkModal
         allArtistProfiles={allArtistProfiles || []}
       ></CreateExhibitionArtworkModal>
-
-      <div className='flex gap-2'>
-        <SlidingButton
-          label='Yeni Resim Ekle'
-          onClick={() => {
-            createExhibitionArtworkModal.onOpen();
-          }}
-        />
-        <SlidingButton
-          onClick={() => setShowArtworkSelection(true)}
-          label='Sistemden Resim Seç'
-        ></SlidingButton>
-      </div>
-
+      <VirtualExhibitionPreview exhibition={exhibition} />
       {showArtworkSelection && (
         <SelectExhibitionArtworkPopup
           onClose={() => {
@@ -116,6 +86,19 @@ const ExhibitionProfile = ({
         ></SelectExhibitionArtworkPopup>
       )}
       <ComponentWithHeading headingText='Katılan Eserler'>
+        <div className='flex gap-2'>
+          <SlidingButton
+            label='Yeni Resim Ekle'
+            onClick={() => {
+              createExhibitionArtworkModal.onOpen();
+            }}
+          />
+          <SlidingButton
+            onClick={() => setShowArtworkSelection(true)}
+            label='Sistemden Resim Seç'
+          ></SlidingButton>
+        </div>
+
         <ArtworkList
           artworks={exhibition.artworks}
           onDelete={handleDeleteArtworkFromExhibition}
