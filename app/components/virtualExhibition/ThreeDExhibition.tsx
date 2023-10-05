@@ -2,20 +2,21 @@
 import { IArtwork } from '@/app/types';
 import React, { useRef, useEffect } from 'react';
 import * as THREE from 'three';
-import { PointerLockControls } from 'three-stdlib';
+
 import { createRoom } from './Room';
 import { createAndHangPaintings } from './Painting';
-import {
-  checkCollisionWithTheBoundingBox,
-  createBoundingBoxOfGroup,
-} from './BoundingBox';
+import { createBoundingBoxOfGroup } from './BoundingBox';
 import { createInitialRoomLight, createSpotlightWithTarget } from './Light';
 import { createMobileControls, createPointerLockControls } from './Controls';
 
 interface ThreeDExhibitionProps {
   artworks?: IArtwork[];
+  small?: boolean;
 }
-const ThreeDExhibition = ({ artworks = [] }: ThreeDExhibitionProps) => {
+const ThreeDExhibition = ({
+  artworks = [],
+  small = false,
+}: ThreeDExhibitionProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -34,7 +35,12 @@ const ThreeDExhibition = ({ artworks = [] }: ThreeDExhibitionProps) => {
       //renderer
 
       const renderer = new THREE.WebGLRenderer();
-      renderer.setSize(window.innerWidth, window.innerHeight);
+      small
+        ? renderer.setSize(
+            (2 * window.innerWidth) / 3,
+            (2 * window.innerHeight) / 3
+          )
+        : renderer.setSize(window.innerWidth, window.innerHeight);
       renderer.setClearColor(0xffffff, 1); //backgroundColor
       renderer.shadowMap.enabled = true;
       renderer.shadowMap.type = THREE.PCFSoftShadowMap;
