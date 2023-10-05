@@ -1,29 +1,29 @@
 import {
-  HiArrowRight,
-  HiArrowLeft,
-  HiArrowUp,
-  HiArrowDown,
-} from 'react-icons/hi';
+  GoChevronDown,
+  GoChevronUp,
+  GoChevronLeft,
+  GoChevronRight,
+} from 'react-icons/go';
 
 const MovementIconsMenu = () => {
   return (
     <div className='relative'>
-      <HiArrowUp
+      <GoChevronUp
         id='iconUp'
-        className='absolute md:bottom-10 bottom-8 md:left-10 left-8 p-1.5 bg-neutral-500 hover:bg-neutral-700 opacity-50 text-neutral-100 rounded-md md:w-8 w-6 md:h-8 h-6'
+        className='absolute md:bottom-10 bottom-8 md:left-10 left-8 p-1 hover:bg-slate-800 bg-slate-600 opacity-50 text-neutral-100 rounded-md md:w-8 w-6 md:h-8 h-6'
       />
-      <HiArrowDown
+      <GoChevronDown
         id='iconDown'
-        className='absolute bottom-0 left-10 p-1.5 bg-neutral-500 hover:bg-neutral-700 opacity-50 text-neutral-100 rounded-md md:w-8 w-6 md:h-8 h-6'
+        className='absolute bottom-0 md:left-10 left-8 p-1 hover:bg-slate-800 bg-slate-600 opacity-50 text-neutral-100 rounded-md md:w-8 w-6 md:h-8 h-6'
       />
-      <HiArrowRight
+      <GoChevronRight
         id='iconRight'
-        className='absolute md:left-20 left-16 bottom-0 p-1.5 bg-neutral-500 hover:bg-neutral-700 opacity-50 text-neutral-100 rounded-md md:w-8 w-6 md:h-8 h-6'
+        className='absolute md:left-20 left-16 bottom-0 p-1 hover:bg-slate-800 bg-slate-600 opacity-50 text-neutral-100 rounded-md md:w-8 w-6 md:h-8 h-6'
       />
 
-      <HiArrowLeft
+      <GoChevronLeft
         id='iconLeft'
-        className='absolute left-0 bottom-0 p-1.5 bg-neutral-500 hover:bg-neutral-700 opacity-50 text-neutral-100 rounded-md md:w-8 w-6 md:h-8 h-6'
+        className='absolute left-0 bottom-0 p-1 hover:bg-slate-800 bg-slate-600 opacity-50 text-neutral-100 rounded-md md:w-8 w-6 md:h-8 h-6'
       />
     </div>
   );
