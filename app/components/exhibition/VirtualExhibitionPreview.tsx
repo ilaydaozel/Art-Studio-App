@@ -2,28 +2,25 @@
 import styled from 'styled-components';
 import { IExhibition } from '@/app/types';
 import Link from 'next/link';
-import { ROUTE_PATHS } from '@/constants/routes';
 import VirtualExhibitionWithMenu from '../virtualExhibition/VirtualExhibitionWithMenu';
+import ComponentWithHeading from '../layouts/ComponentWithHeading';
 
 interface VirtualExhibitionPreviewProps {
   exhibition: IExhibition;
 }
 
-const ExhibitonBox = styled.div<{ backgroundImgUrl: string }>`
-  display: flex;
-  justify-content: center;
-  width: 80vw;
-  height: 20vw;
-  position: relative;
-  background-image: url(${(props) => props.backgroundImgUrl});
-  margin: 1rem;
-`;
-
 const VirtualExhibitionPreview = ({
   exhibition,
 }: VirtualExhibitionPreviewProps) => {
   return (
-    <ExhibitonBox backgroundImgUrl={exhibition.coverImage || ''}></ExhibitonBox>
+    <ComponentWithHeading headingText='Sanal Sergi'>
+      <div className='m-8 shadow-lg'>
+        <VirtualExhibitionWithMenu
+          exhibition={exhibition}
+          small={true}
+        ></VirtualExhibitionWithMenu>
+      </div>
+    </ComponentWithHeading>
   );
 };
 export default VirtualExhibitionPreview;
