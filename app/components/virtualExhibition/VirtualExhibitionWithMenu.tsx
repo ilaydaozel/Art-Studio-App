@@ -7,8 +7,12 @@ import { COLORS } from '@/constants/colors';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { AiOutlineMenu } from 'react-icons/ai';
 import MovementIconsMenu from './MovementIconsMenu';
+import { RiFullscreenFill } from 'react-icons/ri';
+import { ROUTE_PATHS } from '@/constants/routes';
+import { BiArrowBack } from 'react-icons/bi';
 interface GalleryProps {
   exhibition: IExhibition;
+  small?: boolean;
 }
 
 const MenuContainer = styled.div`
@@ -29,12 +33,12 @@ const MenuContainer = styled.div`
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 `;
 
-const StartButton = styled.button`
+const StartButton = styled.button<{ small: boolean }>`
   display: flex;
   justify-content: center;
-  padding: 0.25rem 1rem;
+  padding: ${(props) => (props.small ? '0.25rem 1rem' : '0.1rem 0.4rem')};
   margin: 1rem;
-  font-size: 1rem;
+  font-size: ${(props) => (props.small ? '0.8rem' : '1rem')};
   border-radius: 0.5rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   cursor: pointer;
@@ -45,6 +49,7 @@ const StartButton = styled.button`
     transform: scale(1.05);
   }
 `;
+
 const InformationContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -53,14 +58,7 @@ const InformationContainer = styled.div`
   margin: 1rem;
   gap: 5px;
 `;
-const CoverImage = styled.div<{ backgroundImgUrl: string }>`
-  width: 100%;
-  height: 30vh;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-image: url(${(props) => props.backgroundImgUrl});
-`;
+
 const ExhibitionTitle = styled.text`
   font-size: 1rem;
   color: ${COLORS.darkGray};
@@ -71,7 +69,10 @@ const InfoText = styled.text`
   color: ${COLORS.darkGray};
 `;
 
-const VirtualExhibitionWithMenu = ({ exhibition }: GalleryProps) => {
+const VirtualExhibitionWithMenu = ({
+  exhibition,
+  small = false,
+}: GalleryProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(true);
 
   const toggleOpen = useCallback(() => {
@@ -105,24 +106,40 @@ const VirtualExhibitionWithMenu = ({ exhibition }: GalleryProps) => {
   return (
     <div className='relative'>
       <div className='relative'>
-        <ThreeDExhibition artworks={exhibition.artworks}></ThreeDExhibition>
+        <ThreeDExhibition
+          artworks={exhibition.artworks}
+          small={small}
+        ></ThreeDExhibition>
       </div>
 
       <div
         id='hamburgerMenu'
         ref={menuRef}
         onClick={toggleOpen}
-        className='absolute bottom-10 right-6 cursor-pointer flex items-center justify-center md:w-[30px] md:h-[30px] w-[24px] h-[24px] rounded-full bg-white'
+        className='absolute top-12 right-6 cursor-pointer flex items-center justify-center md:w-8 md:h-8 w-6 h-6 rounded-full bg-white'
       >
-        <AiOutlineMenu className='md:w-[16px] md:h-[16px] w-[14px] h-[14px] text-neutral-500' />
+        <AiOutlineMenu className='md:w-4 md:h-4 w-3 h-3 text-neutral-500' />
       </div>
       <div
         id='movementIconsMenu'
-        className='absolute bottom-6 left-6 cursor-pointer'
+        className='absolute bottom-6 right-36 cursor-pointer'
       >
         <MovementIconsMenu />
       </div>
 
+      {small ? (
+        <a href={`${ROUTE_PATHS.VIRTUAL_EXHIBITION}/${exhibition.id}`}>
+          <div className='absolute bottom-6 left-6 cursor-pointer hover:bg-slate-800 bg-slate-600 opacity-50 p-1 rounded-md'>
+            <RiFullscreenFill className='md:w-6 md:h-6 w-4 h-4  text-neutral-200' />
+          </div>
+        </a>
+      ) : (
+        <a href={`${ROUTE_PATHS.EXHIBITION}/${exhibition.id}`}>
+          <div className='absolute bottom-6 left-6 cursor-pointer hover:bg-slate-800 bg-slate-600 opacity-50 p-1 rounded-md'>
+            <BiArrowBack className='md:w-6 md:h-6 w-4 h-4  text-neutral-200' />
+          </div>
+        </a>
+      )}
       {isMenuOpen && (
         <MenuContainer id='menu'>
           <div className='w-[100%] h-[30vh] relative'>
@@ -146,7 +163,11 @@ const VirtualExhibitionWithMenu = ({ exhibition }: GalleryProps) => {
               )}
               <InfoText>Başlamak için ENTER a basın.</InfoText>
             </div>
-            <StartButton id='start_button' onClick={handleStartClick}>
+            <StartButton
+              small={small}
+              id='start_button'
+              onClick={handleStartClick}
+            >
               Sergiyi Gör
             </StartButton>
           </InformationContainer>
