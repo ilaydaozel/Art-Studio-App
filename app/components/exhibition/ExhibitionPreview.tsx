@@ -22,14 +22,14 @@ const Wrapper = styled.div`
 `;
 
 const TitleText = styled.div`
-  font-size: 1rem;
+  font-size: 1.4rem;
   font-weight: bold;
   color: ${COLORS.darkGray};
   @media (max-width: 768px) {
-    font-size: 1 rem;
+    font-size: 1.2 rem;
   }
   @media (max-width: 480px) {
-    font-size: 0.8rem;
+    font-size: 1rem;
   }
 `;
 
