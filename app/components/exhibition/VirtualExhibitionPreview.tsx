@@ -1,7 +1,6 @@
 'use client';
-import styled from 'styled-components';
+
 import { IExhibition } from '@/app/types';
-import Link from 'next/link';
 import VirtualExhibitionWithMenu from '../virtualExhibition/VirtualExhibitionWithMenu';
 import ComponentWithHeading from '../layouts/ComponentWithHeading';
 
