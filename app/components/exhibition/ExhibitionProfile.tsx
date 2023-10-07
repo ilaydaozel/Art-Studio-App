@@ -86,23 +86,25 @@ const ExhibitionProfile = ({
         ></SelectExhibitionArtworkPopup>
       )}
       <ComponentWithHeading headingText='Katılan Eserler'>
-        <div className='flex gap-2'>
-          <SlidingButton
-            label='Yeni Resim Ekle'
-            onClick={() => {
-              createExhibitionArtworkModal.onOpen();
-            }}
-          />
-          <SlidingButton
-            onClick={() => setShowArtworkSelection(true)}
-            label='Sistemden Resim Seç'
-          ></SlidingButton>
-        </div>
+        {isEditable && (
+          <div className='flex gap-2'>
+            <SlidingButton
+              label='Yeni Eser Yarat'
+              onClick={() => {
+                createExhibitionArtworkModal.onOpen();
+              }}
+            />
+            <SlidingButton
+              onClick={() => setShowArtworkSelection(true)}
+              label='Sergiye Resim Ekle'
+            ></SlidingButton>
+          </div>
+        )}
 
         <ArtworkList
           artworks={exhibition.artworks}
           onDelete={handleDeleteArtworkFromExhibition}
-          isEditable={true}
+          isEditable={isEditable}
           width='90%'
         ></ArtworkList>
       </ComponentWithHeading>
