@@ -1,32 +1,50 @@
 import { TranslationContext } from '@/app/contexts/TranslationContext';
 import { Language } from '@/app/types/language';
 import { COLORS } from '@/constants/colors';
-import { useContext, ChangeEvent } from 'react';
+import { useContext } from 'react';
 import styled from 'styled-components';
 
-const Select = styled.select`
-  background-color: transparent;
-  outline: none;
-  font-size: 1rem;
-  color: ${COLORS.gray};
+const Container = styled.div`
+  display: flex;
+  gap: 0.3rem;
+  cursor: pointer;
+  margin: 2px;
+`;
+const Option = styled.div<{ isSelected: boolean }>`
+  color: ${(props) =>
+    props.isSelected ? `${COLORS.darkGray}` : `${COLORS.gray}`};
+  font-weight: ${(props) => (props.isSelected ? 'bold' : 'normal')};
+  border-bottom: ${(props) => (props.isSelected ? '1px solid' : 'none')};
+  font-size: 1.1rem;
+  line-height: 1.05rem;
   @media (max-width: 768px) {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
+    line-height: 0.85rem;
   }
   @media (max-width: 576px) {
-    font-size: 0.6rem;
+    font-size: 0.8rem;
+    line-height: 0.75rem;
   }
 `;
+
 const LanguageSwitcher = () => {
   const { language, switchLanguage } = useContext(TranslationContext);
-  const handleSwitchLanguage = (event: ChangeEvent<HTMLSelectElement>) => {
-    switchLanguage(event.target.value as Language);
-  };
 
   return (
-    <Select value={language} onChange={handleSwitchLanguage}>
-      <option value='en'>English</option>
-      <option value='tr'>Türkçe</option>
-    </Select>
+    <Container>
+      <Option
+        isSelected={language === ('tr' as Language)}
+        onClick={() => switchLanguage('tr' as Language)}
+      >
+        tr
+      </Option>
+      <Option
+        isSelected={language === ('en' as Language)}
+        onClick={() => switchLanguage('en' as Language)}
+      >
+        en
+      </Option>
+    </Container>
   );
 };
 export default LanguageSwitcher;
