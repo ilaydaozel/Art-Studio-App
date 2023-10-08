@@ -2,11 +2,11 @@
 import { COLORS } from '@/constants/colors';
 import styled from 'styled-components';
 import { IArtistProfile } from '../../types';
-import useBiographyModal from '../../hooks/useBiographyModal';
+import useUpdateTextModal from '../../hooks/useUpdateTextModal';
 import { FaRegEdit } from 'react-icons/fa';
 import TextButton from '../buttons/TextButton';
-import BiographyModal from '../modal/BiographyModal';
-import { useRouter } from 'next/navigation';
+import UpdateTextModal from '../modal/UpdateTextModal';
+import axios from 'axios';
 
 interface BiographyProps {
   artistProfile: IArtistProfile;
@@ -29,18 +29,21 @@ const BiographyContent = styled.div`
 `;
 
 const Biography = ({ artistProfile, isEditable = false }: BiographyProps) => {
-  const biographyModal = useBiographyModal();
-  const router = useRouter();
-  const refreshPage = () => {
-    router.refresh();
+  const updateTextModal = useUpdateTextModal();
+
+  const updateBiography = async (newText: string) => {
+    return await axios.post(`/api/artistProfile/${artistProfile?.artistId}`, {
+      biography: newText,
+    });
   };
 
   return (
     <>
-      <BiographyModal
-        artistProfile={artistProfile}
-        onClose={biographyModal.onClose}
-        onUpdate={refreshPage}
+      <UpdateTextModal
+        script={artistProfile.biography || ''}
+        label='Bio'
+        onClose={updateTextModal.onClose}
+        onSubmit={updateBiography}
       />
       <BiographyContainer>
         <BiographyContent>{artistProfile?.biography}</BiographyContent>
@@ -48,7 +51,7 @@ const Biography = ({ artistProfile, isEditable = false }: BiographyProps) => {
           <TextButton
             label='Düzenle'
             icon={FaRegEdit}
-            onClick={biographyModal.onOpen}
+            onClick={updateTextModal.onOpen}
           ></TextButton>
         ) : (
           <></>
