@@ -1,6 +1,6 @@
 'use client';
 import Input from '@/app/components/inputs/Input';
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { useState } from 'react';
 import { useForm, FieldValues, SubmitHandler } from 'react-hook-form';
 import toast from 'react-hot-toast';
@@ -8,7 +8,6 @@ import Selectbox from '../inputs/Selectbox';
 import {
   PasswordLengthError,
   PasswordMismatchError,
-  UnknownError,
 } from '@/app/lib/exceptions';
 import useTranslate from '@/app/hooks/useTranslate';
 import FormLayout from './FormLayout';
@@ -54,13 +53,16 @@ const RegisterForm = () => {
         throw new PasswordMismatchError();
       }
 
-      const response = await axios.post('/api/user/register', userData);
-      if (response.data.error) {
-        toast.error(t(response.data.error, exceptionsLocation));
-      } else {
-        toast.success('Kayıt olundu!');
-        reset();
-      }
+      await axios
+        .post('/api/user/register', userData)
+        .then((response: AxiosResponse<any, any>) => {
+          if (response.data?.error) {
+            toast.error(t(response.data.error, exceptionsLocation));
+          } else {
+            toast.success('Kayıt olundu!');
+            reset();
+          }
+        });
     } catch (error) {
       toast.error(
         error instanceof Error
