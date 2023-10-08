@@ -87,6 +87,10 @@ const TurkishData: ILanguageData = {
         cover_image: 'Kapak Fotorafı',
         creation_successful_message: 'Duyuru başarıyla oluşturuldu!',
     },
+    update_text_modal: {
+        update_successful_message: "Metin başarıyla güncellendi",
+        action_label: "Güncelle",
+    },
     artist_accounts: {
         list_heading: "Sanatçılar",
         add_button_text: "Yeni Sanatçı Ekle +"

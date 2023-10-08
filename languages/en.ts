@@ -86,6 +86,10 @@ const EnglishData: ILanguageData = {
         cover_image: 'Cover Image',
         creation_successful_message: 'Announcement created successfully!',
     },
+    update_text_modal: {
+        update_successful_message: "Text updated successully",
+        action_label: "Update",
+    },
     artist_accounts: {
         list_heading: "Artists",
         add_button_text: "Add New Artist +"

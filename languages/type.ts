@@ -87,6 +87,10 @@ export type ILanguageData = {
         cover_image: string;
         creation_successful_message: string;
     };
+    update_text_modal: {
+        update_successful_message: string;
+        action_label: string;
+    };
     artist_accounts: {
         list_heading: string;
         add_button_text: string;
@@ -131,5 +135,4 @@ export type ILanguageData = {
         nonUniqueEmailError: string;
         nonExistingArtistProfileError: string;
     };
-
 }

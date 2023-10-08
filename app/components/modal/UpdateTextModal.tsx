@@ -25,6 +25,7 @@ const BiographyModal = ({
   const router = useRouter();
   const t = useTranslate();
   const exceptionsLocation = { element: 'exceptions' };
+  const location = { element: 'update_text_modal' };
 
   const refreshPage = () => {
     router.refresh();
@@ -50,13 +51,12 @@ const BiographyModal = ({
         if (response.data?.error) {
           toast.error(t(response.data.error, exceptionsLocation));
         } else {
-          toast.success('Biografi güncellendi!');
+          toast.success(t('update_successful_message', location));
           biographyModal.onClose();
           refreshPage();
         }
       });
     } catch (error) {
-      console.log('error:', error);
       toast.error(
         error instanceof Error
           ? t(error.message, exceptionsLocation)
@@ -73,7 +73,6 @@ const BiographyModal = ({
         className='w-full min-h-[100px] h-[50vh] border-double border-2 border-neutral-300'
         id='text'
         {...register('text', { required: true })}
-        placeholder='Hakkımda ..'
       />
     </div>
   );
@@ -83,7 +82,7 @@ const BiographyModal = ({
       disabled={isLoading}
       isOpen={biographyModal.isOpen}
       title={label}
-      actionLabel='Güncelle'
+      actionLabel={t('action_label', location)}
       onClose={onClose}
       onSubmit={handleSubmit(submit)}
       body={bodyContent}
