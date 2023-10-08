@@ -1,15 +1,15 @@
 import { create } from 'zustand';
 
-interface BiographyModalStore {
+interface UpdateTextModalStore {
   isOpen: boolean;
   onOpen: () => void;
   onClose: () => void;
 }
 
-const useBiographyModal = create<BiographyModalStore>((set) => ({
+const useUpdateTextModal = create<UpdateTextModalStore>((set) => ({
   isOpen: false,
   onOpen: () => set({ isOpen: true }),
   onClose: () => set({ isOpen: false }),
 }));
 
-export default useBiographyModal;
+export default useUpdateTextModal;
