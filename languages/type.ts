@@ -112,6 +112,10 @@ export type ILanguageData = {
             select_cover_image: string;
             select_button_text: string;
         };
+        biography: {
+            biography_label: string;
+            edit_button_label: string;
+        };
     };
     exhibitions: {
         list_heading: string;

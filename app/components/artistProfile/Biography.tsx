@@ -7,6 +7,7 @@ import { FaRegEdit } from 'react-icons/fa';
 import TextButton from '../buttons/TextButton';
 import UpdateTextModal from '../modal/UpdateTextModal';
 import axios from 'axios';
+import useTranslate from '@/app/hooks/useTranslate';
 
 interface BiographyProps {
   artistProfile: IArtistProfile;
@@ -30,7 +31,8 @@ const BiographyContent = styled.div`
 
 const Biography = ({ artistProfile, isEditable = false }: BiographyProps) => {
   const updateTextModal = useUpdateTextModal();
-
+  const t = useTranslate();
+  const location = { element: 'biography', superElement: 'artist_profile' };
   const updateBiography = async (newText: string) => {
     return await axios.post(`/api/artistProfile/${artistProfile?.artistId}`, {
       biography: newText,
@@ -41,7 +43,7 @@ const Biography = ({ artistProfile, isEditable = false }: BiographyProps) => {
     <>
       <UpdateTextModal
         script={artistProfile.biography || ''}
-        label='Bio'
+        label={t('biography_label', location)}
         onClose={updateTextModal.onClose}
         onSubmit={updateBiography}
       />
@@ -49,7 +51,7 @@ const Biography = ({ artistProfile, isEditable = false }: BiographyProps) => {
         <BiographyContent>{artistProfile?.biography}</BiographyContent>
         {isEditable ? (
           <TextButton
-            label='Düzenle'
+            label={t('edit_button_label', location)}
             icon={FaRegEdit}
             onClick={updateTextModal.onOpen}
           ></TextButton>

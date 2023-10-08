@@ -111,7 +111,12 @@ const TurkishData: ILanguageData = {
             change_failed_message: "Bir şeyler yanlış gitti",
             select_cover_image: "Kapak Resmi Seç",
             select_button_text: "Seç"
+        },
+        biography: {
+            biography_label: "Biografi",
+            edit_button_label: "Biografiyi Düzenle"
         }
+
     },
     exhibitions: {
         list_heading: "Sergileri Düzenle",

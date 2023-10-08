@@ -110,6 +110,10 @@ const EnglishData: ILanguageData = {
             change_failed_message: "Something went wrong",
             select_cover_image: "Select Cover Image",
             select_button_text: "Select"
+        },
+        biography: {
+            biography_label: "Biography",
+            edit_button_label: "Update Biograpy"
         }
     },
     exhibitions: {
