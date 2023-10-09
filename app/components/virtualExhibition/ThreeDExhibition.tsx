@@ -6,7 +6,10 @@ import * as THREE from 'three';
 import { createRoom } from './Room';
 import { createAndHangPaintings } from './Painting';
 import { createBoundingBoxOfGroup } from './BoundingBox';
-import { createInitialRoomLight, createSpotlightWithTarget } from './Light';
+import {
+  createDirectionalLightWithTarget,
+  createInitialRoomLight,
+} from './Light';
 import { createMobileControls, createPointerLockControls } from './Controls';
 
 interface ThreeDExhibitionProps {
@@ -51,12 +54,17 @@ const ThreeDExhibition = ({
       const floorDimensions = { width: 100, height: 200 };
       const { ceiling, floor, walls } = createRoom(floorDimensions);
       scene.add(ceiling, floor, walls);
+      createDirectionalLightWithTarget(
+        walls.children[2],
+        new THREE.Vector3(-40, 20, 0)
+      );
+
       const roomBoundingBox: THREE.Box3[] = createBoundingBoxOfGroup(walls);
       const paintings = createAndHangPaintings(artworks, floorDimensions);
       for (let i = 0; i < paintings.length; i++) {
         scene.add(paintings[i]);
-        const spotlightOfPainting = createSpotlightWithTarget(paintings[i]);
-        scene.add(spotlightOfPainting);
+        //const spotlightOfPainting = createSpotlightWithTarget(paintings[i]);
+        //scene.add(spotlightOfPainting);
       }
       //controls
       /*const isMobile =
