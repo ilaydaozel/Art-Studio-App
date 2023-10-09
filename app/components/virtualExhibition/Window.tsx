@@ -27,11 +27,13 @@ const subtractTheHoleFromTheWall = (wall: THREE.Mesh, hole: THREE.Mesh) => {
 const createGlass = (size: THREE.Vector2) => {
   const iceBlue = '#d3f2f5';
   const glassGeometry = new THREE.BoxGeometry(size.x, size.y, 0.5);
-  const glassMaterial = new THREE.MeshPhongMaterial({
+  const glassMaterial = new THREE.MeshPhysicalMaterial({
     color: iceBlue,
     transparent: true,
-    opacity: 0.3,
-    shininess: 1.0,
+    opacity: 0.7,
+    transmission: 0.9,
+    roughness: 0.6,
+    ior: 1.5,
   });
 
   const glass = new THREE.Mesh(glassGeometry, glassMaterial);
@@ -54,6 +56,7 @@ export const createWindowsInTheWall = (
   }[]
 ) => {
   let wallWithWindows: THREE.Mesh = wall;
+
   for (let i = 0; i < windows.length; i++) {
     const { size, position } = windows[i];
     const windowHole = createHole(size, position);
