@@ -110,7 +110,6 @@ export const createPointerLockControls = (
   roomBoundingBox: THREE.Box3[]
 ) => {
   const controls = setUpPointerLockControls(camera);
-  controls.lock();
 
   const keysPressed: { [key: string]: boolean } = {
     ArrowUp: false,
@@ -168,6 +167,16 @@ export const createPointerLockControls = (
   if (movementIcons) {
     movementIcons.addEventListener('mousedown', onMouseDown, false);
     movementIcons.addEventListener('mouseup', onMouseUp, false);
+  }
+
+  const onClickStart = () => {
+    controls.lock();
+  };
+
+  //active pointer lock on the start of the program
+  const startButton = document.getElementById('start_button');
+  if (startButton) {
+    startButton.addEventListener('click', onClickStart, false);
   }
 
   const updateMovement = (delta: number) => {
