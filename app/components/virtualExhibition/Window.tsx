@@ -24,6 +24,31 @@ const subtractTheHoleFromTheWall = (wall: THREE.Mesh, hole: THREE.Mesh) => {
   return wallWithHole;
 };
 
+const createFrame = (size: THREE.Vector2, width: number) => {
+  let shape = new THREE.Shape([
+    new THREE.Vector2(0, 0),
+    new THREE.Vector2(size.x, 0),
+    new THREE.Vector2(size.x, size.y),
+    new THREE.Vector2(0, size.y),
+  ]);
+
+  let hole = new THREE.Path([
+    new THREE.Vector2(width, width),
+    new THREE.Vector2(width, size.y - width),
+    new THREE.Vector2(size.x - width, size.y - width),
+    new THREE.Vector2(size.x - width, width),
+  ]);
+  shape.holes.push(hole);
+  let shapeGeometry = new THREE.ShapeGeometry(shape);
+
+  var frame = new THREE.Mesh(
+    shapeGeometry,
+    new THREE.MeshLambertMaterial({ color: 0xffffff, side: THREE.DoubleSide })
+  );
+
+  return frame;
+};
+
 const createGlass = (size: THREE.Vector2) => {
   const iceBlue = '#d3f2f5';
   const glassGeometry = new THREE.BoxGeometry(size.x, size.y, 0.5);
@@ -75,6 +100,14 @@ export const createWindowsInTheWall = (
       position.y - wall.position.y,
       position.z - wall.position.z - 0.5
     );
+    const frameScale = 1.1;
+    const frameSize = new THREE.Vector2(
+      size.x * frameScale,
+      size.y * frameScale
+    );
+    const frame = createFrame(frameSize, 2);
+    frame.position.set(0 - frameSize.x / 2, 0 - frameSize.y / 2, -0.3);
+    glass.add(frame);
     wallWithWindows.add(glass);
     addLightToTheGlass(glass, lightDirection);
   }
