@@ -23,10 +23,22 @@ export const createDirectionalLightWithTarget = (
   target.add(directionalLight);
 };
 
-export const createSpotlightWithTarget = (target: THREE.Object3D) => {
-  const spotlight = new THREE.SpotLight(0xffff00, 30);
+export const createSpotlightWithTarget = (
+  target: THREE.Object3D,
+  position?: THREE.Vector3
+) => {
   const { x, z } = target.position;
-  spotlight.position.set(x, 38, z);
+  let spotlightPosition = new THREE.Vector3(x, 38, z);
+  if (position) {
+    spotlightPosition = position;
+  }
+
+  const spotlight = new THREE.SpotLight(0xffff00, 30);
+  spotlight.position.set(
+    spotlightPosition.x,
+    spotlightPosition.y,
+    spotlightPosition.z
+  );
   spotlight.target = target;
   spotlight.castShadow = true;
   spotlight.angle = Math.PI / 2;
