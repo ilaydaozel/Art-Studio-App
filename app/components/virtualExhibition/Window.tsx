@@ -43,7 +43,7 @@ const createFrame = (size: THREE.Vector2, width: number) => {
 
   var frame = new THREE.Mesh(
     shapeGeometry,
-    new THREE.MeshLambertMaterial({ color: 0xffffff, side: THREE.DoubleSide })
+    new THREE.MeshLambertMaterial({ color: 0xebe2d3, side: THREE.DoubleSide })
   );
 
   return frame;
@@ -100,12 +100,12 @@ export const createWindowsInTheWall = (
       position.y - wall.position.y,
       position.z - wall.position.z - 0.5
     );
-    const frameScale = 1.1;
+    const frameWidth = 2;
     const frameSize = new THREE.Vector2(
-      size.x * frameScale,
-      size.y * frameScale
+      size.x + frameWidth,
+      size.y + frameWidth
     );
-    const frame = createFrame(frameSize, 2);
+    const frame = createFrame(frameSize, frameWidth);
     frame.position.set(0 - frameSize.x / 2, 0 - frameSize.y / 2, -0.3);
     glass.add(frame);
     wallWithWindows.add(glass);
