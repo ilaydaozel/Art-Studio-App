@@ -5,6 +5,7 @@ import { COLORS } from '@/constants/colors';
 import { ROUTE_PATHS } from '@/constants/routes';
 import { TranslationContext } from '@/app/contexts/TranslationContext';
 import useTranslate from '../../hooks/useTranslate';
+import GoogleMapsWidget from '../utils/GoogleMapsWidget';
 
 const FooterContainer = styled.div<{ isVisible: boolean }>`
   width: 100%;
@@ -20,7 +21,7 @@ const FooterElement = styled.a`
   color: ${COLORS.lightGray};
   cursor: pointer;
   font-weight: 500;
-  font-size: 10px;
+  font-size: 1rem;
   transition: font-weight 0.2s;
   &:hover {
     font-weight: 800;
@@ -48,12 +49,11 @@ const Footer = () => {
   const [isVisible, setIsVisible] = useState(
     document.documentElement.scrollHeight <= window.innerHeight
   );
-  const [footerHeight, setFooterHeight] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
       const isOnBottom =
-        document.documentElement.clientHeight + window.scrollY + 100 >=
+        document.documentElement.clientHeight + window.scrollY + 150 >=
         (document.documentElement.scrollHeight ||
           document.documentElement.clientHeight);
       setIsVisible(isOnBottom);
@@ -62,7 +62,7 @@ const Footer = () => {
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [footerHeight]);
+  }, []);
 
   const footerRef = React.useRef<HTMLDivElement>(null);
   const location = {
@@ -80,22 +80,28 @@ const Footer = () => {
             md:px-10
             sm: px-2'
       >
-        <div className='flex flex-col items-start '>
-          <LogoTitle>KONAK KÜLTÜR SANAT AKADEMİSİ</LogoTitle>
-          <div className='flex flex-col gap-1 items-start my-2'>
+        <div className='flex flex-col items-start gap-2 '>
+          <LogoTitle>{t('name', { element: 'academy' })}</LogoTitle>
+          <div className='w-[40%] grid grid-flow-col place-content-between'>
             <FooterElement href={ROUTE_PATHS.HOME}>
               {t('home', location)}
             </FooterElement>
             <FooterElement href={ROUTE_PATHS.ARTISTS}>
               {t('artists', location)}
             </FooterElement>
-            <FooterElement href={ROUTE_PATHS.ABOUT}>
-              {t('about', location)}
-            </FooterElement>
             <FooterElement href={ROUTE_PATHS.EXHIBITIONS}>
               {t('exhibitions', location)}
             </FooterElement>
+            <FooterElement href={ROUTE_PATHS.ABOUT}>
+              {t('about', location)}
+            </FooterElement>
+            <FooterElement href={ROUTE_PATHS.CONTACT}>
+              {t('contact', location)}
+            </FooterElement>
           </div>
+          <GoogleMapsWidget
+            mapContainerStyle={{ width: '30%', height: '150px' }}
+          />
         </div>
 
         <FooterText>
