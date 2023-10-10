@@ -1,7 +1,9 @@
+import AboutClient from './AboutClient';
+
 const About = () => {
   return (
-    <div className='pt-20'>
-      <div className='heigth: 200'>Hakkında</div>
+    <div className='pt-28'>
+      <AboutClient></AboutClient>
     </div>
   );
 };
