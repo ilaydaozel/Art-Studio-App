@@ -149,7 +149,7 @@ const VirtualExhibitionWithMenu = ({
               fill
               priority
               placeholder='blur'
-              blurDataURL={exhibition?.coverImage || ''}
+              blurDataURL={'/images/blurImage.jpg'}
               style={{
                 objectFit: 'cover',
               }}

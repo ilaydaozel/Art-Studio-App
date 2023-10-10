@@ -98,7 +98,7 @@ const Header = ({
             priority={true}
             placeholder='blur'
             sizes='55vw'
-            blurDataURL={artistProfile?.coverImage || ''}
+            blurDataURL={'/images/blurImage.jpg'}
             style={{
               objectFit: 'cover',
             }}

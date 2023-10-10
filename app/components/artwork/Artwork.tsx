@@ -77,7 +77,7 @@ const Artwork = ({ artwork }: ArtworkProps) => {
             fill
             quality={100}
             placeholder='blur'
-            blurDataURL={artwork.artworkMedias[0] || ''}
+            blurDataURL={'/images/blurImage.jpg'}
             className='object-cover'
           />
         </ArtworkContainer>

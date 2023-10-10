@@ -75,7 +75,7 @@ const Slide = ({ slide, children, isMini = false }: SlideProps) => {
         sizes={'100vw'}
         priority={true}
         placeholder='blur'
-        blurDataURL={slide.coverImage || ''}
+        blurDataURL={'/images/blurImage.jpg'}
         style={{
           objectFit: 'cover',
         }}
