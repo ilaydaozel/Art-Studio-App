@@ -17,6 +17,7 @@ export type ILanguageData = {
         edit_exhibitions: string;
         artist_profile: string;
         about: string;
+        contact: string,
         exhibitions: string;
         exhibition: string;
         logout: string;

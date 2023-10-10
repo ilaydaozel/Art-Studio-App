@@ -11,6 +11,7 @@ export enum ROUTE_PATHS {
     EDIT_EXHIBITION = 'exhibition',
     ARTIST_PROFILE = '/artistProfile',
     ABOUT = '/about',
+    CONTACT = '/contact',
     EXHIBITIONS = '/exhibitions',
     EXHIBITION = '/exhibition',
     VIRTUAL_EXHIBITION = '/virtualExhibition',

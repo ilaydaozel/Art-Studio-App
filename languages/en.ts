@@ -16,6 +16,7 @@ const EnglishData: ILanguageData = {
         edit_exhibitions: "Edit Exhibitions",
         artist_profile: "Artist",
         about: "About",
+        contact: "Contact",
         exhibitions: "Exhibitions",
         exhibition: "Exhibition",
         logout: "Log out"

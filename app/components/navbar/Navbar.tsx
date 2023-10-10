@@ -192,6 +192,13 @@ const Navbar = ({ currentUser }: NavbarProps) => {
               {t('artists', { element: 'route_names' })}
             </MenuElement>
             <MenuElement
+              isActive={pathname === ROUTE_PATHS.EXHIBITIONS}
+              color={menuElementColor}
+              href={ROUTE_PATHS.EXHIBITIONS}
+            >
+              {t('exhibitions', { element: 'route_names' })}
+            </MenuElement>
+            <MenuElement
               isActive={pathname === ROUTE_PATHS.ABOUT}
               color={menuElementColor}
               href={ROUTE_PATHS.ABOUT}
@@ -199,11 +206,11 @@ const Navbar = ({ currentUser }: NavbarProps) => {
               {t('about', { element: 'route_names' })}
             </MenuElement>
             <MenuElement
-              isActive={pathname === ROUTE_PATHS.EXHIBITIONS}
+              isActive={pathname === ROUTE_PATHS.CONTACT}
               color={menuElementColor}
-              href={ROUTE_PATHS.EXHIBITIONS}
+              href={ROUTE_PATHS.CONTACT}
             >
-              {t('exhibitions', { element: 'route_names' })}
+              {t('contact', { element: 'route_names' })}
             </MenuElement>
           </div>
         </div>

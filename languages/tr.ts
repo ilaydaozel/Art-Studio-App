@@ -17,6 +17,7 @@ const TurkishData: ILanguageData = {
         edit_exhibitions: "Sergileri Düzenle",
         artist_profile: "Sanatçı",
         about: "Hakkımızda",
+        contact: "İletişim",
         exhibitions: "Sergiler",
         exhibition: "Sergi",
         logout: "Çıkış Yap"
