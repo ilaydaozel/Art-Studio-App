@@ -1,16 +1,16 @@
 import React, { useMemo } from 'react';
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 
-const GoogleMapsWidget = () => {
+interface GoogleMapsWidgetProps {
+  mapContainerStyle?: { width: string; height: string };
+}
+const GoogleMapsWidget = ({
+  mapContainerStyle = { width: '50%', height: '400px' },
+}: GoogleMapsWidgetProps) => {
   const center = useMemo(
     () => ({ lat: 38.41948699951172, lng: 27.132444381713867 }),
     []
   );
-
-  const mapContainerStyle = {
-    width: '50%',
-    height: '400px',
-  };
 
   return (
     <LoadScript
