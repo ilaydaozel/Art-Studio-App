@@ -126,6 +126,10 @@ export type ILanguageData = {
         heading: string;
         add_button_text: string;
     };
+    about: {
+        heading: string,
+        about_text: string
+    };
     error_page: {
         caption: string;
         reset_button_label: string;
