@@ -82,26 +82,28 @@ const Footer = () => {
       >
         <div className='flex flex-col items-start gap-2 '>
           <LogoTitle>{t('name', { element: 'academy' })}</LogoTitle>
-          <div className='w-[40%] grid grid-flow-col place-content-between'>
-            <FooterElement href={ROUTE_PATHS.HOME}>
-              {t('home', location)}
-            </FooterElement>
-            <FooterElement href={ROUTE_PATHS.ARTISTS}>
-              {t('artists', location)}
-            </FooterElement>
-            <FooterElement href={ROUTE_PATHS.EXHIBITIONS}>
-              {t('exhibitions', location)}
-            </FooterElement>
-            <FooterElement href={ROUTE_PATHS.ABOUT}>
-              {t('about', location)}
-            </FooterElement>
-            <FooterElement href={ROUTE_PATHS.CONTACT}>
-              {t('contact', location)}
-            </FooterElement>
+          <div className='w-[90%] flex flex-row gap-2 justify-between'>
+            <div className='flex flex-col items-start justify-center gap-2'>
+              <FooterElement href={ROUTE_PATHS.HOME}>
+                {t('home', location)}
+              </FooterElement>
+              <FooterElement href={ROUTE_PATHS.ARTISTS}>
+                {t('artists', location)}
+              </FooterElement>
+              <FooterElement href={ROUTE_PATHS.EXHIBITIONS}>
+                {t('exhibitions', location)}
+              </FooterElement>
+              <FooterElement href={ROUTE_PATHS.ABOUT}>
+                {t('about', location)}
+              </FooterElement>
+              <FooterElement href={ROUTE_PATHS.CONTACT}>
+                {t('contact', location)}
+              </FooterElement>
+            </div>
+            <GoogleMapsWidget
+              mapContainerStyle={{ width: '30%', height: '150px' }}
+            />
           </div>
-          <GoogleMapsWidget
-            mapContainerStyle={{ width: '30%', height: '150px' }}
-          />
         </div>
 
         <FooterText>
