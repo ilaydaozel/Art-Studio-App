@@ -11,11 +11,10 @@ const GoogleMapsWidget = ({
     () => ({ lat: 38.41948699951172, lng: 27.132444381713867 }),
     []
   );
+  const apiKey = useMemo(() => process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY, []);
 
   return (
-    <LoadScript
-      googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || ''}
-    >
+    <LoadScript googleMapsApiKey={apiKey || ''}>
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         center={center}
