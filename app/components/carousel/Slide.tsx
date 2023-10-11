@@ -66,7 +66,7 @@ const SmallCaption = styled.p<{ isMini: boolean }>`
 
 const Slide = ({ slide, children, isMini = false }: SlideProps) => {
   return (
-    <div className='w-[100%] h-[100vh]'>
+    <div className='w-[100%] h-[100vh] relative'>
       <Image
         src={slide.coverImage || ''}
         alt={'Slide image'}
