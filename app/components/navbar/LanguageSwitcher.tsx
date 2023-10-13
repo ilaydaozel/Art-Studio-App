@@ -10,20 +10,41 @@ const Container = styled.div`
   cursor: pointer;
   margin: 2px;
 `;
-const Option = styled.div<{ isSelected: boolean }>`
-  color: ${(props) =>
-    props.isSelected ? `${COLORS.darkGray}` : `${COLORS.gray}`};
-  font-weight: ${(props) => (props.isSelected ? 'bold' : 'normal')};
-  border-bottom: ${(props) => (props.isSelected ? '1px solid' : 'none')};
-  font-size: 1.1rem;
-  line-height: 1.05rem;
+const Option = styled.div<{ isActive: boolean }>`
+  text-align: center;
+  padding: 2px 4px;
+  color: ${(props) => props.color};
+  cursor: pointer;
+  transition: text-decoration 0.3s;
+  font-weight: ${(props) => props.isActive && 'bold'};
+  font-size: 0.85rem;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0.8px;
+    background-color: ${(props) => props.color + '50'};
+    transform: translateX(-100%);
+    transition: transform 0.5s ease;
+  }
+
+  &:hover::before {
+    transform: translateX(0);
+  }
+
+  @media (max-width: 992px) {
+    font-size: 0.8rem;
+  }
   @media (max-width: 768px) {
-    font-size: 0.9rem;
-    line-height: 0.85rem;
+    font-size: 0.7rem;
   }
   @media (max-width: 576px) {
-    font-size: 0.8rem;
-    line-height: 0.75rem;
+    font-size: 0.6rem;
   }
 `;
 
@@ -33,16 +54,16 @@ const LanguageSwitcher = () => {
   return (
     <Container>
       <Option
-        isSelected={language === ('tr' as Language)}
+        isActive={language === ('tr' as Language)}
         onClick={() => switchLanguage('tr' as Language)}
       >
-        tr
+        Türkçe
       </Option>
       <Option
-        isSelected={language === ('en' as Language)}
+        isActive={language === ('en' as Language)}
         onClick={() => switchLanguage('en' as Language)}
       >
-        en
+        English
       </Option>
     </Container>
   );
