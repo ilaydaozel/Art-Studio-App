@@ -12,11 +12,10 @@ const MenuContainer = styled.div`
   justify-content: flex-start;
   align-items: flex-start;
   gap: 10px;
-  font-size: 0.8rem;
 `;
 
 const MenuElement = styled.a<{ isActive?: boolean }>`
-  color: ${COLORS.darkGray};
+  color: ${COLORS.gray};
   font-weight: ${(props) => props.isActive && 'bold'};
   cursor: pointer;
   transition: background-color 0.3s ease;
