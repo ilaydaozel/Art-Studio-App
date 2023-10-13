@@ -92,6 +92,9 @@ const TurkishData: ILanguageData = {
         update_successful_message: "Metin başarıyla güncellendi",
         action_label: "Güncelle",
     },
+    footer: {
+        all_rights_deserved_text: "Tüm hakları saklıdır."
+    },
     artist_accounts: {
         list_heading: "Sanatçılar",
         add_button_text: "Yeni Sanatçı Ekle +"

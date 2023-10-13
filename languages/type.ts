@@ -92,6 +92,9 @@ export type ILanguageData = {
         update_successful_message: string;
         action_label: string;
     };
+    footer: {
+        all_rights_deserved_text: string;
+    };
     artist_accounts: {
         list_heading: string;
         add_button_text: string;

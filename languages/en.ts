@@ -91,6 +91,9 @@ const EnglishData: ILanguageData = {
         update_successful_message: "Text updated successully",
         action_label: "Update",
     },
+    footer: {
+        all_rights_deserved_text: "All rights deserved."
+    },
     artist_accounts: {
         list_heading: "Artists",
         add_button_text: "Add New Artist +"

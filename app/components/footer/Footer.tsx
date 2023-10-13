@@ -1,9 +1,8 @@
 'use client';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { COLORS } from '@/constants/colors';
 import { ROUTE_PATHS } from '@/constants/routes';
-import { TranslationContext } from '@/app/contexts/TranslationContext';
 import useTranslate from '../../hooks/useTranslate';
 import GoogleMapsWidget from '../utils/GoogleMapsWidget';
 
@@ -46,6 +45,7 @@ const LogoTitle = styled.a`
 `;
 
 const Footer = () => {
+  const t = useTranslate();
   const [isVisible, setIsVisible] = useState(
     document.documentElement.scrollHeight <= window.innerHeight
   );
@@ -65,10 +65,12 @@ const Footer = () => {
   }, []);
 
   const footerRef = React.useRef<HTMLDivElement>(null);
-  const location = {
+  const routesLocation = {
     element: 'route_names',
   };
-  const t = useTranslate();
+  const location = {
+    element: 'footer',
+  };
 
   return (
     <FooterContainer isVisible={isVisible} ref={footerRef}>
@@ -85,19 +87,19 @@ const Footer = () => {
           <div className='w-[90%] flex flex-row gap-2 justify-between'>
             <div className='flex flex-col items-start justify-center gap-2'>
               <FooterElement href={ROUTE_PATHS.HOME}>
-                {t('home', location)}
+                {t('home', routesLocation)}
               </FooterElement>
               <FooterElement href={ROUTE_PATHS.ARTISTS}>
-                {t('artists', location)}
+                {t('artists', routesLocation)}
               </FooterElement>
               <FooterElement href={ROUTE_PATHS.EXHIBITIONS}>
-                {t('exhibitions', location)}
+                {t('exhibitions', routesLocation)}
               </FooterElement>
               <FooterElement href={ROUTE_PATHS.ABOUT}>
-                {t('about', location)}
+                {t('about', routesLocation)}
               </FooterElement>
               <FooterElement href={ROUTE_PATHS.CONTACT}>
-                {t('contact', location)}
+                {t('contact', routesLocation)}
               </FooterElement>
             </div>
             <GoogleMapsWidget
@@ -107,8 +109,8 @@ const Footer = () => {
         </div>
 
         <FooterText>
-          &copy; {new Date().getFullYear()} Konak Kültür Sanat Akademisi. Tüm
-          hakları saklıdır.
+          &copy; {new Date().getFullYear()} {t('name', { element: 'academy' })}.{' '}
+          {t('all_rights_deserved_text', location)}
         </FooterText>
       </div>
     </FooterContainer>
