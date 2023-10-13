@@ -125,6 +125,20 @@ export type ILanguageData = {
         list_heading: string;
         add_button_text: string;
     };
+    exhibition_profile: {
+        description: {
+            heading: string,
+            edit_button_label: string
+        };
+        list: {
+            heading: string,
+            add_button_text: string,
+            add_artwork_to_exhibition_button_text: string
+        };
+        virtual_exhibition: {
+            heading: string,
+        };
+    };
     edit_announcements: {
         heading: string;
         add_button_text: string;

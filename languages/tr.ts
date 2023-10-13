@@ -126,6 +126,21 @@ const TurkishData: ILanguageData = {
         list_heading: "Sergileri Düzenle",
         add_button_text: "Yeni Sergi Ekle +"
     },
+    exhibition_profile: {
+        description: {
+            heading: "Açıklama",
+            edit_button_label: "Açıklamayı Düzenle"
+        },
+        list: {
+            heading: "Seçilmiş Eserler",
+            add_button_text: "Yeni Eser Oluştur +",
+            add_artwork_to_exhibition_button_text: "Sergiye Eser Ekle +"
+
+        },
+        virtual_exhibition: {
+            heading: "Sanal Sergi",
+        },
+    },
     edit_announcements: {
         heading: "Duyuruları Düzenle",
         add_button_text: "Yeni Duyuru Ekle +"

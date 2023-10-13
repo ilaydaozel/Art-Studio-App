@@ -124,6 +124,20 @@ const EnglishData: ILanguageData = {
         list_heading: "Edit Exhibitions",
         add_button_text: "Add New Exhibition +"
     },
+    exhibition_profile: {
+        description: {
+            heading: "Description",
+            edit_button_label: "Edit Description"
+        },
+        list: {
+            heading: "Selected Artworks",
+            add_button_text: "Create New Artwork +",
+            add_artwork_to_exhibition_button_text: "Add Artwork to Exhibition +"
+        },
+        virtual_exhibition: {
+            heading: "Virtual Exhibition",
+        },
+    },
     edit_announcements: {
         heading: "Edit Announcements",
         add_button_text: "Add New Announcement +"
