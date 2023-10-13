@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import UserMenu from './UserMenu';
 import styled from 'styled-components';
 import { COLORS } from '@/constants/colors';
 import { ROUTE_PATHS } from '@/constants/routes';
@@ -59,16 +58,17 @@ const LogoTitle = styled.a<{ color: string; isSmallScreen: boolean }>`
   }
   @media (max-width: 576px) {
     font-size: 0.9rem;
+    letter-spacing: 0.5px;
   }
 `;
 
 const SideIcons = styled.div`
   display: flex;
   gap: 1rem;
-  padding: 0 0.6rem;
-  align-items: center;
+  padding: 0 0.4rem;
+  align-items: flex-end;
   @media (max-width: 576px) {
-    gap: 0.6rem;
+    gap: 0.2rem;
   }
 `;
 
@@ -150,7 +150,7 @@ const Navbar = ({ currentUser }: NavbarProps) => {
                 <a href={ROUTE_PATHS.LOGIN}>
                   <PiUserCircleLight
                     style={{ color: menuElementColor }}
-                    className='sm:h-[28px] sm:w-[28px] w-[20px] h-[20px]'
+                    className='md:h-[24px] md:w-[24px] w-[20px] h-[20px]'
                   />
                 </a>
               )}

@@ -1,6 +1,5 @@
 import { TranslationContext } from '@/app/contexts/TranslationContext';
 import { Language } from '@/app/types/language';
-import { COLORS } from '@/constants/colors';
 import { useContext } from 'react';
 import styled from 'styled-components';
 

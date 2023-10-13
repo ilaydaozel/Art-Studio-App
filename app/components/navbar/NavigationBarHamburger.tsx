@@ -16,9 +16,9 @@ interface NavigationBarHamburgerProps {
 
 const Container = styled.div<{ isSmallScreen: boolean }>`
   position: absolute;
-  right: -0.6rem;
+  right: -0.4rem;
   top: ${(props) => (props.isSmallScreen ? '2rem' : '4rem')};
-  width: ${(props) => (props.isSmallScreen ? '97vw' : '20vw')};
+  width: ${(props) => (props.isSmallScreen ? '100vw' : '20vw')};
   background-color: rgba(255, 255, 255);
   border-top: 0.5px solid rgba(0, 0, 0, 0.1);
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
@@ -29,6 +29,9 @@ const Container = styled.div<{ isSmallScreen: boolean }>`
   justify-content: flex-start;
   align-items: flex-start;
   gap: 1rem;
+  @media (max-width: 576px) {
+    right: -0.2rem;
+  }
 `;
 
 const HamburgerIcon = styled.div`
@@ -89,7 +92,7 @@ const NavigationBarHamburger = ({
     <div className='relative' ref={menuRef}>
       <HamburgerIcon onClick={toggleOpen}>
         <AiOutlineMenu
-          className='md:w-[20px] md:h-[20px] w-[16px] h-[16px]'
+          className='md:w-[24px] md:h-[24px] w-[16px] h-[16px]'
           style={{ color: color }}
         />
       </HamburgerIcon>
