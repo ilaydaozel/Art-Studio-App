@@ -54,7 +54,11 @@ const ArtistAccount = ({ artist }: ArtistAccountProps) => {
     <a href={`${ROUTE_PATHS.ARTIST_PROFILE}/${artist.id}`}>
       <Wrapper>
         <ArtistImage
-          profilePic={artistProfile?.profilePic ? artistProfile.profilePic : ''}
+          profilePic={
+            artistProfile?.profilePic
+              ? artistProfile.profilePic
+              : '/images/blurImage.jpg'
+          }
         />
         <NameText>
           {artist.name} {artist.surname}
