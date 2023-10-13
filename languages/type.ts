@@ -120,6 +120,7 @@ export type ILanguageData = {
             biography_label: string;
             edit_button_label: string;
         };
+        delete_successful_mesage: string;
     };
     exhibitions: {
         list_heading: string;

@@ -118,7 +118,8 @@ const EnglishData: ILanguageData = {
         biography: {
             biography_label: "Biography",
             edit_button_label: "Update Biograpy"
-        }
+        },
+        delete_successful_mesage: "Artwork has been successfully deleted"
     },
     exhibitions: {
         list_heading: "Edit Exhibitions",

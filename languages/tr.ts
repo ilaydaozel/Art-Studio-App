@@ -119,7 +119,8 @@ const TurkishData: ILanguageData = {
         biography: {
             biography_label: "Biografi",
             edit_button_label: "Biografiyi Düzenle"
-        }
+        },
+        delete_successful_mesage: "Eser başarıyla silindi"
 
     },
     exhibitions: {
