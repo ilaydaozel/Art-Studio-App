@@ -43,10 +43,9 @@ const BiographyModal = ({
       onSubmit(text),
       setIsLoading,
       t,
-      router,
-      t('update_successful_message', location),
       biographyModal.onClose,
-      undefined
+      router,
+      t('update_successful_message', location)
     );
   };
 

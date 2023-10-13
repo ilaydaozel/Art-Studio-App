@@ -100,9 +100,9 @@ const CreateArtworkModal = ({ artistProfile }: CreateArtworkModalProps) => {
       axios.post(`/api/artwork/createUserArtwork/${artistId}`, artwork),
       setIsLoading,
       t,
+      createArtworkModal.onClose,
       router,
       t('creation_successful_message', location),
-      createArtworkModal.onClose,
       () => {
         reset();
         setStep(STEPS.INFORMATION);

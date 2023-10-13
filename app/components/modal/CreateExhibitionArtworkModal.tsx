@@ -142,9 +142,9 @@ const CreateExhibitionArtworkModal = ({
       axios.post(apiLink, artwork),
       setIsLoading,
       t,
+      createExhibitionArtworkModal.onClose,
       router,
       t('creation_successful_message', location),
-      createExhibitionArtworkModal.onClose,
       () => {
         reset();
         setStep(STEPS.INFORMATION);
