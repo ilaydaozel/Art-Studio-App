@@ -39,9 +39,10 @@ export const updateData = async (
   submitResponse: Promise<AxiosResponse<any, any>>,
   setIsLoading: (isLoading: boolean) => void,
   t: (key: string, location: any) => string,
-  location: any,
   onClose: () => void,
-  router: AppRouterInstance
+  router: AppRouterInstance,
+  successMessage: string,
+  onReset?: () => void
 ) => {
   const exceptionsLocation = { element: 'exceptions' };
   setIsLoading(true);
@@ -51,8 +52,11 @@ export const updateData = async (
       if (response.data?.error) {
         toast.error(t(response.data.error, exceptionsLocation));
       } else {
-        toast.success(t('update_successful_message', location));
+        toast.success(successMessage);
         onClose();
+        if (onReset) {
+          onReset();
+        }
         router.refresh();
       }
     });
