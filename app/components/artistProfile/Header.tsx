@@ -5,7 +5,6 @@ import { IArtistProfile, IArtwork } from '../../types';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import { useState } from 'react';
-import toast from 'react-hot-toast';
 import { FaRegEdit } from 'react-icons/fa';
 import TextButton from '../buttons/TextButton';
 import Popup from '../popup/Popup';
@@ -58,15 +57,12 @@ const Header = ({
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [coverImage, setHeaderArtwork] = useState(
-    artistProfile?.coverImage || ''
+    artistProfile?.coverImage || '/images/blurImage.jpg'
   );
   const [showArtworkSelection, setShowArtworkSelection] = useState(false);
-  const refreshPage = () => {
-    router.refresh();
-  };
 
   const handleHeaderArtworkSelection = (artwork: IArtwork) => {
-    setHeaderArtwork(artwork.artworkMedias[0] || '');
+    setHeaderArtwork(artwork.artworkMedias[0] || '/images/blurImage.jpg');
   };
 
   const location = { element: 'header', superElement: 'artist_profile' };
@@ -92,7 +88,7 @@ const Header = ({
       <HeadingContainer>
         <div className='w-[55%] h-[65%] relative'>
           <Image
-            src={artistProfile.coverImage || ''}
+            src={artistProfile.coverImage || '/images/blurImage.jpg'}
             alt={'Header image'}
             fill
             priority={true}
@@ -124,7 +120,9 @@ const Header = ({
         <Popup
           onClose={() => {
             setShowArtworkSelection(false);
-            setHeaderArtwork(artistProfile?.coverImage || '');
+            setHeaderArtwork(
+              artistProfile?.coverImage || '/images/blurImage.jpg'
+            );
           }}
           width='60%'
           body={
@@ -132,7 +130,7 @@ const Header = ({
               {artworks?.map((artwork) => (
                 <ArtworkThumbnail
                   key={artwork.id}
-                  src={artwork.artworkMedias[0] || ''}
+                  src={artwork.artworkMedias[0] || '/images/blurImage.jpg'}
                   onClick={() => handleHeaderArtworkSelection(artwork)}
                 />
               ))}

@@ -61,7 +61,9 @@ const ExhibitionPreview = ({ exhibition }: ExhibitionProps) => {
   return (
     <Link href={`${ROUTE_PATHS.EXHIBITION}/${exhibition.id}`}>
       <Wrapper>
-        <ExhibitonImage backgroundImgUrl={exhibition.coverImage || ''} />
+        <ExhibitonImage
+          backgroundImgUrl={exhibition.coverImage || '/images/blurImage.jpg'}
+        />
         <TitleText>{exhibition.title}</TitleText>
         <DateText>
           {getDateString(exhibition.startDate, exhibition.endDate)}

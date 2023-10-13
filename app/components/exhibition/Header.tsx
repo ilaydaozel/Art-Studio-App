@@ -56,7 +56,7 @@ const Header = ({ exhibition }: HeaderProps) => {
     <Container>
       <div className='w-[100%] h-[60%] mb-2 relative'>
         <Image
-          src={exhibition?.coverImage || ''}
+          src={exhibition?.coverImage || '/images/blurImage.jpg'}
           alt={'Header image'}
           fill
           priority

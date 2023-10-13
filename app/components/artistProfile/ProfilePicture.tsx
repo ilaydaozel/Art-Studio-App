@@ -45,7 +45,9 @@ const ProfilePicture = ({
         onUpdate={refreshPage}
       />
       <ProfileImageContainer>
-        <ProfileImage imageUrl={artistProfile?.profilePic || ''}></ProfileImage>
+        <ProfileImage
+          imageUrl={artistProfile?.profilePic || '/images/blurImage.jpg'}
+        ></ProfileImage>
         {isEditable ? (
           <TextButton
             label='Düzenle'

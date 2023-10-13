@@ -68,7 +68,7 @@ const Slide = ({ slide, children, isMini = false }: SlideProps) => {
   return (
     <div className='w-[100%] h-[100vh] relative'>
       <Image
-        src={slide.coverImage || ''}
+        src={slide.coverImage || '/images/blurImage.jpg'}
         alt={'Slide image'}
         fill
         quality={80}

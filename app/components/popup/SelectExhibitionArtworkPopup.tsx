@@ -159,7 +159,7 @@ const SelectExhibitionArtworkPopup = ({
                   <AiFillCheckCircle className='absolute right-0 top-0 text-green-600' />
                 )}
                 <ArtworkImage
-                  src={artwork.artworkMedias[0] || ''}
+                  src={artwork.artworkMedias[0] || '/images/blurImage.jpg'}
                   onClick={() => toggleArtworkSelection(artwork)}
                 />
                 <ArtistName>
@@ -183,7 +183,7 @@ const SelectExhibitionArtworkPopup = ({
               >
                 <ArtworkImageMini
                   className='peer'
-                  src={artwork.artworkMedias[0] || ''}
+                  src={artwork.artworkMedias[0] || '/images/blurImage.jpg'}
                 />
                 <AiFillMinusCircle className='peer-hover:visible invisible absolute right-0 top-0 text-red-600' />
               </ArtworkBox>

@@ -72,7 +72,7 @@ const Artwork = ({ artwork }: ArtworkProps) => {
       <Container>
         <ArtworkContainer>
           <Image
-            src={artwork.artworkMedias[0] || ''}
+            src={artwork.artworkMedias[0] || '/images/blurImage.jpg'}
             alt='artwork'
             fill
             quality={100}

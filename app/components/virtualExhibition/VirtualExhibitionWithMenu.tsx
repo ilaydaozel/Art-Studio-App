@@ -144,7 +144,7 @@ const VirtualExhibitionWithMenu = ({
         <MenuContainer id='menu'>
           <div className='w-[100%] h-[30vh] relative'>
             <Image
-              src={exhibition?.coverImage || ''}
+              src={exhibition?.coverImage || '/images/blurImage.jpg'}
               alt={'exhibition cover image'}
               fill
               priority
