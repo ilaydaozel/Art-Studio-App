@@ -7,7 +7,7 @@ import { ROUTE_PATHS } from '@/constants/routes';
 import { usePathname } from 'next/navigation';
 import styled from 'styled-components';
 
-const Container = styled.div`
+const MenuContainer = styled.div`
   display: flex;
   flex-direction: row;
   gap: 0.4rem;
@@ -57,7 +57,7 @@ const NavigationBar = () => {
   const pathname = usePathname();
   const isHomePage = pathname === ROUTE_PATHS.HOME;
   const [menuElementColor, setMenuElementColor] = useState(
-    isHomePage ? '#FFFFFF' : COLORS.darkGray
+    isHomePage ? '#FFFFFF' : COLORS.gray
   );
   const t = useTranslate();
 
@@ -66,7 +66,7 @@ const NavigationBar = () => {
       // Check if the user has scrolled to the top of the page
       const isOnTop = window.scrollY === 0;
       if (isHomePage) {
-        setMenuElementColor(isOnTop ? '#FFFFFF' : COLORS.darkGray);
+        setMenuElementColor(isOnTop ? '#FFFFFF' : COLORS.gray);
       }
     };
 
@@ -79,7 +79,7 @@ const NavigationBar = () => {
   const location = { element: 'route_names' };
 
   return (
-    <Container>
+    <MenuContainer>
       <MenuElement
         isActive={pathname === ROUTE_PATHS.HOME}
         color={menuElementColor}
@@ -115,7 +115,7 @@ const NavigationBar = () => {
       >
         {t('contact', location)}
       </MenuElement>
-    </Container>
+    </MenuContainer>
   );
 };
 
