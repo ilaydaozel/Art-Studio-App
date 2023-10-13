@@ -8,6 +8,9 @@ import Modal from './Modal';
 import ImageUpload from '../inputs/ImageUpload';
 import useProfilePictureModal from '@/app/hooks/useProfilePictureModal';
 import { IArtistProfile } from '@/app/types';
+import { handleApiResponse } from '../utils/Helper';
+import { useRouter } from 'next/navigation';
+import useTranslate from '@/app/hooks/useTranslate';
 
 interface ProfilePictureModalProps {
   artistProfile: IArtistProfile | null;
@@ -22,6 +25,9 @@ const ProfilePictureModal = ({
 }: ProfilePictureModalProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const profilePictureModal = useProfilePictureModal();
+  const router = useRouter();
+  const t = useTranslate();
+  const location = { element: 'update_text_modal' };
   const pictureLink = artistProfile?.profilePic;
   const {
     register,
@@ -36,24 +42,19 @@ const ProfilePictureModal = ({
   });
   const profilePic = watch('profilePic');
 
-  const onSubmit: SubmitHandler<FieldValues> = async (data: FieldValues) => {
-    setIsLoading(true);
-    const { profilePic } = data;
-
-    try {
-      await axios.post(`/api/artistProfile/${artistProfile?.artistId}`, {
+  const onSubmit: SubmitHandler<FieldValues> = async () => {
+    await handleApiResponse(
+      axios.post(`/api/artistProfile/${artistProfile?.artistId}`, {
         profilePic,
-      });
-      toast.success('Profil fotoğrafı güncellendi!');
-      profilePictureModal.onClose();
-      onUpdate();
-    } catch (error) {
-      toast.error('Error');
-      console.log('Profile pic error: ', error);
-    } finally {
-      setIsLoading(false);
-    }
+      }),
+      setIsLoading,
+      t,
+      profilePictureModal.onClose,
+      router,
+      t('update_successful_message', location)
+    );
   };
+
   const setCustomValue = (id: string, value: any) => {
     setValue(id, value, {
       shouldDirty: true,

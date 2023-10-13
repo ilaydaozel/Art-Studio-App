@@ -22,12 +22,12 @@ const DescriptionText = styled.div`
 `;
 
 const About = ({ exhibition, isEditable = false }: AboutProps) => {
+  const t = useTranslate();
+  const updateTextModal = useUpdateTextModal();
   const location = {
     element: 'description',
     superElement: 'exhibition_profile',
   };
-  const t = useTranslate();
-  const updateTextModal = useUpdateTextModal();
   const updateDescription = async (newText: string) => {
     return await axios.post(`/api/exhibition/${exhibition.id}`, {
       biography: newText,

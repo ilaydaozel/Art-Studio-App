@@ -35,7 +35,7 @@ export const getDateString = (
   return startDateString + ' - ' + endDateString;
 };
 
-export const updateData = async (
+export const handleApiResponse = async (
   submitResponse: Promise<AxiosResponse<any, any>>,
   setIsLoading: (isLoading: boolean) => void,
   t: (key: string, location: any) => string,

@@ -1,7 +1,6 @@
 'use client';
 
 import axios from 'axios';
-import { toast } from 'react-hot-toast';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { useMemo, useState } from 'react';
 import useCreateArtworkModal from '@/app/hooks/useCreateArtworkModal';
@@ -11,6 +10,8 @@ import Input from '../inputs/Input';
 import Selectbox from '../inputs/Selectbox';
 import { IArtistProfile } from '@/app/types';
 import useTranslate from '@/app/hooks/useTranslate';
+import { handleApiResponse } from '../utils/Helper';
+import { useRouter } from 'next/navigation';
 
 enum STEPS {
   INFORMATION = 0,
@@ -25,7 +26,7 @@ const CreateArtworkModal = ({ artistProfile }: CreateArtworkModalProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const [step, setStep] = useState(STEPS.INFORMATION);
   const t = useTranslate();
-  const exceptionsLocation = { element: 'exceptions' };
+  const router = useRouter();
   const location = { element: 'create_artwork_modal' };
 
   const {
@@ -95,28 +96,18 @@ const CreateArtworkModal = ({ artistProfile }: CreateArtworkModalProps) => {
       artworkMedias: [media],
       exhibitionIds: [],
     };
-
-    try {
-      const response = await axios.post(
-        `/api/artwork/createUserArtwork/${artistId}`,
-        artwork
-      );
-      if (response.data.error) {
-        toast.error(t(response.data.error, exceptionsLocation));
-      } else {
-        toast.success(t('creation_successful_message', location));
-        window.location.reload();
+    await handleApiResponse(
+      axios.post(`/api/artwork/createUserArtwork/${artistId}`, artwork),
+      setIsLoading,
+      t,
+      createArtworkModal.onClose,
+      router,
+      t('creation_successful_message', location),
+      () => {
         reset();
+        setStep(STEPS.INFORMATION);
       }
-    } catch (error) {
-      toast.error(
-        error instanceof Error
-          ? t(error.message, exceptionsLocation)
-          : t('unknownError', exceptionsLocation)
-      );
-    } finally {
-      setIsLoading(false);
-    }
+    );
   };
 
   const actionLabel = useMemo(() => {

@@ -1,19 +1,20 @@
 'use client';
 
 import axios from 'axios';
-import { toast } from 'react-hot-toast';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { useMemo, useState } from 'react';
 import Modal from './Modal';
 import ImageUpload from '../inputs/ImageUpload';
 import Input from '../inputs/Input';
 import Selectbox from '../inputs/Selectbox';
-import { IArtistProfile, IArtwork } from '@/app/types';
+import { IArtistProfile } from '@/app/types';
 import SelectboxArtists from '../inputs/SelectboxArtists';
 import Radio from '../inputs/Radio';
 import useCreateExhibitionArtworkModal from '@/app/hooks/useCreateExhibitionArtworkModal';
 import styled from 'styled-components';
 import useTranslate from '@/app/hooks/useTranslate';
+import { handleApiResponse } from '../utils/Helper';
+import { useRouter } from 'next/navigation';
 
 enum STEPS {
   INFORMATION = 0,
@@ -33,12 +34,11 @@ const CreateExhibitionArtworkModal = ({
   allArtistProfiles,
 }: CreateExhibitionArtworkModalProps) => {
   const createExhibitionArtworkModal = useCreateExhibitionArtworkModal();
-
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [step, setStep] = useState(STEPS.INFORMATION);
   const [selectedOption, setSelectedOption] = useState('user');
   const t = useTranslate();
-  const exceptionsLocation = { element: 'exceptions' };
   const location = { element: 'create_exhibition_artwork_modal' };
   const handleOptionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedOption(event.target.value);
@@ -138,25 +138,18 @@ const CreateExhibitionArtworkModal = ({
         artworkMedias: [media],
       };
     }
-
-    try {
-      const response = await axios.post(apiLink, artwork);
-      if (response.data.error) {
-        toast.error(t(response.data.error, exceptionsLocation));
-      } else {
-        toast.success(t('creation_successful_message', location));
-        window.location.reload();
+    await handleApiResponse(
+      axios.post(apiLink, artwork),
+      setIsLoading,
+      t,
+      createExhibitionArtworkModal.onClose,
+      router,
+      t('creation_successful_message', location),
+      () => {
         reset();
+        setStep(STEPS.INFORMATION);
       }
-    } catch (error) {
-      toast.error(
-        error instanceof Error
-          ? t(error.message, exceptionsLocation)
-          : t('unknownError', exceptionsLocation)
-      );
-    } finally {
-      setIsLoading(false);
-    }
+    );
   };
 
   const actionLabel = useMemo(() => {

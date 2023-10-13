@@ -10,6 +10,8 @@ import ImageUpload from '../inputs/ImageUpload';
 import Input from '../inputs/Input';
 import useTranslate from '@/app/hooks/useTranslate';
 import DatePicker from '../inputs/DatePicker';
+import { handleApiResponse } from '../utils/Helper';
+import { useRouter } from 'next/navigation';
 
 enum STEPS {
   INFORMATION = 0,
@@ -21,9 +23,8 @@ const CreateExhibitionModal = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [step, setStep] = useState(STEPS.INFORMATION);
   const t = useTranslate();
-
+  const router = useRouter();
   const location = { element: 'create_exhibition_modal' };
-  const exceptionsLocation = { element: 'exceptions' };
 
   const {
     register,
@@ -79,27 +80,18 @@ const CreateExhibitionModal = () => {
       organizedBy: organizedBy,
       coverImage: coverImage,
     };
-    try {
-      const response = await axios.post(
-        '/api/exhibition/createExhibition',
-        exhibitionData
-      );
-      if (response.data.error) {
-        toast.error(t(response.data.error, exceptionsLocation));
-      } else {
-        toast.success(t('creation_successful_message', location));
-        window.location.reload();
+    await handleApiResponse(
+      axios.post('/api/exhibition/createExhibition', exhibitionData),
+      setIsLoading,
+      t,
+      createExhibitionModal.onClose,
+      router,
+      t('creation_successful_message', location),
+      () => {
         reset();
+        setStep(STEPS.INFORMATION);
       }
-    } catch (error) {
-      toast.error(
-        error instanceof Error
-          ? t(error.message, exceptionsLocation)
-          : t('unknownError', exceptionsLocation)
-      );
-    } finally {
-      setIsLoading(false);
-    }
+    );
   };
 
   const actionLabel = useMemo(() => {

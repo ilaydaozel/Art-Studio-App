@@ -1,20 +1,21 @@
 'use client';
 
 import axios from 'axios';
-import { toast } from 'react-hot-toast';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { useState } from 'react';
-import Modal from './Modal';
 import ImageUpload from '../inputs/ImageUpload';
 import Input from '../inputs/Input';
 import useCreateAnnouncementModal from '@/app/hooks/useCreateAnnouncementModal';
 import useTranslate from '@/app/hooks/useTranslate';
+import { handleApiResponse } from '../utils/Helper';
+import { useRouter } from 'next/navigation';
+import Modal from './Modal';
 
 const CreateAnnouncementModal = () => {
   const createAnnouncementModal = useCreateAnnouncementModal();
   const [isLoading, setIsLoading] = useState(false);
   const t = useTranslate();
-  const exceptionsLocation = { element: 'exceptions' };
+  const router = useRouter();
   const location = { element: 'create_announcement_modal' };
 
   const {
@@ -58,27 +59,18 @@ const CreateAnnouncementModal = () => {
       coverImage: coverImage,
       isActive: true,
     };
-    try {
-      const response = await axios.post(
-        `/api/announcement/createAnnouncement/`,
-        announcement
-      );
-      if (response.data.error) {
-        toast.error(t(response.data.error, exceptionsLocation));
-      } else {
-        toast.success(t('creation_successful_message', location));
-        window.location.reload();
+
+    await handleApiResponse(
+      axios.post(`/api/announcement/createAnnouncement/`, announcement),
+      setIsLoading,
+      t,
+      createAnnouncementModal.onClose,
+      router,
+      t('creation_successful_message', location),
+      () => {
         reset();
       }
-    } catch (error) {
-      toast.error(
-        error instanceof Error
-          ? t(error.message, exceptionsLocation)
-          : t('unknownError', exceptionsLocation)
-      );
-    } finally {
-      setIsLoading(false);
-    }
+    );
   };
 
   let bodyContent = (

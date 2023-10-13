@@ -4,7 +4,7 @@ import useBiographyModal from '@/app/hooks/useUpdateTextModal';
 import Modal from './Modal';
 import { useRouter } from 'next/navigation';
 import useTranslate from '@/app/hooks/useTranslate';
-import { updateData } from '../utils/Helper';
+import { handleApiResponse } from '../utils/Helper';
 
 interface BiographyModalProps {
   script: string;
@@ -39,13 +39,13 @@ const BiographyModal = ({
   const text = watch('text');
 
   const submit: SubmitHandler<FieldValues> = async () => {
-    await updateData(
+    await handleApiResponse(
       onSubmit(text),
       setIsLoading,
       t,
-      location,
       biographyModal.onClose,
-      router
+      router,
+      t('update_successful_message', location)
     );
   };
 
