@@ -68,7 +68,7 @@ const SideIcons = styled.div`
   padding: 0 0.4rem;
   align-items: flex-end;
   @media (max-width: 576px) {
-    gap: 0.2rem;
+    gap: 0.8rem;
   }
 `;
 

@@ -29,9 +29,6 @@ const Container = styled.div<{ isSmallScreen: boolean }>`
   justify-content: flex-start;
   align-items: flex-start;
   gap: 1rem;
-  @media (max-width: 576px) {
-    right: -0.2rem;
-  }
 `;
 
 const HamburgerIcon = styled.div`
