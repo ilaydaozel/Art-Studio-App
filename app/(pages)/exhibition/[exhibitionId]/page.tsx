@@ -3,7 +3,6 @@ import EmptyState from '@/app/components/EmptyState';
 import { IArtistProfile, IArtwork, IExhibition } from '@/app/types';
 import getExhibitionById from '@/app/actions/exhibition/getExhibitionById';
 import ExhibitionProfile from '@/app/components/exhibition/ExhibitionProfile';
-import { PiArrowSquareInThin } from 'react-icons/pi';
 import getAllArtworks from '@/app/actions/artwork/getAllArtworks';
 import getAllArtistProfiles from '@/app/actions/artistProfile/getAllArtistProfiles';
 
