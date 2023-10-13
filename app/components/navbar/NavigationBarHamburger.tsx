@@ -13,6 +13,23 @@ interface NavigationBarHamburgerProps {
   isSmallScreen: boolean;
 }
 
+const Container = styled.div<{ isSmallScreen: boolean }>`
+  position: absolute;
+  right: 0;
+  top: ${(props) => (props.isSmallScreen ? '2rem' : '4rem')};
+  width: ${(props) => (props.isSmallScreen ? '97vw' : '20vw')};
+  background-color: rgba(255, 255, 255);
+  border-top: 0.5px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
+  overflow: auto;
+  padding: 1.2rem 0.8rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 1rem;
+`;
+
 const HamburgerIcon = styled.div`
   display: flex;
   justify-content: flex-center;
@@ -20,23 +37,24 @@ const HamburgerIcon = styled.div`
   cursor: pointer;
 `;
 
-const MenuContainer = styled.div<{ isSmallScreen: boolean }>`
-  position: absolute;
-  right: 0;
-  top: ${(props) => (props.isSmallScreen ? '2rem' : '4rem')};
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-  gap: 10px;
-  border-top: 0.5px solid rgba(0, 0, 0, 0.1);
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
-  overflow-y: auto;
-  overlow-x: hidden;
-  width: ${(props) => (props.isSmallScreen ? '97vw' : '20vw')};
-  padding: 16px 8px;
-  background-color: rgba(255, 255, 255);
+const MenuContainer = styled.div`
+  display: grid;
+  grid-template-columns: 3fr 1px 3fr;
+  gap: 2rem;
 `;
 
+const NameText = styled.div`
+  color: ${COLORS.darkGray};
+  width: 100%;
+  font-size: 1rem;
+  font-weight: bold;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+`;
+
+const SeperatorLine = styled.div`
+  background-color: ${COLORS.lightGray};
+  height: 100%;
+`;
 const NavigationBarHamburger = ({
   user,
   isSmallScreen,
@@ -75,10 +93,20 @@ const NavigationBarHamburger = ({
         />
       </HamburgerIcon>
       {isOpen && (
-        <MenuContainer isSmallScreen={isSmallScreen}>
-          {isSmallScreen && <CommonMenu />}
-          {user && <UserMenu user={user} />}
-        </MenuContainer>
+        <Container isSmallScreen={isSmallScreen}>
+          {user && (
+            <NameText>
+              {user.name[0].toLocaleUpperCase('tr') + user.name.slice(1)}{' '}
+              {user.surname[0].toLocaleUpperCase('tr') + user.surname.slice(1)}
+            </NameText>
+          )}
+
+          <MenuContainer>
+            {isSmallScreen && <CommonMenu />}
+            {isSmallScreen && user && <SeperatorLine />}
+            {user && <UserMenu user={user} />}
+          </MenuContainer>
+        </Container>
       )}
     </div>
   );
