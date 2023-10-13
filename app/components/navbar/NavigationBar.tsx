@@ -1,9 +1,19 @@
+'use client';
+
+import React, { useEffect, useState } from 'react';
 import useTranslate from '@/app/hooks/useTranslate';
 import { COLORS } from '@/constants/colors';
 import { ROUTE_PATHS } from '@/constants/routes';
 import { usePathname } from 'next/navigation';
-import { useEffect, useState } from 'react';
 import styled from 'styled-components';
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 0.4rem;
+  justify-items: center;
+  align-items: center;
+`;
 
 const MenuElement = styled.a<{ color: string; isActive?: boolean }>`
   text-align: center;
@@ -45,8 +55,9 @@ const MenuElement = styled.a<{ color: string; isActive?: boolean }>`
 
 const NavigationBar = () => {
   const pathname = usePathname();
+  const isHomePage = pathname === ROUTE_PATHS.HOME;
   const [menuElementColor, setMenuElementColor] = useState(
-    pathname === ROUTE_PATHS.HOME ? '#FFFFFF' : COLORS.darkGray
+    isHomePage ? '#FFFFFF' : COLORS.darkGray
   );
   const t = useTranslate();
 
@@ -54,10 +65,8 @@ const NavigationBar = () => {
     const handleScroll = () => {
       // Check if the user has scrolled to the top of the page
       const isOnTop = window.scrollY === 0;
-      if (pathname === ROUTE_PATHS.HOME) {
+      if (isHomePage) {
         setMenuElementColor(isOnTop ? '#FFFFFF' : COLORS.darkGray);
-      } else {
-        setMenuElementColor(COLORS.darkGray);
       }
     };
 
@@ -70,7 +79,7 @@ const NavigationBar = () => {
   const location = { element: 'route_names' };
 
   return (
-    <div className='flex flex-row gap-2 items-center'>
+    <Container>
       <MenuElement
         isActive={pathname === ROUTE_PATHS.HOME}
         color={menuElementColor}
@@ -106,7 +115,8 @@ const NavigationBar = () => {
       >
         {t('contact', location)}
       </MenuElement>
-    </div>
+    </Container>
   );
 };
+
 export default NavigationBar;
