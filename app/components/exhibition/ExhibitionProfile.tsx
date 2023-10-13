@@ -11,12 +11,12 @@ import ComponentWithHeading from '../layouts/ComponentWithHeading';
 import SlidingButton from '../buttons/SlidingButton';
 import SelectExhibitionArtworkPopup from '../popup/SelectExhibitionArtworkPopup';
 import axios from 'axios';
-import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
 import CreateExhibitionArtworkModal from '../modal/CreateExhibitionArtworkModal';
 import useCreateExhibitionArtworkModal from '@/app/hooks/useCreateExhibitionArtworkModal';
 
 import VirtualExhibitionPreview from './VirtualExhibitionPreview';
+import { handleApiResponse } from '../utils/Helper';
 interface ExhibitionProfileProps {
   exhibition: IExhibition;
   artworks?: IArtwork[];
@@ -38,6 +38,7 @@ const ExhibitionProfile = ({
   isEditable = false,
   allArtistProfiles,
 }: ExhibitionProfileProps) => {
+  const [isLoading, setIsLoading] = useState(false);
   const [showArtworkSelection, setShowArtworkSelection] = useState(false);
   const [remainingArtworks, setRemainingArtworks] = useState<IArtwork[]>([]);
   const router = useRouter();
@@ -47,20 +48,19 @@ const ExhibitionProfile = ({
     element: 'list',
     superElement: 'exhibition_profile',
   };
-  const handleDeleteArtworkFromExhibition = (artworkId: string) => {
-    axios
-      .post(`/api/exhibition/deleteArtworkFromExhibition/${exhibition.id}`, {
-        artworkId,
-      })
-      .then(() => {
-        toast.success('Eser sergiden silindi!');
-        router.refresh();
-      })
-      .catch((error) => {
-        console.log('error: ', error);
-        toast.error('Bir şeyler yanlış gitti');
-        router.refresh();
-      });
+  const handleDeleteArtworkFromExhibition = async (artworkId: string) => {
+    await handleApiResponse(
+      axios.post(
+        `/api/exhibition/deleteArtworkFromExhibition/${exhibition.id}`,
+        {
+          artworkId,
+        }
+      ),
+      setIsLoading,
+      t,
+      router,
+      t('delete_successful_message', { element: 'exhibition_profile' })
+    );
   };
 
   useEffect(() => {

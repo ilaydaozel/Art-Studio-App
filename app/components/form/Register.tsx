@@ -11,11 +11,14 @@ import {
 } from '@/app/lib/exceptions';
 import useTranslate from '@/app/hooks/useTranslate';
 import FormLayout from './FormLayout';
+import { handleApiResponse } from '../utils/Helper';
+import { useRouter } from 'next/navigation';
 
 const RegisterForm = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const exceptionsLocation = { element: 'exceptions' };
   const t = useTranslate();
+  const router = useRouter();
+  const exceptionsLocation = { element: 'exceptions' };
 
   const {
     register,
@@ -53,24 +56,20 @@ const RegisterForm = () => {
         throw new PasswordMismatchError();
       }
 
-      await axios
-        .post('/api/user/register', userData)
-        .then((response: AxiosResponse<any, any>) => {
-          if (response.data?.error) {
-            toast.error(t(response.data.error, exceptionsLocation));
-          } else {
-            toast.success('Kayıt olundu!');
-            reset();
-          }
-        });
+      await handleApiResponse(
+        axios.post('/api/user/register', userData),
+        setIsLoading,
+        t,
+        router,
+        t('delete_successful_message', { element: 'exhibition_profile' }),
+        reset
+      );
     } catch (error) {
       toast.error(
         error instanceof Error
           ? t(error.message, exceptionsLocation)
           : t('unknownError', exceptionsLocation)
       );
-    } finally {
-      setIsLoading(false);
     }
   };
 

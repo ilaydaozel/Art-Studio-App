@@ -9,8 +9,9 @@ import {
   AiFillMinusCircle,
 } from 'react-icons/ai';
 import axios from 'axios';
-import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
+import { handleApiResponse } from '../utils/Helper';
+import useTranslate from '@/app/hooks/useTranslate';
 interface PopupProps {
   onClose: () => void;
   artworks?: IArtwork[];
@@ -106,6 +107,8 @@ const SelectExhibitionArtworkPopup = ({
   const [selectedArtworks, setSelectedArtworks] = useState([] as IArtwork[]);
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
+  const t = useTranslate();
+  const location = { element: 'exhibition_profile' };
 
   const filteredArtworks = artworks.filter((artwork) =>
     `${artwork.artistName} ${artwork.artistSurname}`
@@ -122,29 +125,15 @@ const SelectExhibitionArtworkPopup = ({
   };
 
   const onSubmit = async () => {
-    setIsLoading(true);
-    try {
-      const response = await axios.post(
-        `/api/exhibition/addArtworksToExhibition/${exhibition.id}`,
-        {
-          selectedArtworks,
-        }
-      );
-
-      if (response.data.error) {
-        console.error('error: ', response.data.error);
-        toast.error(response.data.error);
-      } else {
-        toast.success('Eserler sergiye eklendi!');
-        router.refresh();
-      }
-    } catch (error) {
-      // Handle other errors here
-      console.error('Error:', error);
-      toast.error('An error occurred.');
-    } finally {
-      setIsLoading(false);
-    }
+    await handleApiResponse(
+      axios.post(`/api/exhibition/addArtworksToExhibition/${exhibition.id}`, {
+        selectedArtworks,
+      }),
+      setIsLoading,
+      t,
+      router,
+      t('add_artwork_to_exhibition_successful_message', location)
+    );
   };
 
   let bodyContent =

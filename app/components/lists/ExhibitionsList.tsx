@@ -8,6 +8,8 @@ import toast from 'react-hot-toast';
 import { useState } from 'react';
 import { ROUTE_PATHS } from '@/constants/routes';
 import Exhibition from '../exhibition/ExhibitionPreview';
+import useTranslate from '@/app/hooks/useTranslate';
+import { handleApiResponse } from '../utils/Helper';
 
 interface ExhibitionsListProps {
   exhibitions: IExhibition[];
@@ -43,24 +45,17 @@ const ExhibitionsList = ({
 }: ExhibitionsListProps) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
+  const t = useTranslate();
+  const location = { element: 'exhibitions' };
 
-  const refreshPage = () => {
-    router.refresh();
-  };
-  const handleDeleteExhibition = (exhibitionId: string) => {
-    setIsLoading(true);
-    axios
-      .delete(`/api/exhibition/deleteExhibition/${exhibitionId}`)
-      .then(() => {
-        toast.success('Sergi sistemden silindi!');
-        refreshPage();
-      })
-      .catch(() => {
-        toast.error('Bir şeyler yanlış gitti');
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
+  const handleDeleteExhibition = async (exhibitionId: string) => {
+    await handleApiResponse(
+      axios.delete(`/api/exhibition/deleteExhibition/${exhibitionId}`),
+      setIsLoading,
+      t,
+      router,
+      t('delete_successful_message', location)
+    );
   };
 
   return (

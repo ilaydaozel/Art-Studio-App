@@ -7,6 +7,8 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 import { useState } from 'react';
 import Slide from '../carousel/Slide';
+import { handleApiResponse } from '../utils/Helper';
+import useTranslate from '@/app/hooks/useTranslate';
 
 interface AnnouncementsListProps {
   announcements: IAnnouncement[];
@@ -41,32 +43,24 @@ const ListContainer = styled.div<{ width: string }>`
     grid-template-columns: repeat(3, 1fr);
   }
 `;
-const AnnouncementsList = ({
+const AnnouncementsList = async ({
   announcements,
   width = '100%',
   isEditable = false,
 }: AnnouncementsListProps) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
+  const t = useTranslate();
+  const location = { element: 'edit_announcements' };
 
-  const refreshPage = () => {
-    router.refresh();
-  };
-  const handleDeleteAnnouncement = (announcementId: string) => {
-    setIsLoading(true);
-
-    axios
-      .delete(`/api/announcement/${announcementId}`)
-      .then(() => {
-        toast.success('Duyuru sistemden silindi!');
-        refreshPage();
-      })
-      .catch(() => {
-        toast.error('Bir şeyler yanlış gitti');
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
+  const handleDeleteAnnouncement = async (announcementId: string) => {
+    await handleApiResponse(
+      axios.delete(`/api/announcement/${announcementId}`),
+      setIsLoading,
+      t,
+      router,
+      t('delete_successful_message', location)
+    );
   };
 
   return (

@@ -8,6 +8,8 @@ import toast from 'react-hot-toast';
 import { useState } from 'react';
 import { ROUTE_PATHS } from '@/constants/routes';
 import ArtistAccount from '../artist/ArtistAccount';
+import { handleApiResponse } from '../utils/Helper';
+import useTranslate from '@/app/hooks/useTranslate';
 
 interface ArtistAccountsListProps {
   accounts: IUser[];
@@ -46,24 +48,17 @@ const ArtistAccountsList = ({
 }: ArtistAccountsListProps) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
+  const t = useTranslate();
+  const location = { element: 'artist_accounts' };
 
-  const refreshPage = () => {
-    router.refresh();
-  };
-  const handleDeleteArtistAccount = (accountId: string) => {
-    setIsLoading(true);
-    axios
-      .delete(`/api/user/deleteUser/${accountId}`)
-      .then(() => {
-        toast.success('Sanatçı sistemden silindi!');
-        refreshPage();
-      })
-      .catch(() => {
-        toast.error('Bir şeyler yanlış gitti');
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
+  const handleDeleteArtistAccount = async (accountId: string) => {
+    await handleApiResponse(
+      axios.delete(`/api/user/deleteUser/${accountId}`),
+      setIsLoading,
+      t,
+      router,
+      t('delete_successful_message', location)
+    );
   };
 
   return (
