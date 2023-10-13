@@ -49,14 +49,12 @@ const Biography = ({ artistProfile, isEditable = false }: BiographyProps) => {
       />
       <BiographyContainer>
         <BiographyContent>{artistProfile?.biography}</BiographyContent>
-        {isEditable ? (
+        {isEditable && (
           <TextButton
             label={t('edit_button_label', location)}
             icon={FaRegEdit}
             onClick={updateTextModal.onOpen}
           ></TextButton>
-        ) : (
-          <></>
         )}
       </BiographyContainer>
     </>
