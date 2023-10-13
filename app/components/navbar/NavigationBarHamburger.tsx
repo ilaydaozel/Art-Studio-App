@@ -7,22 +7,29 @@ import styled from 'styled-components';
 import { COLORS } from '@/constants/colors';
 import { ROUTE_PATHS } from '@/constants/routes';
 import useTranslate from '../../hooks/useTranslate';
+import { IUser } from '@/app/types';
+import UserMenu from './UserMenu';
 
-interface NavigationBarHamburgerProps {}
+interface NavigationBarHamburgerProps {
+  user?: IUser | null;
+}
 
 const MenuContainer = styled.div`
   position: absolute;
-  left: 0;
+  right: 0;
   top: 2rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
   gap: 10px;
-  width: 100vw;
+  width: 97vw;
   padding: 16px 8px;
-  background-color: rgba(255, 255, 255, 0.8);
-  overflow: auto;
+  background-color: rgba(255, 255, 255);
+  border-top: 0.5px solid rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
+  overflow-y: auto;
+  overlow-x: hidden;
   font-size: 0.8rem;
 `;
 
@@ -38,7 +45,7 @@ const MenuElement = styled.a<{ isActive?: boolean }>`
   }
 `;
 
-const NavigationBarHamburger = ({}: NavigationBarHamburgerProps) => {
+const NavigationBarHamburger = ({ user }: NavigationBarHamburgerProps) => {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -67,6 +74,7 @@ const NavigationBarHamburger = ({}: NavigationBarHamburgerProps) => {
       document.removeEventListener('click', handleClickOutside);
     };
   }, [isOpen]);
+
   return (
     <div className='relative' ref={menuRef}>
       <div
@@ -80,7 +88,10 @@ const NavigationBarHamburger = ({}: NavigationBarHamburgerProps) => {
           gap-1
           '
       >
-        <AiOutlineMenu className='md:w-[24px] md:h-[20px] w-[20px] h-[18px] text-white' />
+        <AiOutlineMenu
+          className='md:w-[24px] md:h-[20px] w-[20px] h-[18px]'
+          style={{ color: COLORS.gray }}
+        />
       </div>
       {isOpen && (
         <MenuContainer>
@@ -114,6 +125,7 @@ const NavigationBarHamburger = ({}: NavigationBarHamburgerProps) => {
           >
             {t('contact', location)}
           </MenuElement>
+          {user && <UserMenu user={user} />}
         </MenuContainer>
       )}
     </div>
