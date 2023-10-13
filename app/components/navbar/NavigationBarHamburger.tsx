@@ -10,6 +10,7 @@ import CommonMenu from './CommonMenu';
 
 interface NavigationBarHamburgerProps {
   user?: IUser | null;
+  isSmallScreen: boolean;
 }
 
 const HamburgerIcon = styled.div`
@@ -19,24 +20,27 @@ const HamburgerIcon = styled.div`
   cursor: pointer;
 `;
 
-const MenuContainer = styled.div`
+const MenuContainer = styled.div<{ isSmallScreen: boolean }>`
   position: absolute;
   right: 0;
-  top: 2rem;
+  top: ${(props) => (props.isSmallScreen ? '2rem' : '4rem')};
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
   gap: 10px;
-  border-top: 0.5px solid rgba(0, 0, 0, 0.2);
+  border-top: 0.5px solid rgba(0, 0, 0, 0.1);
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
   overflow-y: auto;
   overlow-x: hidden;
-  width: 97vw;
+  width: ${(props) => (props.isSmallScreen ? '97vw' : '20vw')};
   padding: 16px 8px;
   background-color: rgba(255, 255, 255);
 `;
 
-const NavigationBarHamburger = ({ user }: NavigationBarHamburgerProps) => {
+const NavigationBarHamburger = ({
+  user,
+  isSmallScreen,
+}: NavigationBarHamburgerProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleOpen = useCallback(() => {
@@ -71,8 +75,8 @@ const NavigationBarHamburger = ({ user }: NavigationBarHamburgerProps) => {
         />
       </HamburgerIcon>
       {isOpen && (
-        <MenuContainer>
-          <CommonMenu />
+        <MenuContainer isSmallScreen={isSmallScreen}>
+          {isSmallScreen && <CommonMenu />}
           {user && <UserMenu user={user} />}
         </MenuContainer>
       )}

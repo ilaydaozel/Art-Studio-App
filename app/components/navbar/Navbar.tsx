@@ -132,11 +132,18 @@ const Navbar = ({ currentUser }: NavbarProps) => {
             </LogoTitle>
             <SideIcons>
               <LanguageSwitcher></LanguageSwitcher>
-              {isSmallScreen && <NavigationBarHamburger user={currentUser} />}
+
               {!currentUser && (
                 <a href={ROUTE_PATHS.LOGIN}>
                   <PiUserCircleLight className='sm:h-[28px] sm:w-[28px] text-neutral-400 w-[20px] h-[20px]' />
                 </a>
+              )}
+
+              {(currentUser || isSmallScreen) && (
+                <NavigationBarHamburger
+                  user={currentUser}
+                  isSmallScreen={isSmallScreen}
+                />
               )}
             </SideIcons>
           </div>
