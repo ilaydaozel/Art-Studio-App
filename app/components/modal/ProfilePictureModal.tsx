@@ -49,9 +49,10 @@ const ProfilePictureModal = ({
       }),
       setIsLoading,
       t,
-      profilePictureModal.onClose,
       router,
-      t('update_successful_message', location)
+      t('update_successful_message', location),
+      profilePictureModal.onClose,
+      undefined
     );
   };
 
