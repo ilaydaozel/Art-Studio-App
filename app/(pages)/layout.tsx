@@ -49,7 +49,7 @@ export default async function RootLayout({
                     currentUser={currentUser ? currentUser.currentUser : null}
                   />
                 </ClientOnly>
-
+                <div></div>
                 {children}
                 {modal}
 
