@@ -32,12 +32,16 @@ const FooterText = styled.p`
   display: flex;
   justify-content: center;
   color: ${COLORS.gray};
+  font-size: 1rem;
+  @media (max-width: 567px) {
+    font-size: 0.8rem;
+  }
 `;
 
 const LogoTitle = styled.a`
   color: #ffffff;
   font-size: 0.9rem;
-  font-weight: 600;
+  font-weight: bold;
   letter-spacing: 1.5px;
   cursor: pointer;
   display: flex;
