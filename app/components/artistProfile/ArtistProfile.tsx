@@ -46,9 +46,7 @@ const ArtistProfile = ({
       setIsLoading,
       t,
       router,
-      t('delete_successful_message', { element: 'artist_profile' }),
-      undefined,
-      router.refresh
+      t('delete_successful_message', { element: 'artist_profile' })
     );
   };
   return (

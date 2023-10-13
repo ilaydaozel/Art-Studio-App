@@ -11,6 +11,7 @@ import TextButton from '../buttons/TextButton';
 import Popup from '../popup/Popup';
 import useTranslate from '../../hooks/useTranslate';
 import Image from 'next/image';
+import { handleApiResponse } from '../utils/Helper';
 
 interface HeaderProps {
   artistProfile: IArtistProfile;
@@ -72,19 +73,18 @@ const Header = ({
   const t = useTranslate();
 
   const handleCoverImageChange = async (coverImage: String) => {
-    setIsLoading(true);
-    try {
-      await axios.post(`/api/artistProfile/${artistProfile.artistId}`, {
+    await handleApiResponse(
+      axios.post(`/api/artistProfile/${artistProfile.artistId}`, {
         coverImage,
-      });
-      toast.success(t('change_successful_message', location));
-      setShowArtworkSelection(false);
-      refreshPage();
-    } catch (error) {
-      toast.error(t('change_failed_message', location));
-    } finally {
-      setIsLoading(false);
-    }
+      }),
+      setIsLoading,
+      t,
+      router,
+      t('change_successful_message', location),
+      () => {
+        setShowArtworkSelection(false);
+      }
+    );
   };
 
   return (

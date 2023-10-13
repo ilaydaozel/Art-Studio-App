@@ -39,10 +39,9 @@ export const handleApiResponse = async (
   submitResponse: Promise<AxiosResponse<any, any>>,
   setIsLoading: (isLoading: boolean) => void,
   t: (key: string, location: any) => string,
-  onClose: () => void,
   router: AppRouterInstance,
   successMessage: string,
-  onReset?: () => void
+  onSuccess?: () => void
 ) => {
   const exceptionsLocation = { element: 'exceptions' };
   setIsLoading(true);
@@ -53,9 +52,8 @@ export const handleApiResponse = async (
         toast.error(t(response.data.error, exceptionsLocation));
       } else {
         toast.success(successMessage);
-        onClose();
-        if (onReset) {
-          onReset();
+        if (onSuccess) {
+          onSuccess();
         }
         router.refresh();
       }

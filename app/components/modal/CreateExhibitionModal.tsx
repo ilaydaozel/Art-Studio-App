@@ -84,10 +84,10 @@ const CreateExhibitionModal = () => {
       axios.post('/api/exhibition/createExhibition', exhibitionData),
       setIsLoading,
       t,
-      createExhibitionModal.onClose,
       router,
       t('creation_successful_message', location),
       () => {
+        createExhibitionModal.onClose();
         reset();
         setStep(STEPS.INFORMATION);
       }

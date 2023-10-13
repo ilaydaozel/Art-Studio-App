@@ -64,10 +64,10 @@ const CreateAnnouncementModal = () => {
       axios.post(`/api/announcement/createAnnouncement/`, announcement),
       setIsLoading,
       t,
-      createAnnouncementModal.onClose,
       router,
       t('creation_successful_message', location),
       () => {
+        createAnnouncementModal.onClose();
         reset();
       }
     );
