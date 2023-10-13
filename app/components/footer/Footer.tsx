@@ -10,10 +10,10 @@ import SocialMedia from '../utils/SocialMedia';
 const FooterContainer = styled.div`
   width: 100%;
   background-color: ${COLORS.darkGray};
-  opacity: 0.3;
+  opacity: 0.6;
   padding: 1% 0 1% 0;
   box-shadow: 0px -6px 6px -6px rgba(0, 0, 0, 0.1);
-  transition: opacity 0.5s ease-in-out;
+  transition: opacity 0.6s ease-in-out;
 `;
 
 const FooterElement = styled.a`
@@ -24,7 +24,7 @@ const FooterElement = styled.a`
   font-size: 0.7rem;
   transition: font-weight 0.2s;
   &:hover {
-    font-weight: 800;
+    font-weight: bold;
   }
 `;
 
@@ -55,7 +55,7 @@ const Footer = () => {
     if (entry.isIntersecting) {
       footer.style.opacity = '1';
     } else {
-      footer.style.opacity = '0.3';
+      footer.style.opacity = '0.6';
     }
   };
 
