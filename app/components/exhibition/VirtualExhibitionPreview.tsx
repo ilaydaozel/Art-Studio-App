@@ -3,6 +3,7 @@
 import { IExhibition } from '@/app/types';
 import VirtualExhibitionWithMenu from '../virtualExhibition/VirtualExhibitionWithMenu';
 import ComponentWithHeading from '../layouts/ComponentWithHeading';
+import useTranslate from '@/app/hooks/useTranslate';
 
 interface VirtualExhibitionPreviewProps {
   exhibition: IExhibition;
@@ -11,8 +12,13 @@ interface VirtualExhibitionPreviewProps {
 const VirtualExhibitionPreview = ({
   exhibition,
 }: VirtualExhibitionPreviewProps) => {
+  const t = useTranslate();
+  const location = {
+    element: 'virtual_exhibition',
+    superElement: 'exhibition_profile',
+  };
   return (
-    <ComponentWithHeading headingText='Sanal Sergi'>
+    <ComponentWithHeading headingText={t('heading', location)}>
       <div className='m-8 shadow-lg'>
         <VirtualExhibitionWithMenu
           exhibition={exhibition}

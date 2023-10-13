@@ -42,7 +42,11 @@ const ExhibitionProfile = ({
   const [remainingArtworks, setRemainingArtworks] = useState<IArtwork[]>([]);
   const router = useRouter();
   const createExhibitionArtworkModal = useCreateExhibitionArtworkModal();
-
+  const t = useTranslate();
+  const location = {
+    element: 'list',
+    superElement: 'exhibition_profile',
+  };
   const handleDeleteArtworkFromExhibition = (artworkId: string) => {
     axios
       .post(`/api/exhibition/deleteArtworkFromExhibition/${exhibition.id}`, {
@@ -84,18 +88,18 @@ const ExhibitionProfile = ({
           exhibition={exhibition}
         ></SelectExhibitionArtworkPopup>
       )}
-      <ComponentWithHeading headingText='Katılan Eserler'>
+      <ComponentWithHeading headingText={t('heading', location)}>
         {isEditable && (
           <div className='flex gap-2'>
             <SlidingButton
-              label='Yeni Eser Yarat'
+              label={t('add_button_text', location)}
               onClick={() => {
                 createExhibitionArtworkModal.onOpen();
               }}
             />
             <SlidingButton
               onClick={() => setShowArtworkSelection(true)}
-              label='Sergiye Resim Ekle'
+              label={t('add_artwork_to_exhibition_button_text', location)}
             ></SlidingButton>
           </div>
         )}
