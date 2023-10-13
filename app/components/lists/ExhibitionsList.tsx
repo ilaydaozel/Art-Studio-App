@@ -72,6 +72,11 @@ const ExhibitionsList = ({
             {isEditable && (
               <EditMenu
                 onDeleteClick={() => handleDeleteExhibition(exhibition.id)}
+                onEditClick={() => {
+                  router.push(
+                    `${ROUTE_PATHS.EDIT}${ROUTE_PATHS.EDIT_EXHIBITION}/${exhibition.id}`
+                  );
+                }}
               ></EditMenu>
             )}
           </ExhibitionContainer>
