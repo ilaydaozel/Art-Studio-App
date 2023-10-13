@@ -10,7 +10,7 @@ import { PiUserCircleLight } from 'react-icons/pi';
 import { IUser } from '@/app/types';
 import useTranslate from '../../hooks/useTranslate';
 import LanguageSwitcher from './LanguageSwitcher';
-import Link from 'next/link';
+import NavigationBar from './NavigationBar';
 
 interface NavbarProps {
   currentUser: IUser | null;
@@ -66,44 +66,6 @@ const SideIcons = styled.div`
   align-items: center;
 `;
 
-const MenuElement = styled.a<{ color: string; isActive?: boolean }>`
-  text-align: center;
-  padding: 2px 4px;
-  color: ${(props) => props.color};
-  cursor: pointer;
-  transition: text-decoration 0.3s;
-  font-weight: ${(props) => props.isActive && 'bold'};
-  font-size: 0.85rem;
-  position: relative;
-  overflow: hidden;
-
-  &::before {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 0.8px;
-    background-color: ${(props) => props.color + '50'};
-    transform: translateX(-100%);
-    transition: transform 0.5s ease;
-  }
-
-  &:hover::before {
-    transform: translateX(0);
-  }
-
-  @media (max-width: 992px) {
-    font-size: 0.8rem;
-  }
-  @media (max-width: 768px) {
-    font-size: 0.7rem;
-  }
-  @media (max-width: 576px) {
-    font-size: 0.6rem;
-  }
-`;
-
 const Navbar = ({ currentUser }: NavbarProps) => {
   const pathname = usePathname();
   const isHomePage = pathname === ROUTE_PATHS.HOME;
@@ -112,9 +74,6 @@ const Navbar = ({ currentUser }: NavbarProps) => {
     isHomePage ? 'transparent' : 'rgba(255, 255, 255, 0.1)'
   );
   const [logoColor, setLogoColor] = useState(
-    isHomePage ? '#FFFFFF' : COLORS.darkGray
-  );
-  const [menuElementColor, setMenuElementColor] = useState(
     isHomePage ? '#FFFFFF' : COLORS.darkGray
   );
 
@@ -127,11 +86,9 @@ const Navbar = ({ currentUser }: NavbarProps) => {
       if (isHomePage) {
         setBackgroundColor(isOnTop ? 'transparent' : '#FFFFFF');
         setLogoColor(isOnTop ? '#FFFFFF' : COLORS.darkGray);
-        setMenuElementColor(isOnTop ? '#FFFFFF' : COLORS.darkGray);
       } else {
         setBackgroundColor(isOnTop ? 'rgba(255, 255, 255, 0.1)' : '#FFFFFF');
         setLogoColor(COLORS.darkGray);
-        setMenuElementColor(COLORS.darkGray);
       }
     };
 
@@ -175,44 +132,7 @@ const Navbar = ({ currentUser }: NavbarProps) => {
               )}
             </SideIcons>
           </div>
-
-          <div className='flex flex-row gap-2 items-center'>
-            <MenuElement
-              isActive={pathname === ROUTE_PATHS.HOME}
-              color={menuElementColor}
-              href={ROUTE_PATHS.HOME}
-            >
-              {t('home', { element: 'route_names' })}
-            </MenuElement>
-            <MenuElement
-              isActive={pathname === ROUTE_PATHS.ARTISTS}
-              color={menuElementColor}
-              href={ROUTE_PATHS.ARTISTS}
-            >
-              {t('artists', { element: 'route_names' })}
-            </MenuElement>
-            <MenuElement
-              isActive={pathname === ROUTE_PATHS.EXHIBITIONS}
-              color={menuElementColor}
-              href={ROUTE_PATHS.EXHIBITIONS}
-            >
-              {t('exhibitions', { element: 'route_names' })}
-            </MenuElement>
-            <MenuElement
-              isActive={pathname === ROUTE_PATHS.ABOUT}
-              color={menuElementColor}
-              href={ROUTE_PATHS.ABOUT}
-            >
-              {t('about', { element: 'route_names' })}
-            </MenuElement>
-            <MenuElement
-              isActive={pathname === ROUTE_PATHS.CONTACT}
-              color={menuElementColor}
-              href={ROUTE_PATHS.CONTACT}
-            >
-              {t('contact', { element: 'route_names' })}
-            </MenuElement>
-          </div>
+          <NavigationBar />
         </div>
       </div>
     </NavbarContainer>
