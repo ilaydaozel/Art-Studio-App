@@ -15,8 +15,7 @@ import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
 import CreateExhibitionArtworkModal from '../modal/CreateExhibitionArtworkModal';
 import useCreateExhibitionArtworkModal from '@/app/hooks/useCreateExhibitionArtworkModal';
-import VirtualExhibitionWithMenu from '../virtualExhibition/VirtualExhibitionWithMenu';
-import Popup from '../popup/Popup';
+
 import VirtualExhibitionPreview from './VirtualExhibitionPreview';
 interface ExhibitionProfileProps {
   exhibition: IExhibition;
@@ -71,7 +70,7 @@ const ExhibitionProfile = ({
   return (
     <Container>
       <Header exhibition={exhibition}></Header>
-      <About exhibition={exhibition}></About>
+      <About exhibition={exhibition} isEditable={isEditable}></About>
       <CreateExhibitionArtworkModal
         allArtistProfiles={allArtistProfiles || []}
       ></CreateExhibitionArtworkModal>
