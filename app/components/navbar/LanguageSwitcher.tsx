@@ -4,22 +4,29 @@ import { COLORS } from '@/constants/colors';
 import { useContext } from 'react';
 import styled from 'styled-components';
 
+interface LanguageSwitcherProps {
+  color: string;
+}
+
 const Container = styled.div`
   display: flex;
-  gap: 0.3rem;
+  gap: 0.5rem;
   cursor: pointer;
-  margin: 2px;
+
+  @media (max-width: 576px) {
+    gap: 0.3rem;
+  }
 `;
-const Option = styled.div<{ isActive: boolean }>`
+
+const Option = styled.div<{ isActive: boolean; color: string }>`
   text-align: center;
-  padding: 2px 4px;
-  color: ${(props) => props.color};
   cursor: pointer;
   transition: text-decoration 0.3s;
   font-weight: ${(props) => props.isActive && 'bold'};
   font-size: 0.85rem;
   position: relative;
   overflow: hidden;
+  color: ${(props) => props.color};
 
   &::before {
     content: '';
@@ -40,26 +47,26 @@ const Option = styled.div<{ isActive: boolean }>`
   @media (max-width: 992px) {
     font-size: 0.8rem;
   }
-  @media (max-width: 768px) {
-    font-size: 0.7rem;
-  }
+
   @media (max-width: 576px) {
     font-size: 0.6rem;
   }
 `;
 
-const LanguageSwitcher = () => {
+const LanguageSwitcher = ({ color }: LanguageSwitcherProps) => {
   const { language, switchLanguage } = useContext(TranslationContext);
 
   return (
     <Container>
       <Option
+        color={color}
         isActive={language === ('tr' as Language)}
         onClick={() => switchLanguage('tr' as Language)}
       >
         Türkçe
       </Option>
       <Option
+        color={color}
         isActive={language === ('en' as Language)}
         onClick={() => switchLanguage('en' as Language)}
       >

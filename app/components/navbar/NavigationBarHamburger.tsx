@@ -11,18 +11,19 @@ import CommonMenu from './CommonMenu';
 interface NavigationBarHamburgerProps {
   user?: IUser | null;
   isSmallScreen: boolean;
+  color: string;
 }
 
 const Container = styled.div<{ isSmallScreen: boolean }>`
   position: absolute;
-  right: 0;
+  right: -0.6rem;
   top: ${(props) => (props.isSmallScreen ? '2rem' : '4rem')};
   width: ${(props) => (props.isSmallScreen ? '97vw' : '20vw')};
   background-color: rgba(255, 255, 255);
   border-top: 0.5px solid rgba(0, 0, 0, 0.1);
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
   overflow: auto;
-  padding: 1.2rem 0.8rem;
+  padding: 2rem 0 1.4rem 1.2rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -32,8 +33,7 @@ const Container = styled.div<{ isSmallScreen: boolean }>`
 
 const HamburgerIcon = styled.div`
   display: flex;
-  justify-content: flex-center;
-  align-items: flex-center;
+  align-items: baseline;
   cursor: pointer;
 `;
 
@@ -46,7 +46,7 @@ const MenuContainer = styled.div`
 const NameText = styled.div`
   color: ${COLORS.darkGray};
   width: 100%;
-  font-size: 1rem;
+  font-size: 0.8rem;
   font-weight: bold;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 `;
@@ -58,6 +58,7 @@ const SeperatorLine = styled.div`
 const NavigationBarHamburger = ({
   user,
   isSmallScreen,
+  color,
 }: NavigationBarHamburgerProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -88,8 +89,8 @@ const NavigationBarHamburger = ({
     <div className='relative' ref={menuRef}>
       <HamburgerIcon onClick={toggleOpen}>
         <AiOutlineMenu
-          className='md:w-[24px] md:h-[20px] w-[20px] h-[18px]'
-          style={{ color: COLORS.gray }}
+          className='md:w-[20px] md:h-[20px] w-[16px] h-[16px]'
+          style={{ color: color }}
         />
       </HamburgerIcon>
       {isOpen && (

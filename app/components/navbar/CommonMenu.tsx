@@ -11,7 +11,7 @@ const MenuContainer = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  gap: 10px;
+  gap: 0.8rem;
 `;
 
 const MenuElement = styled.a<{ isActive?: boolean }>`
@@ -20,9 +20,24 @@ const MenuElement = styled.a<{ isActive?: boolean }>`
   cursor: pointer;
   transition: background-color 0.3s ease;
   white-space: nowrap;
-  font-size: 0.8rem;
-  &:hover {
-    font-weight: 700;
+  font-size: 0.7rem;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0.8px;
+    background-color: ${COLORS.gray + '50'};
+    transform: translateX(-100%);
+    transition: transform 0.5s ease;
+  }
+
+  &:hover::before {
+    transform: translateX(0);
   }
 `;
 

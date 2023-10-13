@@ -64,8 +64,12 @@ const LogoTitle = styled.a<{ color: string; isSmallScreen: boolean }>`
 
 const SideIcons = styled.div`
   display: flex;
-  gap: 0.5rem;
+  gap: 1rem;
+  padding: 0 0.6rem;
   align-items: center;
+  @media (max-width: 576px) {
+    gap: 0.6rem;
+  }
 `;
 
 const Navbar = ({ currentUser }: NavbarProps) => {
@@ -78,6 +82,9 @@ const Navbar = ({ currentUser }: NavbarProps) => {
   const [logoColor, setLogoColor] = useState(
     isHomePage ? '#FFFFFF' : COLORS.darkGray
   );
+  const [menuElementColor, setMenuElementColor] = useState(
+    isHomePage ? '#FFFFFF' : COLORS.gray
+  );
 
   const t = useTranslate();
 
@@ -88,6 +95,7 @@ const Navbar = ({ currentUser }: NavbarProps) => {
       if (isHomePage) {
         setBackgroundColor(isOnTop ? 'transparent' : '#FFFFFF');
         setLogoColor(isOnTop ? '#FFFFFF' : COLORS.darkGray);
+        setMenuElementColor(isOnTop ? '#FFFFFF' : COLORS.gray);
       } else {
         setBackgroundColor(isOnTop ? 'rgba(255, 255, 255, 0.1)' : '#FFFFFF');
         setLogoColor(COLORS.darkGray);
@@ -135,24 +143,27 @@ const Navbar = ({ currentUser }: NavbarProps) => {
             >
               {t('name', { element: 'academy' })}
             </LogoTitle>
-            <SideIcons>
-              <LanguageSwitcher></LanguageSwitcher>
 
+            <SideIcons>
+              <LanguageSwitcher color={menuElementColor} />
               {!currentUser && (
                 <a href={ROUTE_PATHS.LOGIN}>
-                  <PiUserCircleLight className='sm:h-[28px] sm:w-[28px] text-neutral-400 w-[20px] h-[20px]' />
+                  <PiUserCircleLight
+                    style={{ color: menuElementColor }}
+                    className='sm:h-[28px] sm:w-[28px] w-[20px] h-[20px]'
+                  />
                 </a>
               )}
-
               {(currentUser || isSmallScreen) && (
                 <NavigationBarHamburger
                   user={currentUser}
                   isSmallScreen={isSmallScreen}
+                  color={menuElementColor}
                 />
               )}
             </SideIcons>
           </div>
-          {!isSmallScreen && <NavigationBar />}
+          {!isSmallScreen && <NavigationBar color={menuElementColor} />}
         </div>
       </div>
     </NavbarContainer>
