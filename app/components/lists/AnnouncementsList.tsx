@@ -43,7 +43,7 @@ const ListContainer = styled.div<{ width: string }>`
     grid-template-columns: repeat(3, 1fr);
   }
 `;
-const AnnouncementsList = async ({
+const AnnouncementsList = ({
   announcements,
   width = '100%',
   isEditable = false,
