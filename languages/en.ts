@@ -96,7 +96,8 @@ const EnglishData: ILanguageData = {
     },
     artist_accounts: {
         list_heading: "Artists",
-        add_button_text: "Add New Artist +"
+        add_button_text: "Add New Artist +",
+        delete_successful_message: "Artist account has been successfully deleted",
     },
     artist_profile: {
         about: {
@@ -111,7 +112,6 @@ const EnglishData: ILanguageData = {
         header: {
             change_image_button_text: "Change Cover Image",
             change_successful_message: "Cover image is updated",
-            change_failed_message: "Something went wrong",
             select_cover_image: "Select Cover Image",
             select_button_text: "Select"
         },
@@ -119,11 +119,12 @@ const EnglishData: ILanguageData = {
             biography_label: "Biography",
             edit_button_label: "Update Biograpy"
         },
-        delete_successful_mesage: "Artwork has been successfully deleted"
+        delete_successful_message: "Artwork has been successfully deleted"
     },
     exhibitions: {
         list_heading: "Edit Exhibitions",
-        add_button_text: "Add New Exhibition +"
+        add_button_text: "Add New Exhibition +",
+        delete_successful_message: "Exhibition has been successfully deleted",
     },
     exhibition_profile: {
         description: {
@@ -138,10 +139,13 @@ const EnglishData: ILanguageData = {
         virtual_exhibition: {
             heading: "Virtual Exhibition",
         },
+        delete_successful_message: "Exhibition has been successfully deleted",
+        add_artwork_to_exhibition_successful_message: "Artworks have been successfully added to the exhibition"
     },
     edit_announcements: {
         heading: "Edit Announcements",
-        add_button_text: "Add New Announcement +"
+        add_button_text: "Add New Announcement +",
+        delete_successful_message: "Announcement has been successfully deleted",
     },
     about: {
         heading: "About",

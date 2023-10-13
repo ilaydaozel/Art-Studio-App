@@ -98,6 +98,7 @@ export type ILanguageData = {
     artist_accounts: {
         list_heading: string;
         add_button_text: string;
+        delete_successful_message: string;
     };
     artist_profile: {
         about: {
@@ -112,7 +113,6 @@ export type ILanguageData = {
         header: {
             change_image_button_text: string;
             change_successful_message: string;
-            change_failed_message: string;
             select_cover_image: string;
             select_button_text: string;
         };
@@ -120,11 +120,12 @@ export type ILanguageData = {
             biography_label: string;
             edit_button_label: string;
         };
-        delete_successful_mesage: string;
+        delete_successful_message: string;
     };
     exhibitions: {
         list_heading: string;
         add_button_text: string;
+        delete_successful_message: string;
     };
     exhibition_profile: {
         description: {
@@ -139,10 +140,13 @@ export type ILanguageData = {
         virtual_exhibition: {
             heading: string,
         };
+        delete_successful_message: string;
+        add_artwork_to_exhibition_successful_message: string
     };
     edit_announcements: {
         heading: string;
         add_button_text: string;
+        delete_successful_message: string;
     };
     about: {
         heading: string,

@@ -97,7 +97,8 @@ const TurkishData: ILanguageData = {
     },
     artist_accounts: {
         list_heading: "Sanatçılar",
-        add_button_text: "Yeni Sanatçı Ekle +"
+        add_button_text: "Yeni Sanatçı Ekle +",
+        delete_successful_message: "Ssnatçı hesabı başarıyla silindi",
     },
     artist_profile: {
         about: {
@@ -112,7 +113,6 @@ const TurkishData: ILanguageData = {
         header: {
             change_image_button_text: "Kapak Resmini Değiştir",
             change_successful_message: "Kapak fotoğrafı güncellendi",
-            change_failed_message: "Bir şeyler yanlış gitti",
             select_cover_image: "Kapak Resmi Seç",
             select_button_text: "Seç"
         },
@@ -120,12 +120,13 @@ const TurkishData: ILanguageData = {
             biography_label: "Biografi",
             edit_button_label: "Biografiyi Düzenle"
         },
-        delete_successful_mesage: "Eser başarıyla silindi"
+        delete_successful_message: "Eser başarıyla silindi"
 
     },
     exhibitions: {
         list_heading: "Sergileri Düzenle",
-        add_button_text: "Yeni Sergi Ekle +"
+        add_button_text: "Yeni Sergi Ekle +",
+        delete_successful_message: "Sergi başarıyla silindi"
     },
     exhibition_profile: {
         description: {
@@ -141,10 +142,13 @@ const TurkishData: ILanguageData = {
         virtual_exhibition: {
             heading: "Sanal Sergi",
         },
+        delete_successful_message: "Sergi başarıyla silindi",
+        add_artwork_to_exhibition_successful_message: "Eserler başarıyla sergiye eklendi"
     },
     edit_announcements: {
         heading: "Duyuruları Düzenle",
-        add_button_text: "Yeni Duyuru Ekle +"
+        add_button_text: "Yeni Duyuru Ekle +",
+        delete_successful_message: "Duyuru başarıyla silindi",
     },
     about: {
         heading: "Hakkımızda",
