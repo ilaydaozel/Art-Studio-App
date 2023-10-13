@@ -5,6 +5,7 @@ import { COLORS } from '@/constants/colors';
 import { ROUTE_PATHS } from '@/constants/routes';
 import useTranslate from '../../hooks/useTranslate';
 import GoogleMapsWidget from '../utils/GoogleMapsWidget';
+import SocialMedia from '../utils/SocialMedia';
 
 const FooterContainer = styled.div`
   width: 100%;
@@ -48,10 +49,7 @@ const Footer = () => {
   const t = useTranslate();
   const containerRef = useRef<HTMLDivElement | null>(null);
 
-  const handleIntersection = (
-    entries: IntersectionObserverEntry[],
-    observer: IntersectionObserver
-  ) => {
+  const handleIntersection = (entries: IntersectionObserverEntry[]) => {
     const entry = entries[0];
     const footer = entry.target as HTMLDivElement;
     if (entry.isIntersecting) {
@@ -117,7 +115,7 @@ const Footer = () => {
             />
           </div>
         </div>
-
+        <SocialMedia></SocialMedia>
         <FooterText>
           &copy; {new Date().getFullYear()} {t('name', { element: 'academy' })}.{' '}
           {t('all_rights_deserved_text', location)}
