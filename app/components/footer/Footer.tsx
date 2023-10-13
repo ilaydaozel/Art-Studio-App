@@ -1,18 +1,18 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { COLORS } from '@/constants/colors';
 import { ROUTE_PATHS } from '@/constants/routes';
 import useTranslate from '../../hooks/useTranslate';
 import GoogleMapsWidget from '../utils/GoogleMapsWidget';
 
-const FooterContainer = styled.div<{ isVisible: boolean }>`
+const FooterContainer = styled.div`
   width: 100%;
-  background-color: ${(props) =>
-    props.isVisible ? COLORS.darkGray : 'transparent'};
+  background-color: ${COLORS.darkGray};
+  opacity: 0.3;
   padding: 1% 0 1% 0;
   box-shadow: 0px -6px 6px -6px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.6s ease-in-out;
+  transition: opacity 0.5s ease-in-out;
 `;
 
 const FooterElement = styled.a`
@@ -20,7 +20,7 @@ const FooterElement = styled.a`
   color: ${COLORS.lightGray};
   cursor: pointer;
   font-weight: 500;
-  font-size: 1rem;
+  font-size: 0.7rem;
   transition: font-weight 0.2s;
   &:hover {
     font-weight: 800;
@@ -46,25 +46,35 @@ const LogoTitle = styled.a`
 
 const Footer = () => {
   const t = useTranslate();
-  const [isVisible, setIsVisible] = useState(
-    document.documentElement.scrollHeight <= window.innerHeight
-  );
+  const containerRef = useRef<HTMLDivElement | null>(null);
+
+  const handleIntersection = (
+    entries: IntersectionObserverEntry[],
+    observer: IntersectionObserver
+  ) => {
+    const entry = entries[0];
+    const footer = entry.target as HTMLDivElement;
+    if (entry.isIntersecting) {
+      footer.style.opacity = '1';
+    } else {
+      footer.style.opacity = '0.3';
+    }
+  };
 
   useEffect(() => {
-    const handleScroll = () => {
-      const isOnBottom =
-        document.documentElement.clientHeight + window.scrollY + 150 >=
-        (document.documentElement.scrollHeight ||
-          document.documentElement.clientHeight);
-      setIsVisible(isOnBottom);
-    };
-    window.addEventListener('scroll', handleScroll);
+    const container = containerRef.current;
+    if (!container) return;
+    const observer = new IntersectionObserver(handleIntersection, {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.3,
+    });
+    observer.observe(container);
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      observer.unobserve(container);
     };
   }, []);
 
-  const footerRef = React.useRef<HTMLDivElement>(null);
   const routesLocation = {
     element: 'route_names',
   };
@@ -73,7 +83,7 @@ const Footer = () => {
   };
 
   return (
-    <FooterContainer isVisible={isVisible} ref={footerRef}>
+    <FooterContainer ref={containerRef}>
       <div
         className='    
             max-w-[2520px]
