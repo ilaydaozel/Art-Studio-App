@@ -11,8 +11,9 @@ import ComponentWithHeading from '../layouts/ComponentWithHeading';
 import useTranslate from '../../hooks/useTranslate';
 import CreateArtworkModal from '../modal/CreateArtworkModal';
 import axios from 'axios';
-import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
+import { handleApiResponse } from '../utils/Helper';
+import { useState } from 'react';
 interface ArtistProfileProps {
   artistProfile: IArtistProfile;
   artworks?: IArtwork[];
@@ -31,28 +32,24 @@ const ArtistProfile = ({
   isEditable = false,
 }: ArtistProfileProps) => {
   const createArtworkModal = useCreateArtworkModal();
+  const [isLoading, setIsLoading] = useState(false);
+  const t = useTranslate();
+  const router = useRouter();
   const location = {
     element: 'list',
     superElement: 'artist_profile',
   };
-  const t = useTranslate();
-  const router = useRouter();
 
-  const refreshPage = () => {
-    router.refresh();
-  };
-
-  const handleDeleteArtwork = (artworkId: string) => {
-    axios
-      .delete(`/api/artwork/deleteArtwork/${artworkId}`)
-      .then(() => {
-        toast.success('Eser silindi!');
-        refreshPage();
-      })
-      .catch(() => {
-        toast.error('Bir şeyler yanlış gitti');
-        refreshPage();
-      });
+  const handleDeleteArtwork = async (artworkId: string) => {
+    await handleApiResponse(
+      axios.delete(`/api/artwork/deleteArtwork/${artworkId}`),
+      setIsLoading,
+      t,
+      router,
+      t('delete_successful_message', { element: 'artist_profile' }),
+      undefined,
+      router.refresh
+    );
   };
   return (
     <Container>
