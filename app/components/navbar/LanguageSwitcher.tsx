@@ -5,13 +5,14 @@ import styled from 'styled-components';
 
 interface LanguageSwitcherProps {
   color: string;
+  isSmallScreen: boolean;
 }
 
 const Container = styled.div`
   display: flex;
   gap: 0.5rem;
   cursor: pointer;
-
+  margin: 0 0.6rem;
   @media (max-width: 576px) {
     gap: 0.3rem;
   }
@@ -48,11 +49,11 @@ const Option = styled.div<{ isActive: boolean; color: string }>`
   }
 
   @media (max-width: 576px) {
-    font-size: 0.6rem;
+    font-size: 0.7rem;
   }
 `;
 
-const LanguageSwitcher = ({ color }: LanguageSwitcherProps) => {
+const LanguageSwitcher = ({ color, isSmallScreen }: LanguageSwitcherProps) => {
   const { language, switchLanguage } = useContext(TranslationContext);
 
   return (
@@ -62,14 +63,14 @@ const LanguageSwitcher = ({ color }: LanguageSwitcherProps) => {
         isActive={language === ('tr' as Language)}
         onClick={() => switchLanguage('tr' as Language)}
       >
-        Türkçe
+        {isSmallScreen ? 'tr' : 'Türkçe'}
       </Option>
       <Option
         color={color}
         isActive={language === ('en' as Language)}
         onClick={() => switchLanguage('en' as Language)}
       >
-        English
+        {isSmallScreen ? 'en' : 'English'}
       </Option>
     </Container>
   );

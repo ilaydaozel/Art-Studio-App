@@ -145,7 +145,10 @@ const Navbar = ({ currentUser }: NavbarProps) => {
             </LogoTitle>
 
             <SideIcons>
-              <LanguageSwitcher color={menuElementColor} />
+              <LanguageSwitcher
+                color={menuElementColor}
+                isSmallScreen={isSmallScreen}
+              />
               {!currentUser && (
                 <a href={ROUTE_PATHS.LOGIN}>
                   <PiUserCircleLight
