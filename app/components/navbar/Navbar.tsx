@@ -35,10 +35,11 @@ const NavbarContainer = styled.div<{ bgColor: string }>`
   }
 `;
 
-const LogoTitle = styled.a<{ color: string }>`
+const LogoTitle = styled.a<{ color: string; isSmallScreen: boolean }>`
   position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+  left: ${(props) => (props.isSmallScreen ? '10%' : '50%')};
+  transform: ${(props) =>
+    props.isSmallScreen ? 'translateX(-10%)' : 'translateX(-50%)'};
   color: ${(props) => props.color};
   font-size: 1.4rem;
   font-weight: bold;
@@ -127,7 +128,11 @@ const Navbar = ({ currentUser }: NavbarProps) => {
           '
         >
           <div className='w-full relative flex items-center justify-end'>
-            <LogoTitle color={logoColor} href={ROUTE_PATHS.HOME}>
+            <LogoTitle
+              color={logoColor}
+              href={ROUTE_PATHS.HOME}
+              isSmallScreen={isSmallScreen}
+            >
               {t('name', { element: 'academy' })}
             </LogoTitle>
             <SideIcons>
