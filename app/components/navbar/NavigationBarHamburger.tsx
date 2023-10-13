@@ -47,7 +47,6 @@ const NameText = styled.div`
   color: ${COLORS.darkGray};
   width: 100%;
   font-size: 0.8rem;
-  font-weight: bold;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 `;
 
