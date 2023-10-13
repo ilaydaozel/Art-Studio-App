@@ -11,6 +11,7 @@ import { IUser } from '@/app/types';
 import useTranslate from '../../hooks/useTranslate';
 import LanguageSwitcher from './LanguageSwitcher';
 import NavigationBar from './NavigationBar';
+import NavigationBarHamburger from './NavigationBarHamburger';
 
 interface NavbarProps {
   currentUser: IUser | null;
@@ -69,7 +70,7 @@ const SideIcons = styled.div`
 const Navbar = ({ currentUser }: NavbarProps) => {
   const pathname = usePathname();
   const isHomePage = pathname === ROUTE_PATHS.HOME;
-
+  const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 576);
   const [backgroundColor, setBackgroundColor] = useState(
     isHomePage ? 'transparent' : 'rgba(255, 255, 255, 0.1)'
   );
@@ -93,8 +94,15 @@ const Navbar = ({ currentUser }: NavbarProps) => {
     };
 
     window.addEventListener('scroll', handleScroll);
+    // Listen for window resize to check screen width
+    const handleResize = () => {
+      setIsSmallScreen(window.innerWidth < 576);
+    };
+    window.addEventListener('resize', handleResize);
+
     return () => {
       window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleResize);
     };
   }, [pathname]);
 
@@ -109,6 +117,7 @@ const Navbar = ({ currentUser }: NavbarProps) => {
       >
         <div
           className='
+          w-full
           flex
           flex-col
           flex-grow
@@ -132,7 +141,7 @@ const Navbar = ({ currentUser }: NavbarProps) => {
               )}
             </SideIcons>
           </div>
-          <NavigationBar />
+          {isSmallScreen ? <NavigationBarHamburger /> : <NavigationBar />}
         </div>
       </div>
     </NavbarContainer>
