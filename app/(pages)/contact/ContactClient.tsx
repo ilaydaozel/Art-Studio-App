@@ -1,12 +1,6 @@
 'use client';
 
-import GoogleMapsWidget from '@/app/components/utils/GoogleMapsWidget';
-
 const ContactClient = () => {
-  return (
-    <>
-      <GoogleMapsWidget />
-    </>
-  );
+  return <></>;
 };
 export default ContactClient;
