@@ -19,9 +19,7 @@ const GoogleMapsWidget = ({
     const entry = entries[0];
     if (entry.isIntersecting) {
       // Check if the Google Maps script is already loaded
-      if (window.google) {
-        setIsLoading(false);
-      } else {
+      if (!window.google) {
         loadGoogleMapsScript();
       }
     }
@@ -29,7 +27,6 @@ const GoogleMapsWidget = ({
 
   const loadGoogleMapsScript = () => {
     setIsLoading(true);
-    console.log('here');
     const script = document.createElement('script');
     script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&callback=console.debug&libraries=maps,marker&v=beta`;
     script.async = true;
@@ -37,7 +34,6 @@ const GoogleMapsWidget = ({
       setIsLoading(false);
     };
     script.onerror = () => {
-      setIsLoading(false);
       console.error('Google Maps API failed to load');
     };
     document.head.appendChild(script);
