@@ -14,20 +14,32 @@ const GoogleMapsWidget = ({
     () => ({ lat: 38.41948699951172, lng: 27.132444381713867 }),
     []
   );
-  const apiKey = useMemo(() => process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY, []);
 
   const handleIntersection = (entries: IntersectionObserverEntry[]) => {
     const entry = entries[0];
     if (entry.isIntersecting) {
-      setIsLoading(true);
-      const script = document.createElement('script');
-      script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places`;
-      script.async = true;
-      script.onload = () => {
+      // Check if the Google Maps script is already loaded
+      if (window.google) {
         setIsLoading(false);
-      };
-      document.head.appendChild(script);
+      } else {
+        loadGoogleMapsScript();
+      }
     }
+  };
+
+  const loadGoogleMapsScript = () => {
+    setIsLoading(true);
+    const script = document.createElement('script');
+    script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&libraries=places`;
+    script.async = true;
+    script.onload = () => {
+      setIsLoading(false);
+    };
+    script.onerror = () => {
+      setIsLoading(false);
+      console.error('Google Maps API failed to load');
+    };
+    document.head.appendChild(script);
   };
 
   useEffect(() => {
@@ -40,7 +52,7 @@ const GoogleMapsWidget = ({
     });
     observer.observe(container);
     return () => {
-      observer.unobserve(container);
+      observer.disconnect();
     };
   }, []);
 
