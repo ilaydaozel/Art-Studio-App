@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { GoogleMap, Marker } from '@react-google-maps/api';
+import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 import Spinner from './Spinner';
 
 interface GoogleMapsWidgetProps {
@@ -14,29 +14,12 @@ const GoogleMapsWidget = ({
     () => ({ lat: 38.41948699951172, lng: 27.132444381713867 }),
     []
   );
-
+  const apiKey = useMemo(() => process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY, []);
   const handleIntersection = (entries: IntersectionObserverEntry[]) => {
     const entry = entries[0];
     if (entry.isIntersecting) {
-      // Check if the Google Maps script is already loaded
-      if (!window.google) {
-        loadGoogleMapsScript();
-      }
-    }
-  };
-
-  const loadGoogleMapsScript = () => {
-    setIsLoading(true);
-    const script = document.createElement('script');
-    script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&callback=console.debug&libraries=maps,marker&v=beta`;
-    script.async = true;
-    script.onload = () => {
       setIsLoading(false);
-    };
-    script.onerror = () => {
-      console.error('Google Maps API failed to load');
-    };
-    document.head.appendChild(script);
+    }
   };
 
   useEffect(() => {
@@ -60,13 +43,15 @@ const GoogleMapsWidget = ({
       className='outline outline-1 outline-neutral-400 flex justify-center items-center'
     >
       {!isLoading ? (
-        <GoogleMap
-          mapContainerStyle={{ width: '100%', height: '100%' }}
-          center={center}
-          zoom={14}
-        >
-          <Marker position={center} title='Konak Kültür Sanat Akademisi' />
-        </GoogleMap>
+        <LoadScript googleMapsApiKey={apiKey || ''}>
+          <GoogleMap
+            mapContainerStyle={{ width: '100%', height: '100%' }}
+            center={center}
+            zoom={14}
+          >
+            <Marker position={center} title='Konak Kültür Sanat Akademisi' />
+          </GoogleMap>
+        </LoadScript>
       ) : (
         <Spinner />
       )}
