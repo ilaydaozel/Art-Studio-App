@@ -115,7 +115,7 @@ const Footer = () => {
               </FooterElement>
             </div>
             <GoogleMapsWidget
-              mapContainerStyle={{ width: '30%', height: '150px' }}
+              mapContainerStyle={{ width: '40%', height: '200px' }}
             />
           </div>
         </div>
