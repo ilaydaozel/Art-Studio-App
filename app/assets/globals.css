@@ -3,7 +3,9 @@
 @tailwind utilities;
 
 html,
-body,
+body {
+  font-family: 'DM Sans', Arial, sans-serif;
+}
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;

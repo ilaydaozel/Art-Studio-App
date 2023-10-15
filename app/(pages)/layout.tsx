@@ -19,6 +19,7 @@ export const metadata = {
 const font = DM_Sans({
   subsets: ['latin'],
   weight: '400',
+  display: 'swap',
 });
 
 export default async function RootLayout({
