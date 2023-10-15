@@ -140,6 +140,7 @@ const Navbar = ({ currentUser }: NavbarProps) => {
               color={logoColor}
               href={ROUTE_PATHS.HOME}
               isSmallScreen={isSmallScreen}
+              title='Homepage'
             >
               {t('name', { element: 'academy' })}
             </LogoTitle>

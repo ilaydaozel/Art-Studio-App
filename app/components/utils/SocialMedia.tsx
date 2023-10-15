@@ -14,10 +14,16 @@ const SocialMedia = () => {
   return (
     <>
       <Container>
-        <a href='https://www.instagram.com/konaksanat_akademisi/'>
+        <a
+          href='https://www.instagram.com/konaksanat_akademisi/'
+          title='Instagram page'
+        >
           <BsInstagram />
         </a>
-        <a href='https://m.facebook.com/profile.php?id=100023734249933'>
+        <a
+          href='https://m.facebook.com/profile.php?id=100023734249933'
+          title='Facebook page'
+        >
           <BsFacebook />
         </a>
       </Container>
