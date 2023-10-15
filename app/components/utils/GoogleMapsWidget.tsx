@@ -29,8 +29,9 @@ const GoogleMapsWidget = ({
 
   const loadGoogleMapsScript = () => {
     setIsLoading(true);
+    console.log('here');
     const script = document.createElement('script');
-    script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&libraries=places`;
+    script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&callback=console.debug&libraries=maps,marker&v=beta`;
     script.async = true;
     script.onload = () => {
       setIsLoading(false);
