@@ -46,8 +46,14 @@ const MenuContainer = styled.div`
 const NameText = styled.div`
   color: ${COLORS.darkGray};
   width: 100%;
-  font-size: 0.8rem;
+  font-size: 1rem;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  @media (max-width: 972px) {
+    gap: 0.9rem;
+  }
+  @media (max-width: 576px) {
+    gap: 0.8rem;
+  }
 `;
 
 const SeperatorLine = styled.div`

@@ -9,8 +9,8 @@ import { PiUserCircleLight } from 'react-icons/pi';
 import { IUser } from '@/app/types';
 import useTranslate from '../../hooks/useTranslate';
 import LanguageSwitcher from './LanguageSwitcher';
-import NavigationBar from './NavigationBar';
-import NavigationBarHamburger from './NavigationBarHamburger';
+import NavbarMenu from './NavbarMenu';
+import NavbarHamburgerMenu from './NavbarHamburgerMenu';
 
 interface NavbarProps {
   currentUser: IUser | null;
@@ -159,7 +159,7 @@ const Navbar = ({ currentUser }: NavbarProps) => {
                 </a>
               )}
               {(currentUser || isSmallScreen) && (
-                <NavigationBarHamburger
+                <NavbarHamburgerMenu
                   user={currentUser}
                   isSmallScreen={isSmallScreen}
                   color={menuElementColor}
@@ -167,7 +167,7 @@ const Navbar = ({ currentUser }: NavbarProps) => {
               )}
             </SideIcons>
           </div>
-          {!isSmallScreen && <NavigationBar color={menuElementColor} />}
+          {!isSmallScreen && <NavbarMenu color={menuElementColor} />}
         </div>
       </div>
     </NavbarContainer>
