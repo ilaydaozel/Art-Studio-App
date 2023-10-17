@@ -69,7 +69,7 @@ const AnnouncementsList = ({
         <div key={announcement.id} className='flex flex-col items-end'>
           <AnnouncementContainer>
             <AnnouncementBox>
-              <Slide isMini slide={announcement}></Slide>
+              <Slide slide={announcement}></Slide>
             </AnnouncementBox>
             {isEditable ? (
               <EditMenu
