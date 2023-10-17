@@ -9,13 +9,13 @@ interface HeaderProps {
 }
 
 const Container = styled.div`
-  width: 84vw;
+  width: 100%;
   height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: start;
   justify-content: end;
-  padding-bottom: 1rem;
+  position: relative;
 `;
 
 const InfoContainer = styled.div`
@@ -24,12 +24,16 @@ const InfoContainer = styled.div`
   align-items: start;
   justify-content: center;
   gap: 0.2rem;
+  position: absolute;
+  bottom: 14%;
+  left: 10%;
+  transform: translate(-10%, 14%);
 `;
 
 const InfoHeading = styled.text`
-  font-size: 2rem;
+  font-size: 3rem;
   font-weight: bold;
-  color: ${COLORS.darkGray};
+  color: #ffffff;
   letter-spacing: 3px;
   @media (max-width: 768px) {
     font-size: 1.8rem;
@@ -41,8 +45,8 @@ const InfoHeading = styled.text`
 
 const DateHeading = styled.text`
   font-style: italic;
-  font-size: 1.1rem;
-  color: ${COLORS.gray};
+  font-size: 1.4rem;
+  color: ${COLORS.lightGray};
   @media (max-width: 768px) {
     font-size: 1rem;
   }
@@ -54,19 +58,18 @@ const DateHeading = styled.text`
 const Header = ({ exhibition }: HeaderProps) => {
   return (
     <Container>
-      <div className='w-[100%] h-[60%] mb-2 relative'>
-        <Image
-          src={exhibition?.coverImage || '/images/blurImage.jpg'}
-          alt={'Header image'}
-          fill
-          priority
-          placeholder='blur'
-          blurDataURL={'/images/blurImage.jpg'}
-          style={{
-            objectFit: 'cover',
-          }}
-        />
-      </div>
+      <Image
+        src={exhibition?.coverImage || '/images/blurImage.jpg'}
+        alt={'Header image'}
+        fill
+        priority
+        placeholder='blur'
+        blurDataURL={'/images/blurImage.jpg'}
+        style={{
+          objectFit: 'cover',
+        }}
+        className='brightness-75'
+      />
 
       <InfoContainer>
         <InfoHeading>{exhibition.title}</InfoHeading>
