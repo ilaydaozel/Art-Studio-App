@@ -10,6 +10,7 @@ import Image from 'next/image';
 
 const ProfileImageContainer = styled.div`
   position: relative;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   width: 30%;
   height: 50vh;
   @media (max-width: 992px) {
