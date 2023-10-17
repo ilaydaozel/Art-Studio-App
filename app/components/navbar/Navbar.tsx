@@ -75,7 +75,6 @@ const SideIcons = styled.div`
 const Navbar = ({ currentUser }: NavbarProps) => {
   const pathname = usePathname();
   const pagesWithBackground: string[] = [
-    ROUTE_PATHS.HOME,
     ROUTE_PATHS.ARTIST_PROFILE,
     ROUTE_PATHS.EXHIBITION,
     ROUTE_PATHS.EDIT_ARTIST_PROFILE,
@@ -83,9 +82,11 @@ const Navbar = ({ currentUser }: NavbarProps) => {
   ];
   let isPageWithBackground: boolean = false;
   if (pathname) {
-    isPageWithBackground = pagesWithBackground.some((page) =>
-      pathname.includes(page)
-    );
+    isPageWithBackground =
+      pagesWithBackground.some((page) => {
+        const routePattern = new RegExp(`^${page}(\/|$)`);
+        return routePattern.test(pathname);
+      }) || pathname === ROUTE_PATHS.HOME;
   }
   const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 576);
   const [backgroundColor, setBackgroundColor] = useState(
