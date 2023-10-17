@@ -19,7 +19,7 @@ const VirtualExhibitionPreview = ({
   };
   return (
     <ComponentWithHeading headingText={t('heading', location)}>
-      <div className='m-8 shadow-lg'>
+      <div className='shadow-lg'>
         <VirtualExhibitionWithMenu
           exhibition={exhibition}
           small={true}
