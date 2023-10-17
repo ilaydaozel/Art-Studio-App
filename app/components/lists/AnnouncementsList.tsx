@@ -4,7 +4,6 @@ import { useRouter } from 'next/navigation';
 import styled from 'styled-components';
 import EditMenu from '../menu/EditMenu';
 import axios from 'axios';
-import toast from 'react-hot-toast';
 import { useState } from 'react';
 import Slide from '../carousel/Slide';
 import { handleApiResponse } from '../utils/Helper';
@@ -22,26 +21,13 @@ const AnnouncementContainer = styled.div`
   margin: 16px 4px;
 `;
 const AnnouncementBox = styled.div`
-  width: 25vw;
-  height: 25vh;
-  min-width: 250px;
+  width: 80vw;
 `;
 const ListContainer = styled.div<{ width: string }>`
-  display: grid;
-  grid-auto-rows: max-content;
-  align-items: start;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-items: center;
-  width: ${(props) => props.width};
-  margin: 2rem 1rem;
-  grid-template-columns: 1fr;
-
-  @media (min-width: 640px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  @media (min-width: 768px) {
-    grid-template-columns: repeat(3, 1fr);
-  }
 `;
 const AnnouncementsList = ({
   announcements,
