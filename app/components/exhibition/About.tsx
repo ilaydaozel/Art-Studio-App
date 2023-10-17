@@ -16,8 +16,12 @@ interface AboutProps {
 }
 
 const DescriptionText = styled.div`
-  font-size: 1rem;
+  width: 100%;
+  font-size: 0.9rem;
   color: ${COLORS.darkGray};
+  @media (max-width: 576px) {
+    font-size: 0.8rem;
+  }
 `;
 
 const About = ({ exhibition, isEditable = false }: AboutProps) => {
@@ -41,13 +45,12 @@ const About = ({ exhibition, isEditable = false }: AboutProps) => {
         onClose={updateTextModal.onClose}
         onSubmit={updateDescription}
       />
-      <div className='w-[84%] text-left'>
+      <div className='w-[84%] relative flex flex-col justify-end items-end'>
         <DescriptionText>{exhibition.description}</DescriptionText>
         {isEditable && (
-          <EditButton
-            label={t('edit_button_label', location)}
-            onClick={updateTextModal.onOpen}
-          ></EditButton>
+          <div className=''>
+            <EditButton onClick={updateTextModal.onOpen}></EditButton>
+          </div>
         )}
       </div>
     </ComponentWithHeading>
