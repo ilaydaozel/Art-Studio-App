@@ -3,7 +3,6 @@
 import styled from 'styled-components';
 import { IArtistProfile } from '../../types';
 import useUpdatePictureModal from '../../hooks/useUpdatePictureModal';
-import { FaRegEdit } from 'react-icons/fa';
 import EditButton from '../buttons/EditButton';
 import UpdatePictureModal from '../modal/UpdatePictureModal';
 import { useRouter } from 'next/navigation';
@@ -55,7 +54,6 @@ const ProfilePicture = ({
           <div className='absolute top-1 right-1'>
             <EditButton
               darkMode={true}
-              icon={FaRegEdit}
               onClick={updatePictureModal.onOpen}
             ></EditButton>
           </div>

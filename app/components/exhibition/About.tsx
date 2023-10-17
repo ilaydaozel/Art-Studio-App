@@ -9,7 +9,6 @@ import useUpdateTextModal from '@/app/hooks/useUpdateTextModal';
 import axios from 'axios';
 import UpdateTextModal from '../modal/UpdateTextModal';
 import EditButton from '../buttons/EditButton';
-import { FaRegEdit } from 'react-icons/fa';
 
 interface AboutProps {
   exhibition: IExhibition;
@@ -47,7 +46,6 @@ const About = ({ exhibition, isEditable = false }: AboutProps) => {
         {isEditable && (
           <EditButton
             label={t('edit_button_label', location)}
-            icon={FaRegEdit}
             onClick={updateTextModal.onOpen}
           ></EditButton>
         )}

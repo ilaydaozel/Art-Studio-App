@@ -3,7 +3,6 @@ import { COLORS } from '@/constants/colors';
 import styled from 'styled-components';
 import { IArtistProfile } from '../../types';
 import useUpdateTextModal from '../../hooks/useUpdateTextModal';
-import { FaRegEdit } from 'react-icons/fa';
 import EditButton from '../buttons/EditButton';
 import UpdateTextModal from '../modal/UpdateTextModal';
 import axios from 'axios';
@@ -52,7 +51,6 @@ const Biography = ({ artistProfile, isEditable = false }: BiographyProps) => {
         {isEditable && (
           <EditButton
             label={t('edit_button_label', location)}
-            icon={FaRegEdit}
             onClick={updateTextModal.onOpen}
           ></EditButton>
         )}

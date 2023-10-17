@@ -1,14 +1,13 @@
 'use client';
 
-import { IconType } from 'react-icons';
 import { COLORS } from '@/constants/colors';
 import styled from 'styled-components';
+import { FaRegEdit } from 'react-icons/fa';
 
 interface EditButtonProps {
   label?: string;
   onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
   disabled?: boolean;
-  icon?: IconType;
   darkMode?: boolean;
 }
 
@@ -41,17 +40,14 @@ const EditButton = ({
   label,
   onClick,
   disabled,
-  icon: Icon,
   darkMode = false,
 }: EditButtonProps) => {
   return (
     <ButtonStyle dark={darkMode} disabled={disabled} onClick={onClick}>
       {label}
-      {Icon && (
-        <IconStyle dark={darkMode}>
-          <Icon />
-        </IconStyle>
-      )}
+      <IconStyle dark={darkMode}>
+        <FaRegEdit />
+      </IconStyle>
     </ButtonStyle>
   );
 };

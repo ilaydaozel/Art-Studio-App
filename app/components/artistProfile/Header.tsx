@@ -5,7 +5,6 @@ import { IArtistProfile, IArtwork } from '../../types';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import { useState } from 'react';
-import { FaRegEdit } from 'react-icons/fa';
 import EditButton from '../buttons/EditButton';
 import Popup from '../popup/Popup';
 import useTranslate from '../../hooks/useTranslate';
@@ -107,7 +106,6 @@ const Header = ({
           {isEditable ? (
             <EditButton
               label={t('change_image_button_text', location)}
-              icon={FaRegEdit}
               onClick={() => setShowArtworkSelection(true)}
             ></EditButton>
           ) : (
