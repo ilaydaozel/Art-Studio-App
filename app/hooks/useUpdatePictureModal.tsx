@@ -1,15 +1,15 @@
 import { create } from 'zustand';
 
-interface ProfilePictureModalStore {
+interface UpdatePictureModalStore {
   isOpen: boolean;
   onOpen: () => void;
   onClose: () => void;
 }
 
-const useProfilePictureModal = create<ProfilePictureModalStore>((set) => ({
+const useUpdatePictureModal = create<UpdatePictureModalStore>((set) => ({
   isOpen: false,
   onOpen: () => set({ isOpen: true }),
   onClose: () => set({ isOpen: false }),
 }));
 
-export default useProfilePictureModal;
+export default useUpdatePictureModal;

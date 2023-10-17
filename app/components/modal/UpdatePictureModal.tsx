@@ -6,25 +6,25 @@ import { toast } from 'react-hot-toast';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import Modal from './Modal';
 import ImageUpload from '../inputs/ImageUpload';
-import useProfilePictureModal from '@/app/hooks/useProfilePictureModal';
+import useUpdatePictureModal from '@/app/hooks/useUpdatePictureModal';
 import { IArtistProfile } from '@/app/types';
 import { handleApiResponse } from '../utils/Helper';
 import { useRouter } from 'next/navigation';
 import useTranslate from '@/app/hooks/useTranslate';
 
-interface ProfilePictureModalProps {
+interface UpdatePictureModalProps {
   artistProfile: IArtistProfile | null;
   onClose: () => void;
   onUpdate: () => void;
 }
 
-const ProfilePictureModal = ({
+const UpdatePictureModal = ({
   artistProfile,
   onClose,
   onUpdate,
-}: ProfilePictureModalProps) => {
+}: UpdatePictureModalProps) => {
   const [isLoading, setIsLoading] = useState(false);
-  const profilePictureModal = useProfilePictureModal();
+  const updatePictureModal = useUpdatePictureModal();
   const router = useRouter();
   const t = useTranslate();
   const location = { element: 'update_text_modal' };
@@ -51,7 +51,7 @@ const ProfilePictureModal = ({
       t,
       router,
       t('update_successful_message', location),
-      profilePictureModal.onClose
+      updatePictureModal.onClose
     );
   };
 
@@ -74,7 +74,7 @@ const ProfilePictureModal = ({
   return (
     <Modal
       disabled={isLoading}
-      isOpen={profilePictureModal.isOpen}
+      isOpen={updatePictureModal.isOpen}
       title='Profil Fotoğrafı Ekle'
       actionLabel='Güncelle'
       onClose={onClose}
@@ -84,4 +84,4 @@ const ProfilePictureModal = ({
   );
 };
 
-export default ProfilePictureModal;
+export default UpdatePictureModal;

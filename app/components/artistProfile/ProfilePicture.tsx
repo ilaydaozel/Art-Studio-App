@@ -2,10 +2,10 @@
 
 import styled from 'styled-components';
 import { IArtistProfile } from '../../types';
-import useProfilePictureModal from '../../hooks/useProfilePictureModal';
+import useUpdatePictureModal from '../../hooks/useUpdatePictureModal';
 import { FaRegEdit } from 'react-icons/fa';
 import TextButton from '../buttons/TextButton';
-import ProfilePictureModal from '../modal/ProfilePictureModal';
+import UpdatePictureModal from '../modal/UpdatePictureModal';
 import { useRouter } from 'next/navigation';
 
 const ProfileImage = styled.img<{ imageUrl: string }>`
@@ -31,7 +31,7 @@ const ProfilePicture = ({
   artistProfile,
   isEditable = false,
 }: ProfilePictureProps) => {
-  const profilePictureModal = useProfilePictureModal();
+  const updatePictureModal = useUpdatePictureModal();
   const router = useRouter();
   const refreshPage = () => {
     router.refresh();
@@ -39,9 +39,9 @@ const ProfilePicture = ({
 
   return (
     <>
-      <ProfilePictureModal
+      <UpdatePictureModal
         artistProfile={artistProfile}
-        onClose={profilePictureModal.onClose}
+        onClose={updatePictureModal.onClose}
         onUpdate={refreshPage}
       />
       <ProfileImageContainer>
@@ -52,7 +52,7 @@ const ProfilePicture = ({
           <TextButton
             label='Düzenle'
             icon={FaRegEdit}
-            onClick={profilePictureModal.onOpen}
+            onClick={updatePictureModal.onOpen}
           ></TextButton>
         ) : (
           <></>
