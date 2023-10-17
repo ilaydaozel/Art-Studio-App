@@ -15,6 +15,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
 `;
+
 const SectionTitle = styled.div<{ size: string }>`
   width: 100%;
   font-size: ${(props) => props.size};
@@ -23,10 +24,10 @@ const SectionTitle = styled.div<{ size: string }>`
   margin: 2rem 0 0.25rem 0;
   border-bottom: 1px solid #e5e7eb;
   @media (max-width: 768px) {
-    font-size: 0.8rem;
+    font-size: 1rem;
   }
   @media (max-width: 480px) {
-    font-size: 0.7rem;
+    font-size: 0.9rem;
   }
 `;
 
