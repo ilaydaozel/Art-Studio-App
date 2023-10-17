@@ -7,16 +7,12 @@ import { FaRegEdit } from 'react-icons/fa';
 import TextButton from '../buttons/TextButton';
 import UpdatePictureModal from '../modal/UpdatePictureModal';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
-const ProfileImage = styled.img<{ imageUrl: string }>`
-  width: 100%;
-  height: auto;
-  content: url(${(props) => props.imageUrl});
-`;
 const ProfileImageContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 35%;
+  position: relative;
+  width: 30%;
+  height: 50vh;
   @media (max-width: 992px) {
     width: 40%;
   }
@@ -45,17 +41,24 @@ const ProfilePicture = ({
         onUpdate={refreshPage}
       />
       <ProfileImageContainer>
-        <ProfileImage
-          imageUrl={artistProfile?.profilePic || '/images/blurImage.jpg'}
-        ></ProfileImage>
-        {isEditable ? (
-          <TextButton
-            label='Düzenle'
-            icon={FaRegEdit}
-            onClick={updatePictureModal.onOpen}
-          ></TextButton>
-        ) : (
-          <></>
+        <Image
+          src={artistProfile?.profilePic || '/images/blurImage.jpg'}
+          alt={'Artist profile picture'}
+          fill
+          placeholder='blur'
+          blurDataURL={'/images/blurImage.jpg'}
+          style={{
+            objectFit: 'cover',
+          }}
+        />
+        {isEditable && (
+          <div className='absolute top-1 right-1'>
+            <TextButton
+              darkMode={true}
+              icon={FaRegEdit}
+              onClick={updatePictureModal.onOpen}
+            ></TextButton>
+          </div>
         )}
       </ProfileImageContainer>
     </>
