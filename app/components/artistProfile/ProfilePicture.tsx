@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { IArtistProfile } from '../../types';
 import useUpdatePictureModal from '../../hooks/useUpdatePictureModal';
 import { FaRegEdit } from 'react-icons/fa';
-import TextButton from '../buttons/TextButton';
+import EditButton from '../buttons/EditButton';
 import UpdatePictureModal from '../modal/UpdatePictureModal';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
@@ -53,11 +53,11 @@ const ProfilePicture = ({
         />
         {isEditable && (
           <div className='absolute top-1 right-1'>
-            <TextButton
+            <EditButton
               darkMode={true}
               icon={FaRegEdit}
               onClick={updatePictureModal.onOpen}
-            ></TextButton>
+            ></EditButton>
           </div>
         )}
       </ProfileImageContainer>

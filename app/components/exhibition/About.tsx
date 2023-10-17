@@ -8,7 +8,7 @@ import ComponentWithHeading from '../layouts/ComponentWithHeading';
 import useUpdateTextModal from '@/app/hooks/useUpdateTextModal';
 import axios from 'axios';
 import UpdateTextModal from '../modal/UpdateTextModal';
-import TextButton from '../buttons/TextButton';
+import EditButton from '../buttons/EditButton';
 import { FaRegEdit } from 'react-icons/fa';
 
 interface AboutProps {
@@ -45,11 +45,11 @@ const About = ({ exhibition, isEditable = false }: AboutProps) => {
       <div className='w-[84%] text-left'>
         <DescriptionText>{exhibition.description}</DescriptionText>
         {isEditable && (
-          <TextButton
+          <EditButton
             label={t('edit_button_label', location)}
             icon={FaRegEdit}
             onClick={updateTextModal.onOpen}
-          ></TextButton>
+          ></EditButton>
         )}
       </div>
     </ComponentWithHeading>

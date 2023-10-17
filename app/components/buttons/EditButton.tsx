@@ -4,7 +4,7 @@ import { IconType } from 'react-icons';
 import { COLORS } from '@/constants/colors';
 import styled from 'styled-components';
 
-interface TextButtonProps {
+interface EditButtonProps {
   label?: string;
   onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
   disabled?: boolean;
@@ -37,13 +37,13 @@ const IconStyle = styled.div<{ dark: boolean }>`
     props.dark ? 'rgba(0, 0, 0, 0.5)' : 'rgba(0, 0, 0, 0.1)'};
 `;
 
-const TextButton = ({
+const EditButton = ({
   label,
   onClick,
   disabled,
   icon: Icon,
   darkMode = false,
-}: TextButtonProps) => {
+}: EditButtonProps) => {
   return (
     <ButtonStyle dark={darkMode} disabled={disabled} onClick={onClick}>
       {label}
@@ -56,4 +56,4 @@ const TextButton = ({
   );
 };
 
-export default TextButton;
+export default EditButton;

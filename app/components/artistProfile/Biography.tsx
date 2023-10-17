@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { IArtistProfile } from '../../types';
 import useUpdateTextModal from '../../hooks/useUpdateTextModal';
 import { FaRegEdit } from 'react-icons/fa';
-import TextButton from '../buttons/TextButton';
+import EditButton from '../buttons/EditButton';
 import UpdateTextModal from '../modal/UpdateTextModal';
 import axios from 'axios';
 import useTranslate from '@/app/hooks/useTranslate';
@@ -50,11 +50,11 @@ const Biography = ({ artistProfile, isEditable = false }: BiographyProps) => {
       <BiographyContainer>
         <BiographyContent>{artistProfile?.biography}</BiographyContent>
         {isEditable && (
-          <TextButton
+          <EditButton
             label={t('edit_button_label', location)}
             icon={FaRegEdit}
             onClick={updateTextModal.onOpen}
-          ></TextButton>
+          ></EditButton>
         )}
       </BiographyContainer>
     </>

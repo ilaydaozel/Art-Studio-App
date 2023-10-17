@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import { useState } from 'react';
 import { FaRegEdit } from 'react-icons/fa';
-import TextButton from '../buttons/TextButton';
+import EditButton from '../buttons/EditButton';
 import Popup from '../popup/Popup';
 import useTranslate from '../../hooks/useTranslate';
 import Image from 'next/image';
@@ -105,11 +105,11 @@ const Header = ({
             {artistProfile.user.name} {artistProfile.user.surname}
           </NameHeading>
           {isEditable ? (
-            <TextButton
+            <EditButton
               label={t('change_image_button_text', location)}
               icon={FaRegEdit}
               onClick={() => setShowArtworkSelection(true)}
-            ></TextButton>
+            ></EditButton>
           ) : (
             <></>
           )}
