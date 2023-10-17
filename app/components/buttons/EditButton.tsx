@@ -28,12 +28,11 @@ const IconStyle = styled.div<{ dark: boolean }>`
   font-size: 1rem;
   padding: 3px 2px 4px 6px;
   outline: 1px solid;
-  outline-color: ${(props) =>
-    props.dark ? COLORS.darkGray : COLORS.lightGray};
+  outline-color: ${(props) => (props.dark ? COLORS.gray : COLORS.lightGray)};
   border-radius: 0.5rem;
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
   background-color: ${(props) =>
-    props.dark ? 'rgba(0, 0, 0, 0.5)' : 'rgba(0, 0, 0, 0.1)'};
+    props.dark ? 'rgba(0, 0, 0, 0.6)' : 'rgba(0, 0, 0, 0.1)'};
 `;
 
 const EditButton = ({
