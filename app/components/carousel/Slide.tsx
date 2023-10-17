@@ -37,16 +37,16 @@ const Caption = styled.p`
   @media (max-width: 768px) {
     font-size:2.2rem;
   @media (max-width: 576px) {
-    font-size: 0.5rem;
+    font-size: 1.5rem;
 `;
 
 const Subcaption = styled.p`
   color: #ffffff;
   font-size: 1.5rem;
   @media (max-width: 768px) {
-    font-size: 0.6rem;
+    font-size: 1rem;
   @media (max-width: 576px) {
-    font-size: 0.3rem;
+    font-size: 0.8rem;
 `;
 
 const SmallCaption = styled.p`
@@ -58,9 +58,9 @@ const SmallCaption = styled.p`
   text-overflow: ellipsis;
   border-bottom: 0.5px solid ${COLORS.lightGray};
   @media (max-width: 768px) {
-    font-size: 0.6rem;
+    font-size: 0.8rem;
   @media (max-width: 576px) {
-    font-size: 0.4rem;
+    font-size: 0.6rem;
 `;
 
 const Slide = ({ slide, children }: SlideProps) => {
