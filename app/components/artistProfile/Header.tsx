@@ -24,13 +24,14 @@ const HeadingContainer = styled.div`
   height: 100vh;
   width: 100%;
   padding: 1rem;
+  position: relative;
 `;
 const NameHeading = styled.text`
-  font-size: 2.5rem;
+  font-size: 5rem;
   font-weight: bold;
   text-align: center;
   margin: 10px;
-  color: ${COLORS.darkGray};
+  color: #ffffff;
   @media (max-width: 768px) {
     font-size: 2rem;
   }
@@ -55,7 +56,7 @@ const Header = ({
 }: HeaderProps) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
-  const [coverImage, setHeaderArtwork] = useState(
+  const [headerArtwork, setHeaderArtwork] = useState(
     artistProfile?.coverImage || '/images/blurImage.jpg'
   );
   const [showArtworkSelection, setShowArtworkSelection] = useState(false);
@@ -67,7 +68,7 @@ const Header = ({
   const location = { element: 'header', superElement: 'artist_profile' };
   const t = useTranslate();
 
-  const handleCoverImageChange = async (coverImage: String) => {
+  const handleCoverImageChange = async (coverImage: string) => {
     await handleApiResponse(
       axios.post(`/api/artistProfile/${artistProfile.artistId}`, {
         coverImage,
@@ -78,6 +79,7 @@ const Header = ({
       t('change_successful_message', location),
       () => {
         setShowArtworkSelection(false);
+        setHeaderArtwork(coverImage);
       }
     );
   };
@@ -85,31 +87,28 @@ const Header = ({
   return (
     <>
       <HeadingContainer>
-        <div className='w-[55%] h-[65%] relative'>
-          <Image
-            src={artistProfile.coverImage || '/images/blurImage.jpg'}
-            alt={'Header image'}
-            fill
-            priority={true}
-            placeholder='blur'
-            sizes='55vw'
-            blurDataURL={'/images/blurImage.jpg'}
-            style={{
-              objectFit: 'cover',
-            }}
-          />
-        </div>
-        <div className='flex flex-col justify-center items-center w-[40%] h-full'>
+        <Image
+          src={headerArtwork || '/images/blurImage.jpg'}
+          alt={'Header image'}
+          fill
+          priority={true}
+          placeholder='blur'
+          sizes='55vw'
+          blurDataURL={'/images/blurImage.jpg'}
+          style={{
+            objectFit: 'cover',
+          }}
+          className='brightness-75'
+        />
+        <div className='absolute bottom-[16%] left-[8%] translate-x-[-8%] translate-y-[-16%] flex gap-2 '>
           <NameHeading>
             {artistProfile.user.name} {artistProfile.user.surname}
           </NameHeading>
-          {isEditable ? (
+          {isEditable && (
             <EditButton
-              label={t('change_image_button_text', location)}
+              darkMode={true}
               onClick={() => setShowArtworkSelection(true)}
             ></EditButton>
-          ) : (
-            <></>
           )}
         </div>
       </HeadingContainer>
@@ -136,7 +135,7 @@ const Header = ({
           }
           title={t('select_cover_image', location)}
           actionLabel={t('select_button_text', location)}
-          onSubmit={() => handleCoverImageChange(coverImage)}
+          onSubmit={() => handleCoverImageChange(headerArtwork)}
         ></Popup>
       )}
     </>
