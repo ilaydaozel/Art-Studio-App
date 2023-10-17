@@ -30,6 +30,7 @@ const Container = styled.div`
   gap: 4rem;
   justify-content: center;
   align-items: center;
+  width: 100%;
 `;
 
 const ExhibitionProfile = ({
