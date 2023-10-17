@@ -1,7 +1,7 @@
 'use client';
 
 import { styled } from 'styled-components';
-import HeadingWithUnderline from '../heading/HeadingWithUnderline';
+import HeadingWithUnderline from './HeadingWithUnderline';
 
 interface ComponentWithHeadingProps {
   headingText: string;
