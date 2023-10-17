@@ -16,10 +16,14 @@ interface BiographyProps {
 const BiographyContainer = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: flex-end;
+  width: 100%;
 `;
+
 const BiographyContent = styled.div`
   font-size: 1rem;
   font-weight: 500;
+  width: 100%;
   color: ${COLORS.darkGray};
   word-break: break-all;
   padding: 10px 0;
@@ -49,10 +53,7 @@ const Biography = ({ artistProfile, isEditable = false }: BiographyProps) => {
       <BiographyContainer>
         <BiographyContent>{artistProfile?.biography}</BiographyContent>
         {isEditable && (
-          <EditButton
-            label={t('edit_button_label', location)}
-            onClick={updateTextModal.onOpen}
-          ></EditButton>
+          <EditButton onClick={updateTextModal.onOpen}></EditButton>
         )}
       </BiographyContainer>
     </>
