@@ -63,10 +63,8 @@ const UserMenu = ({ user }: UserMenuProps) => {
       {user.userType === 'artist' ? (
         <>
           <UserMenuElement
-            isActive={
-              pathname === ROUTE_PATHS.EDIT + ROUTE_PATHS.EDIT_ARTIST_PROFILE
-            }
-            href={`${ROUTE_PATHS.EDIT}${ROUTE_PATHS.EDIT_ARTIST_PROFILE}/${user.id}`}
+            isActive={pathname === ROUTE_PATHS.EDIT_ARTIST_PROFILE}
+            href={`${ROUTE_PATHS.EDIT_ARTIST_PROFILE}/${user.id}`}
           >
             {t('edit_artist_profile', location)}
           </UserMenuElement>
@@ -74,31 +72,25 @@ const UserMenu = ({ user }: UserMenuProps) => {
       ) : (
         <>
           <UserMenuElement
-            isActive={
-              pathname === ROUTE_PATHS.EDIT + ROUTE_PATHS.EDIT_ARTIST_ACCOUNTS
-            }
-            href={`${ROUTE_PATHS.EDIT}${ROUTE_PATHS.EDIT_ARTIST_ACCOUNTS}`}
+            isActive={pathname === ROUTE_PATHS.EDIT_ARTIST_ACCOUNTS}
+            href={`${ROUTE_PATHS.EDIT_ARTIST_ACCOUNTS}`}
           >
             {t('edit_artist_accounts', location)}
           </UserMenuElement>
           <UserMenuElement
-            isActive={
-              pathname === ROUTE_PATHS.EDIT + ROUTE_PATHS.EDIT_ANNOUNCEMENTS
-            }
-            href={`${ROUTE_PATHS.EDIT}${ROUTE_PATHS.EDIT_ANNOUNCEMENTS}`}
+            isActive={pathname === ROUTE_PATHS.EDIT_ANNOUNCEMENTS}
+            href={`${ROUTE_PATHS.EDIT_ANNOUNCEMENTS}`}
           >
             {t('edit_announcements', location)}
           </UserMenuElement>
           <UserMenuElement
-            isActive={
-              pathname === ROUTE_PATHS.EDIT + ROUTE_PATHS.EDIT_EXHIBITIONS
-            }
-            href={`${ROUTE_PATHS.EDIT}${ROUTE_PATHS.EDIT_EXHIBITIONS}`}
+            isActive={pathname === ROUTE_PATHS.EDIT_EXHIBITIONS}
+            href={`${ROUTE_PATHS.EDIT_EXHIBITIONS}`}
           >
             {t('edit_exhibitions', location)}
           </UserMenuElement>
           <UserMenuElement
-            isActive={pathname === ROUTE_PATHS.EDIT + ROUTE_PATHS.REGISTER}
+            isActive={pathname === ROUTE_PATHS.REGISTER}
             href={`${ROUTE_PATHS.REGISTER}`}
           >
             {t('register', location)}

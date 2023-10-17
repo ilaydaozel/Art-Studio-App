@@ -71,7 +71,7 @@ const ArtistAccountsList = ({
               <EditMenu
                 onEditClick={() => {
                   router.push(
-                    `${ROUTE_PATHS.EDIT}${ROUTE_PATHS.EDIT_ARTIST_PROFILE}/${account.id}`
+                    `${ROUTE_PATHS.EDIT_ARTIST_PROFILE}/${account.id}`
                   );
                 }}
                 onDeleteClick={() => handleDeleteArtistAccount(account.id)}
