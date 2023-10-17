@@ -74,16 +74,28 @@ const SideIcons = styled.div`
 
 const Navbar = ({ currentUser }: NavbarProps) => {
   const pathname = usePathname();
-  const isHomePage = pathname === ROUTE_PATHS.HOME;
+  const pagesWithBackground: string[] = [
+    ROUTE_PATHS.HOME,
+    ROUTE_PATHS.ARTIST_PROFILE,
+    ROUTE_PATHS.EXHIBITION,
+    ROUTE_PATHS.EDIT_ARTIST_PROFILE,
+    ROUTE_PATHS.EDIT_EXHIBITION,
+  ];
+  let isPageWithBackground: boolean = false;
+  if (pathname) {
+    isPageWithBackground = pagesWithBackground.some((page) =>
+      pathname.includes(page)
+    );
+  }
   const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 576);
   const [backgroundColor, setBackgroundColor] = useState(
-    isHomePage ? 'transparent' : 'rgba(255, 255, 255, 0.1)'
+    isPageWithBackground ? 'transparent' : 'rgba(255, 255, 255, 0.1)'
   );
   const [logoColor, setLogoColor] = useState(
-    isHomePage ? '#FFFFFF' : COLORS.darkGray
+    isPageWithBackground ? '#FFFFFF' : COLORS.darkGray
   );
   const [menuElementColor, setMenuElementColor] = useState(
-    isHomePage ? '#FFFFFF' : COLORS.gray
+    isPageWithBackground ? '#FFFFFF' : COLORS.gray
   );
 
   const t = useTranslate();
@@ -92,7 +104,7 @@ const Navbar = ({ currentUser }: NavbarProps) => {
     const handleScroll = () => {
       // Check if the user has scrolled to the top of the page
       const isOnTop = window.scrollY === 0;
-      if (isHomePage) {
+      if (isPageWithBackground) {
         setBackgroundColor(isOnTop ? 'transparent' : '#FFFFFF');
         setLogoColor(isOnTop ? '#FFFFFF' : COLORS.darkGray);
         setMenuElementColor(isOnTop ? '#FFFFFF' : COLORS.gray);
