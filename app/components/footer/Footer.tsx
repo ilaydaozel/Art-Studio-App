@@ -69,7 +69,7 @@ const Footer = () => {
     const observer = new IntersectionObserver(handleIntersection, {
       root: null,
       rootMargin: '0px',
-      threshold: 0.3,
+      threshold: 0.1,
     });
     observer.observe(container);
     return () => {
