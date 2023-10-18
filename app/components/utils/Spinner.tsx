@@ -22,7 +22,6 @@ const GridSpinner = styled.div`
     position: absolute;
     width: 12px;
     height: 12px;
-    border-radius: 50%;
     background: #fff;
     animation: ${gridAnimation} 1.2s linear infinite;
   }
