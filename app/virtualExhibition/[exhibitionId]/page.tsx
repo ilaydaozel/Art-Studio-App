@@ -9,32 +9,32 @@ interface IParams {
 }
 
 const VirtualExhibition = async ({ params }: { params: IParams }) => {
-  let exhibition: { exhibition: IExhibition } | null = null;
+  let exhibition: { exhibition: IExhibition } | null;
 
-  if (params != undefined && params != undefined) {
+  try {
     exhibition = await getExhibitionById(params);
+    if (exhibition?.exhibition) {
+      return (
+        <ClientOnly>
+          <div className='relative'>
+            <VirtualExhibitionWithMenu
+              exhibition={exhibition.exhibition}
+            ></VirtualExhibitionWithMenu>
+          </div>
+        </ClientOnly>
+      );
+    } else {
+      return (
+        <ClientOnly>
+          <div className='bg-neutral-900'>
+            <EmptyState item='virtualExhibition' />
+          </div>
+        </ClientOnly>
+      );
+    }
+  } catch (error: any) {
+    throw new Error(error);
   }
-
-  if (!exhibition) {
-    return (
-      <ClientOnly>
-        <EmptyState
-          title='An error occured.'
-          subtitle='Looks like this exhibiton does not exist anymore.'
-        />
-      </ClientOnly>
-    );
-  }
-
-  return (
-    <ClientOnly>
-      <div className='relative'>
-        <VirtualExhibitionWithMenu
-          exhibition={exhibition.exhibition}
-        ></VirtualExhibitionWithMenu>
-      </div>
-    </ClientOnly>
-  );
 };
 
 export default VirtualExhibition;
