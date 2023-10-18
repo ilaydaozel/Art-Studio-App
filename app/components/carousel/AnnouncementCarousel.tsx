@@ -53,14 +53,26 @@ const AnnouncementCarousel = ({ slides }: AnnouncementCarouselProps) => {
 
   return (
     <div className='w-[100vw] h-[100vh]'>
-      <Slide slide={slides[activeIndex]}>
-        <NavButtonRight onClick={goToPrevSlide}>
-          <BsFillArrowLeftSquareFill />
-        </NavButtonRight>
-        <NavButtonLeft onClick={goToNextSlide}>
-          <BsFillArrowRightSquareFill />
-        </NavButtonLeft>
-      </Slide>
+      {slides.length > 0 ? (
+        <Slide slide={slides[activeIndex]}>
+          <NavButtonRight onClick={goToPrevSlide}>
+            <BsFillArrowLeftSquareFill />
+          </NavButtonRight>
+          <NavButtonLeft onClick={goToNextSlide}>
+            <BsFillArrowRightSquareFill />
+          </NavButtonLeft>
+        </Slide>
+      ) : (
+        <div
+          style={{
+            backgroundImage: 'url("/images/blurImage.jpg")',
+            backgroundSize: 'fit',
+            backgroundPosition: 'center',
+            width: '100%',
+            height: '100%',
+          }}
+        ></div>
+      )}
     </div>
   );
 };
