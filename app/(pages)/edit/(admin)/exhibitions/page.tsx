@@ -1,4 +1,3 @@
-import EmptyState from '@/app/components/EmptyState';
 import ClientOnly from '@/app/components/ClientOnly';
 import { IExhibition, IUser } from '@/app/types';
 import getAllExhibitions from '@/app/actions/exhibition/getAllExhibitions';
@@ -7,9 +6,9 @@ import EditExhibitionsClient from './EditExhibitionsClient';
 const ExhibitionsPage = async () => {
   let exhibitons: IExhibition[] | null = null;
   try {
-    const result = await getAllExhibitions();
-    if (result && result.exhibitons) {
-      exhibitons = result.exhibitons;
+    const response = await getAllExhibitions();
+    if (response.exhibitons) {
+      exhibitons = response.exhibitons;
       return (
         <ClientOnly>
           <div className='pt-28 w-full'>
@@ -20,18 +19,9 @@ const ExhibitionsPage = async () => {
         </ClientOnly>
       );
     }
-  } catch (error) {
-    return (
-      <ClientOnly>
-        <EmptyState title='An error occured.' />
-      </ClientOnly>
-    );
+  } catch (error: any) {
+    throw new Error(error);
   }
-  return (
-    <ClientOnly>
-      <EmptyState title='An error occured.' />
-    </ClientOnly>
-  );
 };
 
 export default ExhibitionsPage;
