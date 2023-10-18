@@ -170,6 +170,10 @@ const EnglishData: ILanguageData = {
         artworks: "There are no artworks yet..",
         announcements: "There are no announcements yet..",
         exhibitions: "There are no exhibitions yet..",
+        artistAccount: "There is no such artist account..",
+        artwork: "There is no such artwork..",
+        announcement: "There is no such announcement..",
+        exhibition: "There is no such exhibition..",
     }
 };
 

@@ -171,5 +171,9 @@ export type ILanguageData = {
         artworks: string;
         announcements: string;
         exhibitions: string;
+        artistAccount: string;
+        artwork: string;
+        announcement: string;
+        exhibition: string;
     }
 }
