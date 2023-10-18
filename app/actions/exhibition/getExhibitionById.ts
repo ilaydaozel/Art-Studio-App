@@ -19,9 +19,6 @@ export default async function getExhibitionById(
             },
         });
 
-        if (!exhibition) {
-            return null;
-        }
         return {
             exhibition: exhibition as IExhibition,
         };

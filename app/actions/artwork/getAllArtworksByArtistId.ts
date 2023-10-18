@@ -20,9 +20,6 @@ export default async function getAllArtworksByArtistId(
             }
         });
 
-        if (!allArtworks) {
-            return null;
-        }
         return {
             allArtworks: allArtworks as IArtwork[],
         };

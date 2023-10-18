@@ -9,10 +9,6 @@ export default async function getAllArtistProfiles() {
                 user: true
             }
         });
-
-        if (!artistProfiles) {
-            return null;
-        }
         return {
             artistProfiles: artistProfiles as IArtistProfile[],
         };

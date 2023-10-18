@@ -12,10 +12,6 @@ export default async function getAllArtists() {
                 artistProfile: true,
             }
         });
-
-        if (!artists) {
-            return null;
-        }
         return {
             artists: artists as unknown as IUser[],
         };

@@ -8,9 +8,6 @@ export default async function getAllExhibitions() {
 
         });
 
-        if (!exhibitons) {
-            return null;
-        }
         return {
             exhibitons: exhibitons as IExhibition[],
         };
