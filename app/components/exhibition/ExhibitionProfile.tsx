@@ -17,6 +17,7 @@ import useCreateExhibitionArtworkModal from '@/app/hooks/useCreateExhibitionArtw
 
 import VirtualExhibitionPreview from './VirtualExhibitionPreview';
 import { handleApiResponse } from '../utils/Helper';
+import EmptyState from '../EmptyState';
 interface ExhibitionProfileProps {
   exhibition: IExhibition;
   artworks?: IArtwork[];
@@ -35,7 +36,7 @@ const Container = styled.div`
 
 const ExhibitionProfile = ({
   exhibition,
-  artworks = [],
+  artworks,
   isEditable = false,
   allArtistProfiles,
 }: ExhibitionProfileProps) => {
@@ -65,12 +66,14 @@ const ExhibitionProfile = ({
   };
 
   useEffect(() => {
-    setRemainingArtworks(
-      artworks.filter(
-        (artwork: IArtwork) => !exhibition.artworkIds.includes(artwork.id)
-      )
-    );
-  }, [exhibition.artworkIds]);
+    if (artworks) {
+      setRemainingArtworks(
+        artworks.filter(
+          (artwork: IArtwork) => !exhibition.artworkIds.includes(artwork.id)
+        )
+      );
+    }
+  }, [exhibition.artworkIds, artworks]);
 
   return (
     <Container>
@@ -105,12 +108,16 @@ const ExhibitionProfile = ({
           </div>
         )}
 
-        <ArtworkList
-          artworks={exhibition.artworks}
-          onDelete={handleDeleteArtworkFromExhibition}
-          isEditable={isEditable}
-          width='90%'
-        ></ArtworkList>
+        {exhibition.artworks.length > 0 ? (
+          <ArtworkList
+            artworks={exhibition.artworks}
+            onDelete={handleDeleteArtworkFromExhibition}
+            isEditable={isEditable}
+            width='90%'
+          ></ArtworkList>
+        ) : (
+          <EmptyState item='artworks'></EmptyState>
+        )}
       </ComponentWithHeading>
     </Container>
   );
