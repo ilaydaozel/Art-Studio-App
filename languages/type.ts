@@ -103,7 +103,6 @@ export type ILanguageData = {
     artist_profile: {
         about: {
             heading: string;
-            change_image_button_text: string;
         };
         list: {
             heading: string;
@@ -111,14 +110,12 @@ export type ILanguageData = {
             max_artwork_number_warning: string;
         };
         header: {
-            change_image_button_text: string;
             change_successful_message: string;
             select_cover_image: string;
             select_button_text: string;
         };
         biography: {
             biography_label: string;
-            edit_button_label: string;
         };
         delete_successful_message: string;
     };
@@ -130,7 +127,6 @@ export type ILanguageData = {
     exhibition_profile: {
         description: {
             heading: string,
-            edit_button_label: string
         };
         list: {
             heading: string,

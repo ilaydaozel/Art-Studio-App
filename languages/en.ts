@@ -102,7 +102,6 @@ const EnglishData: ILanguageData = {
     artist_profile: {
         about: {
             heading: "About",
-            change_image_button_text: "Change Cover Image"
         },
         list: {
             heading: "Selected Artworks",
@@ -110,14 +109,12 @@ const EnglishData: ILanguageData = {
             max_artwork_number_warning: "You have reached the maximum number of artworks"
         },
         header: {
-            change_image_button_text: "Change Cover Image",
             change_successful_message: "Cover image is updated",
             select_cover_image: "Select Cover Image",
             select_button_text: "Select"
         },
         biography: {
             biography_label: "Biography",
-            edit_button_label: "Update Biograpy"
         },
         delete_successful_message: "Artwork has been successfully deleted"
     },
@@ -129,7 +126,6 @@ const EnglishData: ILanguageData = {
     exhibition_profile: {
         description: {
             heading: "Description",
-            edit_button_label: "Edit Description"
         },
         list: {
             heading: "Selected Artworks",

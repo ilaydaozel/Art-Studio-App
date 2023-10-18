@@ -103,7 +103,6 @@ const TurkishData: ILanguageData = {
     artist_profile: {
         about: {
             heading: "Hakkında",
-            change_image_button_text: "Kapak Fotoğrafını Değiştiriniz"
         },
         list: {
             heading: "Seçilmiş Eserler",
@@ -111,14 +110,12 @@ const TurkishData: ILanguageData = {
             max_artwork_number_warning: "Maximum eser sayısına ulaştınız"
         },
         header: {
-            change_image_button_text: "Kapak Resmini Değiştir",
             change_successful_message: "Kapak fotoğrafı güncellendi",
             select_cover_image: "Kapak Resmi Seç",
             select_button_text: "Seç"
         },
         biography: {
             biography_label: "Biografi",
-            edit_button_label: "Biografiyi Düzenle"
         },
         delete_successful_message: "Eser başarıyla silindi"
 
@@ -131,7 +128,6 @@ const TurkishData: ILanguageData = {
     exhibition_profile: {
         description: {
             heading: "Açıklama",
-            edit_button_label: "Açıklamayı Düzenle"
         },
         list: {
             heading: "Seçilmiş Eserler",
