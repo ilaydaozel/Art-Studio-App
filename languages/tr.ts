@@ -10,6 +10,7 @@ const TurkishData: ILanguageData = {
         artists: "Sanatçılar",
         register: "Yeni Sanatçı Kaydet",
         edit: "Düzenle",
+        edit_artworks: "Eserleri Düzenle",
         edit_artist_accounts: "Sanatçıları Düzenle",
         edit_artist_profile: "Profilimi Düzenle",
         edit_announcements: "Duyuruları Düzenle",

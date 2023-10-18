@@ -9,6 +9,7 @@ const EnglishData: ILanguageData = {
         artists: "Artists",
         register: "Register Artist",
         edit: "Edit",
+        edit_artworks: "Edit Artworks",
         edit_artist_accounts: "Edit Artist Accounts",
         edit_artist_profile: "Edit Artist Profile",
         edit_announcements: "Edit Announcements",

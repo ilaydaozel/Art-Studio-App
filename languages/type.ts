@@ -10,6 +10,7 @@ export type ILanguageData = {
         artists: string;
         register: string;
         edit: string;
+        edit_artworks: string;
         edit_artist_accounts: string;
         edit_artist_profile: string;
         edit_announcements: string;
