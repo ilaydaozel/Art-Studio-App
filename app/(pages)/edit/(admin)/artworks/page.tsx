@@ -18,7 +18,6 @@ const ArtworksPage = async () => {
       );
     }
   } catch (error: any) {
-    console.error('Error:', error);
     throw new Error(error);
   }
 };
