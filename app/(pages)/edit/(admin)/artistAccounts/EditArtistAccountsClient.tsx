@@ -7,6 +7,7 @@ import ArtistAccountsList from '@/app/components/lists/ArtistAccountsList';
 import ComponentWithHeading from '@/app/components/layouts/ComponentWithHeading';
 import ListWithButton from '@/app/components/layouts/ListWithButton';
 import useTranslate from '@/app/hooks/useTranslate';
+import EmptyState from '@/app/components/EmptyState';
 interface EditArtistAccountsClientProps {
   accounts: IUser[];
 }
@@ -26,10 +27,14 @@ const EditArtistAccountsClient = ({
         onClick={() => router.push(`${ROUTE_PATHS.REGISTER}`)}
       >
         <ComponentWithHeading headingText={t('list_heading', location)}>
-          <ArtistAccountsList
-            isEditable
-            accounts={accounts}
-          ></ArtistAccountsList>
+          {accounts.length > 0 ? (
+            <ArtistAccountsList
+              isEditable
+              accounts={accounts}
+            ></ArtistAccountsList>
+          ) : (
+            <EmptyState item='artistAccounts'></EmptyState>
+          )}
         </ComponentWithHeading>
       </ListWithButton>
     </>
