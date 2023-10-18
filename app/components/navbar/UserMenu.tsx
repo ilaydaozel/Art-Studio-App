@@ -78,17 +78,24 @@ const UserMenu = ({ user }: UserMenuProps) => {
             {t('edit_artist_accounts', location)}
           </UserMenuElement>
           <UserMenuElement
-            isActive={pathname === ROUTE_PATHS.EDIT_ANNOUNCEMENTS}
-            href={`${ROUTE_PATHS.EDIT_ANNOUNCEMENTS}`}
-          >
-            {t('edit_announcements', location)}
-          </UserMenuElement>
-          <UserMenuElement
             isActive={pathname === ROUTE_PATHS.EDIT_EXHIBITIONS}
             href={`${ROUTE_PATHS.EDIT_EXHIBITIONS}`}
           >
             {t('edit_exhibitions', location)}
           </UserMenuElement>
+          <UserMenuElement
+            isActive={pathname === ROUTE_PATHS.EDIT_ARTWORKS}
+            href={`${ROUTE_PATHS.EDIT_ARTWORKS}`}
+          >
+            {t('edit_artworks', location)}
+          </UserMenuElement>
+          <UserMenuElement
+            isActive={pathname === ROUTE_PATHS.EDIT_ANNOUNCEMENTS}
+            href={`${ROUTE_PATHS.EDIT_ANNOUNCEMENTS}`}
+          >
+            {t('edit_announcements', location)}
+          </UserMenuElement>
+
           <UserMenuElement
             isActive={pathname === ROUTE_PATHS.REGISTER}
             href={`${ROUTE_PATHS.REGISTER}`}
