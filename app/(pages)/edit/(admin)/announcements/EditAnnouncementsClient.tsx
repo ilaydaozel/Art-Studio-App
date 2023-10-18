@@ -6,6 +6,7 @@ import AnnouncementsList from '@/app/components/lists/AnnouncementsList';
 import ComponentWithHeading from '@/app/components/layouts/ComponentWithHeading';
 import ListWithButton from '@/app/components/layouts/ListWithButton';
 import useTranslate from '@/app/hooks/useTranslate';
+import EmptyState from '@/app/components/EmptyState';
 
 interface EditAnnouncementsClientProps {
   announcements: IAnnouncement[];
@@ -27,11 +28,15 @@ const EditAnnouncementsClient = ({
         onClick={() => createAnnouncementModal.onOpen()}
       >
         <ComponentWithHeading headingText={t('heading', location)}>
-          <AnnouncementsList
-            width='90%'
-            isEditable={true}
-            announcements={announcements}
-          ></AnnouncementsList>
+          {announcements.length > 0 ? (
+            <AnnouncementsList
+              width='90%'
+              isEditable={true}
+              announcements={announcements}
+            ></AnnouncementsList>
+          ) : (
+            <EmptyState item='announcements'></EmptyState>
+          )}
         </ComponentWithHeading>
       </ListWithButton>
     </>
