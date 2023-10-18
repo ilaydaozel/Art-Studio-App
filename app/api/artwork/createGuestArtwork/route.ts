@@ -14,6 +14,7 @@ export async function POST(request: Request) {
         width,
         height,
         artworkMedias,
+        exhibitionIds,
     } = body;
 
     const artwork = await prisma.artwork.create({
@@ -28,6 +29,7 @@ export async function POST(request: Request) {
             width,
             height,
             artworkMedias,
+            exhibitionIds,
         }
     });
 

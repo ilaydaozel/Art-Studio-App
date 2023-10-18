@@ -136,6 +136,7 @@ const CreateExhibitionArtworkModal = ({
         width: typeof width === 'string' ? Number(width) : width,
         height: typeof height === 'string' ? Number(height) : height,
         artworkMedias: [media],
+        exhibitionIds: [],
       };
     }
     await handleApiResponse(
