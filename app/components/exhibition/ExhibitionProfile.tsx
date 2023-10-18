@@ -79,9 +79,7 @@ const ExhibitionProfile = ({
     <Container>
       <Header exhibition={exhibition}></Header>
       <About exhibition={exhibition} isEditable={isEditable}></About>
-      <CreateExhibitionArtworkModal
-        allArtistProfiles={allArtistProfiles || []}
-      ></CreateExhibitionArtworkModal>
+
       <VirtualExhibitionPreview exhibition={exhibition} />
       {showArtworkSelection && (
         <SelectExhibitionArtworkPopup
@@ -95,6 +93,9 @@ const ExhibitionProfile = ({
       <ComponentWithHeading headingText={t('heading', location)}>
         {isEditable && (
           <div className='flex gap-2'>
+            <CreateExhibitionArtworkModal
+              allArtistProfiles={allArtistProfiles || []}
+            ></CreateExhibitionArtworkModal>
             <SlidingButton
               label={t('add_button_text', location)}
               onClick={() => {
