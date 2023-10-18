@@ -23,9 +23,9 @@ const ExhibitionPage = async ({ params }: { params: IParams }) => {
       return (
         <ClientOnly>
           <ExhibitionProfile
-            artworks={allArtworks?.artworks}
+            artworks={allArtworks.artworks}
             exhibition={exhibition.exhibition}
-            allArtistProfiles={allArtistProfiles?.artistProfiles}
+            allArtistProfiles={allArtistProfiles.artistProfiles}
           ></ExhibitionProfile>
         </ClientOnly>
       );
