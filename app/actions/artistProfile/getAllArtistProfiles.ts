@@ -6,11 +6,12 @@ export default async function getAllArtistProfiles() {
     try {
         const artistProfiles = await prisma.artistProfile.findMany({
             include: {
-                user: true
+                user: true,
+                artworks: true,
             }
         });
         return {
-            artistProfiles: artistProfiles as IArtistProfile[],
+            artistProfiles: artistProfiles as unknown as IArtistProfile[],
         };
     } catch (error: any) {
         throw new Error(error);
