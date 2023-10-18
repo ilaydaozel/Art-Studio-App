@@ -7,10 +7,6 @@ export default async function getAllArtworks() {
         const artworks = await prisma.artwork.findMany({
 
         });
-
-        if (!artworks) {
-            return null;
-        }
         return {
             artworks: artworks as IArtwork[],
         };
