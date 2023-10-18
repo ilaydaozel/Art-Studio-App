@@ -1,9 +1,8 @@
-import Link from 'next/link';
 import Image from 'next/image';
 import { IArtwork } from '@/app/types';
 import getArtworkById from '@/app/actions/artwork/getArtworkById';
-import ClientOnly from '@/app/components/ClientOnly';
 import EmptyState from '@/app/components/EmptyState';
+import ClientOnly from '@/app/components/ClientOnly';
 
 interface IParams {
   artworkId?: string;
@@ -11,28 +10,32 @@ interface IParams {
 
 const Artwork = async ({ params }: { params: IParams }) => {
   let artwork: { artwork: IArtwork } | null = null;
-  if (params != undefined && params != undefined) {
+  try {
     artwork = await getArtworkById(params);
+    if (artwork?.artwork) {
+      return (
+        <ClientOnly>
+          <div className='pt-28 pb-8 flex justify-center'>
+            <Image
+              alt=''
+              src={artwork.artwork.artworkMedias[0]}
+              height={500}
+              width={500}
+            />
+          </div>
+        </ClientOnly>
+      );
+    } else {
+      return (
+        <ClientOnly>
+          <div className='bg-neutral-900'>
+            <EmptyState item='artwork' />
+          </div>
+        </ClientOnly>
+      );
+    }
+  } catch (error: any) {
+    throw new Error(error);
   }
-  if (!artwork) {
-    return (
-      <ClientOnly>
-        <EmptyState
-          title='An error occured.'
-          subtitle='Looks like this artwork does not exist anymore.'
-        />
-      </ClientOnly>
-    );
-  }
-
-  return (
-    <Image
-      alt=''
-      src={artwork.artwork.artworkMedias[0]}
-      height={500}
-      width={500}
-      className='w-full object-cover aspect-square'
-    />
-  );
 };
 export default Artwork;
