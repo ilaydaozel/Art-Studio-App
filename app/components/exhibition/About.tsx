@@ -32,9 +32,12 @@ const About = ({ exhibition, isEditable = false }: AboutProps) => {
     superElement: 'exhibition_profile',
   };
   const updateDescription = async (newText: string) => {
-    return await axios.post(`/api/exhibition/${exhibition.id}`, {
-      biography: newText,
-    });
+    return await axios.post(
+      `/api/exhibition/updateExhibition/${exhibition.id}`,
+      {
+        description: newText,
+      }
+    );
   };
 
   return (
