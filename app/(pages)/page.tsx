@@ -1,47 +1,23 @@
 import React from 'react';
 import getAllAnnouncements from '../actions/announcement/getAllAnnouncements';
-import ClientOnly from '../components/ClientOnly';
-import EmptyState from '../components/EmptyState';
 import AnnouncementCarousel from '../components/carousel/AnnouncementCarousel';
 import { IAnnouncement } from '../types';
-import Link from 'next/link';
 
 export default async function () {
-  let announcements: IAnnouncement[] = [];
-
+  let announcements: IAnnouncement[];
   try {
-    const allAnnouncements = await getAllAnnouncements();
-    if (allAnnouncements && allAnnouncements.announcements) {
-      announcements = allAnnouncements.announcements;
-      if (announcements.length > 0) {
-        return (
-          <>
-            <div className='max-w-[100vw] overflow-x-hidden'>
-              <AnnouncementCarousel slides={announcements} />
-            </div>
-          </>
-        );
-      } else {
-        return (
-          <ClientOnly>
-            <EmptyState
-              title='Can not load homepage'
-              subtitle='Looks like there is a problem.'
-            />
-          </ClientOnly>
-        );
-      }
-    } else {
+    const response = await getAllAnnouncements();
+    if (response.announcements) {
+      announcements = response.announcements;
       return (
-        <ClientOnly>
-          <EmptyState
-            title='No homepage found'
-            subtitle='Looks like there is a problem.'
-          />
-        </ClientOnly>
+        <>
+          <div className='max-w-[100vw] overflow-x-hidden'>
+            <AnnouncementCarousel slides={announcements} />
+          </div>
+        </>
       );
     }
-  } catch (error) {
-    console.log(error);
+  } catch (error: any) {
+    throw new Error(error);
   }
 }
