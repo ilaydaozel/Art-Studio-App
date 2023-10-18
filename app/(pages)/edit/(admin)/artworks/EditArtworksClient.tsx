@@ -1,6 +1,6 @@
 'use client';
 
-import { IArtwork } from '@/app/types';
+import { IArtistProfile, IArtwork } from '@/app/types';
 import { ROUTE_PATHS } from '@/constants/routes';
 import { useRouter } from 'next/navigation';
 import ComponentWithHeading from '@/app/components/layouts/ComponentWithHeading';
@@ -11,15 +11,23 @@ import axios from 'axios';
 import { useState } from 'react';
 import EmptyState from '@/app/components/EmptyState';
 import { handleApiResponse } from '@/app/components/utils/Helper';
+import SlidingButton from '@/app/components/buttons/SlidingButton';
+import CreateExhibitionArtworkModal from '@/app/components/modal/CreateExhibitionArtworkModal';
+import useCreateExhibitionArtworkModal from '@/app/hooks/useCreateExhibitionArtworkModal';
 interface EditArtworksClientProps {
   artworks: IArtwork[];
+  artistProfiles: IArtistProfile[];
 }
 
-const EditArtworksClient = ({ artworks }: EditArtworksClientProps) => {
+const EditArtworksClient = ({
+  artworks,
+  artistProfiles,
+}: EditArtworksClientProps) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const location = { element: 'artist_accounts' };
   const t = useTranslate();
+  const createExhibitionArtworkModal = useCreateExhibitionArtworkModal();
 
   const handleDeleteArtwork = async (artworkId: string) => {
     await handleApiResponse(
@@ -34,9 +42,16 @@ const EditArtworksClient = ({ artworks }: EditArtworksClientProps) => {
     <>
       <ListWithButton
         buttonText={t('add_button_text', location)}
-        onClick={() => router.push(`${ROUTE_PATHS.REGISTER}`)}
+        onClick={() => {
+          createExhibitionArtworkModal.onOpen();
+        }}
       >
+        <CreateExhibitionArtworkModal
+          allArtistProfiles={artistProfiles}
+        ></CreateExhibitionArtworkModal>
+
         <ComponentWithHeading headingText={t('list_heading', location)}>
+          <div className='flex gap-2'></div>
           {artworks.length > 0 ? (
             <ArtworkList
               isEditable
