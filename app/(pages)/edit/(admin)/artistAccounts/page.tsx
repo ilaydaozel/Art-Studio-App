@@ -4,7 +4,7 @@ import getAllArtists from '@/app/actions/user/getAllArtists';
 import EditArtistAccountsClient from './EditArtistAccountsClient';
 
 const EditArtistAccountsPage = async () => {
-  let artists: IUser[] | null = null;
+  let artists: IUser[];
   try {
     const result = await getAllArtists();
     if (result.artists) {
