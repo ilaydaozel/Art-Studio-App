@@ -1,13 +1,17 @@
 'use client';
+
+import useTranslate from '../hooks/useTranslate';
+
 interface EmptyStateProps {
-  title?: string;
+  item: string;
 }
 
-const EmptyState = ({ title = 'No exact matches' }: EmptyStateProps) => {
+const EmptyState = ({ item }: EmptyStateProps) => {
+  const t = useTranslate();
   return (
     <div
       className='
-        h-[80vh]
+        h-[70vh]
         flex 
         flex-col 
         gap-2 
@@ -16,7 +20,9 @@ const EmptyState = ({ title = 'No exact matches' }: EmptyStateProps) => {
       '
     >
       <div className='text-center'>
-        <div className='text-2xl font-bold'>{title}</div>
+        <div className='text-2xl text-neutral-500'>
+          {t(item, { element: 'empty_state' })}
+        </div>
       </div>
     </div>
   );

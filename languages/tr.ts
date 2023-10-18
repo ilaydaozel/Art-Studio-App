@@ -170,6 +170,12 @@ const TurkishData: ILanguageData = {
         nonExistingArtistProfileError: "Böyle bir sanatçı profili bulunmuyor!",
 
     },
+    empty_state: {
+        artistAccounts: "Henüz hiç sanatçı hesabı yok..",
+        artworks: "Henüz hiç eser yok..",
+        announcements: "Henüz hiç duyuru yok..",
+        exhibitions: "Henüz hiç sergi yok..",
+    }
 };
 
 export default TurkishData;

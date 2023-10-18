@@ -165,6 +165,12 @@ const EnglishData: ILanguageData = {
         nonUniqueEmailError: "This email is already in use!",
         nonExistingArtistProfileError: "There is no such artist profile!",
     },
+    empty_state: {
+        artistAccounts: "There are no artist accounts yet..",
+        artworks: "There are no artworks yet..",
+        announcements: "There are no announcements yet..",
+        exhibitions: "There are no exhibitions yet..",
+    }
 };
 
 export default EnglishData;

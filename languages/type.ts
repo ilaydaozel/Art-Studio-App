@@ -166,4 +166,10 @@ export type ILanguageData = {
         nonUniqueEmailError: string;
         nonExistingArtistProfileError: string;
     };
+    empty_state: {
+        artistAccounts: string;
+        artworks: string;
+        announcements: string;
+        exhibitions: string;
+    }
 }

@@ -44,7 +44,7 @@ const EditArtworksClient = ({ artworks }: EditArtworksClientProps) => {
               onDelete={handleDeleteArtwork}
             ></ArtworkList>
           ) : (
-            <EmptyState title='No Artworks found'></EmptyState>
+            <EmptyState item='artworks'></EmptyState>
           )}
         </ComponentWithHeading>
       </ListWithButton>
