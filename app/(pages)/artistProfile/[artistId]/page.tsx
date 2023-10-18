@@ -13,32 +13,26 @@ interface IParams {
 
 const ArtistProfilePage = async ({ params }: { params: IParams }) => {
   let artistProfile: { artistProfile: IArtistProfile } | null = null;
-  let allArtworks: { allArtworks: IArtwork[] } | null = null;
-
-  if (params != undefined && params != undefined) {
+  try {
     artistProfile = await getArtistProfileById(params);
-    allArtworks = await getAllArtworksByArtistId(params);
+    if (artistProfile?.artistProfile) {
+      return (
+        <ClientOnly>
+          <ArtistProfile artistProfile={artistProfile.artistProfile} />
+        </ClientOnly>
+      );
+    } else {
+      return (
+        <ClientOnly>
+          <div className='bg-neutral-900'>
+            <EmptyState item='artistAccount' />
+          </div>
+        </ClientOnly>
+      );
+    }
+  } catch (error: any) {
+    throw new Error(error);
   }
-
-  if (!artistProfile) {
-    return (
-      <ClientOnly>
-        <EmptyState
-          title='An error occured.'
-          subtitle='Looks like this artist does not exist anymore.'
-        />
-      </ClientOnly>
-    );
-  }
-
-  return (
-    <ClientOnly>
-      <ArtistProfile
-        artistProfile={artistProfile.artistProfile}
-        artworks={allArtworks?.allArtworks}
-      />
-    </ClientOnly>
-  );
 };
 
 export default ArtistProfilePage;
