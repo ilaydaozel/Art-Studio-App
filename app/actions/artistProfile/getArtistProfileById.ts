@@ -16,6 +16,7 @@ export default async function getArtistProfileById(
             },
             include: {
                 user: true,
+                artworks: true,
             },
         });
 
@@ -23,7 +24,7 @@ export default async function getArtistProfileById(
             return null;
         }
         return {
-            artistProfile: artistProfile as IArtistProfile,
+            artistProfile: artistProfile as unknown as IArtistProfile,
         };
     } catch (error: any) {
         throw new Error(error);
