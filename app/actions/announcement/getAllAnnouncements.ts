@@ -9,10 +9,6 @@ export default async function getAllAnnouncements() {
                 isActive: true
             }
         });
-
-        if (!announcements) {
-            return null;
-        }
         return {
             announcements: announcements as IAnnouncement[],
         };
