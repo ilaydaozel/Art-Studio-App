@@ -169,8 +169,8 @@ const EnglishData: ILanguageData = {
         exhibitions: "There are no exhibitions yet..",
         artistAccount: "There is no such artist account..",
         artwork: "There is no such artwork..",
-        announcement: "There is no such announcement..",
         exhibition: "There is no such exhibition..",
+        virtualExhibition: "There is no such virtual exhibition..",
     }
 };
 

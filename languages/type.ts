@@ -170,7 +170,7 @@ export type ILanguageData = {
         exhibitions: string;
         artistAccount: string;
         artwork: string;
-        announcement: string;
         exhibition: string;
+        virtualExhibition: string;
     }
 }

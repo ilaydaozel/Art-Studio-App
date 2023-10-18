@@ -174,8 +174,8 @@ const TurkishData: ILanguageData = {
         exhibitions: "Henüz hiç sergi yok..",
         artistAccount: "Böyle bir sanatçı hesabı yok..",
         artwork: "Böyle bir eser yok..",
-        announcement: "Böyle bir duyuru yok..",
         exhibition: "Böyle bir sergi yok..",
+        virtualExhibition: "Böyle bir sanal sergi yok..",
     }
 };
 
