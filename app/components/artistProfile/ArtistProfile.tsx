@@ -1,7 +1,7 @@
 'use client';
 
 import styled from 'styled-components';
-import { IArtistProfile, IArtwork } from '@/app/types';
+import { IArtistProfile } from '@/app/types';
 import ArtworkList from '@/app/components/lists/ArtworkList';
 import Header from '@/app/components/artistProfile/Header';
 import About from '@/app/components/artistProfile/About';
@@ -14,9 +14,9 @@ import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { handleApiResponse } from '../utils/Helper';
 import { useState } from 'react';
+import EmptyState from '../EmptyState';
 interface ArtistProfileProps {
   artistProfile: IArtistProfile;
-  artworks?: IArtwork[];
   isEditable?: boolean;
 }
 
@@ -28,7 +28,6 @@ const Container = styled.div`
 
 const ArtistProfile = ({
   artistProfile,
-  artworks,
   isEditable = false,
 }: ArtistProfileProps) => {
   const createArtworkModal = useCreateArtworkModal();
@@ -53,42 +52,36 @@ const ArtistProfile = ({
     <Container>
       <Header
         artistProfile={artistProfile}
-        artworks={artworks}
+        artworks={artistProfile.artworks}
         isEditable={isEditable}
       ></Header>
       <About artistProfile={artistProfile} isEditable={isEditable}></About>
       <ComponentWithHeading headingText={t('heading', location)}>
         <CreateArtworkModal artistProfile={artistProfile}></CreateArtworkModal>
-        {isEditable ? (
-          <div className='w-[84%] flex justify-end mt-2'>
-            {artworks ? (
-              artworks.length < 3 ? (
-                <SlidingButton
-                  label={t('add_button_text', location)}
-                  onClick={() => {
-                    createArtworkModal.onOpen();
-                  }}
-                />
-              ) : (
-                <h1>{t('max_artwork_number_warning', location)}</h1>
-              )
-            ) : (
-              <></>
-            )}
-          </div>
-        ) : (
-          <></>
-        )}
-        {artworks ? (
-          <ArtworkList
-            artworks={artworks}
-            width='90%'
-            isEditable={isEditable}
-            onDelete={handleDeleteArtwork}
-          ></ArtworkList>
-        ) : (
-          <></>
-        )}
+        {isEditable &&
+          (artistProfile.artworks.length < 3 ? (
+            <SlidingButton
+              label={t('add_button_text', location)}
+              onClick={() => {
+                createArtworkModal.onOpen();
+              }}
+            />
+          ) : (
+            <h1>{t('max_artwork_number_warning', location)}</h1>
+          ))}
+
+        <div className='w-[84%] flex justify-center mt-2'>
+          {artistProfile.artworks.length > 0 ? (
+            <ArtworkList
+              artworks={artistProfile.artworks}
+              width='90%'
+              isEditable={isEditable}
+              onDelete={handleDeleteArtwork}
+            ></ArtworkList>
+          ) : (
+            <EmptyState item='artworks' />
+          )}
+        </div>
       </ComponentWithHeading>
     </Container>
   );
