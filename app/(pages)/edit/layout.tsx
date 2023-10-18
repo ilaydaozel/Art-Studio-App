@@ -1,7 +1,5 @@
 import getCurrentUser from '@/app/actions/user/getCurrentUser';
 import Unauthorized from './Unauthorized';
-import { AuthRequiredError } from '@/app/lib/exceptions';
-import Error from '../error';
 
 export default async function Layout({
   children,
