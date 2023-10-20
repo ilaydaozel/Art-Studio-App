@@ -11,7 +11,7 @@ interface ArtistAccountProps {
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 1rem;
   margin: 10px;
   transition: transform 0.2s;
   &:hover {
@@ -34,6 +34,7 @@ const ArtistImage = styled.div<{ profilePic: string }>`
   width: 13vw;
   height: 13vw;
   background-image: url(${(props) => props.profilePic});
+  box-shadow: 0.6rem 0.6rem 1rem 0 rgba(0, 0, 0, 0.2);
   background-size: cover;
   overflow: hidden;
 
