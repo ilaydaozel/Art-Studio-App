@@ -36,9 +36,8 @@ const MenuContainer = styled.div`
 const StartButton = styled.button<{ small: boolean }>`
   display: flex;
   justify-content: center;
-  padding: ${(props) => (props.small ? '0.25rem 1rem' : '0.1rem 0.4rem')};
-  margin: 1rem;
-  font-size: ${(props) => (props.small ? '0.8rem' : '1rem')};
+  padding: ${(props) => (props.small ? '0.2rem 0.6rem' : '0.1rem 0.3rem')};
+  font-size: ${(props) => (props.small ? '0.6rem' : '0.8rem')};
   border-radius: 0.5rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   cursor: pointer;
@@ -105,12 +104,10 @@ const VirtualExhibitionWithMenu = ({
 
   return (
     <div className='relative'>
-      <div className='relative'>
-        <ThreeDExhibition
-          artworks={exhibition.artworks}
-          small={small}
-        ></ThreeDExhibition>
-      </div>
+      <ThreeDExhibition
+        artworks={exhibition.artworks}
+        small={small}
+      ></ThreeDExhibition>
 
       <div
         id='hamburgerMenu'
