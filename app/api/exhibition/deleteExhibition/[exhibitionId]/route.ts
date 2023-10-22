@@ -14,9 +14,7 @@ export async function DELETE(request: Request, { params }: { params: IParams }) 
     });
 
     if (!existingExhibition) {
-        console.log("Exhibition not found!")
-        console.log(NextResponse.error());
-        return NextResponse.error();
+        return NextResponse.json({ error: "There is no such exhibition" });
     }
 
     // Delete the Artwork record
