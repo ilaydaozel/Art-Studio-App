@@ -12,6 +12,7 @@ import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { handleApiResponse } from '../utils/Helper';
 import useTranslate from '@/app/hooks/useTranslate';
+import EmptyState from '../EmptyState';
 interface PopupProps {
   onClose: () => void;
   artworks?: IArtwork[];
@@ -92,10 +93,6 @@ const Heading = styled.p`
   font-size: 1rem;
   font-weight: bold;
   color: ${COLORS.darkGray};
-`;
-const EmptyText = styled.p`
-  font-size: 1.5rem;
-  text-align: center;
 `;
 
 const SelectExhibitionArtworkPopup = ({
@@ -192,10 +189,7 @@ const SelectExhibitionArtworkPopup = ({
         </SelectedArtworksWrapper>
       </div>
     ) : (
-      <div>
-        <EmptyText>There are no artworks!</EmptyText>
-        <EmptyText>All the artworks are chosen.</EmptyText>
-      </div>
+      <EmptyState item='artworks'></EmptyState>
     );
 
   return (
