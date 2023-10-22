@@ -130,13 +130,12 @@ const EnglishData: ILanguageData = {
         },
         list: {
             heading: "Selected Artworks",
-            add_button_text: "Create New Artwork +",
             add_artwork_to_exhibition_button_text: "Add Artwork to Exhibition +"
         },
         virtual_exhibition: {
             heading: "Virtual Exhibition",
         },
-        delete_successful_message: "Exhibition has been successfully deleted",
+        delete_successful_message: "Artwork has been successfully deleted from the exhibiton",
         add_artwork_to_exhibition_successful_message: "Artworks have been successfully added to the exhibition"
     },
     edit_announcements: {

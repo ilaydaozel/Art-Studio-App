@@ -132,14 +132,13 @@ const TurkishData: ILanguageData = {
         },
         list: {
             heading: "Seçilmiş Eserler",
-            add_button_text: "Yeni Eser Oluştur +",
             add_artwork_to_exhibition_button_text: "Sergiye Eser Ekle +"
 
         },
         virtual_exhibition: {
             heading: "Sanal Sergi",
         },
-        delete_successful_message: "Sergi başarıyla silindi",
+        delete_successful_message: "Eser başarıyla sergiden silindi",
         add_artwork_to_exhibition_successful_message: "Eserler başarıyla sergiye eklendi"
     },
     edit_announcements: {

@@ -131,7 +131,6 @@ export type ILanguageData = {
         };
         list: {
             heading: string,
-            add_button_text: string,
             add_artwork_to_exhibition_button_text: string
         };
         virtual_exhibition: {
