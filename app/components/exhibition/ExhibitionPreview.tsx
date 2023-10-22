@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { ROUTE_PATHS } from '@/constants/routes';
 import { getDateString } from '../utils/Helper';
 import { COLORS } from '@/constants/colors';
-
+import Image from 'next/image';
 interface ExhibitionProps {
   exhibition: IExhibition;
 }
@@ -44,14 +44,11 @@ const DateText = styled.div`
   }
 `;
 
-const ExhibitonImage = styled.div<{ backgroundImgUrl: string }>`
+const ExhibitonImage = styled.div`
+  position: relative;
   width: 35vw;
   height: 21vw;
-  background-image: url(${(props) => props.backgroundImgUrl});
-  background-size: cover;
-  overflow: hidden;
   box-shadow: 0.6rem 0.6rem 1rem 0 rgba(0, 0, 0, 0.2);
-
   @media (max-width: 576px) {
     width: 60vw;
     height: 36vw;
@@ -62,9 +59,17 @@ const ExhibitionPreview = ({ exhibition }: ExhibitionProps) => {
   return (
     <Link href={`${ROUTE_PATHS.EXHIBITION}/${exhibition.id}`}>
       <Wrapper>
-        <ExhibitonImage
-          backgroundImgUrl={exhibition.coverImage || '/images/blurImage.jpg'}
-        />
+        <ExhibitonImage>
+          <Image
+            src={exhibition.coverImage || '/images/blurImage.jpg'}
+            alt='Exhibition preview'
+            fill
+            quality={70}
+            placeholder='blur'
+            blurDataURL={'/images/blurImage.jpg'}
+            className='object-cover'
+          />
+        </ExhibitonImage>
         <div>
           <TitleText>{exhibition.title}</TitleText>
           <DateText>

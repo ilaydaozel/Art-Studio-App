@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { ROUTE_PATHS } from '@/constants/routes';
 import { IUser } from '@/app/types';
 import { COLORS } from '@/constants/colors';
-
+import Image from 'next/image';
 interface ArtistAccountProps {
   artist: IUser;
 }
@@ -30,14 +30,11 @@ const NameText = styled.div`
   }
 `;
 
-const ArtistImage = styled.div<{ profilePic: string }>`
+const ArtistImage = styled.div`
+  position: relative;
   width: 13vw;
   height: 13vw;
-  background-image: url(${(props) => props.profilePic});
   box-shadow: 0.6rem 0.6rem 1rem 0 rgba(0, 0, 0, 0.2);
-  background-size: cover;
-  overflow: hidden;
-
   @media (max-width: 768px) {
     width: 16vw;
     height: 16vw;
@@ -54,13 +51,21 @@ const ArtistAccount = ({ artist }: ArtistAccountProps) => {
   return (
     <a href={`${ROUTE_PATHS.ARTIST_PROFILE}/${artist.id}`}>
       <Wrapper>
-        <ArtistImage
-          profilePic={
-            artistProfile?.profilePic
-              ? artistProfile.profilePic
-              : '/images/blurImage.jpg'
-          }
-        />
+        <ArtistImage>
+          <Image
+            src={
+              artistProfile?.profilePic
+                ? artistProfile.profilePic
+                : '/images/blurImage.jpg'
+            }
+            alt='Artist account preview'
+            fill
+            quality={70}
+            placeholder='blur'
+            blurDataURL={'/images/blurImage.jpg'}
+            className='object-cover'
+          />
+        </ArtistImage>
         <NameText>
           {artist.name} {artist.surname}
         </NameText>
