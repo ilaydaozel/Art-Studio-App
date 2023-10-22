@@ -81,7 +81,12 @@ const ThreeDExhibition = ({
       const onWindowResize = () => {
         camera.aspect = window.innerWidth / window.innerHeight;
         camera.updateProjectionMatrix();
-        renderer.setSize(window.innerWidth, window.innerHeight);
+        small
+          ? renderer.setSize(
+              (2 * window.innerWidth) / 3,
+              (2 * window.innerHeight) / 3
+            )
+          : renderer.setSize(window.innerWidth, window.innerHeight);
       };
 
       window.addEventListener('resize', onWindowResize, false);
