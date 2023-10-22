@@ -97,12 +97,6 @@ const ExhibitionProfile = ({
               allArtistProfiles={allArtistProfiles || []}
             ></CreateExhibitionArtworkModal>
             <SlidingButton
-              label={t('add_button_text', location)}
-              onClick={() => {
-                createExhibitionArtworkModal.onOpen();
-              }}
-            />
-            <SlidingButton
               onClick={() => setShowArtworkSelection(true)}
               label={t('add_artwork_to_exhibition_button_text', location)}
             ></SlidingButton>
