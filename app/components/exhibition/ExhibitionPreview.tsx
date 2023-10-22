@@ -13,7 +13,7 @@ interface ExhibitionProps {
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 1rem;
   margin: 10px;
   transition: transform 0.2s;
   &:hover {
@@ -50,6 +50,7 @@ const ExhibitonImage = styled.div<{ backgroundImgUrl: string }>`
   background-image: url(${(props) => props.backgroundImgUrl});
   background-size: cover;
   overflow: hidden;
+  box-shadow: 0.6rem 0.6rem 1rem 0 rgba(0, 0, 0, 0.2);
 
   @media (max-width: 576px) {
     width: 60vw;
@@ -64,10 +65,12 @@ const ExhibitionPreview = ({ exhibition }: ExhibitionProps) => {
         <ExhibitonImage
           backgroundImgUrl={exhibition.coverImage || '/images/blurImage.jpg'}
         />
-        <TitleText>{exhibition.title}</TitleText>
-        <DateText>
-          {getDateString(exhibition.startDate, exhibition.endDate)}
-        </DateText>
+        <div>
+          <TitleText>{exhibition.title}</TitleText>
+          <DateText>
+            {getDateString(exhibition.startDate, exhibition.endDate)}
+          </DateText>
+        </div>
       </Wrapper>
     </Link>
   );
