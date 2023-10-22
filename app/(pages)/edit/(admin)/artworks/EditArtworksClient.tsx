@@ -25,7 +25,7 @@ const EditArtworksClient = ({
 }: EditArtworksClientProps) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
-  const location = { element: 'artist_accounts' };
+  const location = { element: 'edit_artworks' };
   const t = useTranslate();
   const createExhibitionArtworkModal = useCreateExhibitionArtworkModal();
 
@@ -35,7 +35,7 @@ const EditArtworksClient = ({
       setIsLoading,
       t,
       router,
-      t('delete_successful_message', { element: 'artist_profile' })
+      t('delete_successful_message', location)
     );
   };
   return (
@@ -50,13 +50,14 @@ const EditArtworksClient = ({
           allArtistProfiles={artistProfiles}
         ></CreateExhibitionArtworkModal>
 
-        <ComponentWithHeading headingText={t('list_heading', location)}>
+        <ComponentWithHeading headingText={t('heading', location)}>
           <div className='flex gap-2'></div>
           {artworks.length > 0 ? (
             <ArtworkList
               isEditable
               artworks={artworks}
               onDelete={handleDeleteArtwork}
+              width='84%'
             ></ArtworkList>
           ) : (
             <EmptyState item='artworks'></EmptyState>

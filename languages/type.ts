@@ -145,6 +145,11 @@ export type ILanguageData = {
         add_button_text: string;
         delete_successful_message: string;
     };
+    edit_artworks: {
+        heading: string;
+        add_button_text: string;
+        delete_successful_message: string;
+    };
     about: {
         heading: string,
         about_text: string
