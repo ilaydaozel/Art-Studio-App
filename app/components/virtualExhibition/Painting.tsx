@@ -66,13 +66,13 @@ export const createAndHangPaintings = (
       case 2:
         // Back wall
         positionX = floorWidth / 2 - currentWallLength - distanceBetween;
-        positionZ = -(floorHeight / 2 - paintingDepth);
+        positionZ = floorHeight / 2 - paintingDepth;
         break;
       case 3:
         // right wall
         positionX = floorWidth / 2 - paintingDepth;
         positionZ = -floorHeight / 2 + currentWallLength + distanceBetween;
-        painting.rotation.y = Math.PI / 2;
+        painting.rotation.y = -Math.PI / 2;
         break;
     }
     painting.position.set(positionX, hangingHeight, positionZ);
