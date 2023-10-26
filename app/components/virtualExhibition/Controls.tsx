@@ -15,8 +15,6 @@ const setUpOrbitControls = (camera: THREE.Camera, renderer: THREE.Renderer) => {
   // Ensure that the camera does not move below the floor level.
   controls.minPolarAngle = 0;
   controls.maxPolarAngle = Math.PI / 2;
-  controls.minAzimuthAngle = -Math.PI / 4;
-  controls.maxAzimuthAngle = Math.PI / 4;
 
   controls.touches = {
     ONE: THREE.TOUCH.ROTATE,
