@@ -196,6 +196,7 @@ const CreateExhibitionArtworkModal = ({
           register={register}
           errors={errors}
           choices={allArtistProfiles || []}
+          required
         />
       )}
       {selectedOption === 'guest' && (
@@ -204,17 +205,17 @@ const CreateExhibitionArtworkModal = ({
             id='artistName'
             label={t('artist_name', location)}
             width='49%'
-            disabled={true}
             register={register}
             errors={errors}
+            required
           />
           <Input
             id='artistSurname'
             label={t('artist_surname', location)}
             width='49%'
-            disabled={true}
             register={register}
             errors={errors}
+            required
           />
         </>
       )}
