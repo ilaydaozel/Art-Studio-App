@@ -27,5 +27,8 @@ npx prisma db push
 ```
 npm run dev
 ```
-
+### Update db model
  
+```
+ npx prisma generate
+```
